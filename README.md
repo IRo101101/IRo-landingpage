@@ -45,9 +45,19 @@ www/
 
 ## Domain / SEO
 
-- Kanonische URL, `sitemap.xml`, `robots.txt` und JSON-LD verwenden `https://iro.swiss`.
-  Wird eine andere Domain genutzt (z. B. `www.ideeroth.ch`), diese Werte per Suchen/Ersetzen anpassen.
-- Nach dem Livegang: Domain in der **Google Search Console** verifizieren und `sitemap.xml` einreichen.
+- **Hauptdomäne (kanonisch): `https://www.iro.swiss`** — verwendet in Canonical-Tags,
+  `sitemap.xml`, `robots.txt`, Open Graph und JSON-LD.
+- **Zweitdomäne `www.ideeroth.ch`** bleibt erreichbar, wird aber per `.htaccess`
+  dauerhaft (301) auf `www.iro.swiss` weitergeleitet — so entsteht bei Google
+  kein doppelter Inhalt und der Linkwert bündelt sich auf der Hauptdomäne.
+- **In Hostpoint einrichten:** beide Domains (`iro.swiss` inkl. `www` und
+  `ideeroth.ch` inkl. `www`) auf dasselbe `www`-Verzeichnis aufschalten und für
+  beide das kostenlose **SSL-Zertifikat (Let's Encrypt)** aktivieren. Die
+  Weiterleitungs- und HTTPS-Regeln stehen bereits in der `.htaccess`.
+  - Falls `ideeroth.ch` stattdessen **eigenständig** (ohne Weiterleitung) laufen
+    soll, in der `.htaccess` den Block „1) ideeroth.ch → …" auskommentieren.
+- Nach dem Livegang: `www.iro.swiss` in der **Google Search Console** verifizieren
+  und `sitemap.xml` einreichen.
 
 ## Design System
 

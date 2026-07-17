@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iro.swiss/sitemap.xml
+Sitemap: https://www.iro.swiss/sitemap.xml

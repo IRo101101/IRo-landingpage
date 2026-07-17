@@ -45,10 +45,24 @@ DirectoryIndex index.html
   </FilesMatch>
 </IfModule>
 
-# ---- Optional: www + HTTPS erzwingen ----
-# Erst aktivieren, wenn die Domain via Hostpoint auf HTTPS läuft.
-# <IfModule mod_rewrite.c>
-#   RewriteEngine On
-#   RewriteCond %{HTTPS} off
-#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-# </IfModule>
+# ---- Domain-Weiterleitung & HTTPS ----
+# Hauptdomain: www.iro.swiss (kanonisch). Die Zweitdomain www.ideeroth.ch
+# bleibt erreichbar, wird aber dauerhaft (301) auf die Hauptdomain geleitet —
+# so gibt es bei Google keinen doppelten Inhalt.
+# Voraussetzung: In Hostpoint sind beide Domains auf dieses www-Verzeichnis
+# aufgeschaltet und das SSL-Zertifikat (Let's Encrypt) ist aktiv.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) ideeroth.ch (mit/ohne www) → https://www.iro.swiss
+  RewriteCond %{HTTP_HOST} (^|\.)ideeroth\.ch$ [NC]
+  RewriteRule ^ https://www.iro.swiss%{REQUEST_URI} [L,R=301]
+
+  # 2) nackte Hauptdomain iro.swiss → https://www.iro.swiss
+  RewriteCond %{HTTP_HOST} ^iro\.swiss$ [NC]
+  RewriteRule ^ https://www.iro.swiss%{REQUEST_URI} [L,R=301]
+
+  # 3) HTTP → HTTPS erzwingen
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
