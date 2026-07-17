@@ -1,0 +1,54 @@
+# IdeeRoth AG — iro.swiss · Apache-Konfiguration für Hostpoint
+# Diese Datei kommt mit ins www-Verzeichnis. Sie ist optional, verbessert
+# aber Performance, Caching und Sicherheit. Falls etwas nicht greift,
+# ignoriert Apache die betreffende Zeile — die Seite läuft trotzdem.
+
+# UTF-8 als Standard
+AddDefaultCharset UTF-8
+
+# Startseite
+DirectoryIndex index.html
+
+# ---- Kompression (schnellere Ladezeit) ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml application/manifest+json
+</IfModule>
+
+# ---- Browser-Caching ----
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
+
+# ---- Sicherheits-Header ----
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+  # Nur eigene Ressourcen erlaubt — keine externen Skripte/Tracker/Fonts.
+  # 'unsafe-inline' nur für Style (Inline-Styles) und den Struktur-Daten-Block.
+  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+  # Nicht benötigte Browser-Funktionen abschalten.
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+  # Schriften/Assets dürfen geladen werden
+  <FilesMatch "\.(woff2)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+# ---- Optional: www + HTTPS erzwingen ----
+# Erst aktivieren, wenn die Domain via Hostpoint auf HTTPS läuft.
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
