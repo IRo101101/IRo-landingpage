@@ -314,7 +314,20 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
 .footer__bottom { border-top: 1px solid var(--iro-dark-line, #3A4A54); padding-block: var(--sp-4);
   display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); justify-content: space-between;
   font-size: 13px; color: #8A969E; }
-@media (max-width: 720px) { .footer__top { grid-template-columns: 1fr; gap: var(--sp-6); } }
+.footer__badges { display: flex; align-items: center; gap: var(--sp-7); flex-wrap: wrap;
+  padding-block: var(--sp-6); border-top: 1px solid var(--iro-dark-line, #3A4A54); }
+.footer__badge { height: 90px; width: auto; display: block; }
+.footer__badge--round { height: 98px; }
+@media (max-width: 720px) { .footer__top { grid-template-columns: 1fr; gap: var(--sp-6); }
+  .footer__badges { gap: var(--sp-5); } .footer__badge { height: 70px; } .footer__badge--round { height: 76px; } }
+
+/* Berufsbildung / Stelleninserat (Karriere) */
+.legal .lead-strong { font: 600 clamp(18px, 2.2vw, 21px)/1.5 var(--font-sans); color: var(--iro-slate); max-width: 60ch; margin-top: var(--sp-4); }
+.job { background: var(--iro-mist); border: 1px solid var(--iro-line); padding: var(--sp-7); margin-top: var(--sp-5); }
+.job h3 { font: 600 22px/1.2 var(--font-sans); }
+.job h4 { font: 600 15px/1.3 var(--font-sans); margin-top: var(--sp-6); color: var(--iro-slate); }
+.job .kicker { margin-bottom: var(--sp-3); }
+@media (max-width: 720px) { .job { padding: var(--sp-6); } }
 
 /* ---------- Cookie-Consent-Banner ---------- */
 .consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
