@@ -146,7 +146,7 @@
 
   /* ---- Karte (Leaflet + dunkle Kacheln, lazy) ------------------------- */
   // Standort IdeeRoth AG. Feinjustierung: nur diese zwei Werte anpassen.
-  var MAP_LAT = 47.5645, MAP_LON = 9.3810, MAP_ZOOM = 16;
+  var MAP_LAT = 47.568190, MAP_LON = 9.382508, MAP_ZOOM = 16;
 
   function initMap() {
     var el = document.getElementById('iro-map');
