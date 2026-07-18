@@ -304,6 +304,25 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
   font-size: 13px; color: #8A969E; }
 @media (max-width: 720px) { .footer__top { grid-template-columns: 1fr; gap: var(--sp-6); } }
 
+/* ---------- Cookie-Consent-Banner ---------- */
+.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  background: var(--iro-slate); color: var(--iro-dark-text-2, #C5C7C4); border-top: 2px solid var(--iro-green); }
+.consent__inner { max-width: var(--max); margin: 0 auto; padding: 16px var(--gutter);
+  display: flex; align-items: center; gap: var(--sp-5); flex-wrap: wrap; }
+.consent__text { flex: 1 1 300px; font-size: 14px; line-height: 1.55; margin: 0; }
+.consent__actions { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; }
+.consent__more { color: #fff; text-decoration: underline; font-size: 14px; white-space: nowrap; }
+.consent__more:hover { color: var(--iro-green); }
+.consent .btn--ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.32); }
+.consent .btn--ghost:hover { background: rgba(255,255,255,.10); color: #fff; border-color: rgba(255,255,255,.5); }
+@media (max-width: 600px) {
+  .consent__inner { align-items: stretch; }
+  .consent__actions { justify-content: flex-end; }
+  .consent__actions .btn { flex: 1 1 auto; justify-content: center; }
+}
+/* Footer-Link „Cookie-Einstellungen" (per JS injiziert) */
+.footer__bottom [data-cookie-settings] { cursor: pointer; }
+
 /* ---------- Scroll-Reveal (nur mit JS; ohne JS bleibt alles sichtbar) ---------- */
 html.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--mo-slow) var(--ease), transform var(--mo-slow) var(--ease); }
 html.js .reveal.is-in { opacity: 1; transform: none; }

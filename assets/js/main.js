@@ -73,6 +73,77 @@
     if (persist) save(lang);
   }
 
+  /* ---- Cookie-Consent + Google Analytics (Opt-in) --------------------- */
+  // >>> HIER deine GA4-Mess-ID eintragen (Format G-XXXXXXXXXX). Solange der
+  //     Platzhalter steht, wird Google Analytics NICHT geladen. <<<
+  var GA_ID = 'G-XXXXXXXXXX';
+  var CONSENT_KEY = 'iro-consent';
+
+  function consentGet() { try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
+  function consentSet(v) { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) {} }
+  function gaConfigured() { return /^G-[A-Z0-9]{6,}$/.test(GA_ID) && GA_ID !== 'G-XXXXXXXXXX'; }
+  function relocalize() { setLang(document.documentElement.getAttribute('lang') || 'de', false); }
+
+  // Google Analytics erst NACH Einwilligung nachladen (kein Call vorher).
+  function loadGA() {
+    if (!gaConfigured() || window.__iroGA) return;
+    window.__iroGA = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+  }
+
+  function buildBanner() {
+    if (document.querySelector('.consent')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'consent';
+    wrap.setAttribute('role', 'dialog');
+    wrap.setAttribute('aria-label', 'Cookie-Hinweis');
+    wrap.innerHTML =
+      '<div class="consent__inner">' +
+        '<p class="consent__text" data-en="We use Google Analytics to understand how our website is used - only with your consent. You can withdraw your choice at any time via “Cookie settings” in the footer.">' +
+        'Wir verwenden Google Analytics, um die Nutzung unserer Website zu verstehen - nur mit Ihrer Einwilligung. Sie können Ihre Wahl jederzeit über „Cookie-Einstellungen“ im Footer widerrufen.</p>' +
+        '<div class="consent__actions">' +
+          '<a class="consent__more" href="/datenschutz.html" data-en="Privacy policy">Datenschutzerklärung</a>' +
+          '<button class="btn btn--ghost" type="button" data-consent="deny" data-en="Decline">Ablehnen</button>' +
+          '<button class="btn btn--primary" type="button" data-consent="allow" data-en="Accept">Akzeptieren</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    wrap.querySelector('[data-consent="allow"]').addEventListener('click', function () { consentSet('granted'); loadGA(); wrap.remove(); });
+    wrap.querySelector('[data-consent="deny"]').addEventListener('click', function () { consentSet('denied'); wrap.remove(); });
+  }
+
+  function initConsent() {
+    // Footer-Link „Cookie-Einstellungen" (Widerruf jederzeit) injizieren
+    var legal = document.querySelector('.footer__bottom span:last-child');
+    if (legal && !legal.querySelector('[data-cookie-settings]')) {
+      var a = document.createElement('a');
+      a.href = '#';
+      a.setAttribute('data-cookie-settings', '');
+      a.setAttribute('data-en', 'Cookie settings');
+      a.textContent = 'Cookie-Einstellungen';
+      legal.appendChild(a);
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var b = document.querySelector('.consent'); if (b) b.remove();
+        consentSet('');
+        buildBanner();
+        relocalize();
+      });
+    }
+    var c = consentGet();
+    if (c === 'granted') { loadGA(); }
+    else if (c !== 'denied') { buildBanner(); }
+    relocalize();
+  }
+
   /* ---- Init ----------------------------------------------------------- */
   // So früh wie möglich anwenden (Attribut auf <html> setzt Basissprache).
   setLang(detect(), false);
@@ -121,5 +192,8 @@
     } else {
       for (var s = 0; s < reveals.length; s++) reveals[s].classList.add('is-in');
     }
+
+    // Cookie-Consent + Google Analytics (Opt-in)
+    initConsent();
   });
 })();
