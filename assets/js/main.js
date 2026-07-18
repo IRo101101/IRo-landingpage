@@ -76,7 +76,7 @@
   /* ---- Cookie-Consent + Google Analytics (Opt-in) --------------------- */
   // >>> HIER deine GA4-Mess-ID eintragen (Format G-XXXXXXXXXX). Solange der
   //     Platzhalter steht, wird Google Analytics NICHT geladen. <<<
-  var GA_ID = 'G-XXXXXXXXXX';
+  var GA_ID = 'G-P2GWBZFYTZ';
   var CONSENT_KEY = 'iro-consent';
 
   function consentGet() { try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
