@@ -144,6 +144,42 @@
     relocalize();
   }
 
+  /* ---- Karte (Leaflet + dunkle Kacheln, lazy) ------------------------- */
+  // Standort IdeeRoth AG. Feinjustierung: nur diese zwei Werte anpassen.
+  var MAP_LAT = 47.5645, MAP_LON = 9.3810, MAP_ZOOM = 16;
+
+  function initMap() {
+    var el = document.getElementById('iro-map');
+    if (!el || !window.L || el.__init) return;
+
+    function build() {
+      if (el.__init) return; el.__init = true;
+      var map = L.map(el, { scrollWheelZoom: false, attributionControl: true }).setView([MAP_LAT, MAP_LON], MAP_ZOOM);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd', maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'
+      }).addTo(map);
+      var pin = L.divIcon({
+        className: 'iro-pin',
+        html: '<svg width="40" height="52" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg"><path d="M20 1C10 1 2 9 2 19c0 14 18 32 18 32s18-18 18-32C38 9 30 1 20 1z" fill="#4DAF47" stroke="#fff" stroke-width="2"/><circle cx="20" cy="19" r="7" fill="#fff"/></svg>',
+        iconSize: [40, 52], iconAnchor: [20, 51], popupAnchor: [0, -46]
+      });
+      L.marker([MAP_LAT, MAP_LON], { icon: pin, title: 'IdeeRoth AG', keyboard: false })
+        .addTo(map)
+        .bindPopup('<strong>IdeeRoth AG</strong><br>Hafenstrasse 62<br>8590 Romanshorn');
+      // Mausrad-Zoom erst nach Klick/Fokus (blockiert das Seiten-Scrollen nicht)
+      map.on('focus', function () { map.scrollWheelZoom.enable(); });
+      map.on('blur', function () { map.scrollWheelZoom.disable(); });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { build(); io.disconnect(); } });
+      }, { rootMargin: '250px' });
+      io.observe(el);
+    } else { build(); }
+  }
+
   /* ---- Init ----------------------------------------------------------- */
   // So früh wie möglich anwenden (Attribut auf <html> setzt Basissprache).
   setLang(detect(), false);
@@ -195,5 +231,8 @@
 
     // Cookie-Consent + Google Analytics (Opt-in)
     initConsent();
+
+    // Karte
+    initMap();
   });
 })();

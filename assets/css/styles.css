@@ -274,19 +274,31 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
 @media (max-width: 720px) { .team { grid-template-columns: 1fr; gap: var(--sp-6); } }
 
 /* ---------- Kontakt ---------- */
-.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--iro-line); border: 1px solid var(--iro-line); }
-.contact__info, .contact__map { background: #fff; }
-.contact__info { padding: var(--sp-7); }
+.contact { display: grid; grid-template-columns: minmax(300px, 360px) 1fr; gap: 1px; background: var(--iro-line); border: 1px solid var(--iro-line); }
+.contact__info { background: #fff; padding: var(--sp-7); display: flex; flex-direction: column; }
 .contact__row { display: grid; grid-template-columns: 96px 1fr; gap: var(--sp-4); padding-block: var(--sp-4); border-top: 1px solid var(--iro-line); }
 .contact__row:first-of-type { border-top: none; }
 .contact__row dt { font: 600 12px/1.4 var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--iro-muted); }
 .contact__row dd { margin: 0; color: var(--iro-ink); }
 .contact__row dd a { color: var(--iro-green-text); }
-.contact__cta { margin-top: var(--sp-6); display: flex; flex-wrap: wrap; gap: var(--sp-3); }
-.contact__map { padding: var(--sp-4); display: flex; }
-.contact__map a { display: block; width: 100%; }
-.contact__map img { width: 100%; height: 100%; object-fit: cover; min-height: 260px; }
-@media (max-width: 720px) { .contact { grid-template-columns: 1fr; } }
+.contact__cta { margin-top: auto; padding-top: var(--sp-6); display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+
+/* Karte (Leaflet, dunkel) */
+.contact__map { position: relative; min-height: 480px; background: var(--iro-dark-bg); overflow: hidden; }
+#iro-map { position: absolute; inset: 0; width: 100%; height: 100%; background: var(--iro-dark-bg); z-index: 1; }
+.leaflet-container { font-family: var(--font-sans); background: var(--iro-dark-bg); }
+.contact__maplink { position: absolute; left: 14px; bottom: 14px; z-index: 600;
+  background: #fff; border: 1px solid var(--iro-line); border-radius: var(--r-1);
+  padding: 9px 13px; font: 600 13px/1 var(--font-sans); color: var(--iro-slate); }
+.contact__maplink:hover { color: var(--iro-green-text); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--iro-slate); color: #fff; box-shadow: none; border-radius: var(--r-1); }
+.leaflet-popup-content { margin: 12px 14px; font: 400 14px/1.5 var(--font-sans); }
+.leaflet-popup-content strong { color: #fff; }
+.leaflet-container a.leaflet-popup-close-button { color: var(--iro-dark-text-2); }
+.leaflet-container a.leaflet-popup-close-button:hover { color: #fff; }
+.leaflet-control-attribution { background: rgba(27,39,48,.82); color: #9AA4AB; }
+.leaflet-control-attribution a { color: var(--iro-dark-text-2); }
+@media (max-width: 720px) { .contact { grid-template-columns: 1fr; } .contact__map { min-height: 360px; } }
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--iro-slate); color: #C5C7C4; }
