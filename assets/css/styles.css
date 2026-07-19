@@ -166,7 +166,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .nav__link::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
   background: var(--iro-green); transition: width var(--mo) var(--ease); }
 .nav__link:hover { color: var(--iro-slate); }
-.nav__link:hover::after, .nav__link[aria-current="true"]::after { width: 100%; }
+.nav__link:hover::after, .nav__link[aria-current]::after { width: 100%; }
 .nav__actions { display: flex; align-items: center; gap: var(--sp-4); }
 
 /* Sprachumschalter */
@@ -320,6 +320,12 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
 .footer__badge--round { height: 98px; }
 @media (max-width: 720px) { .footer__top { grid-template-columns: 1fr; gap: var(--sp-6); }
   .footer__badges { gap: var(--sp-5); } .footer__badge { height: 70px; } .footer__badge--round { height: 76px; } }
+
+/* Karriere-Teaser (dunkles CTA-Band auf der Startseite) */
+.karriere-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-7); flex-wrap: wrap; }
+.karriere-cta__text { flex: 1 1 420px; }
+.karriere-cta__text h2 { font: 600 clamp(24px, 3.4vw, 32px)/1.1 var(--font-sans); letter-spacing: -.015em; }
+@media (max-width: 720px) { .karriere-cta { gap: var(--sp-5); } }
 
 /* Berufsbildung / Stelleninserat (Karriere) */
 .legal .lead-strong { font: 600 clamp(18px, 2.2vw, 21px)/1.5 var(--font-sans); color: var(--iro-slate); max-width: 60ch; margin-top: var(--sp-4); }
