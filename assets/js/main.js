@@ -122,7 +122,7 @@
 
   function initConsent() {
     // Footer-Link „Cookie-Einstellungen" (Widerruf jederzeit) injizieren
-    var legal = document.querySelector('.footer__bottom span:last-child');
+    var legal = document.querySelector('.footer__legal') || document.querySelector('.footer__bottom span:last-child');
     if (legal && !legal.querySelector('[data-cookie-settings]')) {
       var a = document.createElement('a');
       a.href = '#';
