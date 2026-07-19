@@ -9,6 +9,9 @@ AddDefaultCharset UTF-8
 # Startseite
 DirectoryIndex index.html
 
+# Interne, parkierte Inhalte nie ausliefern (falls versehentlich hochgeladen)
+RedirectMatch 404 ^/_parkiert
+
 # ---- Kompression (schnellere Ladezeit) ----
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
