@@ -169,6 +169,17 @@ ul { margin: 0; padding: 0; list-style: none; }
 .nav__link:hover::after, .nav__link[aria-current]::after { width: 100%; }
 .nav__actions { display: flex; align-items: center; gap: var(--sp-4); }
 
+/* Dropdown-Untermenü (Team -> Karriere) */
+.nav__has-sub { position: relative; }
+.nav__sub { position: absolute; top: calc(100% + 6px); left: 0; min-width: 190px; margin: 0; padding: 6px 0;
+  list-style: none; background: #fff; border: 1px solid var(--iro-line); border-radius: var(--r-1);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity var(--mo) var(--ease), transform var(--mo) var(--ease), visibility 0s linear var(--mo); z-index: 60; }
+.nav__has-sub:hover > .nav__sub, .nav__has-sub:focus-within > .nav__sub { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.nav__sublink { display: block; padding: 9px 16px; font-size: 15px; }
+.nav__sublink::after { display: none; }
+.nav__sublink[aria-current] { color: var(--iro-green-text); }
+
 /* Sprachumschalter */
 .lang { display: inline-flex; border: 1px solid var(--iro-line-strong); border-radius: var(--r-1); overflow: hidden; }
 .lang__btn { background: #fff; border: none; cursor: pointer; padding: 7px 10px;
@@ -196,6 +207,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   .nav--open .nav__links { transform: translateY(0); opacity: 1; pointer-events: auto; }
   .nav__link { width: 100%; padding: var(--sp-4) 0; border-bottom: 1px solid var(--iro-line); font-size: 17px; }
   .nav__link::after { display: none; }
+  /* Untermenü im Mobile-Menü immer sichtbar, eingerückt */
+  .nav__has-sub .nav__sub { position: static; opacity: 1; visibility: visible; transform: none;
+    border: none; border-radius: 0; padding: 0; background: transparent; }
+  .nav__sublink { padding-left: var(--sp-5); font-size: 16px; color: var(--iro-muted); }
 }
 
 /* ---------- Hero ---------- */
@@ -321,7 +336,8 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
 @media (max-width: 720px) { .footer__top { grid-template-columns: 1fr; gap: var(--sp-6); }
   .footer__badges { gap: var(--sp-5); } .footer__badge { height: 70px; } .footer__badge--round { height: 76px; } }
 
-/* Karriere-Teaser (dunkles CTA-Band auf der Startseite) */
+/* Karriere-Banner oben + CTA-Band */
+.kbanner { background: var(--iro-slate); border-top: 3px solid var(--iro-green); padding-block: var(--sp-7); }
 .karriere-cta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-7); flex-wrap: wrap; }
 .karriere-cta__text { flex: 1 1 420px; }
 .karriere-cta__text h2 { font: 600 clamp(24px, 3.4vw, 32px)/1.1 var(--font-sans); letter-spacing: -.015em; }
