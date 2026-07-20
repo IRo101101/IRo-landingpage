@@ -157,7 +157,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- Header / Navigation ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.9);
-  backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--iro-line); }
+  -webkit-backdrop-filter: saturate(140%) blur(8px); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--iro-line); }
 .nav { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
 .nav__logo { display: flex; align-items: center; }
 .nav__logo img { height: 45px; width: auto; }
@@ -318,6 +318,11 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
 .leaflet-control-attribution { background: rgba(27,39,48,.82); color: #9AA4AB; }
 .leaflet-control-attribution a { color: var(--iro-dark-text-2); }
 @media (max-width: 720px) { .contact { grid-template-columns: 1fr; } .contact__map { min-height: 360px; } }
+/* Sehr schmale Geräte (<= 420px): Kontaktzeilen stapeln, Padding kleiner -> kein Overflow */
+@media (max-width: 420px) {
+  .contact__info { padding: var(--sp-6); }
+  .contact__row { grid-template-columns: 1fr; gap: var(--sp-2); }
+}
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--iro-slate); color: #C5C7C4; }
@@ -345,8 +350,7 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
 .footer__badge { height: 80px; width: auto; display: block; }
 .footer__badge--round { height: 86px; }
 @media (max-width: 860px) { .footer__brand { flex-basis: 100%; } }
-@media (max-width: 620px) { .footer__head-spacer { display: none; }
-  .footer__badge { height: 64px; } .footer__badge--round { height: 70px; } }
+@media (max-width: 620px) { .footer__badge { height: 64px; } .footer__badge--round { height: 70px; } }
 
 /* Karriere-Banner oben + CTA-Band */
 .kbanner { background: var(--iro-slate); border-top: 3px solid var(--iro-green); padding-block: var(--sp-5); }
