@@ -267,15 +267,13 @@ ul { margin: 0; padding: 0; list-style: none; }
 .values li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--iro-green); margin-top: 9px; }
 
 /* Kennzahlen */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--iro-line); border: 1px solid var(--iro-line); margin-top: var(--sp-7); }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--iro-line); border: 1px solid var(--iro-line); margin-top: var(--sp-7); }
 .stat { background: #fff; padding: var(--sp-6); }
-.stat__value { font: 400 clamp(30px,4vw,42px)/1 var(--font-display); color: var(--iro-slate); letter-spacing: -.01em; }
+/* Alle vier Kennzahlen einheitlich: gleiche Groesse, einzeilig, gleich breite Spalten */
+.stat__value { font: 400 clamp(26px,3vw,34px)/1.05 var(--font-display); color: var(--iro-slate); letter-spacing: -.01em; white-space: nowrap; }
 .stat__value em { font-style: normal; color: var(--iro-green-text); }
-.stat__value--nowrap { white-space: nowrap; }
-.stat__value--wide { font-size: clamp(21px,2.3vw,30px); line-height: 1.06; }
 .nowrap { white-space: nowrap; }
 .stat__label { margin-top: var(--sp-3); font: 500 13px/1.4 var(--font-sans); color: var(--iro-muted); }
-@media (max-width: 860px) { .stats { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 420px) { .stats { grid-template-columns: 1fr; } }
 
 /* ---------- Zitat ---------- */
@@ -332,7 +330,7 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
   gap: calc(var(--sp-6) * .8) calc(var(--sp-7) * .8); padding-block: calc(var(--sp-7) * .8); }
 .footer__brand { flex: 0 1 330px; }
 /* Navigation + Kontakt als kompakter Block zusammen (Marke links, Badges rechts) */
-.footer__menu { display: flex; align-items: flex-start; flex-wrap: wrap; gap: var(--sp-5) calc(var(--sp-6) * .8); }
+.footer__menu { display: flex; align-items: flex-start; flex-wrap: wrap; gap: var(--sp-5) var(--sp-7); }
 .footer__nav { display: grid; grid-template-columns: auto auto; column-gap: calc(var(--sp-6) * .8); }
 .footer__logo { height: 63px; width: auto; display: block; margin-bottom: var(--sp-4); }
 .footer__brand p { color: #97A0A6; font-size: 14px; max-width: 44ch; }
