@@ -381,6 +381,21 @@ html.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity v
 html.js .reveal.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; } }
 
+/* ---------- Hero-Titel: Text-Pressure (Inter Variable, wght 100-900) ---------- */
+.hero h1 { font-family: var(--font-sans); }             /* animierter Titel nutzt die variable Achse von Inter */
+html:not(.js) .hero h1 { font-weight: 500; }            /* ohne JS gut lesbar */
+.hero h1 .tp-word { display: inline-block; white-space: nowrap; }
+.hero h1 .tp-char { display: inline-block; font-variation-settings: 'wght' 140;
+  transform-origin: center bottom; will-change: font-variation-settings, transform; }
+
+/* ---------- Hero-Buttons: Pixel-Effekt (Hover) + weicher Lift ---------- */
+.hero__cta .btn { position: relative; overflow: hidden;
+  transition: transform .28s cubic-bezier(.22,.61,.36,1), background var(--mo) var(--ease), color var(--mo) var(--ease), border-color var(--mo) var(--ease); }
+.hero__cta .btn:hover { transform: translateY(-1.5px); }
+.hero__cta .btn__label { position: relative; z-index: 1; }
+.hero__cta .px-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .9; }
+@media (prefers-reduced-motion: reduce) { .hero__cta .btn:hover { transform: none; } }
+
 /* ---------- Sprach-Sichtbarkeit (Stapel-Blöcke auf Rechtstexten) ---------- */
 [data-only]:not([data-only=""]) { display: none; }
 html[lang="de"] [data-only="de"] { display: revert; }

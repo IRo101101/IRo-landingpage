@@ -8,6 +8,7 @@
 
   var STORE_KEY = 'iro-lang';
   var SUPPORTED = ['de', 'en'];
+  var titlePressure = null;   // Hero-Titel-Effekt (wird bei Sprachwechsel neu aufgebaut)
 
   // JS aktiv → erlaubt CSS, Reveal-Elemente zunächst zu verbergen.
   // Ohne JS greift diese Klasse nie und der Inhalt bleibt sichtbar.
@@ -65,6 +66,9 @@
     for (var k = 0; k < btns.length; k++) {
       btns[k].setAttribute('aria-pressed', String(btns[k].getAttribute('data-lang') === lang));
     }
+
+    // Hero-Titel nach Sprachwechsel neu in Zeichen zerlegen (Text-Pressure)
+    if (titlePressure && titlePressure.refresh) titlePressure.refresh();
   }
 
   function setLang(lang, persist) {
@@ -180,6 +184,159 @@
     } else { build(); }
   }
 
+  /* ---- Hero-Effekte: Text-Pressure (Titel) + Pixel-Buttons ------------ */
+  // Titel: in Ruhe dünn, unter dem Cursor dicker + grün, beim Wegfahren wieder dünn.
+  function makeTitlePressure(el) {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var MIN_W = 100, MAX_W = 900, REST_W = 140, SCALE_MAX = 1.05;
+    var restE = (REST_W - MIN_W) / (MAX_W - MIN_W);
+    var GREEN = [77, 175, 71], WHITE = [255, 255, 255];
+    var accent = true, intensity = 0.30;
+    var chars = [], mouse = { x: -9999, y: -9999 }, cur = { x: -9999, y: -9999 }, maxDist = 300;
+    var press = 0, pressTarget = 0, over = false, raf = null;
+    var stage = el.closest('.hero') || el;
+
+    function split() {
+      var text = el.textContent;
+      el.setAttribute('aria-label', text);
+      el.textContent = '';
+      chars = [];
+      var words = text.split(' ');
+      words.forEach(function (word, wi) {
+        var w = document.createElement('span'); w.className = 'tp-word';
+        for (var i = 0; i < word.length; i++) {
+          var c = document.createElement('span'); c.className = 'tp-char';
+          c.textContent = word[i]; c.setAttribute('aria-hidden', 'true');
+          w.appendChild(c); chars.push(c);
+        }
+        el.appendChild(w);
+        if (wi < words.length - 1) el.appendChild(document.createTextNode(' '));
+      });
+    }
+    function recalc() { var r = el.getBoundingClientRect(); maxDist = Math.max(r.width, r.height) * 0.5; }
+    function smooth(t) { t = t < 0 ? 0 : (t > 1 ? 1 : t); return t * t * (3 - 2 * t); }
+    function paint() {
+      for (var i = 0; i < chars.length; i++) {
+        var c = chars[i], r = c.getBoundingClientRect();
+        var d = Math.hypot(cur.x - (r.left + r.width * 0.5), cur.y - (r.top + r.height * 0.5));
+        var lift = smooth(1 - d / maxDist) * press;
+        var e = restE + (1 - restE) * intensity * lift;
+        c.style.fontVariationSettings = "'wght' " + Math.round(MIN_W + (MAX_W - MIN_W) * e);
+        c.style.transform = "scale(" + (1 + (SCALE_MAX - 1) * lift).toFixed(3) + ")";
+        if (accent) {
+          c.style.color = "rgb(" +
+            Math.round(WHITE[0] + (GREEN[0] - WHITE[0]) * lift) + "," +
+            Math.round(WHITE[1] + (GREEN[1] - WHITE[1]) * lift) + "," +
+            Math.round(WHITE[2] + (GREEN[2] - WHITE[2]) * lift) + ")";
+        } else { c.style.color = ''; }
+      }
+    }
+    function loop() {
+      cur.x += (mouse.x - cur.x) * 0.12; cur.y += (mouse.y - cur.y) * 0.12;
+      press += (pressTarget - press) * (pressTarget > press ? 0.14 : 0.07);
+      paint(); raf = requestAnimationFrame(loop);
+    }
+    function onMove(x, y) { mouse.x = x; mouse.y = y; }
+    window.addEventListener('pointermove', function (e) { onMove(e.clientX, e.clientY); }, { passive: true });
+    stage.addEventListener('pointermove', function (e) { over = true; pressTarget = 1; onMove(e.clientX, e.clientY); }, { passive: true });
+    stage.addEventListener('pointerleave', function () { over = false; pressTarget = 0; });
+    stage.addEventListener('touchstart', function (e) { over = true; pressTarget = 1; if (e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+    window.addEventListener('touchmove', function (e) { if (e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+    window.addEventListener('touchend', function () { over = false; pressTarget = 0; });
+    window.addEventListener('resize', recalc);
+    window.addEventListener('scroll', recalc, { passive: true });
+
+    function staticRender() {
+      for (var i = 0; i < chars.length; i++) {
+        chars[i].style.fontVariationSettings = "'wght' 460";
+        chars[i].style.transform = 'none'; chars[i].style.color = '';
+      }
+    }
+    function introSweep() {
+      var r = el.getBoundingClientRect(), t0 = null, dur = 1500, pad = r.width * 0.15;
+      press = 1; pressTarget = 1;
+      mouse.y = r.top + r.height * 0.5; cur.y = mouse.y; mouse.x = r.left - pad; cur.x = mouse.x;
+      function step(ts) {
+        if (t0 === null) t0 = ts;
+        var p = (ts - t0) / dur;
+        if (p >= 1) { pressTarget = over ? 1 : 0; return; }
+        var e = p * p * (3 - 2 * p);
+        mouse.x = (r.left - pad) + (r.width + 2 * pad) * e; mouse.y = r.top + r.height * 0.5;
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    function refresh() { split(); recalc(); if (reduce) staticRender(); }
+
+    var startedTP = false;
+    function go() {
+      if (startedTP) return; startedTP = true;
+      split(); recalc();
+      mouse.x = -9999; mouse.y = -9999; cur.x = mouse.x; cur.y = mouse.y;
+      if (reduce) { staticRender(); return; }
+      raf = requestAnimationFrame(loop); introSweep();
+    }
+    // Start erst, wenn die variable Inter-Achse verfügbar ist (verhindert Flackern)
+    if (document.fonts && document.fonts.load) {
+      document.fonts.load("400 20px 'Inter'").then(go, go); setTimeout(go, 700);
+    } else { go(); }
+    return { refresh: refresh };
+  }
+
+  // Buttons: Pixel-Effekt beim Hover (Vanilla-Canvas, angelehnt an ReactBits PixelCard).
+  function pxRand(a, b) { return Math.random() * (b - a) + a; }
+  function makePixelCanvas(btn, colors, speed, gap) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var canvas = document.createElement('canvas'); canvas.className = 'px-canvas'; canvas.setAttribute('aria-hidden', 'true');
+    btn.insertBefore(canvas, btn.firstChild);
+    var ctx = canvas.getContext('2d'), pixels = [], raf = null, timePrev = 0, cssW = 0, cssH = 0;
+    var effSpeed = Math.max(0, speed) * 0.001;
+    function Pixel(x, y, color, delay) {
+      this.x = x; this.y = y; this.color = color; this.speed = pxRand(0.1, 0.9) * effSpeed;
+      this.size = 0; this.sizeStep = Math.random() * 0.4; this.minSize = 0.5; this.maxInt = 2;
+      this.maxSize = pxRand(this.minSize, this.maxInt); this.delay = delay; this.counter = 0;
+      this.counterStep = Math.random() * 4 + (cssW + cssH) * 0.02;
+      this.isIdle = false; this.isReverse = false; this.isShimmer = false;
+    }
+    Pixel.prototype.draw = function () { var o = this.maxInt * 0.5 - this.size * 0.5; ctx.fillStyle = this.color; ctx.fillRect(this.x + o, this.y + o, this.size, this.size); };
+    Pixel.prototype.appear = function () { this.isIdle = false; if (this.counter <= this.delay) { this.counter += this.counterStep; return; } if (this.size >= this.maxSize) { this.isShimmer = true; } if (this.isShimmer) { this.shimmer(); } else { this.size += this.sizeStep; } this.draw(); };
+    Pixel.prototype.disappear = function () { this.isShimmer = false; this.counter = 0; if (this.size <= 0) { this.isIdle = true; return; } this.size -= 0.1; this.draw(); };
+    Pixel.prototype.shimmer = function () { if (this.size >= this.maxSize) { this.isReverse = true; } else if (this.size <= this.minSize) { this.isReverse = false; } this.size += this.isReverse ? -this.speed : this.speed; };
+    function build() {
+      var r = btn.getBoundingClientRect(); cssW = Math.max(1, Math.floor(r.width)); cssH = Math.max(1, Math.floor(r.height));
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = cssW * dpr; canvas.height = cssH * dpr; canvas.style.width = cssW + 'px'; canvas.style.height = cssH + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); pixels = [];
+      var g = Math.max(3, gap);
+      for (var x = 0; x < cssW; x += g) { for (var y = 0; y < cssH; y += g) { pixels.push(new Pixel(x, y, colors[Math.floor(Math.random() * colors.length)], Math.hypot(x, y))); } }
+    }
+    function anim(fn) {
+      raf = requestAnimationFrame(function () { anim(fn); });
+      var now = performance.now(), passed = now - timePrev, interval = 1000 / 60;
+      if (passed < interval) return;
+      timePrev = now - (passed % interval);
+      ctx.clearRect(0, 0, cssW, cssH);
+      var idle = true;
+      for (var i = 0; i < pixels.length; i++) { pixels[i][fn](); if (!pixels[i].isIdle) idle = false; }
+      if (idle) { cancelAnimationFrame(raf); raf = null; }
+    }
+    function run(fn) { if (raf) cancelAnimationFrame(raf); raf = null; timePrev = 0; anim(fn); }
+    btn.addEventListener('pointerenter', function () { run('appear'); });
+    btn.addEventListener('pointerleave', function () { run('disappear'); });
+    btn.addEventListener('focus', function () { run('appear'); });
+    btn.addEventListener('blur', function () { run('disappear'); });
+    var rt = null; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    build();
+  }
+  function initHeroEffects() {
+    var t = document.getElementById('hero-title');
+    if (t) titlePressure = makeTitlePressure(t);
+    var prim = document.querySelector('.hero__cta .btn--on-dark');
+    var ghost = document.querySelector('.hero__cta .btn--ghost');
+    if (prim) makePixelCanvas(prim, ['#eafae8', '#ffffff', '#bfe8bb'], 36, 4);   // helle Pixel auf Grün
+    if (ghost) makePixelCanvas(ghost, ['#4DAF47', '#69c162', '#2E7D2A'], 36, 4);  // grüne Pixel auf dunkel
+  }
+
   /* ---- Init ----------------------------------------------------------- */
   // So früh wie möglich anwenden (Attribut auf <html> setzt Basissprache).
   setLang(detect(), false);
@@ -234,5 +391,8 @@
 
     // Karte
     initMap();
+
+    // Hero-Effekte (Text-Pressure + Pixel-Buttons)
+    initHeroEffects();
   });
 })();
