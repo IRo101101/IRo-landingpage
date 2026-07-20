@@ -322,7 +322,10 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
 .site-footer { background: var(--iro-slate); color: #C5C7C4; }
 .site-footer a { color: #C5C7C4; }
 .site-footer a:hover { color: #fff; }
-.footer__top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.25fr; gap: var(--sp-6) var(--sp-7); padding-block: var(--sp-8); align-items: start; }
+.footer__top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
+  gap: var(--sp-6) var(--sp-7); padding-block: var(--sp-7); }
+.footer__brand { flex: 0 1 280px; }
+.footer__nav { display: grid; grid-template-columns: auto auto; column-gap: var(--sp-6); }
 .footer__logo { height: 63px; width: auto; display: block; margin-bottom: var(--sp-4); }
 .footer__brand p { color: #97A0A6; font-size: 14px; max-width: 34ch; }
 .footer__col h4, .footer__head-spacer { font: 600 12px/1 var(--font-sans); height: 12px; margin-bottom: var(--sp-4); }
@@ -333,16 +336,14 @@ html[lang="en"] .quote__en { display: none; } /* im EN-Modus keine doppelte Übe
   display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); justify-content: space-between;
   font-size: 13px; color: #8A969E; }
 .footer__legal { display: flex; align-items: center; gap: var(--sp-3) var(--sp-5); flex-wrap: wrap; }
-.footer__badges { display: flex; align-items: center; gap: var(--sp-7); flex-wrap: wrap;
-  padding-block: var(--sp-6); border-top: 1px solid var(--iro-dark-line, #3A4A54); }
+.footer__badges { display: flex; align-items: flex-start; gap: var(--sp-6); flex-wrap: wrap; }
 .footer__badge-link { display: inline-flex; align-items: center; line-height: 0; transition: opacity 120ms ease-out; }
 .footer__badge-link:hover, .footer__badge-link:focus-visible { opacity: .78; }
-.footer__badge { height: 90px; width: auto; display: block; }
-.footer__badge--round { height: 98px; }
-@media (max-width: 1000px) { .footer__top { grid-template-columns: 1.4fr 1fr 1fr; } .footer__brand { grid-column: 1 / -1; } }
-@media (max-width: 620px) { .footer__head-spacer { display: none; } }
-@media (max-width: 720px) { .footer__top { grid-template-columns: 1fr; gap: var(--sp-6); }
-  .footer__badges { gap: var(--sp-5); } .footer__badge { height: 70px; } .footer__badge--round { height: 76px; } }
+.footer__badge { height: 80px; width: auto; display: block; }
+.footer__badge--round { height: 86px; }
+@media (max-width: 860px) { .footer__brand { flex-basis: 100%; } }
+@media (max-width: 620px) { .footer__head-spacer { display: none; }
+  .footer__badge { height: 64px; } .footer__badge--round { height: 70px; } }
 
 /* Karriere-Banner oben + CTA-Band */
 .kbanner { background: var(--iro-slate); border-top: 3px solid var(--iro-green); padding-block: var(--sp-5); }
@@ -384,10 +385,10 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; } }
 
 /* ---------- Hero-Titel: Text-Pressure (Inter Variable, wght 100-900) ---------- */
-.hero h1 { font-family: var(--font-sans); font-weight: 600; }   /* animierter Titel nutzt die variable Achse von Inter */
-html:not(.js) .hero h1 { font-weight: 600; }                    /* ohne JS gute Stärke */
+.hero h1 { font-family: var(--font-sans); font-weight: 480; }   /* animierter Titel nutzt die variable Achse von Inter */
+html:not(.js) .hero h1 { font-weight: 480; }                    /* ohne JS gute Stärke */
 .hero h1 .tp-word { display: inline-block; white-space: nowrap; }
-.hero h1 .tp-char { display: inline-block; font-variation-settings: 'wght' 600;
+.hero h1 .tp-char { display: inline-block; font-variation-settings: 'wght' 480;
   transform-origin: center bottom; will-change: font-variation-settings, transform; }
 
 /* ---------- Buttons: Pixel-Effekt (Hover) + weicher Lift (alle Buttons) ---------- */

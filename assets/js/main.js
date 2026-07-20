@@ -188,7 +188,7 @@
   // Titel: in Ruhe dünn, unter dem Cursor dicker + grün, beim Wegfahren wieder dünn.
   function makeTitlePressure(el) {
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var MIN_W = 100, MAX_W = 900, REST_W = 600, SCALE_MAX = 1.05;
+    var MIN_W = 100, MAX_W = 900, REST_W = 480, SCALE_MAX = 1.05;
     var restE = (REST_W - MIN_W) / (MAX_W - MIN_W);
     var GREEN = [77, 175, 71], WHITE = [255, 255, 255];
     var accent = true, intensity = 0.6;
@@ -248,7 +248,7 @@
 
     function staticRender() {
       for (var i = 0; i < chars.length; i++) {
-        chars[i].style.fontVariationSettings = "'wght' 600";
+        chars[i].style.fontVariationSettings = "'wght' 480";
         chars[i].style.transform = 'none'; chars[i].style.color = '';
       }
     }
