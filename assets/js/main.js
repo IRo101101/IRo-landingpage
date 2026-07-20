@@ -188,10 +188,10 @@
   // Titel: in Ruhe dünn, unter dem Cursor dicker + grün, beim Wegfahren wieder dünn.
   function makeTitlePressure(el) {
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var MIN_W = 100, MAX_W = 900, REST_W = 140, SCALE_MAX = 1.05;
+    var MIN_W = 100, MAX_W = 900, REST_W = 600, SCALE_MAX = 1.05;
     var restE = (REST_W - MIN_W) / (MAX_W - MIN_W);
     var GREEN = [77, 175, 71], WHITE = [255, 255, 255];
-    var accent = true, intensity = 0.30;
+    var accent = true, intensity = 0.6;
     var chars = [], mouse = { x: -9999, y: -9999 }, cur = { x: -9999, y: -9999 }, maxDist = 300;
     var press = 0, pressTarget = 0, over = false, raf = null;
     var stage = el.closest('.hero') || el;
@@ -248,7 +248,7 @@
 
     function staticRender() {
       for (var i = 0; i < chars.length; i++) {
-        chars[i].style.fontVariationSettings = "'wght' 460";
+        chars[i].style.fontVariationSettings = "'wght' 600";
         chars[i].style.transform = 'none'; chars[i].style.color = '';
       }
     }
@@ -328,16 +328,38 @@
     var rt = null; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
     build();
   }
-  function initHeroEffects() {
+  // Button-Beschriftungen in ein Label-Span kapseln (früh, damit Sprach-Logik + Canvas sauber sind)
+  function prepareButtons() {
+    var btns = document.querySelectorAll('.btn:not(.btn--link)');
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
+      if (btn.closest('.consent')) continue;               // Consent-Buttons ausnehmen
+      if (btn.querySelector('.btn__label')) continue;       // schon gekapselt (Hero im HTML)
+      var span = document.createElement('span'); span.className = 'btn__label';
+      while (btn.firstChild) { span.appendChild(btn.firstChild); }
+      if (btn.hasAttribute('data-en')) { span.setAttribute('data-en', btn.getAttribute('data-en')); btn.removeAttribute('data-en'); }
+      if (btn.hasAttribute('data-de')) { span.setAttribute('data-de', btn.getAttribute('data-de')); btn.removeAttribute('data-de'); }
+      btn.appendChild(span);
+    }
+  }
+
+  function initEffects() {
     var t = document.getElementById('hero-title');
     if (t) titlePressure = makeTitlePressure(t);
-    var prim = document.querySelector('.hero__cta .btn--on-dark');
-    var ghost = document.querySelector('.hero__cta .btn--ghost');
-    if (prim) makePixelCanvas(prim, ['#eafae8', '#ffffff', '#bfe8bb'], 36, 4);   // helle Pixel auf Grün
-    if (ghost) makePixelCanvas(ghost, ['#4DAF47', '#69c162', '#2E7D2A'], 36, 4);  // grüne Pixel auf dunkel
+    // Pixel-Effekt auf allen Buttons (ausser Text-Links und Consent-Buttons)
+    var btns = document.querySelectorAll('.btn:not(.btn--link)');
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
+      if (btn.closest('.consent')) continue;
+      var light = btn.classList.contains('btn--primary') || btn.classList.contains('btn--on-dark');
+      var colors = light ? ['#eafae8', '#ffffff', '#bfe8bb'] : ['#4DAF47', '#69c162', '#2E7D2A'];
+      makePixelCanvas(btn, colors, 36, 4);
+    }
   }
 
   /* ---- Init ----------------------------------------------------------- */
+  // Button-Labels kapseln, bevor die Sprache erstmals angewandt wird.
+  prepareButtons();
   // So früh wie möglich anwenden (Attribut auf <html> setzt Basissprache).
   setLang(detect(), false);
 
@@ -392,7 +414,7 @@
     // Karte
     initMap();
 
-    // Hero-Effekte (Text-Pressure + Pixel-Buttons)
-    initHeroEffects();
+    // Effekte: Hero-Text-Pressure + Pixel-Buttons (alle Seiten)
+    initEffects();
   });
 })();
