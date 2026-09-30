@@ -204,13 +204,16 @@
       var words = text.split(' ');
       words.forEach(function (word, wi) {
         var w = document.createElement('span'); w.className = 'tp-word';
+        var last = wi === words.length - 1;
         for (var i = 0; i < word.length; i++) {
           var c = document.createElement('span'); c.className = 'tp-char';
           c.textContent = word[i]; c.setAttribute('aria-hidden', 'true');
+          // Crawler-sicher: das Leerzeichen haengt am letzten Buchstaben des Wortes
+          // (kein reiner Whitespace-Textknoten, den Text-Extraktoren verwerfen wuerden).
+          if (!last && i === word.length - 1) { c.textContent = word[i] + ' '; c.className += ' tp-char--sp'; }
           w.appendChild(c); chars.push(c);
         }
         el.appendChild(w);
-        if (wi < words.length - 1) el.appendChild(document.createTextNode(' '));
       });
     }
     function recalc() { var r = el.getBoundingClientRect(); maxDist = Math.max(r.width, r.height) * 0.5; }

@@ -395,6 +395,7 @@ html:not(.js) .hero h1 { font-weight: 480; }                    /* ohne JS gute 
 .hero h1 .tp-word { display: inline-block; white-space: nowrap; }
 .hero h1 .tp-char { display: inline-block; font-variation-settings: 'wght' 480;
   transform-origin: center bottom; will-change: font-variation-settings, transform; }
+.hero h1 .tp-char--sp { white-space: pre; }   /* Wortabstand im letzten Buchstaben erhalten (crawler-sicher) */
 
 /* ---------- Buttons: Pixel-Effekt (Hover) + weicher Lift (alle Buttons) ---------- */
 .btn { position: relative; overflow: hidden;
