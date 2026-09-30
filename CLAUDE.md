@@ -42,3 +42,13 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 ## Geparkte Inhalte
 - `_parkiert/offene-stellen.html`: Abschnitt "Offene Stellen" (2 Junior-Positionen), ausgebaut Juli 2026.
   Wiedereinsetzen laut `_parkiert/README.md`, wenn es wieder offene Stellen gibt.
+
+## v2-Redesign (Branch `v2-redesign`) - Vorschau ueber GitHub Pages
+- Vorschau-URL: https://iro101101.github.io/IRo-landingpage/ (Pages-Quelle: Branch `v2-redesign`, Ordner `/`).
+- Der Live-Stand (v1) liegt unveraendert auf `claude/iro-skill-designsystem-access-0i426w`; Live-Site = Hostpoint-Upload.
+- v2 NUR mit RELATIVEN Pfaden bauen (`assets/...`, `karriere.html`, nie `/assets/...`), damit sie auf dem
+  Pages-Unterpfad UND spaeter im Hostpoint-www-Root identisch laeuft.
+- Waehrend der Vorschau-Phase: `<meta name="robots" content="noindex, nofollow">` auf allen Seiten und
+  robots.txt `Disallow: /`. Beim Go-live beides entfernen und sitemap.xml wieder anlegen.
+- `.nojekyll` muss im Root bleiben (sonst ignoriert Pages `_`-Ordner).
+- Alle uebrigen Regeln oben (Wording, DE/EN, Cache-Version, Effekte) gelten auch fuer v2.
