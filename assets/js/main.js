@@ -514,7 +514,10 @@
       var a = e.target.closest && e.target.closest('a[href^="#"]');
       if (!a) return;
       var h = a.getAttribute('href'); if (h === '#') return;
-      if (scrollToHash(h)) { e.preventDefault(); closeMenu(); }
+      if (!doc.querySelector(h)) return;
+      e.preventDefault();
+      closeMenu();                       // zuerst Lenis wieder starten, sonst ignoriert es scrollTo
+      scrollToHash(h);
     });
   }
 

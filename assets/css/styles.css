@@ -316,7 +316,7 @@ section { position: relative; }
 .pstep.is-active { z-index: 20; }
 .pstep__n { font-size: .38em; letter-spacing: 0; font-weight: 400; vertical-align: .9em; margin-right: .35em; color: var(--on-inverse-muted); }
 .pstep__src { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.process__stagepos { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 10; }
+.process__stagepos { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 10; pointer-events: none; }
 .process__par { perspective: 900px; }
 .process__stage { width: 13.25rem; height: 16.25rem; transform-style: preserve-3d; }
 .process__turn { position: absolute; inset: 0; overflow: hidden; background: #1a1f25; }
