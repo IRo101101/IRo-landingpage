@@ -1,32 +1,33 @@
-# v2-Redesign - Briefing (Stand 30.09.2026)
+# v2-Redesign - Briefing und Stand (30.09.2026)
 
 Vorlage: Bauanleitung "Northwall" (Struktur, Motion, Timing 1:1), Inhalte/Fotos/Farben = IdeeRoth.
+Vorschau: https://iro101101.github.io/IRo-landingpage/ (GitHub Pages, Branch `v2-redesign`, Ordner `/`).
 
 ## Entscheidungen
 - Farben: Carbon Black #111418 (dunkel), Ice Mint #E7FFF2 (hell), Signal Green #25C77A (Akzent),
-  Steel Gray #707981 (Nebentext), Fresh Mint #B7F3D0 (Hover/Flächen). Logo einfarbig (weiss/schwarz).
-- Schrift: Inter (selbst gehostet, wie bisher). Kein DM Sans.
-- Smooth Scroll: Lenis, lokal gehostet. Keine externen Skripte/Assets; Icons als Inline-SVG.
-- Monogramm/Logo: Bildmarke "IRo." + "SWISS" - Datei folgt als Anhang (SVG/PNG). Bis dahin Platzhalter.
-- Sprachen: DE Default + Auto-Erkennung + Umschalter DE/EN; alles zweisprachig (auch Lade-Vorhang).
-- Unterseiten bleiben: karriere.html (verbatim-Inserat), impressum.html, datenschutz.html; Karriere-Hinweis auf Startseite.
-- GA4 (G-P2GWBZFYTZ) nur nach Opt-in + Consent-Banner wie bisher.
-- Kontakt: NUR mailto + Telefon (kein Formular).
-- Relative Pfade, noindex + robots Disallow waehrend der Vorschau (GitHub Pages).
+  Steel Gray #707981 (Nebentext), Fresh Mint #B7F3D0 (Team-Zeilen). Logo einfarbig (weiss/schwarz) als Maske.
+- Schrift: Inter (selbst gehostet). Smooth Scroll: Lenis lokal. Keine externen Skripte/Assets; Icons als Inline-SVG.
+- Sprachen: DE Default + Auto-Erkennung + Umschalter DE/EN (Header-Dropdown, Mobilmenue); alles zweisprachig.
+- Unterseiten: karriere.html (Inserat verbatim), impressum.html, datenschutz.html; Karriere-Zeile im Team-Block.
+- GA4 (G-P2GWBZFYTZ) nur nach Opt-in + Consent-Banner. Kontakt: NUR mailto + Telefon (kein Formular).
+- Relative Pfade, noindex + robots Disallow waehrend der Vorschau.
 
-## Bloecke
-1. Hero: Foto 07 (f28_rsf_ideeroth_firma_02, Gegenlicht Tuer). Slogan "Aus weniger mehr entwickeln".
-   Drei zaehlende Kennzahlen: PLATZHALTER, spaeter korrigieren.
-2. About: 10 rotierende Fotos (Werkstatt/Buero/Team-Mix), 5 Themen (z. B. Swiss engineered, 3D-CAD, FEM/CFD, Prototyping, Berufsbildung).
-3. Projects -> 4 Karten: Ideation, Entwicklung, Simulation, Prototyping (Raster auf 4 anpassen).
-4. Process -> 5 Schritte: Idee, Konstruktion, Simulation, Entwicklung, Prototyp.
-5. Team -> KEIN Personen-Block: ein Team-Foto (16 oder 19) mit Text.
-6. Contact: Foto 17 o. ae. als Hintergrund, Rail mit Links + Adresse/Telefon/Mail, keine Formularkarte.
+## Bloecke (umgesetzt)
+1. Hero: Foto 07 (Gegenlicht Tuer). "Aus weniger mehr entwickeln." / "Von der ersten Idee. Bis zur Serie."
+   Drei zaehlende Kennzahlen: PLATZHALTER (20+ Jahre, 100+ Projekte, 5 Leistungen) - bitte korrigieren.
+2. Unternehmen: 10 rotierende Fotos, 5 Themen (Swiss engineered, 3D-CAD, FEM / CFD, Prototyping, Berufsbildung),
+   Mission-Text, Button "Ueber uns" -> Team.
+3. Kompetenzen: 4 Karten Ideation (09), Entwicklung (11), Simulation (13), Prototyping (14) -> Leistungen.
+4. Leistungen / Prozess: 5 Schritte Idee (19), Konstruktion (15), Simulation (10), Entwicklung (21), Prototyp (03),
+   Texte aus v1 gekuerzt, Auto-Weiterschalten unter 1440, Neigung zur Maus.
+5. Team: Titel + Intro, Team-Foto 16, Zeilen Vision / Mission / Leitbild (Texte v1) + Karriere-Zeile (Lehrstelle 2027).
+6. Kontakt: Foto 17, schwarze Schiene mit Logo, Abschnittslinks, Badges (NAFEMS, Lehrbetrieb), Telefon/Mail/Adresse;
+   rechts "Sprechen wir ueber Ihr Projekt." mit E-Mail / Anrufen; Impressum / Datenschutz / Cookie-Einstellungen.
 
-## Texte
-- Bestehende Website-Texte uebertragen; Luecken (Schlusszeile, Captions, Karten, Team-Text) texte ich
-  in DE + EN und lege sie zur Freigabe vor. Alle CLAUDE.md-Wortregeln gelten.
+## Texte zur Freigabe (neu getextet, DE/EN in den HTML-Dateien)
+- Hero-Schlusszeile, Hero-Intro, Kennzahlen-Labels, Unternehmen-Titel/Mission, Karten-Namen,
+  Prozess-Captions (aus v1 gekuerzt), Team-Titel/Intro/Zeilen, Kontakt-Schlusszeile.
 
-## Fotos
-- 21 Originale (6720x4480 JPG) in 5 Paketen; zu WebP verkleinern (max ~2000px, Hero ~2400px).
-- Nummern beziehen sich auf das Kontaktblatt v2_contact_sheet.jpg (01-21).
+## Go-live (spaeter)
+- noindex-Meta und robots.txt Disallow entfernen, sitemap.xml anlegen, Cache-Version hochzaehlen,
+  ZIP fuer Hostpoint bauen (siehe CLAUDE.md Deployment).

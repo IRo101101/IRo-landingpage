@@ -52,3 +52,19 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   robots.txt `Disallow: /`. Beim Go-live beides entfernen und sitemap.xml wieder anlegen.
 - `.nojekyll` muss im Root bleiben (sonst ignoriert Pages `_`-Ordner).
 - Alle uebrigen Regeln oben (Wording, DE/EN, Cache-Version, Effekte) gelten auch fuer v2.
+
+### v2-Technik (Stand 30.09.2026)
+- Aufbau nach der "Northwall"-Bauanleitung (Feder-Engine, ein Ticker, Wort-fuer-Wort-Text, Ladepanel,
+  fester Boden Carbon Black <-> Ice Mint, Header-Thema per Viewport-Mitte). Alle Zahlen stehen als
+  Konstanten oben in `assets/js/main.js`. Lenis lokal unter `assets/vendor/lenis/`.
+- Farben: Carbon Black #111418, Ice Mint #E7FFF2, Signal Green #25C77A, Steel Gray #707981, Fresh Mint #B7F3D0.
+- Logo als CSS-Maske (`assets/img/logo/mark-white.png`, `lockup-white.png`, `word-white.png`), nimmt `currentColor`.
+- Wort-Engine: Leerzeichen haengt am Wort-Span (`.w__i`, white-space:pre), `column-gap:0` - crawler-sicher.
+  `data-en` auf Elementen mit Wort-Engine/RollLabel/Zaehler funktioniert ueber `el.__setText` (main.js applyLang).
+- Chrome rechnet `clip-path` des Ziels in IntersectionObserver ein: maskierte Elemente (`.card__mask`,
+  `.team__mask`) nie direkt beobachten, sondern den unmaskierten Elternknoten (`Inview(..., {watch: el})`).
+- Fotos: `assets/img/v2/NN.webp` (Desktop) und `NN-m.webp` (mobil); Nummern = Kontaktblatt 01-21.
+  Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02.
+- Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind PLATZHALTER, vom Kunden zu korrigieren.
+- Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
+  `scratchpad/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel).
