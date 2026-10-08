@@ -3,6 +3,13 @@
 Vorlage: Bauanleitung "Northwall" (Struktur, Motion, Timing 1:1), Inhalte/Fotos/Farben = IdeeRoth.
 Vorschau: https://iro101101.github.io/IRo-landingpage/ (GitHub Pages, Branch `v2-redesign`, Ordner `/`).
 
+## A/B-Vergleich (seit 08.10.2026)
+- Variante A = Stand vom 30.09., eingefroren: https://iro101101.github.io/IRo-landingpage/
+- Variante B = Feinschliff nach dem Video-Vergleich (Ladepanel kuerzer, Kennzahlen in einer Zeile, Prozess
+  lesbar auf Mobil, Karten springen auf den Prozessschritt, Kontakt mit gruener Primaeraktion u. a.):
+  https://iro101101.github.io/IRo-landingpage/b/
+- Punkteliste mit Status: `V2-VIDEOVERGLEICH.md`. Nach dem Entscheid wird eine Variante zum Root, die andere geloescht.
+
 ## Entscheidungen
 - Farben: Carbon Black #111418 (dunkel), Ice Mint #E7FFF2 (hell), Signal Green #25C77A (Akzent),
   Steel Gray #707981 (Nebentext), Fresh Mint #B7F3D0 (Team-Zeilen). Logo einfarbig (weiss/schwarz) als Maske.

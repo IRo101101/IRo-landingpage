@@ -46,6 +46,11 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 ## v2-Redesign (Branch `v2-redesign`) - Vorschau ueber GitHub Pages
 - Vorschau-URL: https://iro101101.github.io/IRo-landingpage/ (Pages-Quelle: Branch `v2-redesign`, Ordner `/`).
 - Der Live-Stand (v1) liegt unveraendert auf `claude/iro-skill-designsystem-access-0i426w`; Live-Site = Hostpoint-Upload.
+- A/B seit 08.10.2026: Root = Variante A (EINGEFROREN fuer den 1:1-Vergleich, nicht anfassen), Ordner `b/` =
+  Variante B (eigenstaendige Kopie inkl. assets/, Cache-Version 20261008), Vorschau
+  https://iro101101.github.io/IRo-landingpage/b/ . Aenderungen nur in `b/`, bis der Kunde entschieden hat;
+  danach gewinnt eine Variante den Root, die andere wird geloescht. Stand der Punkte: `V2-VIDEOVERGLEICH.md`.
+- B-Unterseiten entstehen aus `scratchpad/build_subpages_b.py` (ROOT=b), nicht von Hand.
 - v2 NUR mit RELATIVEN Pfaden bauen (`assets/...`, `karriere.html`, nie `/assets/...`), damit sie auf dem
   Pages-Unterpfad UND spaeter im Hostpoint-www-Root identisch laeuft.
 - Waehrend der Vorschau-Phase: `<meta name="robots" content="noindex, nofollow">` auf allen Seiten und
@@ -67,4 +72,10 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02.
 - Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind PLATZHALTER, vom Kunden zu korrigieren.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
-  `scratchpad/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel).
+  `scratchpad/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel);
+  fuer B: `scratchpad/test_v2b.py <port> b/` (Server auf dem Repo-Root starten).
+- Variante B zusaetzlich (nur `b/`): Ladepanel endet beim sichtbaren Ankommen (Ticker-Check), Wiederbesuch im
+  selben Tab ueberspringt es (`sessionStorage iro-pre`, `html.pre-skip`); `<picture>` mit `-m`-Fotos;
+  Kennzahlen zaehlen erst nach der Uebergabe; Prozess mit Auto-Takt 6 s, 01-05-Leiste mobil, Foto ueber der
+  Liste unter 768 px; Karten springen per `data-step` auf den Prozessschritt (Hover danach kurz gesperrt);
+  `.about__band` als Flex-Spalte mit Abstaenden; Buttons in Foto-Rahmen unten statt mittig.
