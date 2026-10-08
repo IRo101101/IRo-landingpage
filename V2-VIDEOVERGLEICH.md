@@ -126,3 +126,24 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 9. Kontakt: eine solide Primaeraktion (E-Mail gruen), Scrim, lesbare Rechtszeile.
 10. Mobil und Barrierefreiheit: <picture> mit -m-Fotos (1.5 MB weniger), Fokusring auf hellem Boden dunkel,
     aria-live nur bei Nutzeraktion, Navigation in Seitenreihenfolge, Versal-Labels bei 12 px mit positiver Laufweite.
+
+## Runde 1 (Ordner `r1/`, Stand 08.10.2026) - Kundenwuensche vom 08.10.
+Vorschau: https://iro101101.github.io/IRo-landingpage/r1/ (Root bleibt der Stand vom 30.09. zum Vergleich).
+Umgesetzt in r1:
+- Ladepanel: Hochzaehlen bis 100 % doppelt so lang (1.9 s statt 1.0 s), Panel insgesamt ca. 4.3 s.
+- Bodenwechsel ab 768 px doppelt so lang (90 % in 1.2 s statt 0.55 s), beide Richtungen gleich. Unter 768 px folgt
+  der Boden dem Scrollweg (kein Text mehr in der eigenen Bodenfarbe, Befund 2 des Handy-Audits).
+- Prozess: Hintergrundzeilen 30 % groesser, Foto 15 % kleiner, Unschaerfe 2.5 statt 5 px, Deckkraft .45 statt .3.
+- Mobil (unter 768 px, Audit mit 142 Rohbefunden): Prozess gestapelt mit Leiste 01-05 (Punkt 38), Abstaende im
+  Unternehmen-Block (Punkt 37), Header deckend in Bodenfarbe (auch Tablet), Root-Schrift mit Untergrenze 14 px,
+  keine Schrift unter 12 px, Tap-Ziele 40 px, Kontakt-Parallaxe ohne Ueberdeckung der Adresse, Hero-CTAs ueber der
+  Falz (390 px), Datenschutz-Titel nicht mehr abgeschnitten, Rechtszeile ohne haengenden Trennstrich, Navigation
+  768 bis 1023 px ohne Ueberlappung (Punkte 9 und 40), Sprachpanel-Klick, Unterseiten-Links ohne Unterstreichung.
+- Pruefung r1: Sweep 48/48 (4 Seiten x 6 Viewports x DE/EN) ohne Overflow, Konsolenfehler, Ladepanel-Haenger;
+  zwei unabhaengige Audit-Runden auf 390/360/320/768/1024 plus Unterseiten.
+Zur Entscheidung durch den Kunden (Vorschauseiten in r1):
+- `vorschau-uebergaenge.html`: sieben Fotouebergaenge aus dem Prompt (Dissolve, Dissolve + Settle, Wipe, Clear,
+  Deal, Turn, Push) mit Takt 0.52 bis 3 s und Tempo 1x bis 3x; Wunsch: sechs davon als Bibliothek fuer die ganze Site.
+- `vorschau-layouts.html`: Unternehmen U-A/U-B/U-C (Mission ohne Ueberlappung, Themenliste am Foto; Punkt 19),
+  Karten K-A/K-B/K-C (gleich hoch, wechselnd, versetzt; Punkt 21), Team T-A/T-B/T-C (weniger Luft in der Mitte).
+Nicht in r1 (bewusst, Kunde): Hero-Text (spaeter), Karten bleiben vier, Teil-1-Punkte 4, 7, 8, 11, 15.

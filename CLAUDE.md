@@ -48,6 +48,11 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Der Live-Stand (v1) liegt unveraendert auf `claude/iro-skill-designsystem-access-0i426w`; Live-Site = Hostpoint-Upload.
 - Eine Variante B (Ordner `b/`, 08.10.2026) wurde dem Kunden gezeigt und verworfen: Der Stand vom 30.09. ist
   die Basis, Aenderungen daran nur Punkt fuer Punkt mit dem Kunden (Liste: `V2-VIDEOVERGLEICH.md`).
+- Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
+  Arbeitskopie (eigene assets/, Cache-Version 20261008), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
+  Takt- und Tempo-Regler) und `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C).
+  Nach dem Entscheid des Kunden wird `r1/` zum Root; die Vorschauseiten kommen nicht mit auf die Live-Site.
 - v2 NUR mit RELATIVEN Pfaden bauen (`assets/...`, `karriere.html`, nie `/assets/...`), damit sie auf dem
   Pages-Unterpfad UND spaeter im Hostpoint-www-Root identisch laeuft.
 - Waehrend der Vorschau-Phase: `<meta name="robots" content="noindex, nofollow">` auf allen Seiten und
@@ -69,4 +74,22 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02.
 - Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind PLATZHALTER, vom Kunden zu korrigieren.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
-  `scratchpad/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel).
+  `scratchpad/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel);
+  fuer r1: `scratchpad/test_v2b.py <port> r1/` (Server auf dem Repo-Root). Nur Chromium verfuegbar: Android-Browser
+  (Chrome, Edge, Samsung) sind damit abgedeckt, iOS (alle Browser = WebKit) nicht; WebKit/Firefox liessen sich nur
+  installieren, wenn die Netzwerkrichtlinie der Umgebung `playwright.download.prss.microsoft.com` erlaubt.
+
+### r1-Technik (Stand 08.10.2026, nur `r1/`)
+- Konstanten: FILL 15/15 und FINISH 37.5/15 (Hochzaehlen doppelt so lang, 100 % nach ca. 1.9 s), GROUND 22.5/13
+  (Bodenwechsel ab 768 px doppelt so lang, 90 % in 1.2 s), DIM_OPACITY .45 und DIM_BLUR 2.5 (Prozess); Schrittzeilen
+  5.875rem ab 1024 (30 % groesser), Buehne 17.5 x 21.25rem (15 % kleiner), Caption top min(50 % + 18.5rem, 100 % - 8rem).
+- Unter 768 px folgt der Boden dem Scrollweg (initGround: Mischfarbe anteilig zur sichtbaren Flaeche beider Sektionen,
+  Zone Viewport-Unterkante bis 10 %, Feder GROUND_MOBILE 170/26 glaettet nur); ab 768 px zeitbasiert an der Mitte.
+  main.js schreibt die Bodenfarbe pro Frame in `--ground-rgb`; der Header ist unter 1024 px damit deckend.
+- Unter 768 px: Prozess gestapelt (Foto oben, Liste, Caption, Leiste 01-05 `.process__bar`, Parallaxe +-20 px),
+  `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen 12 px fuer Versal-Labels, Tap-Ziele 40 px (auch bei
+  `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand, Hero-Foto 358/400 mit staerkerem Schleier.
+- Kontakt-Parallaxe laeuft auf `.contact__layer` (innerer Layer 120 %), nicht mehr auf `.contact__photo`.
+- Rechtszeile: Trenner-Spans sind ausgeblendet, der Schraegstrich haengt per `a ~ a::before` am Link (nie am Zeilenende).
+- Unterseiten-Links ohne gestrichelte Linie (Projektregel "keine Unterstreichungen"), Gewicht 500 statt Linie.
+- `win.IRO` (Ende von main.js) stellt Group, ticker, Words, Inview, Scrub, Hover und die Federn fuer die Vorschauseiten bereit.

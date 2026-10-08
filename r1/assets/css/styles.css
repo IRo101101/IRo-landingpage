@@ -130,9 +130,10 @@ body.menu-open, body.loading { overflow: hidden; }
 .hdr__burger i { position: absolute; left: 0; top: 0; width: 100%; height: 1px; background: currentColor; transform: translate3d(0,5px,0); }
 .hdr__burger i + i { transform: translate3d(0,11px,0); }
 .hdr__nav a { position: relative; padding: .8rem .25rem; margin-inline: -.25rem; }   /* r1: Tap-Ziel >= 40 px (Tablet quer), Text und Abstaende bleiben gleich */
-/* r1: Header auf dem Handy deckend in der aktuellen Bodenfarbe (--ground-rgb schreibt main.js pro Frame), bei offenem Menue schwarz */
+/* r1: Header unter 1024 px deckend in der aktuellen Bodenfarbe (--ground-rgb schreibt main.js pro Frame), bei offenem Menue schwarz */
+@media (max-width: 1023px) { .hdr { background: var(--ground-rgb, var(--black)); } }
 @media (max-width: 767px) {
-  .hdr { border-bottom: 1px dashed var(--rule); background: var(--ground-rgb, var(--black)); }
+  .hdr { border-bottom: 1px dashed var(--rule); }
   body.menu-open .hdr { background: var(--black); color: #fff; --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); --rule: rgba(255,255,255,.3); }
 }
 @media (min-width: 640px)  { .hdr__logo { padding-left: 2rem; } }
@@ -421,6 +422,9 @@ section { position: relative; }
 .contact__close { position: relative; order: 3; padding: 2rem 1rem 0; }
 .contact__close h2 { font-size: 2rem; }
 .contact__ctas { display: flex; gap: .75rem; margin-top: 1.25rem; flex-wrap: wrap; }
+/* r1: Trennstrich haengt am Link (nie am Zeilenende), die Trenner-Spans im Markup bleiben fuer Screenreader unsichtbar */
+.contact__legal > span[aria-hidden], .subfoot__legal > span[aria-hidden] { display: none; }
+.contact__legal a ~ a::before, .subfoot__legal a ~ a::before { content: "/"; margin-right: .6rem; }
 .contact__legal { position: relative; order: 4; padding: 1.5rem 1rem 0; display: flex; flex-wrap: wrap; gap: .5rem .6rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); }
 .contact__copy { position: relative; order: 5; padding: .75rem 1rem 0; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); white-space: nowrap; }
 @media (min-width: 768px) {
@@ -481,7 +485,8 @@ section { position: relative; }
 .sub li { margin-top: .35rem; display: flex; gap: .6rem; }
 .sub li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: .55em; background: var(--black); border: 1px solid var(--border-on-muted); }
 .sub .lead { font-size: 1.25rem; line-height: 1.35; }
-.sub a:not(.dbtn):not(.al) { color: var(--fg); border-bottom: 1px dashed var(--border-on-muted); }
+.sub a:not(.dbtn):not(.al) { color: var(--fg); font-weight: 500; }   /* r1: keine Unterstreichung (Projektregel), Links tragen Gewicht statt Linie */
+.sub a:not(.dbtn):not(.al):hover { color: var(--steel, #707981); }
 .sub .job { position: relative; border: 1px dashed var(--border-on-muted); padding: 1.5rem; margin-top: 1.5rem; background: rgba(255,255,255,.35); }
 .sub .job > :first-child { margin-top: 0; }
 .sub .actions { margin-top: 1.5rem; display: flex; gap: .75rem; flex-wrap: wrap; }
@@ -504,8 +509,7 @@ section { position: relative; }
   .contact__legal, .subfoot__legal { align-items: center; }
   .contact__legal a, .subfoot__legal a { display: inline-flex; align-items: center; min-height: 40px; margin-block: -.375rem; }
   /* Textlinks auf den Unterseiten: Flaeche auf 42 px, Zeile bleibt gleich hoch, gestrichelte Linie als Hintergrund an der alten Stelle */
-  .sub p a:not(.dbtn), .sub address a { display: inline-block; padding-block: calc((42px - 1.5em) / 2); margin-block: calc((1.5em - 42px) / 2); border-bottom: 0;
-    background-image: repeating-linear-gradient(to right, var(--border-on-muted) 0 3px, transparent 3px 6px); background-size: 100% 1px; background-repeat: no-repeat; background-position: 0 calc(100% - (42px - 1.5em) / 2); }
+  .sub p a:not(.dbtn), .sub address a { display: inline-block; padding-block: calc((42px - 1.5em) / 2); margin-block: calc((1.5em - 42px) / 2); }
 }
 
 /* ---- Consent -------------------------------------------------------- */

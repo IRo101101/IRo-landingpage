@@ -27,7 +27,7 @@
 
   var ENTRY_DELAY = 180, ENTRY_STAGGER = 110;
   var GROUND = { tension: 22.5, friction: 13 };     // r1: Bodenwechsel doppelt so lang wie in der Vorlage (90/26), beide Richtungen gleich - ab 768 px
-  var GROUND_MOBILE = { tension: 90, friction: 26 }; // r1: unter 768 px die Feder der Vorlage (auf dem Handy wird schneller gescrollt)
+  var GROUND_MOBILE = { tension: 170, friction: 26 }; // r1: unter 768 px glaettet diese Feder nur den scroll-gekoppelten Farbverlauf (siehe initGround)
   var MID_LINE = 0.5, MID_LINE_MOBILE = 0.65;        // r1: Testlinie fuer Boden und Header-Thema (Anteil der Viewporthoehe), unter 768 px bei 65 %
   var FLOW = { tension: 110, friction: 26 };
   var PARALLAX = { tension: 120, friction: 26 };
@@ -543,18 +543,36 @@
     var cur = first ? first.getAttribute('data-ground') : 'light';
     var grp = new Group(g, { from: { bg: cur === 'dark' ? DARK : LIGHT }, config: GROUND });
     root.setAttribute('data-ground-now', cur);
-    // r1: aktuelle Bodenfarbe als CSS-Variable (Header unter 768 px deckend in Bodenfarbe)
+    // r1: aktuelle Bodenfarbe als CSS-Variable (Header unter 1024 px deckend in Bodenfarbe)
     var mirror = function () { root.style.setProperty('--ground-rgb', g.style.backgroundColor); };
     mirror();
+    function follow(cfg) { grp.to({ bg: lastTarget }, cfg); ticker.add(function () { mirror(); if (!grp.active) return false; }); }
+    var lastTarget = cur === 'dark' ? DARK : LIGHT;
+    function colorOf(el) { return el.getAttribute('data-ground') === 'dark' ? DARK : LIGHT; }
+    function mix(a, b, t) { var A = parseColor(a), B = parseColor(b); return 'rgb(' + A.map(function (x, i) { return Math.round(x + (B[i] - x) * t); }).join(',') + ')'; }
     ticker.add(function () {
+      if (VW() < MD) {
+        // r1, unter 768 px: Die Bodenfarbe folgt dem Scrollweg. Waehrend der Anfang der naechsten Sektion von der Unterkante
+        // bis 10 % der Viewporthoehe wandert, mischt sich der Boden anteilig zur sichtbaren Flaeche beider Sektionen; die
+        // Sektion, die den Bildschirm dominiert, bekommt immer die bessere Lesbarkeit, und ganz langsames Scrollen ergibt
+        // einen ganz langsamen Wechsel. (Ab 768 px bleibt der zeitbasierte Wechsel an der Viewportmitte.)
+        var secs = doc.querySelectorAll('[data-ground]'), vh = VH(), hi = vh, lo = vh * 0.1, lead = -1;
+        for (var i = 0; i < secs.length; i++) { if (secs[i].getBoundingClientRect().top <= hi) lead = i; else break; }
+        if (lead < 0) return;
+        var prev = secs[lead > 0 ? lead - 1 : lead], top = secs[lead].getBoundingClientRect().top;
+        var p = Math.max(0, Math.min(1, (hi - top) / (hi - lo)));
+        var target = mix(colorOf(prev), colorOf(secs[lead]), p), now = (p >= 0.5 ? secs[lead] : prev).getAttribute('data-ground');
+        if (now !== cur) { cur = now; root.setAttribute('data-ground-now', now); }
+        if (target !== lastTarget) { lastTarget = target; follow(GROUND_MOBILE); }
+        return;
+      }
       var s = sectionAtMid('data-ground'); if (!s) return;
       var v = s.getAttribute('data-ground');
       if (v !== cur) {
         cur = v; root.setAttribute('data-ground-now', v);
-        grp.to({ bg: v === 'dark' ? DARK : LIGHT }, VW() < MD ? GROUND_MOBILE : GROUND);
-        ticker.add(function () { mirror(); if (!grp.active) return false; });   // laeuft pro Frame, solange die Feder aktiv ist
+        lastTarget = v === 'dark' ? DARK : LIGHT; follow(GROUND);
       }
-    }, 150);
+    }, 50);
   }
   function initHeaderTheme() {
     var h = doc.querySelector('.hdr'); if (!h) return;
@@ -613,11 +631,12 @@
       var open = false, timer = null;
       function show() { clearTimeout(timer); if (open) return; open = true; panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); pg.to({ opacity: 1, y: 0, scale: 1 }); cg.to({ rotate: 180 }); }
       function hide() { clearTimeout(timer); if (!open) return; open = false; btn.setAttribute('aria-expanded', 'false'); pg.to({ opacity: 0, y: -6, scale: 0.98 }, null, function () { if (!open) panel.hidden = true; }); cg.to({ rotate: 0 }); }
+      var viaHover = false;   // r1: Klick nach Hover-Oeffnung schliesst das Panel nicht mehr sofort wieder
       if (!isTouchOnly) {
-        lg.addEventListener('pointerenter', show);
+        lg.addEventListener('pointerenter', function () { viaHover = !open; show(); });
         lg.addEventListener('pointerleave', function () { clearTimeout(timer); timer = setTimeout(hide, CLOSE_DELAY); });
       }
-      btn.addEventListener('click', function () { open ? hide() : show(); });
+      btn.addEventListener('click', function () { if (!open) { viaHover = false; show(); } else if (viaHover) { viaHover = false; } else hide(); });
       lg.addEventListener('keydown', function (e) { if (e.key === 'Escape') { hide(); btn.focus(); } });
       doc.addEventListener('click', function (e) { if (!lg.contains(e.target)) hide(); });
       panel.querySelectorAll('[data-lang]').forEach(function (o) {
