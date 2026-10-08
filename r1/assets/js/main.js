@@ -26,7 +26,9 @@
   var LEAVE = { tension: 320, friction: 30, clamp: true };
 
   var ENTRY_DELAY = 180, ENTRY_STAGGER = 110;
-  var GROUND = { tension: 22.5, friction: 13 };     // r1: Bodenwechsel doppelt so lang wie in der Vorlage (90/26), beide Richtungen gleich
+  var GROUND = { tension: 22.5, friction: 13 };     // r1: Bodenwechsel doppelt so lang wie in der Vorlage (90/26), beide Richtungen gleich - ab 768 px
+  var GROUND_MOBILE = { tension: 90, friction: 26 }; // r1: unter 768 px die Feder der Vorlage (auf dem Handy wird schneller gescrollt)
+  var MID_LINE = 0.5, MID_LINE_MOBILE = 0.65;        // r1: Testlinie fuer Boden und Header-Thema (Anteil der Viewporthoehe), unter 768 px bei 65 %
   var FLOW = { tension: 110, friction: 26 };
   var PARALLAX = { tension: 120, friction: 26 };
   var HEAD = { tension: 180, friction: 26 }, HEAD_STAGGER = 55;
@@ -52,6 +54,7 @@
   var LABEL = { tension: 190, friction: 28 };
 
   var AUTO_STEP_MS = 3800, MAX_TILT = 12, MAX_DEPTH = 18, DIM_OPACITY = 0.45, DIM_BLUR = 2.5;   // r1: Hintergrundzeilen lesbarer (Vorlage 0.3 / 5 px)
+  var STAGE_DRIFT = 70, STAGE_DRIFT_MOBILE = 20;    // r1: Parallaxe der Prozess-Buehne (+-px), unter 768 px kleiner
   var LAST_TILT = 30, TILT_STEP = 10;
   var TILT = { tension: 150, friction: 24 };
   var STEPC = { tension: 220, friction: 30 };
@@ -525,8 +528,9 @@
      Boden (fixer Hintergrund) und Header-Thema
      ===================================================================== */
   var DARK = '#111418', LIGHT = '#E7FFF2';
+  function midLine() { return VH() * (VW() < MD ? MID_LINE_MOBILE : MID_LINE); }
   function sectionAtMid(attr) {
-    var secs = doc.querySelectorAll('[' + attr + ']'), mid = VH() / 2;
+    var secs = doc.querySelectorAll('[' + attr + ']'), mid = midLine();
     for (var i = secs.length - 1; i >= 0; i--) {                       // rueckwaerts
       var r = secs[i].getBoundingClientRect();
       if (r.top <= mid && r.bottom > mid) return secs[i];
@@ -539,10 +543,17 @@
     var cur = first ? first.getAttribute('data-ground') : 'light';
     var grp = new Group(g, { from: { bg: cur === 'dark' ? DARK : LIGHT }, config: GROUND });
     root.setAttribute('data-ground-now', cur);
+    // r1: aktuelle Bodenfarbe als CSS-Variable (Header unter 768 px deckend in Bodenfarbe)
+    var mirror = function () { root.style.setProperty('--ground-rgb', g.style.backgroundColor); };
+    mirror();
     ticker.add(function () {
       var s = sectionAtMid('data-ground'); if (!s) return;
       var v = s.getAttribute('data-ground');
-      if (v !== cur) { cur = v; grp.to({ bg: v === 'dark' ? DARK : LIGHT }); root.setAttribute('data-ground-now', v); }
+      if (v !== cur) {
+        cur = v; root.setAttribute('data-ground-now', v);
+        grp.to({ bg: v === 'dark' ? DARK : LIGHT }, VW() < MD ? GROUND_MOBILE : GROUND);
+        ticker.add(function () { mirror(); if (!grp.active) return false; });   // laeuft pro Frame, solange die Feder aktiv ist
+      }
     }, 150);
   }
   function initHeaderTheme() {
@@ -551,7 +562,7 @@
     var cur = first ? first.getAttribute('data-header-theme') : 'light';
     h.setAttribute('data-theme', cur);
     ticker.add(function () {
-      var secs = doc.querySelectorAll('[data-header-theme]'), mid = VH() * 0.5, theme = cur;
+      var secs = doc.querySelectorAll('[data-header-theme]'), mid = midLine(), theme = cur;
       for (var i = secs.length - 1; i >= 0; i--) {
         var r = secs[i].getBoundingClientRect(), t = secs[i].getAttribute('data-header-theme');
         if (t === 'hidden' && r.top <= mid && r.bottom > 0) { theme = 'hidden'; break; }
@@ -816,8 +827,20 @@
     var turn = new Group(stage.querySelector('.process__turn'), { from: { rotate: LAST_TILT - (steps.length - 1) * TILT_STEP }, config: TURN });
     var tilt = new Group(stage, { from: { rotateX: 0, rotateY: 0 }, config: TILT });
     var depth = new Group(inner, { from: { x: 0, y: 0, scale: 1.12 }, config: TILT });
-    Scrub(stage.parentNode, { start: 'top bottom', end: 'bottom top', from: { y: 70 }, to: { y: -70 }, config: PARALLAX, frameInterval: 32 });
-    var active = 0, capWords = null;
+    var drift = VW() < MD ? STAGE_DRIFT_MOBILE : STAGE_DRIFT;
+    Scrub(stage.parentNode, { start: 'top bottom', end: 'bottom top', from: { y: drift }, to: { y: -drift }, config: PARALLAX, frameInterval: 32 });
+    // r1: tappbare Leiste 01-05 unter der Caption (nur unter 1024 px sichtbar, CSS)
+    var bar = doc.createElement('div'), dots = [];
+    bar.className = 'process__bar'; bar.setAttribute('role', 'group');
+    bar.setAttribute('aria-label', 'Schritt wählen'); bar.setAttribute('data-en-label', 'Choose step');
+    steps.forEach(function (s, i) {
+      var b = doc.createElement('button'); b.type = 'button'; b.className = 'process__dot';
+      b.textContent = String(i + 1).padStart(2, '0'); b.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+      b.addEventListener('click', function () { tapped = true; if (i !== active) setActive(i); });
+      bar.appendChild(b); dots.push(b);
+    });
+    caption.parentNode.insertBefore(bar, caption.nextSibling);
+    var active = 0, capWords = null, tapped = false;
     function setCaption(i) {
       var src = steps[i].querySelector('.pstep__src');
       caption.textContent = src ? src.textContent : '';
@@ -828,6 +851,7 @@
     function setActive(i) {
       active = i;
       steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); s.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+      dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
       sg.forEach(function (g, k) { g.to({ opacity: k === i ? 1 : DIM_OPACITY, blur: k === i ? 0 : DIM_BLUR }); });
       pg.forEach(function (g, k) { g.to({ opacity: k === i ? 1 : 0 }); });
       turn.to({ rotate: LAST_TILT - (steps.length - 1 - i) * TILT_STEP });
@@ -838,11 +862,11 @@
     steps.forEach(function (s, i) {
       s.addEventListener('pointerenter', function () { if (i !== active) setActive(i); });
       s.addEventListener('focus', function () { if (i !== active) setActive(i); });
-      s.addEventListener('click', function () { if (i !== active) setActive(i); });
+      s.addEventListener('click', function () { tapped = true; if (i !== active) setActive(i); });
     });
-    // Auto-Weiterschalten unter 1440 (solange >= 40% sichtbar), echte Maus schaltet ab
+    // Auto-Weiterschalten unter 1440 (solange >= 40% sichtbar), echte Maus oder erster Tipp (Schritt/Leiste) schaltet ab
     var auto = null, mouseSeen = false, visible = false;
-    function tickAuto() { if (visible && !mouseSeen && !RM) setActive((active + 1) % steps.length); }
+    function tickAuto() { if (visible && !mouseSeen && !tapped && !RM) setActive((active + 1) % steps.length); }
     function arm() { if (auto || VW() >= XL) return; auto = setInterval(tickAuto, AUTO_STEP_MS); }
     new IntersectionObserver(function (es) { es.forEach(function (e) { visible = e.isIntersecting; if (visible) arm(); }); }, { threshold: 0.4 }).observe(sec);
     sec.addEventListener('pointermove', function (e) {
@@ -882,7 +906,8 @@
      ===================================================================== */
   function initContact() {
     var sec = doc.querySelector('.contact'); if (!sec) return;
-    var photo = sec.querySelector('.contact__photo');
+    // r1: Parallaxe auf der inneren Ebene (.contact__layer, 120 % hoch), die Aussenbox bleibt stehen
+    var photo = sec.querySelector('.contact__layer') || sec.querySelector('.contact__photo');
     if (photo) Scrub(photo, { start: 'top bottom', end: 'bottom bottom', from: { y: '-15%' }, to: { y: '0%' }, config: PARALLAX, frameInterval: 32 });
     sec.querySelectorAll('.rail__links .al').forEach(function (a, i) {
       ArrowLink(a);

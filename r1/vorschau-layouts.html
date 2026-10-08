@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title data-en="Layout variants - Preview r1">Layout-Varianten - Vorschau r1</title>
+<meta name="description" data-en="Internal preview: layout variants for the blocks Company, Expertise and Team of the iro.swiss v2 redesign (r1)." content="Interne Vorschau: Layout-Varianten für die Blöcke Unternehmen, Kompetenzen und Team des iro.swiss v2-Redesigns (r1).">
+<meta name="theme-color" content="#111418">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/styles.css?v=20261008">
+<link rel="stylesheet" href="assets/css/vorschau-layouts.css">
+</head>
+<body class="vl">
+<a class="skip" href="#main" data-en="Skip to content">Zum Inhalt springen</a>
+
+<header class="vl__hdr">
+  <a class="vl__logo" href="index.html" aria-label="IdeeRoth AG - Startseite" data-en-label="IdeeRoth AG - Home"><span class="logo-mark" role="img" aria-label="iro.swiss"></span></a>
+  <span class="vl__title">Vorschau r1 · Layout-Varianten</span>
+  <nav aria-label="Vorschauseiten">
+    <a href="vorschau-layouts.html" aria-current="page" data-en="Layouts">Layouts</a>
+    <a href="vorschau-uebergaenge.html" data-en="Transitions">Übergänge</a>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="vl__intro">
+    <span class="eyebrow" data-en="Preview r1 · decision page">Vorschau r1 · Entscheidungsseite</span>
+    <h1 data-en="Layout variants">Layout-Varianten</h1>
+    <p data-en="Three blocks, three variants each - built from the real markup and CSS of the site, without the motion engine. From 1024 px the blocks appear at their desktop size as on the site; below that the variants simply stack.">Drei Blöcke, je drei Varianten - gebaut aus dem echten Markup und CSS der Site, ohne die Bewegungs-Engine. Ab 1024 px erscheinen die Blöcke in Desktop-Grösse wie auf der Site; darunter stapeln die Varianten einfach.</p>
+    <p data-en="Only the block itself is shown: for Company the full band (100vh as on the site), for Expertise the row of cards without the empty area below, for Team the four rows without the large team photo.">Gezeigt wird nur der Block selbst: bei Unternehmen das ganze Band (100vh wie auf der Site), bei Kompetenzen die Kartenreihe ohne den leeren Bereich darunter, beim Team die vier Zeilen ohne das grosse Teamfoto.</p>
+    <nav class="vl__toc" aria-label="Varianten">
+      <a href="#u-a">U-A</a><a href="#u-b">U-B</a><a href="#u-c">U-C</a>
+      <a href="#k-a">K-A</a><a href="#k-b">K-B</a><a href="#k-c">K-C</a>
+      <a href="#t-a">T-A</a><a href="#t-b">T-B</a><a href="#t-c">T-C</a>
+    </nav>
+  </div>
+
+  <!-- ===================== Block Unternehmen ===================== -->
+  <section class="vl__block" id="block-unternehmen" aria-labelledby="vl-h-u">
+    <div class="vl__blockhead">
+      <span class="eyebrow" data-en="Block 1 · Company">Block 1 · Unternehmen</span>
+      <h2 id="vl-h-u" data-en="Topics, photo and mission">Themenliste, Foto und Mission</h2>
+      <p data-en="Today the mission runs over the photo and the topic list at the bottom left loses its relation to the photo. All three variants keep title, frame and photo where they are and only move the list and the mission.">Heute läuft die Mission über das Foto, und die Themenliste links unten verliert den Bezug zum Foto. Alle drei Varianten lassen Titel, Rahmen und Foto an Ort und Stelle und verschieben nur Liste und Mission.</p>
+    </div>
+
+  <article class="vl__variant" id="u-a">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="U-A · Triad bottom">U-A · Dreiklang unten</span>
+      <p data-en="Topic list left and mission right of the photo, both aligned to the bottom edge of the frame with 2rem of air; mission left-aligned without hanging indent, 19rem wide.">Themenliste links und Mission rechts neben dem Foto, beide an der Unterkante des Rahmens ausgerichtet, je 2rem Luft zum Rahmen; Mission linksbündig ohne hängenden Einzug, 19rem breit.</p>
+    </div>
+<section class="about center vl-u-a" aria-label="Unternehmen - Variante U-A">
+  <div class="about__band">
+    <div class="about__head">
+      <span class="eyebrow" data-en="IdeeRoth AG · Switzerland">IdeeRoth AG · Schweiz</span>
+      <h2 data-en="Specialist in product development">Spezialanbieterin für Produktentwicklung</h2>
+    </div>
+    <div class="about__wrap">
+      <a class="about__frame" href="index.html#team" aria-label="Über uns" data-en-label="About us">
+        <div class="about__photo"><img src="assets/img/v2/01.webp" alt="Espressobezug an der Kaffeemaschine" loading="lazy"></div>
+        <span class="about__btnpos"><span class="about__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="about us">Über uns</span></span></span>
+      </a>
+      <ul class="about__topics">
+        <li class="about__topic">Swiss engineered</li>
+        <li class="about__topic">3D-CAD</li>
+        <li class="about__topic">FEM / CFD</li>
+        <li class="about__topic">Prototyping</li>
+        <li class="about__topic" data-en="Vocational training">Berufsbildung</li>
+      </ul>
+    </div>
+    <p class="about__mission left" data-indent data-en="We develop more from less - our team accompanies customers from the first idea to finished series production and strengthens their competitiveness.">Wir entwickeln aus weniger mehr - unser Team begleitet Kunden von der ersten Idee bis zur fertigen Serienentwicklung und stärkt so ihre Wettbewerbsfähigkeit.</p>
+  </div>
+</section>
+  </article>
+  <article class="vl__variant" id="u-b">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="U-B · Triad centred">U-B · Dreiklang mittig</span>
+      <p data-en="The same three columns as U-A, but topic list and mission are vertically centred on the middle of the photo.">Dieselben drei Spalten wie U-A, aber Themenliste und Mission sind vertikal auf die Mitte des Fotos zentriert.</p>
+    </div>
+<section class="about center vl-u-b" aria-label="Unternehmen - Variante U-B">
+  <div class="about__band">
+    <div class="about__head">
+      <span class="eyebrow" data-en="IdeeRoth AG · Switzerland">IdeeRoth AG · Schweiz</span>
+      <h2 data-en="Specialist in product development">Spezialanbieterin für Produktentwicklung</h2>
+    </div>
+    <div class="about__wrap">
+      <a class="about__frame" href="index.html#team" aria-label="Über uns" data-en-label="About us">
+        <div class="about__photo"><img src="assets/img/v2/01.webp" alt="Espressobezug an der Kaffeemaschine" loading="lazy"></div>
+        <span class="about__btnpos"><span class="about__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="about us">Über uns</span></span></span>
+      </a>
+      <ul class="about__topics">
+        <li class="about__topic">Swiss engineered</li>
+        <li class="about__topic">3D-CAD</li>
+        <li class="about__topic">FEM / CFD</li>
+        <li class="about__topic">Prototyping</li>
+        <li class="about__topic" data-en="Vocational training">Berufsbildung</li>
+      </ul>
+    </div>
+    <p class="about__mission left" data-indent data-en="We develop more from less - our team accompanies customers from the first idea to finished series production and strengthens their competitiveness.">Wir entwickeln aus weniger mehr - unser Team begleitet Kunden von der ersten Idee bis zur fertigen Serienentwicklung und stärkt so ihre Wettbewerbsfähigkeit.</p>
+  </div>
+</section>
+  </article>
+  <article class="vl__variant" id="u-c">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="U-C · Mission below the photo">U-C · Mission unter dem Foto</span>
+      <p data-en="Topic list bottom left as today; the mission sits centred 1.5rem below the frame, at most 30rem wide (from 1440 px at 1.25rem instead of 1.5rem type so it stays within the band).">Themenliste links unten wie heute; die Mission steht zentriert 1.5rem unter dem Rahmen, maximal 30rem breit (ab 1440 px mit 1.25rem statt 1.5rem Schrift, damit sie im Band bleibt).</p>
+    </div>
+<section class="about center vl-u-c" aria-label="Unternehmen - Variante U-C">
+  <div class="about__band">
+    <div class="about__head">
+      <span class="eyebrow" data-en="IdeeRoth AG · Switzerland">IdeeRoth AG · Schweiz</span>
+      <h2 data-en="Specialist in product development">Spezialanbieterin für Produktentwicklung</h2>
+    </div>
+    <div class="about__wrap">
+      <a class="about__frame" href="index.html#team" aria-label="Über uns" data-en-label="About us">
+        <div class="about__photo"><img src="assets/img/v2/01.webp" alt="Espressobezug an der Kaffeemaschine" loading="lazy"></div>
+        <span class="about__btnpos"><span class="about__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="about us">Über uns</span></span></span>
+      </a>
+      <ul class="about__topics">
+        <li class="about__topic">Swiss engineered</li>
+        <li class="about__topic">3D-CAD</li>
+        <li class="about__topic">FEM / CFD</li>
+        <li class="about__topic">Prototyping</li>
+        <li class="about__topic" data-en="Vocational training">Berufsbildung</li>
+      </ul>
+    </div>
+    <p class="about__mission center" data-indent data-en="We develop more from less - our team accompanies customers from the first idea to finished series production and strengthens their competitiveness.">Wir entwickeln aus weniger mehr - unser Team begleitet Kunden von der ersten Idee bis zur fertigen Serienentwicklung und stärkt so ihre Wettbewerbsfähigkeit.</p>
+  </div>
+</section>
+  </article>
+  </section>
+
+  <!-- ===================== Block Kompetenzen ===================== -->
+  <section class="vl__block" id="block-kompetenzen" aria-labelledby="vl-h-k">
+    <div class="vl__blockhead">
+      <span class="eyebrow" data-en="Block 2 · Expertise">Block 2 · Kompetenzen</span>
+      <h2 id="vl-h-k" data-en="Heights of the four cards">Höhen der vier Karten</h2>
+      <p data-en="Today: short-tall-tall-short (26 / 32rem, from 1440 px 30 / 36rem); the unequal heights look restless. The four cards and their order stay.">Heute: kurz-lang-lang-kurz (26 / 32rem, ab 1440 px 30 / 36rem); die ungleichen Höhen wirken unruhig. Die vier Karten und ihre Reihenfolge bleiben.</p>
+    </div>
+
+  <article class="vl__variant" id="k-a">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="K-A · Equal height">K-A · Gleich hoch</span>
+      <p data-en="All four cards 30rem tall (34rem from 1440 px); a calm, closed row.">Alle vier Karten 30rem hoch (ab 1440 px 34rem); eine ruhige, geschlossene Reihe.</p>
+    </div>
+<section class="cards vl-k-a" aria-label="Kompetenzen - Variante K-A">
+  <div class="cards__row">
+    <a class="card" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/09.webp" alt="Zwei Mitarbeiter besprechen ein Konzept am Tablet" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Ideation</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card card--tall" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/11.webp" alt="Konstruktionsbesprechung mit 3D-CAD am Bildschirm" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center" data-en="Development">Entwicklung</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card card--tall" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/13.webp" alt="Büro mit Arbeitsplätzen und Bildschirmen" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Simulation</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/14.webp" alt="Mitarbeiter an der Fräsmaschine" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Prototyping</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+  </div>
+</section>
+  </article>
+  <article class="vl__variant" id="k-b">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="K-B · Alternating">K-B · Wechselnd</span>
+      <p data-en="Short-tall-short-tall instead of short-tall-tall-short: 26 / 32 / 26 / 32rem (30 / 36 / 30 / 36rem from 1440 px); the tall card is set via nth-child on cards 2 and 4.">Kurz-lang-kurz-lang statt kurz-lang-lang-kurz: 26 / 32 / 26 / 32rem (ab 1440 px 30 / 36 / 30 / 36rem); die hohe Karte liegt per nth-child auf Karte 2 und 4.</p>
+    </div>
+<section class="cards vl-k-b" aria-label="Kompetenzen - Variante K-B">
+  <div class="cards__row">
+    <a class="card" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/09.webp" alt="Zwei Mitarbeiter besprechen ein Konzept am Tablet" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Ideation</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card card--tall" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/11.webp" alt="Konstruktionsbesprechung mit 3D-CAD am Bildschirm" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center" data-en="Development">Entwicklung</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card card--tall" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/13.webp" alt="Büro mit Arbeitsplätzen und Bildschirmen" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Simulation</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/14.webp" alt="Mitarbeiter an der Fräsmaschine" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Prototyping</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+  </div>
+</section>
+  </article>
+  <article class="vl__variant" id="k-c">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="K-C · Equal height, stepped">K-C · Gleich hoch, versetzt</span>
+      <p data-en="All four cards 30rem tall (34rem from 1440 px), cards 2 and 4 offset 3rem downwards; a calm staircase instead of unequal heights.">Alle vier Karten 30rem hoch (ab 1440 px 34rem), Karte 2 und 4 um 3rem nach unten versetzt; eine ruhige Treppe statt ungleicher Höhen.</p>
+    </div>
+<section class="cards vl-k-c" aria-label="Kompetenzen - Variante K-C">
+  <div class="cards__row">
+    <a class="card" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/09.webp" alt="Zwei Mitarbeiter besprechen ein Konzept am Tablet" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Ideation</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card card--tall" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/11.webp" alt="Konstruktionsbesprechung mit 3D-CAD am Bildschirm" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center" data-en="Development">Entwicklung</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card card--tall" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/13.webp" alt="Büro mit Arbeitsplätzen und Bildschirmen" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Simulation</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+    <a class="card" href="index.html#leistungen">
+      <div class="card__mask">
+      <div class="card__drift"><img class="card__photo" src="assets/img/v2/14.webp" alt="Mitarbeiter an der Fräsmaschine" loading="lazy"></div>
+      <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
+      <h3 class="card__label center">Prototyping</h3>
+      <span class="card__btnpos"><span class="card__btn"><span class="sw swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+      </div>
+    </a>
+  </div>
+</section>
+  </article>
+  </section>
+
+  <!-- ===================== Block Team ===================== -->
+  <section class="vl__block" id="block-team" aria-labelledby="vl-h-t">
+    <div class="vl__blockhead">
+      <span class="eyebrow" data-en="Block 3 · Team">Block 3 · Team</span>
+      <h2 id="vl-h-t" data-en="Width of the rows">Breite der Zeilen</h2>
+      <p data-en="Today the text sits on the left (17.3rem from 1440 px) and quote/lists on the right (24rem); at 1440 px a lot of air remains in between. The large team photo is omitted here.">Heute steht der Text links (ab 1440 px 17.3rem) und Zitat/Listen rechts (24rem); bei 1440 px bleibt dazwischen viel Luft. Das grosse Teamfoto ist hier weggelassen.</p>
+    </div>
+
+  <article class="vl__variant" id="t-a">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="T-A · Narrower">T-A · Schmaler</span>
+      <p data-en="The rows are limited to 64rem and centred; column widths as today, the air in between shrinks with them.">Die Zeilen sind auf 64rem begrenzt und zentriert; Spaltenbreiten wie heute, die Luft dazwischen schrumpft mit.</p>
+    </div>
+<section class="team vl-t-a" aria-label="Team - Variante T-A">
+  <div class="team__rows">
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow">01 //  Vision</span>
+        <span class="trow__name">Better products for life.</span>
+        <p class="trow__bio" data-en="With this vision we solve problems with our ideas. In our customers' innovation network we are a long-term partner - sustainable, ecological and efficient.">Mit dieser Vision lösen wir Probleme mit unseren Ideen. Im Innovationsnetzwerk unserer Kunden sind wir langfristige Partnerin - nachhaltig, ökologisch und effizient.</p>
+      </div>
+      <blockquote class="trow__quote">
+        <span data-en="“Develop more from less - the simplest solution is usually the best.”">„Aus weniger mehr entwickeln - die einfachste Lösung ist meist die beste.“</span>
+        <small>Alain Roth · <span data-en="Founder, IdeeRoth AG">Gründer, IdeeRoth AG</span></small>
+      </blockquote>
+    </div>
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow">02 //  Mission</span>
+        <span class="trow__name" data-en="Develop more from less.">Aus weniger mehr entwickeln.</span>
+        <p class="trow__bio" data-en="Our team supports customers in product development and improves their competitiveness. We value:">Unser Team unterstützt Kunden bei der Produktentwicklung und verbessert so deren Wettbewerbsfähigkeit. Wir legen Wert auf:</p>
+      </div>
+      <ul class="trow__side">
+        <li data-en="An independent and neutral perspective">Eine unabhängige und neutrale Sichtweise</li>
+        <li data-en="Targeted implementation and results">Eine zielgerichtete Umsetzung und Resultaterreichung</li>
+        <li data-en="A strong technological and business network">Einen starken technologischen und betriebswirtschaftlichen Leistungsverbund</li>
+        <li data-en="Industry-specific application expertise">Branchenspezifisches Anwendungsfachwissen</li>
+      </ul>
+    </div>
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow" data-en="03 //  Principles">03 //  Leitbild</span>
+        <span class="trow__name" data-en="Responsible, honest, loyal.">Verantwortungsbewusst, ehrlich, loyal.</span>
+        <p class="trow__bio" data-en="Employees are our most valuable asset. We offer attractive workplaces, support people through targeted training and aim for long-term partnership.">Mitarbeitende sind unser wichtigstes Gut. Wir bieten attraktive Arbeitsplätze, fördern gezielt durch Weiterbildung und streben eine langjährige Partnerschaft an.</p>
+      </div>
+      <ul class="trow__side">
+        <li data-en="We honour our agreements.">Wir halten Vereinbarungen ein.</li>
+        <li data-en="We act fast and decisively and see change as an opportunity.">Wir handeln schnell und entschlossen und sehen Veränderung als Chance.</li>
+        <li data-en="We are creative and continuously seek precisely engineered solutions.">Wir sind kreativ und suchen laufend nach präzis ausgearbeiteten Lösungen.</li>
+        <li data-en="We communicate openly and honestly to build trust.">Wir kommunizieren offen und ehrlich, um Vertrauen zu schaffen.</li>
+      </ul>
+    </div>
+    <a class="trow trow--link" href="karriere.html">
+      <div class="trow__main">
+        <span class="trow__eyebrow" data-en="04 //  Vocational training">04 //  Berufsbildung</span>
+        <span class="trow__name" data-en="We train talent - apprenticeship Konstrukteur/-in EFZ 2027.">Wir bilden aus - Lehrstelle Konstrukteur/-in EFZ 2027.</span>
+        <p class="trow__bio" data-en="There is a lot of talk about the skills shortage. We prefer to do something about it.">Vom Fachkräftemangel wird viel geredet. Wir tun etwas dagegen.</p>
+      </div>
+      <span class="al"><span class="al__label" data-en="About the apprenticeship">Zur Lehrstelle</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></span>
+    </a>
+  </div>
+</section>
+  </article>
+  <article class="vl__variant" id="t-b">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="T-B · Two columns left">T-B · Zwei Spalten links</span>
+      <p data-en="Full-width rows, but both columns sit together on the left: text 22rem, quote/lists 30rem, 5rem gap; the right side stays calm.">Zeilen in voller Breite, aber beide Spalten stehen links beieinander: Text 22rem, Zitat/Listen 30rem, 5rem Abstand; rechts bleibt Ruhe.</p>
+    </div>
+<section class="team vl-t-b" aria-label="Team - Variante T-B">
+  <div class="team__rows">
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow">01 //  Vision</span>
+        <span class="trow__name">Better products for life.</span>
+        <p class="trow__bio" data-en="With this vision we solve problems with our ideas. In our customers' innovation network we are a long-term partner - sustainable, ecological and efficient.">Mit dieser Vision lösen wir Probleme mit unseren Ideen. Im Innovationsnetzwerk unserer Kunden sind wir langfristige Partnerin - nachhaltig, ökologisch und effizient.</p>
+      </div>
+      <blockquote class="trow__quote">
+        <span data-en="“Develop more from less - the simplest solution is usually the best.”">„Aus weniger mehr entwickeln - die einfachste Lösung ist meist die beste.“</span>
+        <small>Alain Roth · <span data-en="Founder, IdeeRoth AG">Gründer, IdeeRoth AG</span></small>
+      </blockquote>
+    </div>
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow">02 //  Mission</span>
+        <span class="trow__name" data-en="Develop more from less.">Aus weniger mehr entwickeln.</span>
+        <p class="trow__bio" data-en="Our team supports customers in product development and improves their competitiveness. We value:">Unser Team unterstützt Kunden bei der Produktentwicklung und verbessert so deren Wettbewerbsfähigkeit. Wir legen Wert auf:</p>
+      </div>
+      <ul class="trow__side">
+        <li data-en="An independent and neutral perspective">Eine unabhängige und neutrale Sichtweise</li>
+        <li data-en="Targeted implementation and results">Eine zielgerichtete Umsetzung und Resultaterreichung</li>
+        <li data-en="A strong technological and business network">Einen starken technologischen und betriebswirtschaftlichen Leistungsverbund</li>
+        <li data-en="Industry-specific application expertise">Branchenspezifisches Anwendungsfachwissen</li>
+      </ul>
+    </div>
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow" data-en="03 //  Principles">03 //  Leitbild</span>
+        <span class="trow__name" data-en="Responsible, honest, loyal.">Verantwortungsbewusst, ehrlich, loyal.</span>
+        <p class="trow__bio" data-en="Employees are our most valuable asset. We offer attractive workplaces, support people through targeted training and aim for long-term partnership.">Mitarbeitende sind unser wichtigstes Gut. Wir bieten attraktive Arbeitsplätze, fördern gezielt durch Weiterbildung und streben eine langjährige Partnerschaft an.</p>
+      </div>
+      <ul class="trow__side">
+        <li data-en="We honour our agreements.">Wir halten Vereinbarungen ein.</li>
+        <li data-en="We act fast and decisively and see change as an opportunity.">Wir handeln schnell und entschlossen und sehen Veränderung als Chance.</li>
+        <li data-en="We are creative and continuously seek precisely engineered solutions.">Wir sind kreativ und suchen laufend nach präzis ausgearbeiteten Lösungen.</li>
+        <li data-en="We communicate openly and honestly to build trust.">Wir kommunizieren offen und ehrlich, um Vertrauen zu schaffen.</li>
+      </ul>
+    </div>
+    <a class="trow trow--link" href="karriere.html">
+      <div class="trow__main">
+        <span class="trow__eyebrow" data-en="04 //  Vocational training">04 //  Berufsbildung</span>
+        <span class="trow__name" data-en="We train talent - apprenticeship Konstrukteur/-in EFZ 2027.">Wir bilden aus - Lehrstelle Konstrukteur/-in EFZ 2027.</span>
+        <p class="trow__bio" data-en="There is a lot of talk about the skills shortage. We prefer to do something about it.">Vom Fachkräftemangel wird viel geredet. Wir tun etwas dagegen.</p>
+      </div>
+      <span class="al"><span class="al__label" data-en="About the apprenticeship">Zur Lehrstelle</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></span>
+    </a>
+  </div>
+</section>
+  </article>
+  <article class="vl__variant" id="t-c">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="T-C · Quote centred">T-C · Zitat mittig</span>
+      <p data-en="Quote and lists start at 50 % of the row and are 45 % wide; the text on the left stays as today.">Zitat und Listen beginnen bei 50 % der Zeile und sind 45 % breit; der Text links bleibt wie heute.</p>
+    </div>
+<section class="team vl-t-c" aria-label="Team - Variante T-C">
+  <div class="team__rows">
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow">01 //  Vision</span>
+        <span class="trow__name">Better products for life.</span>
+        <p class="trow__bio" data-en="With this vision we solve problems with our ideas. In our customers' innovation network we are a long-term partner - sustainable, ecological and efficient.">Mit dieser Vision lösen wir Probleme mit unseren Ideen. Im Innovationsnetzwerk unserer Kunden sind wir langfristige Partnerin - nachhaltig, ökologisch und effizient.</p>
+      </div>
+      <blockquote class="trow__quote">
+        <span data-en="“Develop more from less - the simplest solution is usually the best.”">„Aus weniger mehr entwickeln - die einfachste Lösung ist meist die beste.“</span>
+        <small>Alain Roth · <span data-en="Founder, IdeeRoth AG">Gründer, IdeeRoth AG</span></small>
+      </blockquote>
+    </div>
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow">02 //  Mission</span>
+        <span class="trow__name" data-en="Develop more from less.">Aus weniger mehr entwickeln.</span>
+        <p class="trow__bio" data-en="Our team supports customers in product development and improves their competitiveness. We value:">Unser Team unterstützt Kunden bei der Produktentwicklung und verbessert so deren Wettbewerbsfähigkeit. Wir legen Wert auf:</p>
+      </div>
+      <ul class="trow__side">
+        <li data-en="An independent and neutral perspective">Eine unabhängige und neutrale Sichtweise</li>
+        <li data-en="Targeted implementation and results">Eine zielgerichtete Umsetzung und Resultaterreichung</li>
+        <li data-en="A strong technological and business network">Einen starken technologischen und betriebswirtschaftlichen Leistungsverbund</li>
+        <li data-en="Industry-specific application expertise">Branchenspezifisches Anwendungsfachwissen</li>
+      </ul>
+    </div>
+    <div class="trow" tabindex="0">
+      <div class="trow__main">
+        <span class="trow__eyebrow" data-en="03 //  Principles">03 //  Leitbild</span>
+        <span class="trow__name" data-en="Responsible, honest, loyal.">Verantwortungsbewusst, ehrlich, loyal.</span>
+        <p class="trow__bio" data-en="Employees are our most valuable asset. We offer attractive workplaces, support people through targeted training and aim for long-term partnership.">Mitarbeitende sind unser wichtigstes Gut. Wir bieten attraktive Arbeitsplätze, fördern gezielt durch Weiterbildung und streben eine langjährige Partnerschaft an.</p>
+      </div>
+      <ul class="trow__side">
+        <li data-en="We honour our agreements.">Wir halten Vereinbarungen ein.</li>
+        <li data-en="We act fast and decisively and see change as an opportunity.">Wir handeln schnell und entschlossen und sehen Veränderung als Chance.</li>
+        <li data-en="We are creative and continuously seek precisely engineered solutions.">Wir sind kreativ und suchen laufend nach präzis ausgearbeiteten Lösungen.</li>
+        <li data-en="We communicate openly and honestly to build trust.">Wir kommunizieren offen und ehrlich, um Vertrauen zu schaffen.</li>
+      </ul>
+    </div>
+    <a class="trow trow--link" href="karriere.html">
+      <div class="trow__main">
+        <span class="trow__eyebrow" data-en="04 //  Vocational training">04 //  Berufsbildung</span>
+        <span class="trow__name" data-en="We train talent - apprenticeship Konstrukteur/-in EFZ 2027.">Wir bilden aus - Lehrstelle Konstrukteur/-in EFZ 2027.</span>
+        <p class="trow__bio" data-en="There is a lot of talk about the skills shortage. We prefer to do something about it.">Vom Fachkräftemangel wird viel geredet. Wir tun etwas dagegen.</p>
+      </div>
+      <span class="al"><span class="al__label" data-en="About the apprenticeship">Zur Lehrstelle</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></span>
+    </a>
+  </div>
+</section>
+  </article>
+  </section>
+
+  <p class="vl__foot"><span data-en="Internal preview, not indexed.">Interne Vorschau, nicht indexiert.</span> <a href="vorschau-uebergaenge.html" data-en="Preview of the transitions">Vorschau der Übergänge</a> · <a href="index.html" data-en="Start page">Startseite</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,154 @@
+/* =========================================================================
+   IdeeRoth AG - iro.swiss - Vorschau r1: Layout-Varianten
+   Nur fuer vorschau-layouts.html. Laedt NACH styles.css, ohne main.js.
+   Die Demo-Bloecke nutzen das echte Markup und CSS der Site; hier stehen
+   nur die Seitenrahmen, der Ersatz fuer die Engine-Einblendungen und die
+   Varianten-Regeln (ab 1024 px, wie die Desktop-Layouts der Site).
+   ========================================================================= */
+
+/* ---- Seite ---------------------------------------------------------- */
+.vl { background: #fff; color: var(--fg); }
+.vl__hdr { display: flex; align-items: center; gap: 1.25rem; height: var(--header-height); padding-inline: 1rem; border-bottom: 1px dashed var(--border-on-muted); text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.2; }
+.vl__logo { display: flex; align-items: center; flex: none; color: var(--fg); }
+.vl__title { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vl__hdr nav { display: flex; gap: 1rem; flex: none; }
+.vl__hdr nav a { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .6rem; border: 1px dashed var(--border-on-muted); border-radius: var(--button-radius); white-space: nowrap; }
+.vl__hdr nav a[aria-current="page"] { background: var(--black); color: #fff; border-color: var(--black); }
+.vl__hdr nav a:hover { border-style: solid; }
+/* Schmal: Kopfzeile bricht um, Titel in eigener Zeile (sonst wird er abgeschnitten) */
+@media (max-width: 639px) {
+  .vl__hdr { flex-wrap: wrap; height: auto; padding-block: .875rem; row-gap: .75rem; }
+  .vl__hdr nav { margin-left: auto; }
+  .vl__title { flex-basis: 100%; order: 3; white-space: normal; overflow: visible; }
+}
+
+.vl__intro { padding: 3rem 1rem 0; max-width: 48rem; }
+.vl__intro .eyebrow { display: block; color: var(--on-muted-label); }
+.vl__intro h1 { font-size: 2.25rem; margin-top: .75rem; }
+.vl__intro p { margin-top: 1rem; font-size: 1.0625rem; line-height: 1.5; }
+.vl__toc { display: flex; flex-wrap: wrap; gap: .5rem .5rem; margin-top: 1.5rem; text-transform: uppercase; font-size: .8125rem; letter-spacing: var(--tracking-nav); line-height: 1.2; }
+.vl__toc a { padding: .45rem .65rem; border: 1px dashed var(--border-on-muted); border-radius: var(--button-radius); white-space: nowrap; }
+.vl__toc a:hover { border-style: solid; }
+
+.vl__block { margin-top: 5rem; }
+.vl__blockhead { padding-inline: 1rem; max-width: 48rem; }
+.vl__blockhead .eyebrow { display: block; color: var(--on-muted-label); }
+.vl__blockhead h2 { font-size: 1.75rem; margin-top: .5rem; }
+.vl__blockhead p { margin-top: .75rem; font-size: 1.0625rem; line-height: 1.5; color: var(--on-muted-meta); }
+
+.vl__variant { margin-top: 2.5rem; }
+.vl__meta { padding: 0 1rem 1rem; max-width: 48rem; }
+.vl__meta .eyebrow { display: block; font-size: .875rem; color: var(--fg); }
+.vl__meta p { margin-top: .5rem; font-size: 1.0625rem; line-height: 1.5; color: var(--on-muted-meta); }
+
+.vl__foot { padding: 4rem 1rem 3rem; max-width: 48rem; font-size: .875rem; line-height: 1.5; color: var(--on-muted-meta); }
+.vl__foot a { color: var(--fg); }
+
+@media (min-width: 768px) {
+  .vl__hdr, .vl__intro, .vl__blockhead, .vl__meta, .vl__foot { padding-inline: 1.5rem; }
+  .vl__intro h1 { font-size: 3rem; }
+}
+@media (min-width: 1440px) {
+  .vl__hdr, .vl__intro, .vl__blockhead, .vl__meta, .vl__foot { padding-inline: 2rem; }
+  .vl__intro h1 { font-size: var(--section-title); }
+}
+
+/* ---- Ersatz fuer die Engine (main.js laeuft hier nicht) ------------- */
+.vl .card__mask { clip-path: none; }
+.vl .card__photo { transform: none; }
+.vl .card__btn { opacity: 1; }
+.vl .about__photo:first-child { opacity: 1; }
+.vl .about__topic { opacity: .55; }
+.vl .about__topic:first-child { opacity: 1; }
+.vl .team__mask { clip-path: none; }
+.vl .team__drift img { transform: none; }
+/* SwapArrow setzt sonst das SVG ein; statisch steht es im Markup */
+.vl .swap__a { position: absolute; inset: 0; display: block; }
+
+/* ---- Demo-Sektionen: Hintergrund explizit (kein Boden, kein data-ground) */
+.vl .about, .vl .team { --mk-bg: #111418; --mk-bd: rgba(17,20,24,.4); --rule: rgba(17,20,24,.4); background: var(--light); color: var(--fg); }
+.vl .cards { --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); --rule: rgba(255,255,255,.3); background: var(--black); color: #fff; }
+
+/* Kompakter beim Stapeln (< 1024): kein 100vh-Zwang, kuerzere Abstaende */
+.vl .about { min-height: 0; }
+.vl .cards { padding-block: 2.5rem; }
+.vl .team { padding-block: 2.5rem; }
+.vl .team__rows { margin-top: 0; }
+@media (min-width: 1024px) {
+  /* Unternehmen: Hoehe 100vh und Band bleiben wie auf der Site (die Band-Mitte ist der Bezug) */
+  /* Karten: Zeile bleibt am selben Ort wie auf der Site, nur der leere Bereich darunter entfaellt */
+  .vl .cards { height: auto; padding: 2.25rem 1.5rem 2.5rem; }
+  .vl .cards__row { position: relative; inset: auto; }
+  .vl .team { padding-block: 2.5rem; }
+}
+@media (min-width: 1440px) {
+  .vl .cards { padding: 6.1875rem 2.5rem 2.5rem; }
+  .vl .team { padding-block: 2.5rem; }
+}
+
+/* =========================================================================
+   Block Unternehmen
+   Rahmen ab 1024: Mitte bei left 50% / top calc(50% + 3.3125rem), 20 x 24.625rem
+     -> Kanten bei 50% -/+ 10rem, Unterkante bei 50% + 15.625rem
+   Rahmen ab 1440: Mitte bei top calc(50% + 4.4375rem), 20.8125 x 25.5rem
+     -> Kanten bei 50% -/+ 10.40625rem, Unterkante bei 50% + 17.1875rem
+   ========================================================================= */
+@media (min-width: 1024px) {
+  /* Dreiklang (U-A, U-B): Themen links, Mission rechts, je 2rem Luft zum Rahmen */
+  .vl-u-a .about__topics, .vl-u-b .about__topics { left: auto; right: calc(50% + 12rem); align-items: flex-end; text-align: right; }
+  .vl-u-a .about__mission, .vl-u-b .about__mission { left: calc(50% + 12rem); width: 19rem; }
+  .vl-u-a .about__mission .words__indent, .vl-u-b .about__mission .words__indent, .vl-u-c .about__mission .words__indent { width: 0; }
+  /* U-A: an der Unterkante des Rahmens ausgerichtet */
+  .vl-u-a .about__topics, .vl-u-a .about__mission { bottom: calc(50% - 15.625rem); }
+  /* U-B: auf die Fotomitte zentriert */
+  .vl-u-b .about__topics, .vl-u-b .about__mission { bottom: auto; top: calc(50% + 3.3125rem); transform: translateY(-50%); }
+  /* U-C: Themen wie heute, Mission zentriert 1.5rem unter dem Rahmen */
+  .vl-u-c .about__mission { left: 50%; bottom: auto; top: calc(50% + 17.125rem); transform: translateX(-50%); width: 30rem; max-width: 30rem; text-align: center; }
+  .vl-u-c .about__mission.words { justify-content: center; }
+}
+@media (min-width: 1440px) {
+  .vl-u-a .about__topics, .vl-u-b .about__topics { right: calc(50% + 12.40625rem); }
+  .vl-u-a .about__mission, .vl-u-b .about__mission { left: calc(50% + 12.40625rem); width: 19rem; }
+  .vl-u-a .about__topics, .vl-u-a .about__mission { bottom: calc(50% - 17.1875rem); }
+  .vl-u-b .about__topics, .vl-u-b .about__mission { top: calc(50% + 4.4375rem); }
+  .vl-u-c .about__mission { top: calc(50% + 18.6875rem); font-size: 1.25rem; }
+}
+
+/* =========================================================================
+   Block Kompetenzen (ab 1024: Reihe absolut, vier Karten flex 1)
+   Heute: 26rem, .card--tall 32rem (ab 1440: 30 / 36rem), Reihenfolge kurz-lang-lang-kurz
+   ========================================================================= */
+@media (min-width: 1024px) {
+  /* K-A: alle gleich hoch */
+  .vl-k-a .card, .vl-k-a .card--tall { height: 30rem; }
+  /* K-B: kurz-lang-kurz-lang, card--tall per nth-child auf Karte 2 und 4 */
+  .vl-k-b .card, .vl-k-b .card--tall { height: 26rem; }
+  .vl-k-b .card:nth-child(2), .vl-k-b .card:nth-child(4) { height: 32rem; }
+  /* K-C: alle gleich hoch, Karte 2 und 4 um 3rem versetzt */
+  .vl-k-c .card, .vl-k-c .card--tall { height: 30rem; }
+  .vl-k-c .card:nth-child(2), .vl-k-c .card:nth-child(4) { margin-top: 3rem; }
+}
+@media (min-width: 1440px) {
+  .vl-k-a .card, .vl-k-a .card--tall { height: 34rem; }
+  .vl-k-b .card, .vl-k-b .card--tall { height: 30rem; }
+  .vl-k-b .card:nth-child(2), .vl-k-b .card:nth-child(4) { height: 36rem; }
+  .vl-k-c .card, .vl-k-c .card--tall { height: 34rem; }
+}
+
+/* =========================================================================
+   Block Team (ab 768: .trow flex row space-between; ab 1440 main 17.3125rem, side 24rem)
+   ========================================================================= */
+/* T-A: Zeilen schmaler, zentriert */
+.vl-t-a .team__rows { max-width: 64rem; margin-inline: auto; }
+@media (min-width: 1024px) {
+  /* T-B: zwei Spalten links, Text und Zitat/Listen beieinander */
+  .vl-t-b .trow { justify-content: flex-start; gap: 5rem; }
+  .vl-t-b .trow__main { width: 22rem; }
+  .vl-t-b .trow__side, .vl-t-b .trow__quote { width: 30rem; flex: none; }
+  .vl-t-b .trow--link .al { width: 30rem; flex: none; justify-content: flex-start; }
+}
+@media (min-width: 768px) {
+  /* T-C: Zitat/Listen beginnen bei 50 % der Zeile (45 % breit, 5 % Luft rechts) */
+  .vl-t-c .trow__side, .vl-t-c .trow__quote { width: 45%; flex: none; margin-left: auto; margin-right: 5%; }
+  .vl-t-c .trow--link .al { width: 45%; flex: none; margin-left: auto; margin-right: 5%; justify-content: flex-start; }
+}

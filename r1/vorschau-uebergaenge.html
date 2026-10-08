@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Fotoübergänge - Vorschau r1</title>
+<meta name="description" content="Interne Vorschau r1: sieben Fotoübergänge für den Block Unternehmen im Vergleich.">
+<meta name="theme-color" content="#111418">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/vendor/lenis/lenis.css">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261008">
+<link rel="stylesheet" href="assets/css/vorschau.css">
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<div class="ground" data-ground-layer aria-hidden="true"></div>
+
+<!-- ===================== Kopfzeile ===================== -->
+<header class="hdr vs-hdr" data-theme="light">
+  <a class="hdr__cell hdr__logo" href="index.html" aria-label="IdeeRoth AG - Startseite"><span class="logo-mark" role="img" aria-label="iro.swiss"></span></a>
+  <div class="hdr__cell vs-hdr__title"><span>Vorschau r1 · Fotoübergänge</span></div>
+  <a class="hdr__cell vs-hdr__link" href="vorschau-layouts.html"><span>Layouts</span></a>
+</header>
+
+<main id="main">
+<section class="vs" data-ground="light" data-header-theme="light" aria-labelledby="vs-title">
+
+  <!-- ===================== Einleitung ===================== -->
+  <div class="vs-intro">
+    <span class="eyebrow">Unternehmen · Fotowechsel</span>
+    <h1 id="vs-title">Sieben Übergänge im Vergleich</h1>
+    <p>Heute wechselt das Foto im Block Unternehmen als reiner Crossfade (Feder 420 / 38) im Takt von 0.52 s und wirkt dadurch schlagartig. Alle sieben Rahmen unten laufen auf derselben Uhr mit demselben Foto-Index. Takt und Tempo gelten für alle gleichzeitig, damit die Übergänge direkt vergleichbar sind.</p>
+    <p class="vs-note" data-vs-rm hidden>Reduzierte Bewegung ist im System aktiv: Die Uhr startet nicht, Einzelschritt zeigt das nächste Foto ohne Animation.</p>
+  </div>
+
+  <!-- ===================== Bedienung ===================== -->
+  <div class="vs-ctl" role="group" aria-label="Steuerung">
+    <div class="vs-ctl__group">
+      <span class="eyebrow">Takt</span>
+      <div class="vs-ctl__btns" role="group" aria-label="Takt">
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-takt="520" aria-pressed="true">0.52 s</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-takt="1000" aria-pressed="false">1 s</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-takt="1500" aria-pressed="false">1.5 s</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-takt="2000" aria-pressed="false">2 s</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-takt="3000" aria-pressed="false">3 s</button>
+      </div>
+    </div>
+    <div class="vs-ctl__group">
+      <span class="eyebrow">Tempo</span>
+      <div class="vs-ctl__btns" role="group" aria-label="Tempo">
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-tempo="1" aria-pressed="true">1x</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-tempo="2" aria-pressed="false">2x</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-tempo="3" aria-pressed="false">3x</button>
+      </div>
+    </div>
+    <div class="vs-ctl__group">
+      <span class="eyebrow">Ablauf</span>
+      <div class="vs-ctl__btns">
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pause aria-pressed="false">Pause</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-step>Einzelschritt</button>
+      </div>
+    </div>
+    <div class="vs-ctl__group vs-ctl__state">
+      <span class="eyebrow">Foto</span>
+      <span class="vs-ctl__idx" data-vs-idx-text>01 / 10</span>
+    </div>
+    <p class="vs-ctl__hint">0.52 s und 1x entsprechen dem Prompt. Tempo 2x und 3x skalieren die Federn (Tension / k², Friction / k), der Takt bleibt wie gewählt.</p>
+  </div>
+
+  <!-- ===================== Raster: sieben Rahmen ===================== -->
+  <div class="vs-grid">
+
+    <article class="vs-cell" data-vs="dissolve">
+      <h3 class="vs-cell__name"><span class="vs-cell__n">01</span>Dissolve</h3>
+      <div class="vs-stage" data-vs="dissolve"><div class="about__frame" data-vs-frame="dissolve"></div></div>
+      <p class="vs-cell__desc">Das neue Foto blendet über dem alten ein, das alte bleibt darunter und wird nach der Ruhe ausgeblendet. So läuft der Block heute.</p>
+      <dl class="vs-meta">
+        <dt class="eyebrow">Herkunft</dt><dd>About-Galerie</dd>
+        <dt class="eyebrow">Feder</dt><dd data-vs-nums="dissolve"></dd>
+        <dt class="eyebrow">Takt</dt><dd data-vs-takt-text></dd>
+      </dl>
+    </article>
+
+    <article class="vs-cell" data-vs="settle">
+      <h3 class="vs-cell__name"><span class="vs-cell__n">02</span>Dissolve + Settle</h3>
+      <div class="vs-stage" data-vs="settle"><div class="about__frame" data-vs-frame="settle"></div></div>
+      <p class="vs-cell__desc">Wie Dissolve, zusätzlich zieht sich das neue Foto beim Einblenden von 1.12 auf 1 zusammen.</p>
+      <dl class="vs-meta">
+        <dt class="eyebrow">Herkunft</dt><dd>Team-Foto, Finale-Karte</dd>
+        <dt class="eyebrow">Feder</dt><dd data-vs-nums="settle"></dd>
+        <dt class="eyebrow">Takt</dt><dd data-vs-takt-text></dd>
+      </dl>
+    </article>
+
+    <article class="vs-cell" data-vs="wipe">
+      <h3 class="vs-cell__name"><span class="vs-cell__n">03</span>Wipe</h3>
+      <div class="vs-stage" data-vs="wipe"><div class="about__frame" data-vs-frame="wipe"></div></div>
+      <p class="vs-cell__desc">Eine Maske fährt von oben nach unten und deckt das neue Foto über dem alten auf, das Foto darin setzt sich dabei von 1.18 auf 1.</p>
+      <dl class="vs-meta">
+        <dt class="eyebrow">Herkunft</dt><dd>Karten-Einstieg</dd>
+        <dt class="eyebrow">Feder</dt><dd data-vs-nums="wipe"></dd>
+        <dt class="eyebrow">Takt</dt><dd data-vs-takt-text></dd>
+      </dl>
+    </article>
+
+    <article class="vs-cell" data-vs="clear">
+      <h3 class="vs-cell__name"><span class="vs-cell__n">04</span>Clear</h3>
+      <div class="vs-stage" data-vs="clear"><div class="about__frame" data-vs-frame="clear"></div></div>
+      <p class="vs-cell__desc">Das neue Foto kommt unscharf und leicht von oben, wird scharf und blendet dabei ein.</p>
+      <dl class="vs-meta">
+        <dt class="eyebrow">Herkunft</dt><dd>Team-Zeilen</dd>
+        <dt class="eyebrow">Feder</dt><dd data-vs-nums="clear"></dd>
+        <dt class="eyebrow">Takt</dt><dd data-vs-takt-text></dd>
+      </dl>
+    </article>
+
+    <article class="vs-cell" data-vs="deal">
+      <h3 class="vs-cell__name"><span class="vs-cell__n">05</span>Deal</h3>
+      <div class="vs-stage" data-vs="deal"><div class="about__frame" data-vs-frame="deal"></div></div>
+      <p class="vs-cell__desc">Das neue Foto wird wie eine Karte ausgeteilt: klein, von unten, abwechselnd nach links und rechts gedreht, und schwingt in den Rahmen ein. Dunkler Grund, damit die Ecken beim Drehen nicht leer wirken.</p>
+      <dl class="vs-meta">
+        <dt class="eyebrow">Herkunft</dt><dd>Ladepanel-Karten</dd>
+        <dt class="eyebrow">Feder</dt><dd data-vs-nums="deal"></dd>
+        <dt class="eyebrow">Takt</dt><dd data-vs-takt-text></dd>
+      </dl>
+    </article>
+
+    <article class="vs-cell" data-vs="turn">
+      <h3 class="vs-cell__name"><span class="vs-cell__n">06</span>Turn</h3>
+      <div class="vs-stage" data-vs="turn"><div class="about__frame" data-vs-frame="turn"></div></div>
+      <p class="vs-cell__desc">Der ganze Rahmen kippt abwechselnd um 4 Grad nach links und rechts, während das neue Foto überblendet.</p>
+      <dl class="vs-meta">
+        <dt class="eyebrow">Herkunft</dt><dd>Prozess-Bühne</dd>
+        <dt class="eyebrow">Feder</dt><dd data-vs-nums="turn"></dd>
+        <dt class="eyebrow">Takt</dt><dd data-vs-takt-text></dd>
+      </dl>
+    </article>
+
+    <article class="vs-cell" data-vs="push">
+      <h3 class="vs-cell__name"><span class="vs-cell__n">07</span>Push</h3>
+      <div class="vs-stage" data-vs="push"><div class="about__frame" data-vs-frame="push"></div></div>
+      <p class="vs-cell__desc">Das neue Foto schiebt sich von unten herein, das alte weicht nach oben aus und dunkelt dabei leicht ab.</p>
+      <dl class="vs-meta">
+        <dt class="eyebrow">Herkunft</dt><dd>Wanderndes Team-Porträt</dd>
+        <dt class="eyebrow">Feder</dt><dd data-vs-nums="push"></dd>
+        <dt class="eyebrow">Takt</dt><dd data-vs-takt-text></dd>
+      </dl>
+    </article>
+
+  </div>
+
+  <!-- ===================== Grossansicht ===================== -->
+  <div class="vs-big">
+    <div class="vs-big__head">
+      <span class="eyebrow">Grossansicht</span>
+      <h2>Ein Rahmen in Originalgrösse</h2>
+      <p>Derselbe Rahmen wie im Block Unternehmen, mit der Themenliste und ihrem Dimmen wie auf der Site. Der Übergang lässt sich hier umschalten, die Uhr bleibt dieselbe.</p>
+    </div>
+    <div class="vs-big__row">
+      <ul class="vs-topics" aria-label="Themen">
+        <li class="vs-topic">Swiss engineered</li>
+        <li class="vs-topic">3D-CAD</li>
+        <li class="vs-topic">FEM / CFD</li>
+        <li class="vs-topic">Prototyping</li>
+        <li class="vs-topic">Berufsbildung</li>
+      </ul>
+      <div class="vs-stage vs-stage--big" data-vs="dissolve"><div class="about__frame" data-vs-frame="big"></div></div>
+      <div class="vs-big__pick" role="group" aria-label="Übergang wählen">
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pick="dissolve" aria-pressed="true">01 Dissolve</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pick="settle" aria-pressed="false">02 Dissolve + Settle</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pick="wipe" aria-pressed="false">03 Wipe</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pick="clear" aria-pressed="false">04 Clear</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pick="deal" aria-pressed="false">05 Deal</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pick="turn" aria-pressed="false">06 Turn</button>
+        <button class="dbtn dbtn--light vs-btn" type="button" data-vs-pick="push" aria-pressed="false">07 Push</button>
+      </div>
+    </div>
+    <div class="vs-big__meta" data-vs-big-meta aria-live="polite"></div>
+  </div>
+
+</section>
+</main>
+
+<!-- Die zehn Fotos des Unternehmen-Blocks (Reihenfolge und alt-Texte wie index.html); werden per Skript in jeden Rahmen kopiert. -->
+<template id="vs-photos">
+  <div class="about__photo"><img src="assets/img/v2/01.webp" alt="Espressobezug an der Kaffeemaschine"></div>
+  <div class="about__photo"><img src="assets/img/v2/05.webp" alt="Mitarbeiter mit Unterlagen in der Werkstatt"></div>
+  <div class="about__photo"><img src="assets/img/v2/10.webp" alt="Besprechung am Tisch mit Bildschirm"></div>
+  <div class="about__photo"><img src="assets/img/v2/04.webp" alt="Mitarbeiterin am Bildschirm"></div>
+  <div class="about__photo"><img src="assets/img/v2/12.webp" alt="Mitarbeiter im Gespräch am Arbeitsplatz"></div>
+  <div class="about__photo"><img src="assets/img/v2/18.webp" alt="Mitarbeiter mit Kaffeetasse"></div>
+  <div class="about__photo"><img src="assets/img/v2/06.webp" alt="Offene Glastür zur Werkstatt"></div>
+  <div class="about__photo"><img src="assets/img/v2/15.webp" alt="Mitarbeiter beim Skizzieren am Arbeitsplatz"></div>
+  <div class="about__photo"><img src="assets/img/v2/20.webp" alt="Mitarbeiter an der Drehmaschine"></div>
+  <div class="about__photo"><img src="assets/img/v2/02.webp" alt="Blick durch die Glasfront auf eine Werkzeugmaschine"></div>
+</template>
+
+<script src="assets/vendor/lenis/lenis.min.js"></script>
+<script src="assets/js/main.js?v=20261008"></script>
+<script src="assets/js/vorschau.js"></script>
+</body>
+</html>
