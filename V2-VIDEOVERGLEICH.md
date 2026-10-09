@@ -165,10 +165,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Design des Headers (gestrichelte Linien aussen und zwischen den Spalten, Punkte an den Kreuzungen). Vorschlag B-4
     auf `r1/vorschau-footer.html` (Raster mit .mk-Punkten wie die Header-Zellen, Rechtszeile als eigene Zeile im Raster;
     768 bis 1023 px zwei mal zwei, mobil eine Spalte mit gestrichelten Trennlinien). Kundenentscheid 09.10. (dritte
-    Runde): B-4 ohne Rahmen und Spaltenlinien, nur die vertikale gestrichelte Haarlinie mit zwei Punkten zwischen
-    Copyright und Rechtslinks; eingebaut auf karriere, impressum, datenschutz (`.subfoot__inner` Grid 1.25fr 1fr 1fr
-    1.25fr ab 1024, 2 x 2 ab 768; `.subfoot__legal` mit border-left dashed und .mk-Punkten tl/bl, mobil border-top mit
-    tl/tr). Status: erledigt in r1
+    Runde): B-4 ohne Rahmen und Spaltenlinien; Kundenkorrektur gleicher Tag: die gestrichelte Haarlinie mit zwei Punkten
+    liegt waagrecht ueber der Rechtszeile und trennt Copyright, Impressum | Datenschutz | Cookie-Einstellungen vom Rest
+    (wie frueher die weisse Linie). Eingebaut auf karriere, impressum, datenschutz (`.subfoot__inner` Grid 1.25fr 1fr
+    1fr 1.25fr ab 1024, 2 x 2 ab 768; `.subfoot__bottom` border-top dashed mit .mk-Punkten tl/tr, Copyright links,
+    Links rechts, mobil gestapelt). Status: erledigt in r1
 53. [Kunde 09.10.] Das Original-Logo iro.swiss (Kachel mit Marke als Ausschnitt, SWISS darunter) ist nirgends zu sehen:
     Abspann der Startseite und Footer der Unterseiten zeigen nur die weisse Wortmarke, die Kachel geht auf Schwarz
     unter (der isolierte Header-Mark bleibt). Entscheidungsseite `r1/vorschau-logo.html`: Kachel in CSS nachgebaut

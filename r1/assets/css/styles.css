@@ -559,17 +559,13 @@ section { position: relative; }
 .subfoot__badges { display: flex; gap: 1rem; align-items: center; }
 .subfoot__badges a { display: block; }
 .subfoot__links, .subfoot__details { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; }
-.subfoot__bottom { max-width: 64rem; margin: 3rem auto 0; display: flex; flex-direction: column; gap: .75rem; color: var(--on-inverse-meta); }
-.subfoot__legal { position: relative; display: flex; flex-wrap: wrap; gap: .5rem .6rem; padding-top: .875rem; border-top: 1px dashed var(--rule); }
-.subfoot__legal .mk--bl { display: none; }
+/* Rechtszeile (Kundenkorrektur 09.10.): waagrechte gestrichelte Haarlinie mit einem Punkt links und einem rechts trennt
+   Copyright und Impressum | Datenschutz | Cookie-Einstellungen vom Rest, Copyright links, Links rechts (mobil gestapelt) */
+.subfoot__bottom { position: relative; max-width: 64rem; margin: 3rem auto 0; padding-top: 1rem; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; color: var(--on-inverse-meta); }
+.subfoot__legal { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
 @media (min-width: 768px) {
   .subfoot { padding: 4.5rem 1.5rem 4rem; }
   .subfoot__inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 2rem; align-items: start; }
-  .subfoot__bottom { flex-direction: row; align-items: stretch; gap: 1.5rem; }
-  .subfoot__copy { align-self: center; }   /* kein Flex auf dem Span, sonst verschwinden die Leerzeichen um die Jahreszahl */
-  .subfoot__legal { border-top: 0; border-left: 1px dashed var(--rule); padding: .625rem 0 .625rem 1.5rem; align-items: center; }
-  .subfoot__legal .mk--tr { display: none; }
-  .subfoot__legal .mk--bl { display: block; }
 }
 @media (min-width: 1024px) { .subfoot__inner { grid-template-columns: 1.25fr 1fr 1fr 1.25fr; } }
 @media (min-width: 1440px) { .subfoot { padding-inline: 2rem; } }

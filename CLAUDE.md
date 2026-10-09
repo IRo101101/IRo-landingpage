@@ -55,7 +55,7 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Eine Variante B (Ordner `b/`, 08.10.2026) wurde dem Kunden gezeigt und verworfen: Der Stand vom 30.09. ist
   die Basis, Aenderungen daran nur Punkt fuer Punkt mit dem Kunden (Liste: `V2-VIDEOVERGLEICH.md`).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261009c; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261009d; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -127,8 +127,9 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   bei klassischen Scrollbalken (Windows).
 - Footer der Unterseiten (Kundenentscheid 09.10., B-4 ohne Linien): `.subfoot__inner` vier Spalten auf 64rem (Logo-Kachel
   und Badges, Kompetenzen / Unternehmen / Leistungen, Team / Karriere / Kontakt, Adresse), 2 x 2 ab 768, eine Spalte
-  darunter; `.subfoot__bottom` mit `.subfoot__copy` und `.subfoot__legal` (vertikale gestrichelte Linie mit .mk-Punkten
-  tl/bl ab 768, mobil waagrecht mit tl/tr; Marker stehen statisch im Markup). Keine Rahmen, keine Spaltenlinien.
+  darunter; `.subfoot__bottom` (Copyright links, Impressum | Datenschutz | Cookie-Einstellungen rechts, mobil gestapelt)
+  mit waagrechter gestrichelter Haarlinie oben und je einem .mk-Punkt links und rechts (Marker tl/tr statisch im Markup;
+  Kundenkorrektur 09.10.). Keine Rahmen, keine Spaltenlinien.
 - Logo-Kachel `.logo-tile` (Original-Logo `assets/img/logo/tile-white.png` als Maske, 5.5 x 5.5rem, Kachel und SWISS in
   currentColor, Marke als Ausschnitt): im Abspann der Startseite (`.rail__logo`, Schienen-Links ab 768 auf top 9rem) und
   im Footer (`.subfoot__logo`), Farbe Ice Mint, Hover Fresh Mint, Klick zur Startseite. Header-Mark bleibt `.logo-mark`.
