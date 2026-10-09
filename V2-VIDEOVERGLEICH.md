@@ -140,9 +140,14 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 48. [Kunde 09.10.] Footer der Unterseiten wirkt verloren (Screenshot: drei Inseln Logo / Links / Kontakt ueber die
     volle Breite, ab 1600 px viel Leere; die Schlussseite der Startseite dagegen stimmig). Der Prompt kennt nur den
     Abspann des Einseiters, der Unterseiten-Footer ist unsere Zugabe (seit dem ersten v2-Commit). Entscheidungsseite
-    `r1/vorschau-footer.html`: Heute, F-A (Kontaktblock der Startseite, 40 bis 48rem statt 100vh, mobil identisch),
-    F-B (dunkles Band auf 64rem mit Schlusszeile und Buttons, drei Spalten, Rechtszeile), F-C (nur Rechtszeile mit
-    Logo-Marke, Kontakt, Impressum / Datenschutz / Cookies, Copyright). Empfehlung F-A. Status: offen (Entscheid Kunde)
+    `r1/vorschau-footer.html`, erste Runde: F-A (Kontaktblock der Startseite, kuerzer), F-B (dunkles Band auf 64rem mit
+    Schlusszeile und Buttons), F-C (nur Rechtszeile). Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer von
+    mediawork.ch (drei gleich breite Textspalten auf Seitenbreite, keine Linien, keine Buttons, Firmenname fett),
+    ohne "Sprechen wir ueber Ihr Projekt." und ohne die zwei Buttons, mit Logo, NAFEMS und "Wir bilden aus".
+    Zweite Runde auf der Seite: B-1 wie Vorbild (Gemischtschreibung 1.0625rem, Logo und Adresse / Abschnitte / Badges und
+    Rechtliches, Copyright unter der Adresse), B-2 im Stil der Site (Versalien .875rem, Logo und Badges / Abschnitte /
+    Adresse, Rechtszeile unten wie heute), B-3 hell (Anordnung B-1 auf Ice Mint, Haarlinie oben, Badges in Anthrazit).
+    Alle ab 768 px drei Spalten in 64rem, darunter eine Spalte. Status: offen (Entscheid Kunde zwischen B-1 bis B-3)
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
