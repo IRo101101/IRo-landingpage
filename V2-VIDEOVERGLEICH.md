@@ -29,7 +29,7 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 4. [Entscheid] Original teilt alle fuenf Karten praktisch gleichzeitig aus (innerhalb 0.2 s), Spec sagt
    alle 240 ms. Vorschlag: CARD_INTERVAL 240 -> 70, CARD_LEAD 180 -> 120. Status: offen
 5. [Bug] Monogramm-Landung springt bei klassischen Scrollbalken (Windows) um ca. 8 px, weil der Scrollbalken
-   erst nach der Messung erscheint. Umsetzung: html { scrollbar-gutter: stable } und Monogramm im rAF neu messen. Status: offen
+   erst nach der Messung erscheint. Umsetzung: html { scrollbar-gutter: stable } und Monogramm im rAF neu messen. Status: erledigt in r1 (Gutter)
 6. [Bug] Erstes Bild: Monogramm-Basis fehlt (Masken-PNG noch nicht geladen), "LADEN" blitzt vor "LOADING" auf.
    Umsetzung: preload fuer mark-white.png, Readout bis html.js verstecken. Status: offen
 7. [Entscheid] Header-Logo: Original zeigt Monogramm plus Wortmarke, bei uns nur das Monogramm.
@@ -103,7 +103,12 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 38. [Bug] Prozess unter 768 px: Die Schrittliste liegt hinter dem Foto und ist praktisch unlesbar. Status: offen
 39. [Bug] Kartenklick auf Desktop: Beim Scrollen zum Ziel laeuft die Schrittliste unter dem ruhenden Mauszeiger
     durch, ein Hover waehlt dann einen anderen Schritt (nur relevant, falls Karten auf Schritte springen). Status: offen
-40. [Bug] Header 768 bis 1023 px (DE): Navigation ueberlappt die Sprach-Zelle, sobald ein Label laenger wird. Status: offen
+40. [Bug] Header 768 bis 1023 px (DE): Navigation ueberlappt die Sprach-Zelle, sobald ein Label laenger wird. Status: erledigt in r1
+41. [Bug] Sprung am Ende des Ladens (Kunde 09.10.): Das Hero-Foto stand 5 % tiefer als die Finale-Karte, weil die
+    Hero-Parallaxe ihren Scrollweg am 130 % hohen Fotolayer mass (Anfang schon ueber dem Viewport, Fortschritt 0.23
+    bei Scrollposition 0 statt 0). Beim Ausblenden des Panels rutschte das Bild um ca. 49 px (1440) bzw. 58 px (1920).
+    Dazu auf Windows: klassischer Scrollbalken erscheint erst bei der Freigabe, Seite wird 17 px schmaler, Foto wird neu
+    eingepasst. Umsetzung: Scrub mit Referenzelement (Buehne) statt Layer, html { scrollbar-gutter: stable }. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

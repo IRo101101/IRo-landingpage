@@ -273,10 +273,13 @@
     }
     return out;
   }
+  // o.ref: Element, dessen Kanten den Scrollweg bestimmen (Standard: el selbst). Noetig, wenn el ein ueberstehender
+  // Layer ist (Hero-Foto 130 % hoch): sonst liegt sein Anfang schon ueber dem Viewport und die Parallaxe startet bei
+  // Scrollposition 0 nicht bei 0 - das Foto stand 5 % tiefer als die Finale-Karte, der Sprung am Ende des Ladens.
   function Scrub(el, o) {
-    var g = new Group(el, { from: o.from, config: o.config }), lastT = -1;
+    var g = new Group(el, { from: o.from, config: o.config }), lastT = -1, ref = o.ref || el;
     ticker.add(function () {
-      var a = edgePos(el, o.start), b = edgePos(el, o.end);
+      var a = edgePos(ref, o.start), b = edgePos(ref, o.end);
       var t = b === a ? 0 : Math.min(1, Math.max(0, a / (a - b)));
       if (t !== lastT) { lastT = t; g.to(lerpState(o.from, o.to, t)); }
     }, o.frameInterval || 32);
@@ -751,7 +754,7 @@
   function initHero() {
     var hero = doc.querySelector('.hero'); if (!hero) return;
     var photo = hero.querySelector('.hero__photo');
-    if (photo) Scrub(photo, { start: 'top top', end: 'bottom top', from: { y: '0%' }, to: { y: '22%' }, config: PARALLAX, frameInterval: 32 });
+    if (photo) Scrub(photo, { ref: hero.querySelector('.hero__stage') || hero, start: 'top top', end: 'bottom top', from: { y: '0%' }, to: { y: '22%' }, config: PARALLAX, frameInterval: 32 });
     var h1 = hero.querySelector('h1'), lines = hero.querySelectorAll('.hero__line'), intro = hero.querySelector('.hero__intro');
     var wH1 = new Words(h1, { preset: 'head', manual: true });
     var wLines = Array.prototype.map.call(lines, function (l) { return new Words(l, { preset: 'head', manual: true }); });
@@ -990,7 +993,7 @@
     var sec = doc.querySelector('.contact'); if (!sec) return;
     // r1: Parallaxe auf der inneren Ebene (.contact__layer, 120 % hoch), die Aussenbox bleibt stehen
     var photo = sec.querySelector('.contact__layer') || sec.querySelector('.contact__photo');
-    if (photo) Scrub(photo, { start: 'top bottom', end: 'bottom bottom', from: { y: '-15%' }, to: { y: '0%' }, config: PARALLAX, frameInterval: 32 });
+    if (photo) Scrub(photo, { ref: sec.querySelector('.contact__photo') || photo, start: 'top bottom', end: 'bottom bottom', from: { y: '-15%' }, to: { y: '0%' }, config: PARALLAX, frameInterval: 32 });
     sec.querySelectorAll('.rail__links .al').forEach(function (a, i) {
       ArrowLink(a);
       Inview(a, { from: { opacity: 0, y: 14 }, to: { opacity: 1, y: 0 }, config: { tension: 200, friction: 30 }, delayIn: ENTRY_DELAY + i * ENTRY_STAGGER });

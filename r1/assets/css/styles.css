@@ -46,7 +46,7 @@
 
 /* ---- Reset ---------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; }
+html { font-family: 'Inter', system-ui, sans-serif; font-size: 16px; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; scrollbar-gutter: stable; }   /* r1: Platz fuer klassische Scrollbalken (Windows) von Anfang an reservieren, sonst wird die Seite beim Freigeben des Ladepanels schmaler und das Foto neu eingepasst */
 @media (max-width: 1023px) { html { font-size: 2.083333vw; } }
 @media (max-width: 767px)  { html { font-size: max(14px, 4.102564vw); } }   /* r1: Untergrenze 14 px (320 px waren 13.1 px) */
 body { color: var(--fg); background: var(--light); line-height: var(--leading-body); min-height: 100vh; overflow-x: hidden; }
