@@ -51,7 +51,9 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
   Arbeitskopie (eigene assets/, Cache-Version 20261009), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
-  Takt- und Tempo-Regler) und `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C).
+  Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
+  und `r1/vorschau-footer.html` (Footer der Unterseiten: Heute, F-A Abspann wie Startseite nur kuerzer, F-B dunkles Band
+  auf 64rem, F-C nur Rechtszeile; eigenes CSS `assets/css/vorschau-footer.css`, laedt nach vorschau-layouts.css).
   Nach dem Entscheid des Kunden wird `r1/` zum Root; die Vorschauseiten kommen nicht mit auf die Live-Site.
 - v2 NUR mit RELATIVEN Pfaden bauen (`assets/...`, `karriere.html`, nie `/assets/...`), damit sie auf dem
   Pages-Unterpfad UND spaeter im Hostpoint-www-Root identisch laeuft.

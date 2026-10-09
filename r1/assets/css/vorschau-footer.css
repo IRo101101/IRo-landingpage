@@ -1,0 +1,80 @@
+/* =========================================================================
+   IdeeRoth AG - iro.swiss - Vorschau r1: Footer der Unterseiten
+   Nur fuer vorschau-footer.html. Laedt NACH styles.css und vorschau-layouts.css
+   (Seitenrahmen), ohne main.js. Die Demo-Bloecke nutzen das echte Markup und
+   CSS der Site (Kontaktblock der Startseite, Footer der Unterseiten); hier
+   stehen nur das Unterseiten-Beispiel vor jedem Footer und die Varianten.
+   ========================================================================= */
+
+/* ---- Ende einer Unterseite als Vorspann (letzte Zeile, Zurueck-Button) --- */
+.vf-sample { background: var(--light); color: var(--fg); }
+.vf-sample .sub { padding-top: 2.5rem; padding-bottom: 4rem; }
+.vf-sample .sub__back { margin-top: 2.5rem; }
+
+/* Pfeile der Schienen-Links stehen hier statisch im Markup (sonst setzt sie SwapArrow) */
+.vf .al__arrow.swap { color: inherit; }
+
+/* =========================================================================
+   F-A: Abspann wie die Startseite, nur kuerzer (Kontaktblock mit Foto und Schiene)
+   Site: 47.75rem (768), 100vh min 46rem (1024), min 50rem (1440). Hier 40rem bzw.
+   66 % der Fensterhoehe zwischen 40 und 48rem; die Schiene braucht ab 768
+   rund 38rem (Logo, 5 Links, Badges, Kontakt).
+   ========================================================================= */
+/* Auf der Site liegt der Block auf dem dunklen Boden (data-ground); hier traegt er den Hintergrund selbst,
+   sonst stehen Schlusszeile und Rechtszeile unter 768 px weiss auf weiss */
+.vf-a.contact { background: var(--black); }
+@media (min-width: 768px) {
+  .vf-a.contact { height: 40rem; }
+}
+@media (min-width: 1024px) {
+  .vf-a.contact { height: 66vh; height: 66lvh; min-height: 40rem; max-height: 48rem; }
+}
+@media (min-width: 1440px) {
+  .vf-a.contact { min-height: 42rem; max-height: 50rem; }
+}
+
+/* =========================================================================
+   F-B: Dunkles Band auf Inhaltsbreite (64rem wie die Zeilen darueber),
+   oben die Schlusszeile mit den zwei Buttons, darunter drei Spalten
+   (Logo und Badges, Links, Kontakt), unten die Rechtszeile.
+   ========================================================================= */
+.vf-b__inner { max-width: 64rem; margin-inline: auto; }
+.vf-b__close { padding-bottom: 2rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-on-inverse-subtle); }
+.vf-b__close h2 { font-size: 2rem; }
+.vf-b .contact__ctas { margin-top: 1.25rem; }
+/* Mobil: Logo, Links, Kontakt, Badges in der Reihenfolge der Schiene auf der Startseite */
+.vf-b__brand { display: contents; }
+.vf-b .rail__badges { order: 2; margin-top: 0; }
+@media (min-width: 768px) {
+  .vf-b__close { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-bottom: 2.5rem; margin-bottom: 3rem; }
+  .vf-b__close h2 { font-size: 2.5rem; max-width: 22rem; }
+  .vf-b .contact__ctas { margin-top: 0; flex: none; }
+  .vf-b__brand { display: flex; flex-direction: column; gap: 1.5rem; }
+  .vf-b .rail__badges { order: 0; }
+}
+@media (min-width: 1024px) {
+  .vf-b__close h2 { font-size: 3rem; max-width: 26rem; }
+}
+
+/* =========================================================================
+   F-C: Nur die Rechtszeile - Logo-Marke, Kontakt-Link, Impressum / Datenschutz /
+   Cookie-Einstellungen, Copyright. Eine Zeile ab 768, mobil gestapelt.
+   ========================================================================= */
+.vf-c.subfoot { padding: 2rem 1rem; }
+.vf-c__inner { max-width: 64rem; margin-inline: auto; display: flex; flex-direction: column; gap: 1.25rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.3; color: var(--on-inverse-meta); }
+.vf-c .rail__logo { color: #fff; line-height: 0; }
+.vf-c__links { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
+.vf-c__links a { color: var(--on-inverse-meta); }
+.vf-c__links a.vf-c__contact { color: #fff; }
+.vf-c__links a ~ a::before { content: "/"; margin-right: .6rem; color: var(--on-inverse-meta); }
+.vf-c__copy { white-space: nowrap; }
+@media (min-width: 768px) {
+  .vf-c.subfoot { padding: 2rem 1.5rem; }
+  .vf-c__inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 2rem; }
+  .vf-c__links { flex: 1 1 auto; justify-content: center; }
+}
+@media (min-width: 1440px) { .vf-c.subfoot { padding-inline: 2rem; } }
+@media (max-width: 1024px), (pointer: coarse) {
+  .vf-c__links a { display: inline-flex; align-items: center; min-height: 40px; margin-block: -.375rem; }
+  .vf-c__links { align-items: center; }
+}

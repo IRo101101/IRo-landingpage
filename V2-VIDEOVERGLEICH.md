@@ -137,6 +137,12 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Button und Themenliste 4. Gedacht ist: ab 1440 px mit Maus erscheint der Button bei jedem Hineinfahren und
     verschwindet beim Verlassen; unter 1440 px und auf Touch-Geraeten ist er immer sichtbar (vgl. Punkt 20). Status:
     erledigt in r1
+48. [Kunde 09.10.] Footer der Unterseiten wirkt verloren (Screenshot: drei Inseln Logo / Links / Kontakt ueber die
+    volle Breite, ab 1600 px viel Leere; die Schlussseite der Startseite dagegen stimmig). Der Prompt kennt nur den
+    Abspann des Einseiters, der Unterseiten-Footer ist unsere Zugabe (seit dem ersten v2-Commit). Entscheidungsseite
+    `r1/vorschau-footer.html`: Heute, F-A (Kontaktblock der Startseite, 40 bis 48rem statt 100vh, mobil identisch),
+    F-B (dunkles Band auf 64rem mit Schlusszeile und Buttons, drei Spalten, Rechtszeile), F-C (nur Rechtszeile mit
+    Logo-Marke, Kontakt, Impressum / Datenschutz / Cookies, Copyright). Empfehlung F-A. Status: offen (Entscheid Kunde)
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

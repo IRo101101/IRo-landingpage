@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title data-en="Footer variants - Preview r1">Footer-Varianten - Vorschau r1</title>
+<meta name="description" data-en="Internal preview: footer variants for the subpages of the iro.swiss v2 redesign (r1)." content="Interne Vorschau: Footer-Varianten für die Unterseiten des iro.swiss v2-Redesigns (r1).">
+<meta name="theme-color" content="#111418">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/styles.css?v=20261009">
+<link rel="stylesheet" href="assets/css/vorschau-layouts.css">
+<link rel="stylesheet" href="assets/css/vorschau-footer.css">
+</head>
+<body class="vl vf">
+<a class="skip" href="#main" data-en="Skip to content">Zum Inhalt springen</a>
+
+<header class="vl__hdr">
+  <a class="vl__logo" href="index.html" aria-label="IdeeRoth AG - Startseite" data-en-label="IdeeRoth AG - Home"><span class="logo-mark" role="img" aria-label="iro.swiss"></span></a>
+  <span class="vl__title">Vorschau r1 · Footer-Varianten</span>
+  <nav aria-label="Vorschauseiten">
+    <a href="vorschau-layouts.html" data-en="Layouts">Layouts</a>
+    <a href="vorschau-uebergaenge.html" data-en="Transitions">Übergänge</a>
+    <a href="vorschau-footer.html" aria-current="page">Footer</a>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="vl__intro">
+    <span class="eyebrow" data-en="Preview r1 · decision page">Vorschau r1 · Entscheidungsseite</span>
+    <h1 data-en="Footer of the subpages">Footer der Unterseiten</h1>
+    <p data-en="The start page ends with the contact block (photo, black rail, 'Let's talk about your project.'). The subpages Careers, Legal notice and Privacy end with a dark footer whose three islands (logo, links, contact) are spread across the full window width; from about 1600 px it looks lost. The original prompt only knows the one-page closing block, the subpage footer is our own addition.">Die Startseite endet mit dem Kontaktblock (Foto, schwarze Schiene, "Sprechen wir über Ihr Projekt."). Die Unterseiten Karriere, Impressum und Datenschutz enden mit einem dunklen Footer, dessen drei Inseln (Logo, Links, Kontakt) über die volle Fensterbreite verteilt sind; ab etwa 1600 px wirkt er verloren. Der Original-Prompt kennt nur den Abspann des Einseiters, der Unterseiten-Footer ist unsere eigene Zugabe.</p>
+    <p data-en="Each variant first shows the end of a subpage (last row of the legal notice, back button) and then the footer, built from the real markup and CSS of the site without the motion engine. Below 768 px all variants stack like the rail on the start page.">Jede Variante zeigt zuerst das Ende einer Unterseite (letzte Zeile des Impressums, Zurück-Button) und dann den Footer, gebaut aus dem echten Markup und CSS der Site ohne die Bewegungs-Engine. Unter 768 px stapeln alle Varianten wie die Schiene auf der Startseite.</p>
+    <p class="vl__note" data-en="Recommendation: F-A, the same closing as on the start page, only shorter.">Empfehlung: F-A, derselbe Abspann wie auf der Startseite, nur kürzer.</p>
+    <nav class="vl__toc" aria-label="Varianten">
+      <a href="#f-0" data-en="Today">Heute</a><a href="#f-a">F-A</a><a href="#f-b">F-B</a><a href="#f-c">F-C</a>
+    </nav>
+  </div>
+
+  <section class="vl__block" id="block-footer" aria-labelledby="vl-h-f">
+    <div class="vl__blockhead">
+      <span class="eyebrow" data-en="Subpages · Footer">Unterseiten · Footer</span>
+      <h2 id="vl-h-f" data-en="Today and three variants">Heute und drei Varianten</h2>
+      <p data-en="For comparison: the current footer first, then F-A to F-C. Links and buttons work as on the site.">Zum Vergleich zuerst der heutige Footer, dann F-A bis F-C. Links und Buttons funktionieren wie auf der Site.</p>
+    </div>
+
+  <!-- ===================== Heute ===================== -->
+  <article class="vl__variant" id="f-0">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="Today · dark footer across the full width">Heute · Dunkler Footer über die volle Breite</span>
+      <p data-en="Logo left, six links in the middle, phone, mail, address and badges right, legal line below. The three columns follow the window width, not the 64rem of the content above.">Logo links, sechs Links in der Mitte, rechts Telefon, Mail, Adresse und Badges, darunter die Rechtszeile. Die drei Spalten folgen der Fensterbreite, nicht den 64rem des Inhalts darüber.</p>
+    </div>
+<div class="vf-sample">
+  <div class="sub">
+    <div class="srows">
+      <section class="srow">
+        <div class="srow__main">
+          <span class="srow__eyebrow">04 //  <span data-en="Legal notice">Impressum</span></span>
+          <h2 class="srow__name" data-en="Links">Haftung für Links</h2>
+        </div>
+        <div class="srow__body">
+          <p data-en="References and links to third-party websites lie outside our area of responsibility. Any responsibility for such websites is rejected. Access to and use of such websites is at the user's own risk.">Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr der Nutzerin oder des Nutzers.</p>
+        </div>
+      </section>
+    </div>
+    <p><a class="dbtn dbtn--light sub__back" href="index.html"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Back to home">Zurück zur Startseite</span></a></p>
+  </div>
+</div>
+<footer class="subfoot" aria-label="Footer - heute">
+  <div class="subfoot__grid">
+    <a class="rail__logo" href="index.html" aria-label="IdeeRoth AG - Startseite" data-en-label="IdeeRoth AG - Home"><span class="logo-lock" role="img" aria-label="iro.swiss"></span></a>
+    <nav class="rail__links" aria-label="Abschnitte">
+      <a class="al" href="index.html#kompetenzen"><span class="al__label" data-en="Expertise">Kompetenzen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="index.html#unternehmen"><span class="al__label" data-en="Company">Unternehmen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="index.html#leistungen"><span class="al__label" data-en="Services">Leistungen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="index.html#team"><span class="al__label">Team</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="karriere.html"><span class="al__label" data-en="Careers">Karriere</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="index.html#kontakt"><span class="al__label" data-en="Contact">Kontakt</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+    </nav>
+    <address class="subfoot__details">
+      <a href="tel:+41718558855">+41 71 855 88 55</a>
+      <a href="mailto:info@iro.swiss">info@iro.swiss</a>
+      <span>IdeeRoth AG<br>Hafenstrasse 62<br>CH-8590 Romanshorn</span>
+      <span class="rail__badges">
+        <a href="https://www.nafems.org" target="_blank" rel="noopener" aria-label="NAFEMS - nafems.org (neues Fenster)"><img src="assets/img/badge-nafems-member.png" alt="NAFEMS Member" width="165" height="150" loading="lazy"></a>
+        <a href="https://www.berufsbildungplus.ch" target="_blank" rel="noopener" aria-label="Berufsbildung - Wir machen Profis, berufsbildungplus.ch (neues Fenster)"><img src="assets/img/badge-lehrbetrieb.png" alt="Lehrbetrieb - Wir machen Profis" width="130" height="130" loading="lazy"></a>
+      </span>
+    </address>
+  </div>
+  <div class="subfoot__bottom">
+    <span>© 2026 IdeeRoth AG</span>
+    <span class="subfoot__legal">
+      <a href="impressum.html" data-en="Legal notice">Impressum</a><span aria-hidden="true">/</span>
+      <a href="datenschutz.html" data-en="Privacy">Datenschutz</a><span aria-hidden="true">/</span>
+      <a href="#" data-cookie-settings data-en="Cookie settings">Cookie-Einstellungen</a>
+    </span>
+  </div>
+</footer>
+  </article>
+
+  <!-- ===================== F-A ===================== -->
+  <article class="vl__variant" id="f-a">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="F-A · Same closing as the start page, only shorter">F-A · Gleicher Abspann wie die Startseite, nur kürzer</span>
+      <p data-en="The contact block of the start page: black rail with logo, links, badges and contact on the left, the photo with 'Let's talk about your project.' and the two buttons on the right, legal line below. Instead of the full window height it takes about two thirds (40 to 48rem). Every page ends the same way, the photo fills the void. Below 768 px identical to the start page: rail, photo, closing line, legal line.">Der Kontaktblock der Startseite: schwarze Schiene mit Logo, Links, Badges und Kontakt links, rechts das Foto mit "Sprechen wir über Ihr Projekt." und den zwei Buttons, darunter die Rechtszeile. Statt der ganzen Fensterhöhe nimmt er rund zwei Drittel (40 bis 48rem). Jede Seite endet gleich, das Foto füllt die Leere. Unter 768 px identisch mit der Startseite: Schiene, Foto, Schlusszeile, Rechtszeile.</p>
+    </div>
+<div class="vf-sample">
+  <div class="sub">
+    <div class="srows">
+      <section class="srow">
+        <div class="srow__main">
+          <span class="srow__eyebrow">04 //  <span data-en="Legal notice">Impressum</span></span>
+          <h2 class="srow__name" data-en="Links">Haftung für Links</h2>
+        </div>
+        <div class="srow__body">
+          <p data-en="References and links to third-party websites lie outside our area of responsibility. Any responsibility for such websites is rejected. Access to and use of such websites is at the user's own risk.">Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr der Nutzerin oder des Nutzers.</p>
+        </div>
+      </section>
+    </div>
+    <p><a class="dbtn dbtn--light sub__back" href="index.html"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Back to home">Zurück zur Startseite</span></a></p>
+  </div>
+</div>
+<section class="contact vf-a" aria-label="Footer - Variante F-A">
+  <div class="contact__photo"><div class="contact__layer"><img src="assets/img/v2/17.webp" alt="Aussenansicht des Firmengebäudes mit Weg" loading="lazy"></div></div>
+  <div class="rail">
+    <a class="rail__logo" href="index.html" aria-label="IdeeRoth AG - Startseite" data-en-label="IdeeRoth AG - Home"><span class="logo-lock" role="img" aria-label="iro.swiss"></span></a>
+    <nav class="rail__links" aria-label="Abschnitte">
+      <a class="al" href="index.html#kompetenzen"><span class="al__label" data-en="Expertise">Kompetenzen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="index.html#unternehmen"><span class="al__label" data-en="Company">Unternehmen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="index.html#leistungen"><span class="al__label" data-en="Services">Leistungen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="index.html#team"><span class="al__label">Team</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      <a class="al" href="karriere.html"><span class="al__label" data-en="Careers">Karriere</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+    </nav>
+    <div class="rail__badges" aria-label="Mitgliedschaften und Auszeichnungen">
+      <a href="https://www.nafems.org" target="_blank" rel="noopener" aria-label="NAFEMS - nafems.org (neues Fenster)"><img src="assets/img/badge-nafems-member.png" alt="NAFEMS Member" width="165" height="150" loading="lazy"></a>
+      <a href="https://www.berufsbildungplus.ch" target="_blank" rel="noopener" aria-label="Berufsbildung - Wir machen Profis, berufsbildungplus.ch (neues Fenster)"><img src="assets/img/badge-lehrbetrieb.png" alt="Lehrbetrieb - Wir machen Profis" width="130" height="130" loading="lazy"></a>
+    </div>
+    <address class="rail__details">
+      <a href="tel:+41718558855">+41 71 855 88 55</a>
+      <a href="mailto:info@iro.swiss">info@iro.swiss</a>
+      <span>IdeeRoth AG<br>Hafenstrasse 62<br>CH-8590 Romanshorn</span>
+    </address>
+  </div>
+  <div class="contact__close right">
+    <h2 data-en="Let's talk about your project.">Sprechen wir über Ihr Projekt.</h2>
+    <div class="contact__ctas">
+      <a class="dbtn" href="mailto:info@iro.swiss?subject=Projektanfrage%20IdeeRoth%20AG"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Write e-mail">E-Mail schreiben</span></a>
+      <a class="dbtn" href="tel:+41718558855"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Call">Anrufen</span></a>
+    </div>
+  </div>
+  <div class="contact__legal">
+    <a class="rl-link" href="impressum.html"><span class="rl" data-en="Legal notice">Impressum</span></a><span aria-hidden="true">/</span>
+    <a class="rl-link" href="datenschutz.html"><span class="rl" data-en="Privacy">Datenschutz</span></a><span aria-hidden="true">/</span>
+    <a class="rl-link" href="#" data-cookie-settings><span class="rl" data-en="Cookie settings">Cookie-Einstellungen</span></a>
+  </div>
+  <div class="contact__copy">© 2026 IdeeRoth AG</div>
+</section>
+  </article>
+
+  <!-- ===================== F-B ===================== -->
+  <article class="vl__variant" id="f-b">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="F-B · Dark band at content width">F-B · Dunkles Band auf Inhaltsbreite</span>
+      <p data-en="No photo. The footer keeps its dark band, but everything sits within the 64rem of the rows above: first the closing line 'Let's talk about your project.' with the two buttons, then three columns (logo and badges, links, contact) close together, then the legal line. Lighter than F-A and aligned with the grid of the subpages. Below 768 px stacked: closing line, logo, links, contact, badges, legal line.">Ohne Foto. Der Footer behält sein dunkles Band, aber alles steht innerhalb der 64rem der Zeilen darüber: zuerst die Schlusszeile "Sprechen wir über Ihr Projekt." mit den zwei Buttons, dann drei Spalten (Logo und Badges, Links, Kontakt) nah beieinander, dann die Rechtszeile. Leichter als F-A und im Raster der Unterseiten. Unter 768 px gestapelt: Schlusszeile, Logo, Links, Kontakt, Badges, Rechtszeile.</p>
+    </div>
+<div class="vf-sample">
+  <div class="sub">
+    <div class="srows">
+      <section class="srow">
+        <div class="srow__main">
+          <span class="srow__eyebrow">04 //  <span data-en="Legal notice">Impressum</span></span>
+          <h2 class="srow__name" data-en="Links">Haftung für Links</h2>
+        </div>
+        <div class="srow__body">
+          <p data-en="References and links to third-party websites lie outside our area of responsibility. Any responsibility for such websites is rejected. Access to and use of such websites is at the user's own risk.">Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr der Nutzerin oder des Nutzers.</p>
+        </div>
+      </section>
+    </div>
+    <p><a class="dbtn dbtn--light sub__back" href="index.html"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Back to home">Zurück zur Startseite</span></a></p>
+  </div>
+</div>
+<footer class="subfoot vf-b" aria-label="Footer - Variante F-B">
+  <div class="vf-b__inner">
+    <div class="vf-b__close">
+      <h2 data-en="Let's talk about your project.">Sprechen wir über Ihr Projekt.</h2>
+      <div class="contact__ctas">
+        <a class="dbtn" href="mailto:info@iro.swiss?subject=Projektanfrage%20IdeeRoth%20AG"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Write e-mail">E-Mail schreiben</span></a>
+        <a class="dbtn" href="tel:+41718558855"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Call">Anrufen</span></a>
+      </div>
+    </div>
+    <div class="subfoot__grid">
+      <div class="vf-b__brand">
+        <a class="rail__logo" href="index.html" aria-label="IdeeRoth AG - Startseite" data-en-label="IdeeRoth AG - Home"><span class="logo-lock" role="img" aria-label="iro.swiss"></span></a>
+        <span class="rail__badges">
+          <a href="https://www.nafems.org" target="_blank" rel="noopener" aria-label="NAFEMS - nafems.org (neues Fenster)"><img src="assets/img/badge-nafems-member.png" alt="NAFEMS Member" width="165" height="150" loading="lazy"></a>
+          <a href="https://www.berufsbildungplus.ch" target="_blank" rel="noopener" aria-label="Berufsbildung - Wir machen Profis, berufsbildungplus.ch (neues Fenster)"><img src="assets/img/badge-lehrbetrieb.png" alt="Lehrbetrieb - Wir machen Profis" width="130" height="130" loading="lazy"></a>
+        </span>
+      </div>
+      <nav class="rail__links" aria-label="Abschnitte">
+        <a class="al" href="index.html#kompetenzen"><span class="al__label" data-en="Expertise">Kompetenzen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+        <a class="al" href="index.html#unternehmen"><span class="al__label" data-en="Company">Unternehmen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+        <a class="al" href="index.html#leistungen"><span class="al__label" data-en="Services">Leistungen</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+        <a class="al" href="index.html#team"><span class="al__label">Team</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+        <a class="al" href="karriere.html"><span class="al__label" data-en="Careers">Karriere</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+        <a class="al" href="index.html#kontakt"><span class="al__label" data-en="Contact">Kontakt</span><span class="al__arrow swap" aria-hidden="true"><span class="swap__a"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8 8 2M3.5 2H8v4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></span></a>
+      </nav>
+      <address class="subfoot__details">
+        <a href="tel:+41718558855">+41 71 855 88 55</a>
+        <a href="mailto:info@iro.swiss">info@iro.swiss</a>
+        <span>IdeeRoth AG<br>Hafenstrasse 62<br>CH-8590 Romanshorn</span>
+      </address>
+    </div>
+    <div class="subfoot__bottom">
+      <span>© 2026 IdeeRoth AG</span>
+      <span class="subfoot__legal">
+        <a href="impressum.html" data-en="Legal notice">Impressum</a><span aria-hidden="true">/</span>
+        <a href="datenschutz.html" data-en="Privacy">Datenschutz</a><span aria-hidden="true">/</span>
+        <a href="#" data-cookie-settings data-en="Cookie settings">Cookie-Einstellungen</a>
+      </span>
+    </div>
+  </div>
+</footer>
+  </article>
+
+  <!-- ===================== F-C ===================== -->
+  <article class="vl__variant" id="f-c">
+    <div class="vl__meta">
+      <span class="eyebrow" data-en="F-C · Legal line only">F-C · Nur die Rechtszeile</span>
+      <p data-en="The quietest ending: one dark line with the logo mark, a contact link, Legal notice / Privacy / Cookie settings and the copyright. The 'Back to home' button remains the exit, the navigation stays in the header. Calm for Legal notice and Privacy, but Careers loses the invitation to get in touch. Below 768 px three stacked lines.">Der ruhigste Abschluss: eine dunkle Zeile mit Logo-Marke, einem Kontakt-Link, Impressum / Datenschutz / Cookie-Einstellungen und dem Copyright. Der Button "Zurück zur Startseite" bleibt der Ausgang, die Navigation steckt im Header. Ruhig für Impressum und Datenschutz, bei Karriere fehlt aber die Einladung zum Kontakt. Unter 768 px drei gestapelte Zeilen.</p>
+    </div>
+<div class="vf-sample">
+  <div class="sub">
+    <div class="srows">
+      <section class="srow">
+        <div class="srow__main">
+          <span class="srow__eyebrow">04 //  <span data-en="Legal notice">Impressum</span></span>
+          <h2 class="srow__name" data-en="Links">Haftung für Links</h2>
+        </div>
+        <div class="srow__body">
+          <p data-en="References and links to third-party websites lie outside our area of responsibility. Any responsibility for such websites is rejected. Access to and use of such websites is at the user's own risk.">Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr der Nutzerin oder des Nutzers.</p>
+        </div>
+      </section>
+    </div>
+    <p><a class="dbtn dbtn--light sub__back" href="index.html"><span class="dbtn__fill" aria-hidden="true"></span><span class="rl" data-en="Back to home">Zurück zur Startseite</span></a></p>
+  </div>
+</div>
+<footer class="subfoot vf-c" aria-label="Footer - Variante F-C">
+  <div class="vf-c__inner">
+    <a class="rail__logo" href="index.html" aria-label="IdeeRoth AG - Startseite" data-en-label="IdeeRoth AG - Home"><span class="logo-mark" role="img" aria-label="iro.swiss"></span></a>
+    <nav class="vf-c__links" aria-label="Rechtliches und Kontakt">
+      <a class="vf-c__contact" href="index.html#kontakt" data-en="Contact">Kontakt</a>
+      <a href="impressum.html" data-en="Legal notice">Impressum</a>
+      <a href="datenschutz.html" data-en="Privacy">Datenschutz</a>
+      <a href="#" data-cookie-settings data-en="Cookie settings">Cookie-Einstellungen</a>
+    </nav>
+    <span class="vf-c__copy">© 2026 IdeeRoth AG</span>
+  </div>
+</footer>
+  </article>
+  </section>
+
+  <p class="vl__foot"><span data-en="Internal preview, not indexed.">Interne Vorschau, nicht indexiert.</span> <a href="vorschau-layouts.html" data-en="Layout variants">Layout-Varianten</a> · <a href="vorschau-uebergaenge.html" data-en="Preview of the transitions">Vorschau der Übergänge</a> · <a href="index.html" data-en="Start page">Startseite</a></p>
+</main>
+</body>
+</html>
