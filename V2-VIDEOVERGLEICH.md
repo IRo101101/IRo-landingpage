@@ -159,7 +159,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     (aus OpenStreetMap-Daten oder swisstopo gerendert, Quellenangabe daneben), S-2 gezeichneter einfarbiger Lageplan
     als SVG (Hafen, Uferlinie, Hafenstrasse, Bahnhof), S-3 Zwei-Klick-Karte (Platzhalter, nach Klick Leaflet lokal
     mit CARTO-Schluessel oder swisstopo). Platz: Kachel in der Schiene ueber der Adresse (Startseite) bzw. in der
-    Adressspalte des Footers (Unterseiten), Klick oeffnet Google oder Apple Karten. Status: offen (Entscheid Kunde)
+    Adressspalte des Footers (Unterseiten), Klick oeffnet Google oder Apple Karten. Entscheidungsseite
+    `r1/vorschau-standort.html` (09.10.): je Variante Abspann der Startseite (50rem, Kachel in der Schiene zwischen
+    Badges und Adresse, 12 x 7.5rem ab 768, 13.6875 x 8.55rem ab 1440, mobil volle Breite) und Footer B-1 (Kachel in
+    Spalte 1 unter der Adresse). Kartenbild und Lageplan aus OpenStreetMap-Daten (overpass.osm.ch) selbst gerendert,
+    Ausschnitt 800 x 500 m, Beschriftung nur Hafenstrasse, Bahnhof, Hafen. Empfehlung S-1. Status: offen (Entscheid Kunde)
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

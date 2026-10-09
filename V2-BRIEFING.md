@@ -9,7 +9,9 @@ Vorschau: https://iro101101.github.io/IRo-landingpage/ (GitHub Pages, Branch `v2
 - Entscheidungsseiten: https://iro101101.github.io/IRo-landingpage/r1/vorschau-uebergaenge.html (Fotouebergaenge)
   und https://iro101101.github.io/IRo-landingpage/r1/vorschau-layouts.html (Unternehmen, Karten, Team),
   https://iro101101.github.io/IRo-landingpage/r1/vorschau-footer.html (Footer der Unterseiten: Heute, B-1, B-2, B-3;
-  Richtung F-B entschieden, Ausprägung offen).
+  Richtung F-B entschieden, Ausprägung offen),
+  https://iro101101.github.io/IRo-landingpage/r1/vorschau-standort.html (Standort und Karte: S-1 Kartenbild, S-2 Lageplan,
+  S-3 Zwei-Klick-Karte; offen).
 - Entschieden 09.10.2026: Fotowechsel Clear (2 s, Feder 40 % schneller) im Block Unternehmen, Layouts U-A, K-A, T-A; eingebaut in r1.
 - Details und Status: `V2-VIDEOVERGLEICH.md`, Abschnitt "Runde 1".
 

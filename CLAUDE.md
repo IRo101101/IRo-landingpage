@@ -55,7 +55,13 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
   mediawork.ch = drei gleich breite Textspalten auf Inhaltsbreite, keine Linien, keine Buttons, keine Schlusszeile;
   gezeigt: Heute, B-1 wie Vorbild in Gemischtschreibung, B-2 in Versalien mit Rechtszeile unten, B-3 hell auf Ice Mint;
-  eigenes CSS `assets/css/vorschau-footer.css`, laedt nach vorschau-layouts.css).
+  eigenes CSS `assets/css/vorschau-footer.css`, laedt nach vorschau-layouts.css) und `r1/vorschau-standort.html`
+  (Standort und Karte, Kundenwunsch 09.10.: S-1 statisches Kartenbild `assets/img/map/standort.webp`, 1600 x 1000,
+  43 KB, aus OpenStreetMap-Daten gerendert, S-2 gezeichneter Lageplan als Inline-SVG-Symbol `#lageplan`, S-3 Zwei-Klick-
+  Karte mit Leaflet lokal unter `assets/vendor/leaflet/` und swisstopo-Kacheln; CSS `vorschau-standort.css`, JS
+  `vorschau-standort.js`). Die Karten entstehen aus `scratchpad/osm/make_maps.py` (Overpass-Daten der Schweizer
+  Instanz overpass.osm.ch, ODbL; Quellenangabe "Kartendaten: OpenStreetMap" bleibt Pflicht, kein Seename im Bild).
+  Leaflet und die Vorschau-Assets gehoeren nicht auf die Live-Site, solange S-3 nicht gewaehlt ist.
   Nach dem Entscheid des Kunden wird `r1/` zum Root; die Vorschauseiten kommen nicht mit auf die Live-Site.
 - v2 NUR mit RELATIVEN Pfaden bauen (`assets/...`, `karriere.html`, nie `/assets/...`), damit sie auf dem
   Pages-Unterpfad UND spaeter im Hostpoint-www-Root identisch laeuft.

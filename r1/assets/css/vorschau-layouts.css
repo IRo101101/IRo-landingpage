@@ -18,7 +18,7 @@
 /* Schmal: Kopfzeile bricht um, Titel in eigener Zeile (sonst wird er abgeschnitten) */
 @media (max-width: 639px) {
   .vl__hdr { flex-wrap: wrap; height: auto; padding-block: .875rem; row-gap: .75rem; }
-  .vl__hdr nav { margin-left: auto; }
+  .vl__hdr nav { margin-left: 0; flex: 1 1 100%; order: 2; flex-wrap: wrap; gap: .5rem; }   /* vier Vorschauseiten passen bei 320 bis 390 px nur in eigener, umbrechender Zeile */
   .vl__title { flex-basis: 100%; order: 3; white-space: normal; overflow: visible; }
 }
 

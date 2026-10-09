@@ -1,0 +1,70 @@
+/* =========================================================================
+   IdeeRoth AG - iro.swiss - Vorschau r1: Standort und Karte
+   Nur fuer vorschau-standort.html. Laedt NACH styles.css, vorschau-layouts.css
+   und vorschau-footer.css, ohne main.js (Leaflet lokal nur fuer S-3).
+   Standort-Baustein: Kachel 16:10 (Karte, verlinkt auf Google Maps), darunter
+   Versal-Zeile "In Maps oeffnen" und "Apple Karten", Quellenangabe in der Kachel.
+   Platz: Startseite in der Schiene zwischen Badges und Adresse, Unterseiten in
+   Spalte 1 des Footers (B-1) unter der Adresse.
+   ========================================================================= */
+
+/* ---- Kontext-Zeile ueber jedem Block ---- */
+.vst__ctx { padding: 1.5rem 1rem .75rem; margin: 0; max-width: 48rem; }
+.vst__ctx .eyebrow { display: block; color: var(--on-muted-label); }
+@media (min-width: 768px) { .vst__ctx { padding-inline: 1.5rem; } }
+@media (min-width: 1440px) { .vst__ctx { padding-inline: 2rem; } }
+
+/* ---- Kontext Startseite: Abspann wie F-A verkuerzt, aber 50rem hoch (Schiene braucht Platz fuer die Kachel) ---- */
+.vst-a.contact { background: var(--black); }
+@media (min-width: 768px) { .vst-a.contact { height: 50rem; } }
+@media (min-width: 1024px) { .vst-a.contact { height: 70vh; height: 70lvh; min-height: 50rem; max-height: 56rem; } }
+
+/* ---- Standort-Baustein ---- */
+.rail__site { margin-top: 1.5rem; }
+.site__tile { position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #171c21; border: 1px solid var(--border-on-inverse-subtle); color: #fff; }
+.site__tile img, .site__plan { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.site__plan { background: var(--black); }
+a.site__tile:hover img, a.site__tile:hover .site__plan { opacity: .9; }
+.site__credit { position: absolute; right: 0; bottom: 0; padding: .1rem .35rem; font-size: 10px; line-height: 1.3; letter-spacing: .02em; color: rgba(255,255,255,.7); background: rgba(17,20,24,.72); text-transform: none; }
+.site__credit a { color: inherit; }
+.site__links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .5rem; text-transform: uppercase; font-size: max(.75rem, 12px); letter-spacing: var(--tracking-nav); line-height: 1.2; }
+.site__open { display: inline-flex; align-items: center; gap: .4rem; color: #fff; white-space: nowrap; }
+.site__open .swap { width: .5rem; height: .5rem; }
+.site__open--alt { color: var(--on-inverse-meta); }
+.site__open:hover { color: var(--mint, #B7F3D0); }
+
+/* Schiene ab 768: absolut wie die uebrigen Schienen-Elemente, Badges ruecken nach oben */
+@media (min-width: 768px) {
+  .contact .rail__site { position: absolute; left: 1.5rem; bottom: 12.25rem; width: 12rem; margin: 0; }
+  .contact .site__open--alt { display: none; }   /* in der schmalen Schiene nur "In Maps oeffnen" (eine Zeile); Apple-Link mobil und im Footer */
+  .vst-a .rail__badges { bottom: 22.75rem; }
+}
+@media (min-width: 1024px) { .contact .rail__site { left: 2rem; } }
+@media (min-width: 1440px) {
+  .contact .rail__site { width: 13.6875rem; bottom: 11rem; }
+  .vst-a .rail__badges { bottom: 22.5rem; }
+}
+
+/* Footer (B-1): Baustein in Spalte 1 unter der Adresse */
+.vfb__site { margin-top: 1.5rem; max-width: 20rem; }
+.vfb-1 .vfb__site .site__links { font-size: max(.75rem, 12px); line-height: 1.3; }
+@media (max-width: 767px) { .vfb__site { order: 1; } }   /* vor dem Copyright (order 10) */
+
+/* ---- S-3: Zwei-Klick-Karte ---- */
+.site__tile--load { cursor: default; }
+.site__consent { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; padding: .5rem; text-align: center; background: rgba(17,20,24,.55); }
+.site__load.dbtn { padding: .5rem .75rem; font-size: max(.75rem, 12px); min-height: 0; }
+.site__hint { margin: 0; font-size: max(.6875rem, 11px); line-height: 1.3; color: rgba(255,255,255,.75); max-width: 12rem; text-transform: none; letter-spacing: 0; }
+.site__map { position: absolute; inset: 0; background: #171c21; }
+.site__map .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.82) contrast(1.05); }   /* Graukarte dunkel */
+.site__map.is-plain .leaflet-tile-pane { filter: none; }
+.site__map .leaflet-control-attribution { font-size: 10px; background: rgba(17,20,24,.72); color: rgba(255,255,255,.7); }
+.site__map .leaflet-control-attribution a { color: inherit; }
+.site__map .leaflet-control-zoom a { background: var(--black); color: #fff; border-color: rgba(255,255,255,.2); }
+.site__map .leaflet-control-zoom a:hover { background: #252c34; }
+.site__pinwrap { background: none; border: 0; }
+.site__pin { display: block; box-sizing: border-box; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 2.5px solid #fff; box-shadow: 0 0 0 8px rgba(37,199,122,.22); }
+.site__toggle { color: var(--on-inverse-meta); cursor: pointer; background: none; border: 0; padding: 0; font: inherit; text-transform: inherit; letter-spacing: inherit; display: none; }
+.site__toggle:hover { color: #fff; }
+.rail__site.is-loaded .site__toggle { display: inline-flex; }
+.rail__site.is-loaded .site__consent { display: none; }
