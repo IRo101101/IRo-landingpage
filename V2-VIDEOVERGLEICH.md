@@ -209,11 +209,15 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Schiene, stattdessen eigene Kontaktseite (Punkt 56); die Vorschauseite bleibt als Nachschlagewerk. Status: erledigt
 56. [Kunde 09.10.] Eigene Kontaktseite `kontakt.html` wie Karriere: Kontaktadresse mit Ansprechperson und Buttons, Karte
     vom Geoportal des Bundes (map.geo.admin.ch, swisstopo, Zoom 9, graue Karte, OeV-Haltestellen, Marker Hafenstrasse 62,
-    Mausrad nur mit Ctrl/Cmd), Ladeverhalten A (laedt beim Scrollen zum Kartenbereich, vorher keine externe Anfrage),
-    Routen-Links Google Maps / Apple Karten / SBB-Fahrplan (DE/EN), Anreise mit Auto, Bahn und Bus, Faehre ab
-    Friedrichshafen, Eingang und Anlieferung; fehlende Fakten als Platzhalter [[...]]. Datenschutz Abschnitt 11 "Karte und
-    Routenplanung". Navigation, Menue, Footer und Schiene verlinken Kontakt auf die neue Seite. CSP: r1/.htaccess mit
-    frame-src map.geo.admin.ch. Offene Punkte (Kunde): Anfahrt Auto, Parkplaetze, Buslinie, Eingang, Anlieferung.
+    Mausrad nur mit Ctrl/Cmd), Ladeverhalten A (laedt, sobald der Kartenbereich im Fenster sichtbar wird, vorher keine
+    externe Anfrage; auf grossen Bildschirmen liegt er bei Scrollposition 0 schon im Fenster, die Karte laedt dann direkt
+    beim Aufruf - Texte auf der Kontaktseite und im Datenschutz sagen das so), Routen-Links Google Maps / Apple Karten /
+    SBB-Fahrplan (DE/EN), Anreise mit Auto, Bahn und Bus, Faehre ab Friedrichshafen, Eingang und Anlieferung; fehlende
+    Fakten als Platzhalter [[...]]. Datenschutz Abschnitt 11 "Karte und Routenplanung" (Bundes-Link DE/EN). Navigation,
+    Menue, Footer und Schiene verlinken Kontakt auf die neue Seite. CSP: r1/.htaccess mit frame-src map.geo.admin.ch.
+    Gegenpruefung 09.10. (Tastatur, Kontrast): Unterseiten-Buttons fuellen sich auch bei Tastaturfokus, Fokusring auf
+    hellem Grund schwarz. Offene Punkte (Kunde): Anfahrt Auto, Parkplaetze, Buslinie, Eingang, Anlieferung; falls vor einer
+    Nutzerhandlung gar nichts Externes laden soll, waere Klick-zum-Laden (wie S-3) die Alternative zu A.
     Status: erledigt in r1, Platzhalter offen
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)

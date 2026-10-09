@@ -70,6 +70,10 @@ body.menu-open, body.loading { overflow: hidden; }
 .ground { position: fixed; inset: 0; z-index: -10; background: var(--black); }
 [data-ground="dark"]  { --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); --rule: rgba(255,255,255,.3); color: #fff; }
 [data-ground="light"] { --mk-bg: #111418; --mk-bd: rgba(17,20,24,.4); --rule: rgba(17,20,24,.4); color: var(--fg); }
+/* Fokusring auf hellem Grund in Carbon Black (Signal Green auf Ice Mint / Fresh Mint laege unter 3:1, Review 09.10.);
+   dunkle Bloecke innerhalb heller Bereiche (z. B. Footer der Unterseiten) behalten Signal Green */
+[data-ground="light"] :focus-visible, .hdr[data-theme="light"] :focus-visible { outline-color: var(--black); }
+[data-ground="dark"] :focus-visible { outline-color: var(--accent); }
 
 /* ---- Text-Engine ---------------------------------------------------- */
 .words { display: flex; flex-wrap: wrap; column-gap: 0; }
@@ -536,7 +540,7 @@ section { position: relative; }
 .sub li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: .55em; background: var(--black); border: 1px solid var(--border-on-muted); }
 .sub .lead { font-size: 1.25rem; line-height: 1.35; }
 .sub a:not(.dbtn):not(.al) { color: var(--fg); font-weight: 500; transition: color var(--duration-fast); }   /* r1: keine Unterstreichung (Projektregel), Links tragen Gewicht statt Linie */
-.sub a:not(.dbtn):not(.al):hover, .sub a:not(.dbtn):not(.al):focus-visible { color: var(--link-hover-light); }   /* Textlinks auf hellem Grund: Signal Green (Kundenregel 09.10.2026) */
+.sub a:not(.dbtn):not(.al):hover { color: var(--link-hover-light); }   /* Textlinks auf hellem Grund: Signal Green (Kundenregel 09.10.2026); bei Tastaturfokus bleibt der Text schwarz, der schwarze Ring zeigt den Fokus (Kontrast) */
 .sub .job { position: relative; border: 1px dashed var(--border-on-muted); padding: 1.5rem; margin-top: 1.5rem; background: rgba(255,255,255,.35); }
 .sub .job > :first-child { margin-top: 0; }
 .sub .actions { margin-top: 1.5rem; display: flex; gap: .75rem; flex-wrap: wrap; }

@@ -1066,12 +1066,18 @@
     pg.querySelectorAll('.dbtn').forEach(function (b) {
       var fg = new Group(b.querySelector('.dbtn__fill'), { from: { scaleY: 0 }, config: LINK_FILL });
       RollLabel(b.querySelector('.rl'), b); Corners(b, 'box', b);
-      if (!(VW() <= MD || isTouchOnly)) { b.addEventListener('pointerenter', function () { fg.to({ scaleY: 1 }); }); b.addEventListener('pointerleave', function () { fg.to({ scaleY: 0 }); }); }
+      if (!(VW() <= MD || isTouchOnly)) {
+        b.addEventListener('pointerenter', function () { fg.to({ scaleY: 1 }); }); b.addEventListener('pointerleave', function () { fg.to({ scaleY: 0 }); });
+        // Tastaturfokus wie bei Hero und Abspann: ohne Fuellung staende die weisse Beschriftung auf Mint (Review 09.10.)
+        b.addEventListener('focusin', function () { fg.to({ scaleY: 1 }); }); b.addEventListener('focusout', function () { fg.to({ scaleY: 0 }); });
+      }
     });
     pg.querySelectorAll('.al').forEach(ArrowLink);
   }
-  /* r1: Kontaktseite - swisstopo-Karte (map.geo.admin.ch) laedt erst, wenn der Kartenbereich in die Naehe des
-     Viewports scrollt (Ladeverhalten A); vorher verlaesst keine Anfrage die Seite. Der Sprachwechsel tauscht nur
+  /* r1: Kontaktseite - swisstopo-Karte (map.geo.admin.ch) laedt erst, wenn der Kartenbereich im Viewport sichtbar wird
+     (Ladeverhalten A, kein Vorlauf: rootMargin 0); vorher verlaesst keine Anfrage die Seite. Auf grossen Bildschirmen
+     liegt der Kartenbereich bei Scrollposition 0 bereits im Fenster, die Karte laedt dann direkt beim Aufruf - die
+     Texte auf der Kontaktseite und in der Datenschutzerklaerung sagen das so. Der Sprachwechsel tauscht nur
      lang=de / lang=en im src. Der iFrame bleibt unveraendert (Nutzungsbedingungen geo.admin.ch), gestaltet wird nur
      der Container .kmap. */
   function initMapEmbed() {
@@ -1088,7 +1094,7 @@
       box.innerHTML = ''; box.appendChild(frame); box.classList.add('is-loaded');
     }
     if ('IntersectionObserver' in win) {
-      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); build(); } }); }, { rootMargin: '120px 0px' });
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); build(); } }); }, { rootMargin: '0px', threshold: 0 });
       io.observe(box);
     } else build();
     langListeners.push(function (lang) { if (frame) { var s = src(lang); if (frame.src !== s) frame.src = s; } });
