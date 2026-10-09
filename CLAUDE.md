@@ -113,7 +113,7 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   Kundenentscheid 09.10.2026: Unternehmen = clear, 2 s, Faktor 1.4; andere Bloecke unveraendert (Prozess SWAP_IMG).
 - Unternehmen ab 1024 px liegt im Fluss (kein absolut zentriertes Band mehr): `.about` min-height 100lvh als Flex-Spalte,
   `.about__head` oben, `.about__wrap` (Rahmen, Themenliste, Mission; die Mission steht im Markup IM Wrap) mit
-  mit festem Abstand 1.25rem zum Titel; die Gruppe ist im Band zentriert (justify-content center, Ueberschuss oben und
+  mit festem Abstand 2rem zum Titel (gleich wie seitlich zum Foto); die Gruppe ist im Band zentriert (justify-content center, Ueberschuss oben und
   unten). Bei kurzen Fenstern waechst die Sektion, Titel und Foto koennen nicht kollidieren. Kompetenzen ab 1024 px
   ebenso: Kartenreihe im Fluss, Sektion min-height 100lvh (bei 1920 x 700 ragten die Karten in den Prozessblock).
 - Layouts ab 1024 px (Kundenentscheid 09.10.2026): Unternehmen U-A (Themenliste links, Mission rechts neben dem Foto,

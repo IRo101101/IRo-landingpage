@@ -285,7 +285,7 @@ section { position: relative; }
   .about__topics { position: static; color: inherit; margin-top: 1rem; }
 }
 /* r1 ab 1024: Band im Fluss statt absolut zentriert. Titel und Fotogruppe (Rahmen, Themenliste, Mission) bilden
-   einen Block mit festem Abstand 1.25rem (wie im 1440 x 800-Entwurf der Vorlage); der Block ist in der Sektion
+   einen Block mit festem Abstand 2rem (gleich wie der seitliche Abstand zum Foto); der Block ist in der Sektion
    vertikal zentriert, Ueberschuss liegt ueber dem Titel und unter der Fotogruppe. Bei kurzen Fenstern (z. B.
    1366 x 614 bei 125 % Windows-Skalierung) waechst die Sektion ueber 100vh hinaus, statt dass Titel und Foto
    sich ueberlagern. */
@@ -294,7 +294,7 @@ section { position: relative; }
   .about__band { display: flex; flex-direction: column; justify-content: center; flex: 1 0 auto; gap: 0; position: static; transform: none; height: auto; padding: 5.25rem 0 2.5rem; }
   .about__head { position: relative; left: auto; transform: none; flex: none; margin: 0 auto; padding: 0; width: 30rem; gap: 1.75rem; }
   .about h2 { font-size: 2.5rem; }
-  .about__wrap { position: relative; flex: none; height: 24.625rem; margin: 1.25rem 0 0; }
+  .about__wrap { position: relative; flex: none; height: 24.625rem; margin: 2rem 0 0; }   /* Abstand Titel zu Foto = seitlicher Abstand zum Foto (2rem), Kundenwunsch 09.10. */
   .about__stage { position: static; }
   .about__frame { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 20rem; height: 24.625rem; aspect-ratio: auto; }
   /* Layout U-A (Kundenentscheid 09.10.2026): Themenliste links und Mission rechts neben dem Foto, beide an der
