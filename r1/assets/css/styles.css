@@ -457,7 +457,7 @@ section { position: relative; }
 .contact__ctas { display: flex; gap: .75rem; margin-top: 1.25rem; flex-wrap: wrap; }
 /* r1: Trennstrich haengt am Link (nie am Zeilenende), die Trenner-Spans im Markup bleiben fuer Screenreader unsichtbar */
 .contact__legal > span[aria-hidden], .subfoot__legal > span[aria-hidden] { display: none; }
-.contact__legal a ~ a::before, .subfoot__legal a ~ a::before { content: "|"; margin-right: .6rem; color: var(--on-inverse-meta); }   /* Kundenwunsch 09.10.: gerader Strich statt Schraegstrich; Trenner bleibt gedaempft, auch beim Hover des Links */
+.contact__legal a ~ a::before, .subfoot__legal a ~ a::before { content: "|"; content: "|" / ""; margin-right: .6rem; color: var(--on-inverse-meta); pointer-events: none; }   /* Kundenwunsch 09.10.: gerader Strich statt Schraegstrich; Trenner bleibt gedaempft, zaehlt nicht zum Linknamen (Alt-Syntax, Fallback ohne) und nicht zur Klickflaeche */
 .contact__legal { position: relative; order: 4; padding: 1.5rem 1rem 0; display: flex; flex-wrap: wrap; gap: .5rem .6rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); }
 .contact__copy { position: relative; order: 5; padding: .75rem 1rem 0; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); white-space: nowrap; }
 @media (min-width: 768px) {
@@ -536,7 +536,7 @@ section { position: relative; }
 .sub li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: .55em; background: var(--black); border: 1px solid var(--border-on-muted); }
 .sub .lead { font-size: 1.25rem; line-height: 1.35; }
 .sub a:not(.dbtn):not(.al) { color: var(--fg); font-weight: 500; transition: color var(--duration-fast); }   /* r1: keine Unterstreichung (Projektregel), Links tragen Gewicht statt Linie */
-.sub a:not(.dbtn):not(.al):hover { color: var(--link-hover-light); }   /* Textlinks auf hellem Grund: Signal Green (Kundenregel 09.10.2026) */
+.sub a:not(.dbtn):not(.al):hover, .sub a:not(.dbtn):not(.al):focus-visible { color: var(--link-hover-light); }   /* Textlinks auf hellem Grund: Signal Green (Kundenregel 09.10.2026) */
 .sub .job { position: relative; border: 1px dashed var(--border-on-muted); padding: 1.5rem; margin-top: 1.5rem; background: rgba(255,255,255,.35); }
 .sub .job > :first-child { margin-top: 0; }
 .sub .actions { margin-top: 1.5rem; display: flex; gap: .75rem; flex-wrap: wrap; }
@@ -579,7 +579,10 @@ section { position: relative; }
    Ausnahmen bleiben wie entworfen: Pfeil-Links (.al, Schiene, Burger-Menue, "Zur Lehrstelle"), Buttons (.dbtn, .cbtn,
    Aktions-Button), Header-Navigation und Sprachwahl. Neue Seiten uebernehmen die Regel ueber dieselben Klassen. */
 .rail__details a, .contact__legal a, .subfoot__links a, .subfoot__details a, .subfoot__legal a, .consent__more { transition: color var(--duration-fast); }
-.rail__details a:hover, .contact__legal a:hover, .subfoot__links a:hover, .subfoot__details a:hover, .subfoot__legal a:hover, .consent__more:hover { color: var(--link-hover-dark); }
+.rail__details a:hover, .contact__legal a:hover, .subfoot__links a:hover, .subfoot__details a:hover, .subfoot__legal a:hover, .consent__more:hover,
+.rail__details a:focus-visible, .contact__legal a:focus-visible, .subfoot__links a:focus-visible, .subfoot__details a:focus-visible, .subfoot__legal a:focus-visible, .consent__more:focus-visible { color: var(--link-hover-dark); }
+/* Windows-Kontrastmodus: Masken (Logo, Badges) leben von background: currentColor und wuerden sonst verschwinden */
+@media (forced-colors: active) { .logo-mark, .logo-lock, .logo-word, .logo-tile, .badge { forced-color-adjust: none; } }
 
 /* ---- Tap-Ziele bis 1024 (iPad quer) und auf Touch-Geraeten (pointer: coarse), mindestens 40 px hoch; Desktop mit Maus unveraendert ---- */
 @media (max-width: 1024px), (pointer: coarse) {
@@ -591,8 +594,8 @@ section { position: relative; }
 }
 
 /* ---- Consent -------------------------------------------------------- */
-.consent { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 70; display: flex; justify-content: center; }
-.consent__inner { position: relative; width: 100%; max-width: 44rem; background: var(--black); color: #fff; border: 1px dashed var(--border-on-inverse); padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: .875rem; }
+.consent { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 70; display: flex; justify-content: center; pointer-events: none; }   /* nur die Karte faengt Klicks, nicht die ganze Breite */
+.consent__inner { pointer-events: auto; position: relative; width: 100%; max-width: 44rem; background: var(--black); color: #fff; border: 1px dashed var(--border-on-inverse); padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: .875rem; }
 .consent__text { font-size: .875rem; line-height: 1.4; color: rgba(255,255,255,.85); }
 .consent__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
 .consent__more { text-transform: uppercase; font-size: max(.75rem, 12px); letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); margin-right: auto; }

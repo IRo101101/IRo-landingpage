@@ -182,6 +182,13 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 54. [Kunde 09.10.] Badges NAFEMS Member und "Wir machen Profis": beim Hover gruen wie die Textlinks. Umsetzung: PNG als
     CSS-Masken `.badge--nafems` / `.badge--lehrbetrieb` in currentColor (Grau #c4c8cc), Hover Fresh Mint ueber den
     umschliessenden Link; Abspann der Startseite und Footer der Unterseiten. Status: erledigt in r1
+55. [Gegenpruefung 09.10.] Nach dem Einbau von Footer B-4, Logo-Kachel und Badges (drei Reviewer: Regeln und Markup,
+    Responsive, Barrierefreiheit): Vorschauseiten zeigten die Footer-Varianten durch die geaenderten Basisklassen anders
+    (vorschau-footer.css stellt sie wieder her), fehlende englische aria-labels (Footer-Navigationen, Badge-Links und
+    -Gruppen mit data-en-label, Gruppen mit role="group"), Cache-Version (20261009b), Masken im Windows-Kontrastmodus
+    (forced-color-adjust: none fuer Logo und Badges), Trenner "|" nicht mehr Teil von Linkname und Klickflaeche
+    (content-Alt-Syntax, pointer-events none), Consent-Banner faengt keine Klicks mehr neben der Karte (pointer-events),
+    Fokus-Farbe auf allen Textlinks wie der Hover. Status: erledigt in r1
 49. [Kunde 09.10.] Standortangabe mit Karte fehlt in v2 (v1 hat eine Leaflet-Karte im Kontaktblock). Recherche 09.10.:
     Der Prompt (Northwall, GetLayers) kennt keinen Standort- oder Kartenblock, die GetLayers-Bibliothek hat keine
     Kontakt- oder Kartensektion; Premium-Agenturseiten loesen den Standort typografisch (Adresse plus "Route planen")
