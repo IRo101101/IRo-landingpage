@@ -16,6 +16,22 @@
 /* Pfeile der Schienen-Links (nur im Block "Heute") stehen statisch im Markup */
 .vf .al__arrow.swap { color: inherit; }
 
+/* Die Basisklassen .subfoot__* haben sich mit dem Einbau von B-4 (ohne Linien) geaendert. Die Vorschau zeigt die
+   Varianten weiter so, wie sie zum Entscheid standen: Block "Heute" mit dem alten Raster, Rechtszeile mit weisser
+   Haarlinie und ohne Punkte (B-1 bis B-3), B-4 mit eigener Rechtszeile im Raster. */
+.vl .subfoot__grid { display: flex; flex-direction: column; gap: 2rem; }
+.vl .subfoot .rail__links { margin-top: 0; width: 100%; max-width: 16rem; }
+.vl .subfoot__details { display: flex; flex-direction: column; gap: .75rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.3; }
+.vl .subfoot__bottom { flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-on-inverse-subtle); }
+.vl .subfoot__legal { border: 0; padding: 0; }
+.vl .subfoot__legal .mk { display: none; }
+.vl .vfb4__bottom .subfoot__legal { margin-left: auto; }
+@media (min-width: 768px) {
+  .vl .subfoot__grid { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 2rem; }
+  .vl .subfoot .rail__links { width: 13.6875rem; }
+  .vl .subfoot__inner { grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* B-2 der Vorschau: drei Spalten */
+}
+
 /* =========================================================================
    Gemeinsam fuer B-1 bis B-3: Band auf Inhaltsbreite 64rem (wie die Zeilen),
    drei gleich breite Spalten ab 768, darunter eine Spalte.
