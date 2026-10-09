@@ -552,7 +552,10 @@
     var grp = new Group(g, { from: { bg: cur === 'dark' ? DARK : LIGHT }, config: GROUND });
     root.setAttribute('data-ground-now', cur);
     // r1: aktuelle Bodenfarbe als CSS-Variable (Header unter 1024 px deckend in Bodenfarbe)
-    var mirror = function () { root.style.setProperty('--ground-rgb', g.style.backgroundColor); };
+    var mirror = function () {
+      var c = g.style.backgroundColor; root.style.setProperty('--ground-rgb', c);
+      var m = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(c); if (m) root.style.setProperty('--ground-glass', 'rgba(' + m[1] + ',' + m[2] + ',' + m[3] + ',.72)');   // Milchglas-Header unter 1024 px
+    };
     mirror();
     function follow(cfg) { grp.to({ bg: lastTarget }, cfg); ticker.add(function () { mirror(); if (!grp.active) return false; }); }
     var lastTarget = cur === 'dark' ? DARK : LIGHT;
@@ -1038,6 +1041,12 @@
     var pg = doc.querySelector('.sub'); if (!pg) return;
     var h1 = pg.querySelector('h1'); if (h1) new Words(h1, { preset: 'head', delayIn: 120 });
     pg.querySelectorAll('.sub__reveal').forEach(function (el, i) { Inview(el, { from: { opacity: 0, y: 14 }, to: { opacity: 1, y: 0 }, config: REVEAL, delayIn: 80 + Math.min(i, 4) * 60 }); });
+    // r1: Zeilen der Unterseiten wie die Team-Zeilen einblenden (Drift aus der Unschaerfe), gestaffelt nur fuer gleichzeitig sichtbare
+    var fired = [];
+    pg.querySelectorAll('.srow').forEach(function (row) {
+      var g = new Group(row, { from: { opacity: 0, y: -28, blur: 14 }, config: ROW_REVEAL });
+      new IntersectionObserver(function (es, io) { es.forEach(function (e) { if (!e.isIntersecting) return; io.unobserve(row); var now = Date.now(), k = fired.filter(function (t) { return now - t < 300; }).length; fired.push(now); delay(ENTRY_DELAY + k * 140, function () { g.to({ opacity: 1, y: 0, blur: 0 }); }); }); }, { threshold: 0.1 }).observe(row);
+    });
     pg.querySelectorAll('.dbtn').forEach(function (b) {
       var fg = new Group(b.querySelector('.dbtn__fill'), { from: { scaleY: 0 }, config: LINK_FILL });
       RollLabel(b.querySelector('.rl'), b); Corners(b, 'box', b);

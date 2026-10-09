@@ -125,6 +125,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Flow-Scrub verschiebt verlassene Bloecke um bis zu 50 px nach unten, Lenis mass das Ziel am verschobenen Block.
     Umsetzung: scrollToHash nimmt die Layout-Position (offsetTop-Kette). Gilt fuer alle Anker (Header-Logo, Navigation,
     Burger-Menue, Kontakt-Schiene, Hero-CTAs, Karten). Status: erledigt in r1
+45. [Kunde 09.10.] Header unter 1024 px als Milchglas statt deckend (Bodenfarbe 72 % plus Unschaerfe 14 px); am
+    Desktop bleibt er wie im Prompt ohne Hintergrund. Status: erledigt in r1
+46. [Kunde 09.10.] Unterseiten (Karriere, Impressum, Datenschutz) im Stil der Team-Zeilen: nummerierte Zeilen
+    "0N //  Seitenname", Abschnittstitel links, Text rechts, mobil gestapelt, Breite 64rem, Einblenden wie die
+    Team-Zeilen. Inserat unveraendert. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

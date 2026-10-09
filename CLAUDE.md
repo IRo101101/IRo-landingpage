@@ -91,7 +91,13 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand, Hero-Foto 358/400 mit staerkerem Schleier.
 - Kontakt-Parallaxe laeuft auf `.contact__layer` (innerer Layer 120 %), nicht mehr auf `.contact__photo`.
 - Header ab 768 px: `.hdr::after` zieht die gestrichelte Unterkante ueber die ganze Breite (wie im Original), der
-  Aktions-Button (z-index 1) deckt sie ab; unter 768 px traegt `.hdr` die Unterkante selbst.
+  Aktions-Button (z-index 1) deckt sie ab; unter 768 px traegt `.hdr` die Unterkante selbst. Am Desktop bleibt der
+  Header ohne Hintergrund (Prompt, Kundenentscheid 09.10.); unter 1024 px Milchglas: `--ground-glass` (Bodenfarbe
+  mit Alpha .72, schreibt main.js pro Frame) plus backdrop-filter blur(14px) mit -webkit-Praefix.
+- Unterseiten (karriere, impressum, datenschutz): Kopf `.sub__head` (Eyebrow, H1, Lead), danach `.srows` mit je einer
+  `.srow` pro Abschnitt im Stil der Team-Zeilen: `.srow__main` (Eyebrow "0N //  Seitenname" mit data-en am inneren
+  Span, `h2.srow__name`) links, `.srow__body` rechts, unter 768 px gestapelt; Einblenden wie Team-Zeilen (ROW_REVEAL).
+  Das Lehrstellen-Inserat (`.job`) liegt unveraendert im Body der Zeile "Lehrstelle 2027". Seitenbreite 64rem wie T-A.
 - Anker-Sprung (scrollToHash) nimmt die Layout-Position (offsetTop-Kette), nicht getBoundingClientRect: Der Flow-Scrub
   verschiebt verlassene Bloecke um bis zu 50 px, Spruenge nach oben (Logo, Navigation, Schiene) landeten sonst zu tief.
 - Scrub hat `ref` (Element, dessen Kanten den Scrollweg messen). Hero- und Kontakt-Parallaxe messen an der Buehne bzw.
