@@ -93,3 +93,9 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Rechtszeile: Trenner-Spans sind ausgeblendet, der Schraegstrich haengt per `a ~ a::before` am Link (nie am Zeilenende).
 - Unterseiten-Links ohne gestrichelte Linie (Projektregel "keine Unterstreichungen"), Gewicht 500 statt Linie.
 - `win.IRO` (Ende von main.js) stellt Group, ticker, Words, Inview, Scrub, Hover und die Federn fuer die Vorschauseiten bereit.
+- Foto-Uebergaenge: Bibliothek TRANSITIONS in main.js (dissolve, dissolve-settle, wipe, clear, deal, turn, push; alle
+  aus dem Prompt), `PhotoSwap(frame, photos, name)` blendet gestapelte Fotos um. Am Rahmen waehlbar per
+  `data-transition` und `data-interval` (ms). Kundenentscheid 09.10.2026: Unternehmen = dissolve-settle, 1.5 s.
+- Layouts ab 1024 px (Kundenentscheid 09.10.2026): Unternehmen U-A (Themenliste links, Mission rechts neben dem Foto,
+  beide an der Rahmenunterkante, kein Einzug), Karten K-A (alle 30rem, xl 34rem), Team T-B (Text 22rem, Zitat/Listen
+  30rem, gap 5rem, flex-start). Die Vorschauseiten bleiben als Nachschlagewerk in r1.

@@ -282,9 +282,11 @@ section { position: relative; }
   .about__head { position: absolute; left: 50%; top: 5.25rem; width: 30rem; transform: translateX(-50%); gap: 1.75rem; }
   .about h2 { font-size: 2.5rem; }
   .about__frame { position: absolute; left: 50%; top: calc(50% + 3.3125rem); transform: translate(-50%,-50%); width: 20rem; height: 24.625rem; aspect-ratio: auto; }
-  .about__topics { position: absolute; left: 1.5rem; bottom: 1.5rem; margin: 0; }
-  .about__mission { position: absolute; bottom: 1.5rem; left: 40.6875rem; width: 19.5rem; }
-  .about__mission .words__indent { width: 4.3125rem; }
+  /* r1, Layout U-A (Kundenentscheid 09.10.2026): Themenliste links und Mission rechts neben dem Foto, beide an der
+     Unterkante des Rahmens ausgerichtet, je 2rem Luft; Mission ohne haengenden Einzug (kein Ueberlappen mehr) */
+  .about__topics { position: absolute; left: auto; right: calc(50% + 12rem); bottom: calc(50% - 15.625rem); margin: 0; align-items: flex-end; text-align: right; }
+  .about__mission { position: absolute; bottom: calc(50% - 15.625rem); left: calc(50% + 12rem); width: 19rem; }
+  .about__mission .words__indent { width: 0; }
 }
 @media (min-width: 1440px) {
   .about__band { height: 50rem; }
@@ -292,9 +294,9 @@ section { position: relative; }
   .about h2 { font-size: 2.875rem; }
   .about__head { width: 36rem; }
   .about__frame { top: calc(50% + 4.4375rem); width: 20.8125rem; height: 25.5rem; }
-  .about__topics { left: 2rem; }
-  .about__mission { bottom: 2rem; left: calc(50% + 5.9375rem); width: 23.625rem; font-size: 1.5rem; }
-  .about__mission .words__indent { width: 5.1875rem; }
+  .about__topics { right: calc(50% + 12.40625rem); bottom: calc(50% - 17.1875rem); }
+  .about__mission { bottom: calc(50% - 17.1875rem); left: calc(50% + 12.40625rem); width: 21rem; font-size: 1.25rem; }
+  .about__mission .words__indent { width: 0; }
 }
 
 /* ---- 3 Kompetenzen (Karten) ----------------------------------------- */
@@ -319,13 +321,13 @@ section { position: relative; }
 @media (min-width: 1024px) {
   .cards { height: 100vh; height: 100lvh; padding: 0; }
   .cards__row { position: absolute; inset-inline: 1.5rem; top: 2.25rem; display: flex; flex-direction: row; align-items: flex-start; gap: .75rem; padding: 0; }
-  .card { flex: 1; aspect-ratio: auto; height: 26rem; }
-  .card--tall { height: 32rem; }
+  .card { flex: 1; aspect-ratio: auto; height: 30rem; }   /* r1, Layout K-A (Kundenentscheid 09.10.2026): alle vier Karten gleich hoch */
+  .card--tall { height: 30rem; }
 }
 @media (min-width: 1440px) {
   .cards__row { inset-inline: 2.5rem; top: 6.1875rem; }
-  .card { height: 30rem; }
-  .card--tall { height: 36rem; }
+  .card { height: 34rem; }
+  .card--tall { height: 34rem; }
 }
 
 /* ---- 4 Leistungen / Prozess ----------------------------------------- */
@@ -392,17 +394,19 @@ section { position: relative; }
   .team { padding: 7.75rem 1.5rem 6rem; }
   .team h2 { font-size: 2.75rem; width: 24rem; }
   .team__intro { width: 21rem; }
-  .trow { min-height: 12.1875rem; padding: 1.5rem; }
-  .trow__main { width: 17.5rem; }
-  .trow__side { width: 22rem; }
+  /* r1, Layout T-B (Kundenentscheid 09.10.2026): zwei Spalten links beieinander, rechts bleibt Ruhe */
+  .trow { min-height: 12.1875rem; padding: 1.5rem; justify-content: flex-start; gap: 5rem; }
+  .trow__main { width: 22rem; }
+  .trow__side, .trow__quote { width: 30rem; flex: none; }
+  .trow--link .al { width: 30rem; flex: none; justify-content: flex-start; }
 }
 @media (min-width: 1440px) {
   .team { padding: 8.125rem 2rem 6rem; }
   .team h2 { font-size: var(--section-title); width: 30.3125rem; }
   .team__intro { width: 20.9375rem; font-size: 1.125rem; }
   .trow { min-height: 12.6875rem; padding: 2rem; }
-  .trow__main { width: 17.3125rem; }
-  .trow__side { width: 24rem; }
+  .trow__main { width: 22rem; }
+  .trow__side { width: 30rem; }
 }
 
 /* ---- 6 Kontakt ------------------------------------------------------ */

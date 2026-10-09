@@ -141,9 +141,11 @@ Umgesetzt in r1:
   768 bis 1023 px ohne Ueberlappung (Punkte 9 und 40), Sprachpanel-Klick, Unterseiten-Links ohne Unterstreichung.
 - Pruefung r1: Sweep 48/48 (4 Seiten x 6 Viewports x DE/EN) ohne Overflow, Konsolenfehler, Ladepanel-Haenger;
   zwei unabhaengige Audit-Runden auf 390/360/320/768/1024 plus Unterseiten.
-Zur Entscheidung durch den Kunden (Vorschauseiten in r1):
-- `vorschau-uebergaenge.html`: sieben Fotouebergaenge aus dem Prompt (Dissolve, Dissolve + Settle, Wipe, Clear,
-  Deal, Turn, Push) mit Takt 0.52 bis 3 s und Tempo 1x bis 3x; Wunsch: sechs davon als Bibliothek fuer die ganze Site.
-- `vorschau-layouts.html`: Unternehmen U-A/U-B/U-C (Mission ohne Ueberlappung, Themenliste am Foto; Punkt 19),
-  Karten K-A/K-B/K-C (gleich hoch, wechselnd, versetzt; Punkt 21), Team T-A/T-B/T-C (weniger Luft in der Mitte).
+Entschieden am 09.10.2026 (Vorschauseiten bleiben in r1 als Nachschlagewerk):
+- Fotowechsel Unternehmen: 02 Dissolve + Settle im Takt 1.5 s (`data-transition="dissolve-settle" data-interval="1500"`
+  am Rahmen). Alle sieben Uebergaenge aus `vorschau-uebergaenge.html` liegen als Bibliothek TRANSITIONS in main.js
+  (dissolve, dissolve-settle, wipe, clear, deal, turn, push) und sind per data-transition an jedem Fotostapel waehlbar.
+- Unternehmen U-A: Themenliste links und Mission rechts neben dem Foto, beide an der Rahmenunterkante, Mission ohne
+  Einzug (Punkt 19 erledigt). Karten K-A: alle vier gleich hoch (30rem, xl 34rem; Punkt 21 erledigt). Team T-B: zwei
+  Spalten links beieinander (Text 22rem, Zitat/Listen 30rem, 5rem Abstand).
 Nicht in r1 (bewusst, Kunde): Hero-Text (spaeter), Karten bleiben vier, Teil-1-Punkte 4, 7, 8, 11, 15.

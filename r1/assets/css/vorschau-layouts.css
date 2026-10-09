@@ -25,6 +25,7 @@
 .vl__intro { padding: 3rem 1rem 0; max-width: 48rem; }
 .vl__intro .eyebrow { display: block; color: var(--on-muted-label); }
 .vl__intro h1 { font-size: 2.25rem; margin-top: .75rem; }
+.vl__note { font-size: .9375rem; color: var(--on-muted-meta); border-left: 2px solid var(--accent); padding-left: .75rem; }
 .vl__intro p { margin-top: 1rem; font-size: 1.0625rem; line-height: 1.5; }
 .vl__toc { display: flex; flex-wrap: wrap; gap: .5rem .5rem; margin-top: 1.5rem; text-transform: uppercase; font-size: .8125rem; letter-spacing: var(--tracking-nav); line-height: 1.2; }
 .vl__toc a { padding: .45rem .65rem; border: 1px dashed var(--border-on-muted); border-radius: var(--button-radius); white-space: nowrap; }

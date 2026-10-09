@@ -782,6 +782,68 @@
   /* =====================================================================
      Sektion 2: Unternehmen (rotierende Fotos, Themen)
      ===================================================================== */
+  /* r1: Foto-Uebergaenge als Bibliothek (alle aus dem Prompt), waehlbar per data-transition am Rahmen:
+     dissolve (About-Galerie), dissolve-settle (Team-Foto, Finale-Karte), wipe (Karten-Einstieg), clear (Team-Zeilen),
+     deal (Ladepanel-Karten), turn (Prozess-Buehne), push (wanderndes Team-Portraet). Kundenentscheid 09.10.2026 fuer
+     den Block Unternehmen: dissolve-settle im Takt 1.5 s (data-interval). */
+  var SLIDE = { tension: 480, friction: 42 };
+  var SETTLE_SCALE = 1.12, WIPE_SCALE = 1.18, CLEAR_BLUR = 14, CLEAR_Y = -28, DEAL_SCALE = 0.82, DEAL_Y = 48, DEAL_TILT = 9, DEAL_START = 1.8, TURN_ANGLE = 4;
+  var TRANSITIONS = {
+    'dissolve': {
+      build: function (p) { return [new Group(p, { from: { opacity: 0 }, config: FADE })]; },
+      hide: function (g) { g[0].set({ opacity: 0 }); }, show: function (g) { g[0].set({ opacity: 1 }); },
+      enter: function (g, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, FADE, done); }
+    },
+    'dissolve-settle': {
+      build: function (p) { return [new Group(p, { from: { opacity: 0 }, config: FADE }), new Group(p, { from: { scale: SETTLE_SCALE }, config: SETTLE })]; },
+      hide: function (g) { g[0].set({ opacity: 0 }); g[1].set({ scale: SETTLE_SCALE }); }, show: function (g) { g[0].set({ opacity: 1 }); g[1].set({ scale: 1 }); },
+      enter: function (g, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, FADE, done); g[1].set({ scale: SETTLE_SCALE }).to({ scale: 1 }, SETTLE); }
+    },
+    'wipe': {
+      build: function (p) { return [new Group(p, { from: { opacity: 0, clip: [0, 0, 100, 0] }, config: MASK }), new Group(p.querySelector('img'), { from: { scale: WIPE_SCALE }, config: SETTLE })]; },
+      hide: function (g) { g[0].set({ opacity: 0, clip: [0, 0, 100, 0] }); g[1].set({ scale: WIPE_SCALE }); }, show: function (g) { g[0].set({ opacity: 1, clip: [0, 0, 0, 0] }); g[1].set({ scale: 1 }); },
+      enter: function (g, step, done) { g[0].set({ opacity: 1, clip: [0, 0, 100, 0] }).to({ clip: [0, 0, 0, 0] }, MASK, done); g[1].set({ scale: WIPE_SCALE }).to({ scale: 1 }, SETTLE); }
+    },
+    'clear': {
+      build: function (p) { return [new Group(p, { from: { opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }, config: ROW_REVEAL })]; },
+      hide: function (g) { g[0].set({ opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }); }, show: function (g) { g[0].set({ opacity: 1, blur: 0, y: 0 }); },
+      enter: function (g, step, done) { g[0].set({ opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }).to({ opacity: 1, blur: 0, y: 0 }, ROW_REVEAL, done); }
+    },
+    'deal': {
+      build: function (p) { return [new Group(p, { from: { opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: 0 }, config: CARD })]; },
+      hide: function (g) { g[0].set({ opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: 0 }); }, show: function (g) { g[0].set({ opacity: 1, scale: 1, y: 0, rotate: 0 }); },
+      enter: function (g, step, done) { var tilt = (step % 2 ? -1 : 1) * DEAL_TILT; g[0].set({ opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: tilt * DEAL_START }).to({ opacity: 1, scale: 1, y: 0, rotate: 0 }, CARD, done); }
+    },
+    'turn': {
+      build: function (p) { return [new Group(p, { from: { opacity: 0 }, config: SWAP_IMG })]; },
+      frame: function (el) { return new Group(el, { from: { rotate: -TURN_ANGLE }, config: TURN }); },
+      turn: function (fg, step) { fg.to({ rotate: (step % 2 ? 1 : -1) * TURN_ANGLE }, TURN); },
+      hide: function (g) { g[0].set({ opacity: 0 }); }, show: function (g) { g[0].set({ opacity: 1 }); },
+      enter: function (g, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, SWAP_IMG, done); }
+    },
+    'push': {
+      build: function (p) { return [new Group(p, { from: { opacity: 0, y: '0%' }, config: SLIDE })]; },
+      hide: function (g) { g[0].set({ opacity: 0, y: '0%' }); }, show: function (g) { g[0].set({ opacity: 1, y: '0%' }); },
+      enter: function (g, step, done) { g[0].set({ opacity: 1, y: '100%' }).to({ y: '0%' }, SLIDE, done); },
+      leave: function (g) { g[0].to({ y: '-30%', opacity: 0.6 }, SLIDE); }
+    }
+  };
+  // Stapel gestapelter Fotos in einem Rahmen; go(i) blendet Foto i mit dem gewaehlten Uebergang ueber das aktuelle
+  function PhotoSwap(frame, photos, name) {
+    var tr = TRANSITIONS[name] || TRANSITIONS.dissolve, z = 1, idx = 0, step = 0;
+    var h = Array.prototype.map.call(photos, function (p, i) { var g = tr.build(p); if (i === 0) { tr.show(g); p.style.zIndex = '1'; } else { tr.hide(g); p.style.zIndex = '0'; } return { el: p, g: g, gen: -1 }; });
+    var fg = tr.frame ? tr.frame(frame) : null;
+    function go(i) {
+      i = i % h.length; if (i === idx) return;
+      var hn = h[i], ho = h[idx], oldGen = ho.gen; idx = i; step += 1; hn.gen = step;
+      z += 1; hn.el.style.zIndex = String(z);
+      tr.enter(hn.g, step, function () { if (ho.gen === oldGen) { tr.hide(ho.g); ho.el.style.zIndex = '0'; } });   // nur, wenn das alte Foto nicht inzwischen neu eingetreten ist
+      if (tr.leave) tr.leave(ho.g);
+      if (tr.turn && fg) tr.turn(fg, step);
+    }
+    return { go: go, index: function () { return idx; } };
+  }
+
   function initAbout() {
     var sec = doc.querySelector('.about'); if (!sec) return;
     var eyebrow = sec.querySelector('.eyebrow'), title = sec.querySelector('h2'), mission = sec.querySelector('.about__mission');
@@ -789,16 +851,17 @@
     new Words(title, { preset: 'head', delayIn: ENTRY_DELAY + 120 });
     new Words(mission, { preset: 'copy', mode: 'always', delayIn: ENTRY_DELAY + 280 });
     var frame = sec.querySelector('.about__frame'), photos = frame.querySelectorAll('.about__photo'), topics = sec.querySelectorAll('.about__topic');
-    var pg = Array.prototype.map.call(photos, function (p, i) { return new Group(p, { from: { opacity: i === 0 ? 1 : 0 }, config: FADE }); });
+    var swap = PhotoSwap(frame, photos, frame.getAttribute('data-transition') || 'dissolve');
+    var interval = parseInt(frame.getAttribute('data-interval'), 10) || STEP_INTERVAL;
     var tg = Array.prototype.map.call(topics, function (t, i) { return new Group(t, { from: { opacity: i === 0 ? 1 : TOPIC_DIM }, config: TOPIC }); });
     var idx = 0, timer = null, n = photos.length;
     function setIndex(i) {
       idx = i % n;
-      pg.forEach(function (g, k) { g.to({ opacity: k === idx ? 1 : 0 }); });
+      swap.go(idx);
       var active = Math.floor(idx * topics.length / n);
       tg.forEach(function (g, k) { g.to({ opacity: k === active ? 1 : TOPIC_DIM }); });
     }
-    function start() { if (timer || RM) return; timer = setTimeout(function () { setIndex(idx + 1); timer = setInterval(function () { setIndex(idx + 1); }, STEP_INTERVAL); }, START_DELAY); }
+    function start() { if (timer || RM) return; timer = setTimeout(function () { setIndex(idx + 1); timer = setInterval(function () { setIndex(idx + 1); }, interval); }, START_DELAY); }
     function stop() { clearTimeout(timer); clearInterval(timer); timer = null; }
     new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { threshold: 0.1 }).observe(frame);
     var btn = sec.querySelector('.about__btn');
@@ -1001,6 +1064,6 @@
   applyLang(currentLang());
   if (location.hash && !doc.querySelector('[data-preloader]')) setTimeout(function () { scrollToHash(location.hash); }, 50);
   // r1: Engine fuer die Vorschauseiten (vorschau*.html) zugaenglich machen
-  win.IRO = { Group: Group, ticker: ticker, advance: advance, Words: Words, Inview: Inview, Scrub: Scrub, Hover: Hover, onHandoff: onHandoff,
+  win.IRO = { Group: Group, ticker: ticker, advance: advance, Words: Words, Inview: Inview, Scrub: Scrub, Hover: Hover, onHandoff: onHandoff, PhotoSwap: PhotoSwap, TRANSITIONS: TRANSITIONS,
     springs: { FADE: FADE, SWAP_IMG: SWAP_IMG, MASK: MASK, SETTLE: SETTLE, CARD: CARD, TURN: TURN, ROW_REVEAL: ROW_REVEAL, PARALLAX: PARALLAX } };
 })();
