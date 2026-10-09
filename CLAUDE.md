@@ -68,6 +68,11 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   `vorschau-standort.js`). Die Karten entstehen aus `scratchpad/osm/make_maps.py` (Overpass-Daten der Schweizer
   Instanz overpass.osm.ch, ODbL; Quellenangabe "Kartendaten: OpenStreetMap" bleibt Pflicht, kein Seename im Bild).
   Leaflet und die Vorschau-Assets gehoeren nicht auf die Live-Site, solange S-3 nicht gewaehlt ist.
+  Dazu `r1/vorschau-logo.html` (+ `assets/css/vorschau-logo.css`): Logo-Kachel nach dem Original (`_handover/logo/
+  logo-original-iro-swiss.png`: Kachel 1912 x 1528, Marke als Ausschnitt bei 9.5 % / 44.5 %, 81.9 % breit; SWISS 15 %
+  der Kachelbreite hoch, Abstand 5 %) als CSS-Bausteine `.ltile` mit --tile / --mark / --word, Varianten L-1 bis L-4;
+  Badges als CSS-Masken `.badge--nafems` / `.badge--lehrbetrieb` in currentColor mit Hover Fresh Mint. Footer-Vorschau
+  zusaetzlich mit B-4 (vier Spalten im gestrichelten Raster mit .mk-Punkten).
   Nach dem Entscheid des Kunden wird `r1/` zum Root; die Vorschauseiten kommen nicht mit auf die Live-Site.
 - v2 NUR mit RELATIVEN Pfaden bauen (`assets/...`, `karriere.html`, nie `/assets/...`), damit sie auf dem
   Pages-Unterpfad UND spaeter im Hostpoint-www-Root identisch laeuft.
@@ -120,7 +125,9 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   Aussenbox, nicht am ueberstehenden Layer; sonst steht das Hero-Foto bei Scrollposition 0 schon 5 % tiefer als die
   Finale-Karte und springt beim Ausblenden des Ladepanels. `html { scrollbar-gutter: stable }` gegen den Breitensprung
   bei klassischen Scrollbalken (Windows).
-- Rechtszeile: Trenner-Spans sind ausgeblendet, der Schraegstrich haengt per `a ~ a::before` am Link (nie am Zeilenende).
+- Rechtszeile: Trenner-Spans sind ausgeblendet, der gerade Strich "|" (Kundenwunsch 09.10., vorher Schraegstrich) haengt
+  per `a ~ a::before` am Link (nie am Zeilenende) und bleibt gedaempft; die Links der Startseite haben kein RollLabel mehr,
+  nur den Farbwechsel der Textlink-Regel.
 - Unterseiten-Links ohne gestrichelte Linie (Projektregel "keine Unterstreichungen"), Gewicht 500 statt Linie.
 - `win.IRO` (Ende von main.js) stellt Group, ticker, Words, Inview, Scrub, Hover und die Federn fuer die Vorschauseiten bereit.
 - Foto-Uebergaenge: Bibliothek TRANSITIONS in main.js (dissolve, dissolve-settle, wipe, clear, deal, turn, push; alle

@@ -157,6 +157,23 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Startseite (Roll-Effekt bleibt, dazu Gruen), Footer der Unterseiten, Links im Fliesstext der Unterseiten (vorher
     Steel Gray), Link im Consent-Banner. Unveraendert: Pfeil-Links (Schiene, Menue, "Zur Lehrstelle"), Buttons, Header-
     Navigation, Sprachwahl. Regel in CLAUDE.md (Inhalt / Wording). Status: erledigt in r1
+51. [Kunde 09.10.] Rechtszeile: Trenner gerader Strich "|" statt Schraegstrich (Startseite und Footer der Unterseiten,
+    Trenner bleibt gedaempft). Auf der Startseite kein Hochschnappen (RollLabel) mehr fuer Impressum / Datenschutz /
+    Cookie-Einstellungen, nur noch der Farbwechsel wie bei allen Textlinks. Status: erledigt in r1
+52. [Kunde 09.10.] Footer B-2 gefaellt nicht hundertprozentig: Kompetenzen / Unternehmen / Leistungen und Team /
+    Karriere / Kontakt sollen je eine Spalte bilden (vierspaltig), und statt der weissen Haarlinie unten das Corporate
+    Design des Headers (gestrichelte Linien aussen und zwischen den Spalten, Punkte an den Kreuzungen). Vorschlag B-4
+    auf `r1/vorschau-footer.html` (Raster mit .mk-Punkten wie die Header-Zellen, Rechtszeile als eigene Zeile im Raster;
+    768 bis 1023 px zwei mal zwei, mobil eine Spalte mit gestrichelten Trennlinien). Status: offen (Entscheid Kunde)
+53. [Kunde 09.10.] Das Original-Logo iro.swiss (Kachel mit Marke als Ausschnitt, SWISS darunter) ist nirgends zu sehen:
+    Abspann der Startseite und Footer der Unterseiten zeigen nur die weisse Wortmarke, die Kachel geht auf Schwarz
+    unter (der isolierte Header-Mark bleibt). Entscheidungsseite `r1/vorschau-logo.html`: Kachel in CSS nachgebaut
+    (Proportionen 1912 x 1528, Marke 9.5 / 44.5 %, 81.9 % breit, SWISS 15 % hoch, Abstand 5 %), Varianten L-1
+    Originalkachel Schiefer #233540, L-2 Signal Green mit Marke als Ausschnitt, L-3 Carbon Black mit gestrichelter Linie
+    und Punkten (Raster), L-4 Ice Mint. Schienen-Links ruecken 2rem tiefer (9rem). Status: offen (Entscheid Kunde)
+54. [Kunde 09.10.] Badges NAFEMS Member und "Wir machen Profis": beim Hover gruen wie die Textlinks. Umsetzung auf der
+    Vorschauseite: PNG als CSS-Masken in currentColor (Grau #c4c8cc), Hover Fresh Mint; gleiche Masken-Technik wie das
+    Logo. Status: offen (zeigen, dann einbauen)
 49. [Kunde 09.10.] Standortangabe mit Karte fehlt in v2 (v1 hat eine Leaflet-Karte im Kontaktblock). Recherche 09.10.:
     Der Prompt (Northwall, GetLayers) kennt keinen Standort- oder Kartenblock, die GetLayers-Bibliothek hat keine
     Kontakt- oder Kartensektion; Premium-Agenturseiten loesen den Standort typografisch (Adresse plus "Route planen")

@@ -1034,7 +1034,7 @@
     var legal = sec.querySelector('.contact__legal'), copy = sec.querySelector('.contact__copy');
     if (legal) Inview(legal, { from: { opacity: 0, y: 10 }, to: { opacity: 1, y: 0 }, config: { tension: 200, friction: 30 }, delayIn: ENTRY_DELAY + 320 });
     if (copy) Inview(copy, { from: { opacity: 0, y: 10 }, to: { opacity: 1, y: 0 }, config: { tension: 200, friction: 30 }, delayIn: ENTRY_DELAY + 400 });
-    sec.querySelectorAll('.rl-link').forEach(function (a) { RollLabel(a.querySelector('.rl'), a); });
+    // Rechtszeile: kein RollLabel mehr (Kundenwunsch 09.10.2026), die Links wechseln beim Hover nur die Farbe wie alle Textlinks
   }
 
   /* =====================================================================

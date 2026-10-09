@@ -68,6 +68,45 @@
 .vfb-3 .vfb__copy { font-size: .9375rem; }
 .vfb-3 .vfb__badges img { filter: invert(1) brightness(.75); }   /* weisse Badges auf hellem Grund: Anthrazit */
 
+/* ---- B-4: vier Spalten im Raster des Headers (gestrichelte Linien aussen und zwischen den Spalten, Punkte an den
+   Kreuzungen wie die Eckmarker der Header-Zellen, Rechtszeile als eigene Zeile im Raster) ---- */
+.vfb-4 { --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); --rule: rgba(255,255,255,.3); text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.3; }
+.vfb-4.subfoot { padding: 3.5rem 1rem 3rem; }
+.vfb4 { position: relative; max-width: 64rem; margin-inline: auto; border: 1px dashed var(--rule); }
+.vfb4__grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+.vfb4__cell { position: relative; padding: 1.5rem 1.25rem; min-width: 0; }
+.vfb4__cell + .vfb4__cell { border-top: 1px dashed var(--rule); }
+.vfb4__brand { display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+.vfb-4 .vfb__logo { margin: 0; }
+.vfb-4 .vfb__badges { margin: 0; }
+.vfb4__links, .vfb4__details { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; }
+.vfb4__links a, .vfb4__details a { color: inherit; transition: color var(--duration-fast); }
+.vfb4__links a:hover, .vfb4__details a:hover, .vfb-4 .subfoot__legal a:hover { color: var(--link-hover-dark, #B7F3D0); }
+.vfb4__bottom { position: relative; border-top: 1px dashed var(--rule); padding: 1rem 1.25rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; color: var(--on-inverse-meta); }
+/* Punkte je Zelle: mobil an den Enden der Trennzeile (tl, tr), ab 768 an den Enden der Spaltenlinie (tl, bl) */
+.vfb4__cell .mk--bl { display: none; }
+@media (min-width: 768px) {
+  .vfb-4.subfoot { padding: 4.5rem 1.5rem 4rem; }
+  .vfb4__cell { padding: 2rem 1.5rem; }
+  .vfb4__bottom { padding-inline: 1.5rem; }
+  .vfb4__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vfb4__cell + .vfb4__cell { border-top: 0; }
+  .vfb4__cell:nth-child(2), .vfb4__cell:nth-child(4) { border-left: 1px dashed var(--rule); }
+  .vfb4__cell:nth-child(3), .vfb4__cell:nth-child(4) { border-top: 1px dashed var(--rule); }
+  .vfb4__cell .mk { display: none; }
+  .vfb4__cell:nth-child(2) .mk--tl, .vfb4__cell:nth-child(2) .mk--bl,
+  .vfb4__cell:nth-child(3) .mk--tl, .vfb4__cell:nth-child(3) .mk--tr,
+  .vfb4__cell:nth-child(4) .mk--tl, .vfb4__cell:nth-child(4) .mk--tr, .vfb4__cell:nth-child(4) .mk--bl { display: block; }
+}
+@media (min-width: 1024px) {
+  .vfb4__grid { grid-template-columns: 1.25fr 1fr 1fr 1.25fr; }
+  .vfb4__cell:nth-child(3) { border-left: 1px dashed var(--rule); }
+  .vfb4__cell:nth-child(3), .vfb4__cell:nth-child(4) { border-top: 0; }
+  .vfb4__cell .mk { display: none; }
+  .vfb4__cell:nth-child(n+2) .mk--tl, .vfb4__cell:nth-child(n+2) .mk--bl { display: block; }
+}
+@media (min-width: 1440px) { .vfb-4.subfoot { padding-inline: 2rem; } }
+
 /* ---- Tap-Ziele bis 1024 und auf Touch: Zeilen mindestens 40 px, Zeilenabstand bleibt ---- */
 @media (max-width: 1024px), (pointer: coarse) {
   .vfb__address a, .vfb__links a, .vfb__legal a { display: inline-flex; align-items: center; min-height: 40px; margin-block: calc((1.75em - 40px) / 2); }

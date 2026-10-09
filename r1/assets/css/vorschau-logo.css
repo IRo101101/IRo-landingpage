@@ -1,0 +1,42 @@
+/* =========================================================================
+   IdeeRoth AG - iro.swiss - Vorschau r1: Logo-Kachel und Badges
+   Nur fuer vorschau-logo.html. Laedt NACH styles.css, vorschau-layouts.css und
+   vorschau-footer.css, ohne main.js.
+   Logo-Kachel: Nachbau des Original-Logos iro.swiss (Kachel 1912 x 1528 mit der
+   Marke als Ausschnitt bei 9.5 % / 44.5 %, 81.9 % breit; darunter SWISS ueber die
+   ganze Breite, Hoehe 15 % der Kachelbreite, Abstand 5 %). Farben per Variable:
+   --tile (Kachel), --mark (Marke), --word (SWISS).
+   Badges: dieselben PNG als Masken in currentColor, Hover in Fresh Mint.
+   ========================================================================= */
+
+/* ---- Logo-Kachel ---- */
+.ltile { position: relative; display: block; width: 5.5rem; --tile: #233540; --mark: #fff; --word: #fff; }
+.ltile__box { position: relative; display: block; width: 100%; aspect-ratio: 1912 / 1528; background: var(--tile); }
+.ltile__mark { position: absolute; left: 9.5%; width: 81.9%; top: 44.5%; height: 36.1%; background: var(--mark); -webkit-mask: url('../img/logo/mark-white.png') center / contain no-repeat; mask: url('../img/logo/mark-white.png') center / contain no-repeat; }
+.ltile__word { display: block; width: 100%; aspect-ratio: 1912 / 288; margin-top: 5%; background: var(--word); -webkit-mask: url('../img/logo/word-white.png') center / contain no-repeat; mask: url('../img/logo/word-white.png') center / contain no-repeat; }
+/* L-1 Originalkachel (Schiefer wie im Original), L-2 Signal Green mit Marke als Ausschnitt, L-3 Raster, L-4 hell */
+.ltile--l1 { --tile: #233540; --mark: #fff; --word: #fff; }
+.ltile--l2 { --tile: #25C77A; --mark: #111418; --word: #fff; }
+.ltile--l3 { --tile: #111418; --mark: #fff; --word: #fff; --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); --rule: rgba(255,255,255,.3); }
+.ltile--l3 .ltile__box { border: 1px dashed var(--rule); }
+.ltile--l4 { --tile: #E7FFF2; --mark: #111418; --word: #E7FFF2; }
+a.ltile { transition: opacity var(--duration-fast); }
+a.ltile:hover { opacity: .85; }
+
+/* ---- Badges als Masken (Hover Fresh Mint) ---- */
+.badge { display: block; height: 3.25rem; background: currentColor; color: #c4c8cc; transition: color var(--duration-fast); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
+.badge--nafems { width: 3.58rem; -webkit-mask-image: url('../img/badge-nafems-member.png'); mask-image: url('../img/badge-nafems-member.png'); }
+.badge--lehrbetrieb { width: 3.25rem; -webkit-mask-image: url('../img/badge-lehrbetrieb.png'); mask-image: url('../img/badge-lehrbetrieb.png'); }
+a:hover > .badge, a:focus-visible > .badge { color: var(--link-hover-dark, #B7F3D0); }
+
+/* ---- Kontext Startseite: Abspann verkuerzt (42rem), Links der Schiene ruecken wegen der hoeheren Kachel auf 9rem ---- */
+.vfl-a.contact { background: var(--black); }
+@media (min-width: 768px) {
+  .vfl-a.contact { height: 42rem; }
+  .vfl-a .rail__links { top: 9rem; }
+}
+@media (min-width: 1024px) { .vfl-a.contact { height: 66vh; height: 66lvh; min-height: 42rem; max-height: 50rem; } }
+
+/* ---- Kontext Footer B-2 (wie eingebaut), Kachel statt Wortmarke ---- */
+.vfl .subfoot__brand .ltile { margin: 0; }
+.vfl .subfoot__badges { display: flex; gap: 1rem; align-items: center; }

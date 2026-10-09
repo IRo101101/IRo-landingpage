@@ -447,7 +447,7 @@ section { position: relative; }
 .contact__ctas { display: flex; gap: .75rem; margin-top: 1.25rem; flex-wrap: wrap; }
 /* r1: Trennstrich haengt am Link (nie am Zeilenende), die Trenner-Spans im Markup bleiben fuer Screenreader unsichtbar */
 .contact__legal > span[aria-hidden], .subfoot__legal > span[aria-hidden] { display: none; }
-.contact__legal a ~ a::before, .subfoot__legal a ~ a::before { content: "/"; margin-right: .6rem; }
+.contact__legal a ~ a::before, .subfoot__legal a ~ a::before { content: "|"; margin-right: .6rem; color: var(--on-inverse-meta); }   /* Kundenwunsch 09.10.: gerader Strich statt Schraegstrich; Trenner bleibt gedaempft, auch beim Hover des Links */
 .contact__legal { position: relative; order: 4; padding: 1.5rem 1rem 0; display: flex; flex-wrap: wrap; gap: .5rem .6rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); }
 .contact__copy { position: relative; order: 5; padding: .75rem 1rem 0; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); white-space: nowrap; }
 @media (min-width: 768px) {
