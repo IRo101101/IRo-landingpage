@@ -37,7 +37,8 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 
 ### B. Header
 8. [Video] Gestrichelte Unterkante des Headers ueber die ganze Breite bis zum Button (beide Themen) fehlt
-   bei uns auf Desktop (Spec nennt sie nur mobil). Umsetzung: .hdr__cell:not(.hdr__action) border-bottom. Status: offen
+   bei uns auf Desktop (Spec nennt sie nur mobil). Umsetzung: .hdr::after als durchgehende Linie hinter den Zellen, der
+   Button deckt sie ab. Status: erledigt in r1 (Kundenentscheid 09.10.2026)
 9. [Bug] Deutsch bei 768 bis 1023 px: Navigation ueberlappt Logo- und Sprach-Zelle um 23 bis 27 px.
    Umsetzung: in diesem Bereich gap .75rem und 12 px, oder Burger bis 1023 px. Status: offen
 10. [Video] Eckmarker an der linken Fensterkante (Logo-Zelle) gibt es im Original nicht. Umsetzung:

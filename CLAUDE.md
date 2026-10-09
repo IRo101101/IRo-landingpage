@@ -90,6 +90,8 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen 12 px fuer Versal-Labels, Tap-Ziele 40 px (auch bei
   `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand, Hero-Foto 358/400 mit staerkerem Schleier.
 - Kontakt-Parallaxe laeuft auf `.contact__layer` (innerer Layer 120 %), nicht mehr auf `.contact__photo`.
+- Header ab 768 px: `.hdr::after` zieht die gestrichelte Unterkante ueber die ganze Breite (wie im Original), der
+  Aktions-Button (z-index 1) deckt sie ab; unter 768 px traegt `.hdr` die Unterkante selbst.
 - Scrub hat `ref` (Element, dessen Kanten den Scrollweg messen). Hero- und Kontakt-Parallaxe messen an der Buehne bzw.
   Aussenbox, nicht am ueberstehenden Layer; sonst steht das Hero-Foto bei Scrollposition 0 schon 5 % tiefer als die
   Finale-Karte und springt beim Ausblenden des Ladepanels. `html { scrollbar-gutter: stable }` gegen den Breitensprung

@@ -118,6 +118,13 @@ body.menu-open, body.loading { overflow: hidden; }
 .hdr[data-theme="light"] { color: var(--black); --mk-bg: #111418; --mk-bd: rgba(17,20,24,.4); --rule: rgba(17,20,24,.4); }
 .hdr[data-theme="hidden"] { opacity: 0; pointer-events: none; }
 .hdr__cell { position: relative; border-left: 1px dashed var(--rule); transition: border-color var(--duration-normal) var(--ease-entrance); }
+/* r1 (Punkt 8, Kundenentscheid 09.10.2026): gestrichelte Unterkante des Headers ueber die ganze Breite wie im Original,
+   als eine durchgehende Linie hinter den Zellen; der Aktions-Button liegt darueber und deckt sie ab. Die unteren
+   Eckmarker der Zellen sitzen damit auf der Linie. Unter 768 px traegt .hdr selbst die Unterkante (Prompt). */
+@media (min-width: 768px) {
+  .hdr::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1px dashed var(--rule); pointer-events: none; transition: border-color var(--duration-normal) var(--ease-entrance); }
+  .hdr__action { position: relative; z-index: 1; }
+}
 .hdr__logo { width: 9rem; padding-left: 1rem; display: flex; align-items: center; border-left: 0; }
 .hdr__spacer { flex: 1; }
 .hdr__nav { position: absolute; top: 0; height: 100%; left: calc(50% - 2.25rem); transform: translateX(-50%); display: none; align-items: center; gap: 1rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.2; white-space: nowrap; }
