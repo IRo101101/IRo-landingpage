@@ -148,6 +148,18 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Rechtliches, Copyright unter der Adresse), B-2 im Stil der Site (Versalien .875rem, Logo und Badges / Abschnitte /
     Adresse, Rechtszeile unten wie heute), B-3 hell (Anordnung B-1 auf Ice Mint, Haarlinie oben, Badges in Anthrazit).
     Alle ab 768 px drei Spalten in 64rem, darunter eine Spalte. Status: offen (Entscheid Kunde zwischen B-1 bis B-3)
+49. [Kunde 09.10.] Standortangabe mit Karte fehlt in v2 (v1 hat eine Leaflet-Karte im Kontaktblock). Recherche 09.10.:
+    Der Prompt (Northwall, GetLayers) kennt keinen Standort- oder Kartenblock, die GetLayers-Bibliothek hat keine
+    Kontakt- oder Kartensektion; Premium-Agenturseiten loesen den Standort typografisch (Adresse plus "Route planen")
+    oder mit einer selbst gezeichneten, einfarbigen Lageplan-Grafik. Die Live-Site v1 ist seit 25.09.2026 kaputt:
+    CARTO liefert Rasterkacheln ohne Schluessel nur noch als Wasserzeichen "API KEY REQUIRED" (Marker, Zoom und Link
+    "In Maps oeffnen" laufen weiter); zudem gehen die Kachelabrufe ohne Einwilligung an einen US-Anbieter, den die
+    Datenschutzerklaerung nicht nennt. Vorschlaege fuer v2 (alle ohne externe Skripte, ohne Schluessel, ohne
+    Drittanfrage bis zum Klick): S-1 statisches, selbst gehostetes Kartenbild in Carbon Black mit Signal-Green-Pin
+    (aus OpenStreetMap-Daten oder swisstopo gerendert, Quellenangabe daneben), S-2 gezeichneter einfarbiger Lageplan
+    als SVG (Hafen, Uferlinie, Hafenstrasse, Bahnhof), S-3 Zwei-Klick-Karte (Platzhalter, nach Klick Leaflet lokal
+    mit CARTO-Schluessel oder swisstopo). Platz: Kachel in der Schiene ueber der Adresse (Startseite) bzw. in der
+    Adressspalte des Footers (Unterseiten), Klick oeffnet Google oder Apple Karten. Status: offen (Entscheid Kunde)
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
