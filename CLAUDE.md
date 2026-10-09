@@ -125,6 +125,15 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   Aussenbox, nicht am ueberstehenden Layer; sonst steht das Hero-Foto bei Scrollposition 0 schon 5 % tiefer als die
   Finale-Karte und springt beim Ausblenden des Ladepanels. `html { scrollbar-gutter: stable }` gegen den Breitensprung
   bei klassischen Scrollbalken (Windows).
+- Footer der Unterseiten (Kundenentscheid 09.10., B-4 ohne Linien): `.subfoot__inner` vier Spalten auf 64rem (Logo-Kachel
+  und Badges, Kompetenzen / Unternehmen / Leistungen, Team / Karriere / Kontakt, Adresse), 2 x 2 ab 768, eine Spalte
+  darunter; `.subfoot__bottom` mit `.subfoot__copy` und `.subfoot__legal` (vertikale gestrichelte Linie mit .mk-Punkten
+  tl/bl ab 768, mobil waagrecht mit tl/tr; Marker stehen statisch im Markup). Keine Rahmen, keine Spaltenlinien.
+- Logo-Kachel `.logo-tile` (Original-Logo `assets/img/logo/tile-white.png` als Maske, 5.5 x 5.5rem, Kachel und SWISS in
+  currentColor, Marke als Ausschnitt): im Abspann der Startseite (`.rail__logo`, Schienen-Links ab 768 auf top 9rem) und
+  im Footer (`.subfoot__logo`), Farbe Ice Mint, Hover Fresh Mint, Klick zur Startseite. Header-Mark bleibt `.logo-mark`.
+- Badges `.badge--nafems` / `.badge--lehrbetrieb`: PNG als Maske in currentColor (#c4c8cc), Hover Fresh Mint ueber den
+  umschliessenden Link; nie mehr als <img>.
 - Rechtszeile: Trenner-Spans sind ausgeblendet, der gerade Strich "|" (Kundenwunsch 09.10., vorher Schraegstrich) haengt
   per `a ~ a::before` am Link (nie am Zeilenende) und bleibt gedaempft; die Links der Startseite haben kein RollLabel mehr,
   nur den Farbwechsel der Textlink-Regel.

@@ -114,6 +114,15 @@ body.menu-open, body.loading { overflow: hidden; }
 .logo-mark { width: 3.8125rem; height: 1.375rem; -webkit-mask-image: url('../img/logo/mark-white.png'); mask-image: url('../img/logo/mark-white.png'); }
 .logo-lock { width: 5.5rem; height: 3.5625rem; -webkit-mask-image: url('../img/logo/lockup-white.png'); mask-image: url('../img/logo/lockup-white.png'); }
 .logo-word { width: 6.25rem; height: 1rem; -webkit-mask-image: url('../img/logo/word-white.png'); mask-image: url('../img/logo/word-white.png'); }
+/* r1 (Kundenentscheid 09.10.2026, Logo L-4): Original-Logo iro.swiss als Maske (Kachel und SWISS in currentColor, die
+   Marke ist der Ausschnitt und zeigt den Grund). Farbe Ice Mint, Hover Fresh Mint ueber den umschliessenden Link.
+   Abspann der Startseite und Footer der Unterseiten; der isolierte Mark im Header bleibt. */
+.logo-tile { display: block; width: 5.5rem; height: 5.5rem; background: currentColor; -webkit-mask: url('../img/logo/tile-white.png') center / contain no-repeat; mask: url('../img/logo/tile-white.png') center / contain no-repeat; }
+/* Badges NAFEMS Member und "Wir machen Profis" als Masken in currentColor (Grau wie die Bilder), Hover Fresh Mint */
+.badge { display: block; height: 3.25rem; background: currentColor; color: #c4c8cc; transition: color var(--duration-fast); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
+.badge--nafems { width: 3.58rem; -webkit-mask-image: url('../img/badge-nafems-member.png'); mask-image: url('../img/badge-nafems-member.png'); }
+.badge--lehrbetrieb { width: 3.25rem; -webkit-mask-image: url('../img/badge-lehrbetrieb.png'); mask-image: url('../img/badge-lehrbetrieb.png'); }
+a:hover > .badge, a:focus-visible > .badge { color: var(--link-hover-dark); }
 
 /* ---- Header --------------------------------------------------------- */
 .hdr { position: fixed; inset-inline: 0; top: 0; z-index: 50; height: var(--header-height); display: flex; align-items: stretch; color: #fff; --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); --rule: rgba(255,255,255,.3); transition: color var(--duration-normal) var(--ease-entrance), opacity var(--duration-normal) var(--ease-entrance); }
@@ -434,7 +443,8 @@ section { position: relative; }
 .contact__layer { position: absolute; inset-inline: 0; top: 0; height: 120%; }   /* r1: Parallaxe bewegt nur diese Ebene, die Aussenbox bleibt stehen */
 .contact__photo img { width: 100%; height: 100%; object-fit: cover; }
 .rail { position: relative; order: 1; background: var(--black); padding: 2rem 1rem; }
-.rail__logo { display: block; color: #fff; }
+.rail__logo { display: block; color: var(--light); transition: color var(--duration-fast); }   /* Logo-Kachel Ice Mint, Hover Fresh Mint */
+.rail__logo:hover, .rail__logo:focus-visible { color: var(--link-hover-dark); }
 .rail__links { margin-top: 2rem; }
 .rail__links .al { padding-block: 1rem; border-top: 1px solid var(--border-on-inverse-subtle); color: #fff; }
 .rail__links .al:last-child { border-bottom: 1px solid var(--border-on-inverse-subtle); }
@@ -455,7 +465,7 @@ section { position: relative; }
   .contact__photo { position: absolute; inset-inline: 0; top: 0; height: 100%; }
   .rail { position: absolute; inset-block: 0; left: 0; width: 15rem; padding: 0; }
   .contact .rail__logo { position: absolute; left: 1.5rem; top: 2rem; }
-  .contact .rail__links { position: absolute; left: 1.5rem; top: 7rem; width: 12rem; margin: 0; }
+  .contact .rail__links { position: absolute; left: 1.5rem; top: 9rem; width: 12rem; margin: 0; }   /* r1: 9 statt 7rem, die Logo-Kachel (5.5rem hoch) endet bei 7.5rem */
   .contact .rail__badges { position: absolute; left: 1.5rem; bottom: 12rem; margin: 0; }
   .contact .rail__details { position: absolute; left: 1.5rem; bottom: 2.5rem; margin: 0; }
   .contact__close { position: absolute; left: 16.5rem; right: 1.5rem; bottom: 5.0625rem; padding: 0; text-align: right; }
@@ -534,24 +544,34 @@ section { position: relative; }
 @media (min-width: 768px) { .sub { padding-inline: 1.5rem; } .sub h1 { font-size: 3rem; } }
 @media (min-width: 1440px) { .sub { padding-inline: 2rem; } .sub h1 { font-size: var(--section-title); } }
 
-/* r1: Footer der Unterseiten als B-2 (Kundenentscheid 09.10.2026, Vorbild mediawork.ch): dunkles Band, drei gleich
-   breite Spalten auf 64rem (Logo und Badges, Abschnitte als schlichte Versal-Links, Adresse), Rechtszeile unten.
-   Unter 768 px eine Spalte: Logo, Badges, Abschnitte, Adresse, Rechtszeile. Hover der Links in Fresh Mint. */
-.subfoot { position: relative; background: var(--black); color: #fff; padding: 3.5rem 1rem 3rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.3; }
+/* r1: Footer der Unterseiten als B-4 ohne Linien (Kundenentscheid 09.10.2026, Vorbild mediawork.ch): dunkles Band,
+   vier Spalten auf 64rem (Logo-Kachel und Badges, Kompetenzen / Unternehmen / Leistungen, Team / Karriere / Kontakt,
+   Adresse), Versalien, keine Rahmen und keine Spaltenlinien. Rechtszeile darunter: Copyright, dann eine vertikale
+   gestrichelte Haarlinie mit je einem Punkt oben und unten (wie die Header-Zellen), dann Impressum | Datenschutz |
+   Cookie-Einstellungen. 768 bis 1023 px zwei mal zwei Spalten; unter 768 px eine Spalte, die Rechtszeile gestapelt mit
+   waagrechter Linie und Punkten links und rechts. Hover der Links in Fresh Mint. */
+.subfoot { position: relative; background: var(--black); color: #fff; padding: 3.5rem 1rem 3rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.3; --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); --rule: rgba(255,255,255,.3); }
 .subfoot__inner { max-width: 64rem; margin-inline: auto; display: flex; flex-direction: column; gap: 2.5rem; }
 .subfoot__col { min-width: 0; }
 .subfoot__brand { display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
-.subfoot__logo { display: block; color: #fff; }
+.subfoot__logo { display: block; color: var(--light); transition: color var(--duration-fast); }
+.subfoot__logo:hover, .subfoot__logo:focus-visible { color: var(--link-hover-dark); }
 .subfoot__badges { display: flex; gap: 1rem; align-items: center; }
-.subfoot__badges img { height: 3.25rem; width: auto; }
 .subfoot__badges a { display: block; }
 .subfoot__links, .subfoot__details { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; }
-.subfoot__bottom { max-width: 64rem; margin: 3rem auto 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-on-inverse-subtle); color: var(--on-inverse-meta); }
-.subfoot__legal { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
+.subfoot__bottom { max-width: 64rem; margin: 3rem auto 0; display: flex; flex-direction: column; gap: .75rem; color: var(--on-inverse-meta); }
+.subfoot__legal { position: relative; display: flex; flex-wrap: wrap; gap: .5rem .6rem; padding-top: .875rem; border-top: 1px dashed var(--rule); }
+.subfoot__legal .mk--bl { display: none; }
 @media (min-width: 768px) {
   .subfoot { padding: 4.5rem 1.5rem 4rem; }
-  .subfoot__inner { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 2rem; align-items: start; }
+  .subfoot__inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 2rem; align-items: start; }
+  .subfoot__bottom { flex-direction: row; align-items: stretch; gap: 1.5rem; }
+  .subfoot__copy { align-self: center; }   /* kein Flex auf dem Span, sonst verschwinden die Leerzeichen um die Jahreszahl */
+  .subfoot__legal { border-top: 0; border-left: 1px dashed var(--rule); padding: .625rem 0 .625rem 1.5rem; align-items: center; }
+  .subfoot__legal .mk--tr { display: none; }
+  .subfoot__legal .mk--bl { display: block; }
 }
+@media (min-width: 1024px) { .subfoot__inner { grid-template-columns: 1.25fr 1fr 1fr 1.25fr; } }
 @media (min-width: 1440px) { .subfoot { padding-inline: 2rem; } }
 
 /* ---- Textlinks: Hover in Gruen (Kundenregel 09.10.2026) ----

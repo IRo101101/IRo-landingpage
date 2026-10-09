@@ -164,16 +164,24 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Karriere / Kontakt sollen je eine Spalte bilden (vierspaltig), und statt der weissen Haarlinie unten das Corporate
     Design des Headers (gestrichelte Linien aussen und zwischen den Spalten, Punkte an den Kreuzungen). Vorschlag B-4
     auf `r1/vorschau-footer.html` (Raster mit .mk-Punkten wie die Header-Zellen, Rechtszeile als eigene Zeile im Raster;
-    768 bis 1023 px zwei mal zwei, mobil eine Spalte mit gestrichelten Trennlinien). Status: offen (Entscheid Kunde)
+    768 bis 1023 px zwei mal zwei, mobil eine Spalte mit gestrichelten Trennlinien). Kundenentscheid 09.10. (dritte
+    Runde): B-4 ohne Rahmen und Spaltenlinien, nur die vertikale gestrichelte Haarlinie mit zwei Punkten zwischen
+    Copyright und Rechtslinks; eingebaut auf karriere, impressum, datenschutz (`.subfoot__inner` Grid 1.25fr 1fr 1fr
+    1.25fr ab 1024, 2 x 2 ab 768; `.subfoot__legal` mit border-left dashed und .mk-Punkten tl/bl, mobil border-top mit
+    tl/tr). Status: erledigt in r1
 53. [Kunde 09.10.] Das Original-Logo iro.swiss (Kachel mit Marke als Ausschnitt, SWISS darunter) ist nirgends zu sehen:
     Abspann der Startseite und Footer der Unterseiten zeigen nur die weisse Wortmarke, die Kachel geht auf Schwarz
     unter (der isolierte Header-Mark bleibt). Entscheidungsseite `r1/vorschau-logo.html`: Kachel in CSS nachgebaut
     (Proportionen 1912 x 1528, Marke 9.5 / 44.5 %, 81.9 % breit, SWISS 15 % hoch, Abstand 5 %), Varianten L-1
     Originalkachel Schiefer #233540, L-2 Signal Green mit Marke als Ausschnitt, L-3 Carbon Black mit gestrichelter Linie
-    und Punkten (Raster), L-4 Ice Mint. Schienen-Links ruecken 2rem tiefer (9rem). Status: offen (Entscheid Kunde)
-54. [Kunde 09.10.] Badges NAFEMS Member und "Wir machen Profis": beim Hover gruen wie die Textlinks. Umsetzung auf der
-    Vorschauseite: PNG als CSS-Masken in currentColor (Grau #c4c8cc), Hover Fresh Mint; gleiche Masken-Technik wie das
-    Logo. Status: offen (zeigen, dann einbauen)
+    und Punkten (Raster), L-4 Ice Mint. Schienen-Links ruecken 2rem tiefer (9rem). Kundenentscheid 09.10.: L-4 auf Basis
+    des Original-Logos (Maske `assets/img/logo/tile-white.png`, 800 px aus `_handover/logo/logo-original-iro-swiss.png`,
+    identisch mit dem erneut gelieferten Logo), `.logo-tile` 5.5 x 5.5rem in currentColor: Kachel und SWISS Ice Mint,
+    Marke als Ausschnitt zeigt den Grund, Hover Fresh Mint, Klick zur Startseite (Footer index.html, Abspann #top).
+    Eingebaut im Abspann der Startseite (Schienen-Links auf 9rem) und im Footer der Unterseiten. Status: erledigt in r1
+54. [Kunde 09.10.] Badges NAFEMS Member und "Wir machen Profis": beim Hover gruen wie die Textlinks. Umsetzung: PNG als
+    CSS-Masken `.badge--nafems` / `.badge--lehrbetrieb` in currentColor (Grau #c4c8cc), Hover Fresh Mint ueber den
+    umschliessenden Link; Abspann der Startseite und Footer der Unterseiten. Status: erledigt in r1
 49. [Kunde 09.10.] Standortangabe mit Karte fehlt in v2 (v1 hat eine Leaflet-Karte im Kontaktblock). Recherche 09.10.:
     Der Prompt (Northwall, GetLayers) kennt keinen Standort- oder Kartenblock, die GetLayers-Bibliothek hat keine
     Kontakt- oder Kartensektion; Premium-Agenturseiten loesen den Standort typografisch (Adresse plus "Route planen")
