@@ -284,15 +284,17 @@ section { position: relative; }
   .about__frame { aspect-ratio: 720 / 628; }
   .about__topics { position: static; color: inherit; margin-top: 1rem; }
 }
-/* r1 ab 1024: Band im Fluss statt absolut zentriert. Titel oben, der Rahmen mit Themenliste und Mission zentriert
-   sich im Rest der Hoehe (margin auto), kann aber nie in den Titel rutschen: bei kurzen Fenstern (z. B. 1366 x 614
-   bei 125 % Windows-Skalierung) waechst die Sektion ueber 100vh hinaus, statt dass sich Titel und Foto ueberlagern. */
+/* r1 ab 1024: Band im Fluss statt absolut zentriert. Titel und Fotogruppe (Rahmen, Themenliste, Mission) bilden
+   einen Block mit festem Abstand 1.25rem (wie im 1440 x 800-Entwurf der Vorlage); der Block ist in der Sektion
+   vertikal zentriert, Ueberschuss liegt ueber dem Titel und unter der Fotogruppe. Bei kurzen Fenstern (z. B.
+   1366 x 614 bei 125 % Windows-Skalierung) waechst die Sektion ueber 100vh hinaus, statt dass Titel und Foto
+   sich ueberlagern. */
 @media (min-width: 1024px) {
   .about { display: flex; flex-direction: column; padding: 0; height: auto; min-height: 100vh; min-height: 100lvh; }
-  .about__band { display: flex; flex-direction: column; flex: 1 0 auto; gap: 0; position: static; transform: none; height: auto; padding-bottom: 2.5rem; }
-  .about__head { position: relative; left: auto; transform: none; flex: none; margin: 5.25rem auto 0; padding-bottom: 1.5rem; width: 30rem; gap: 1.75rem; }
+  .about__band { display: flex; flex-direction: column; justify-content: center; flex: 1 0 auto; gap: 0; position: static; transform: none; height: auto; padding: 5.25rem 0 2.5rem; }
+  .about__head { position: relative; left: auto; transform: none; flex: none; margin: 0 auto; padding: 0; width: 30rem; gap: 1.75rem; }
   .about h2 { font-size: 2.5rem; }
-  .about__wrap { position: relative; flex: none; height: 24.625rem; margin-block: auto; }
+  .about__wrap { position: relative; flex: none; height: 24.625rem; margin: 1.25rem 0 0; }
   .about__stage { position: static; }
   .about__frame { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 20rem; height: 24.625rem; aspect-ratio: auto; }
   /* Layout U-A (Kundenentscheid 09.10.2026): Themenliste links und Mission rechts neben dem Foto, beide an der
@@ -302,7 +304,8 @@ section { position: relative; }
   .about__mission .words__indent { width: 0; }
 }
 @media (min-width: 1440px) {
-  .about__head { margin-top: 6.1875rem; width: 36rem; }
+  .about__band { padding-top: 6.1875rem; }
+  .about__head { width: 36rem; }
   .about h2 { font-size: 2.875rem; }
   .about__wrap { height: 25.5rem; }
   .about__frame { width: 20.8125rem; height: 25.5rem; }
@@ -330,13 +333,15 @@ section { position: relative; }
   .card { aspect-ratio: 352 / 435; }
 }
 @media (min-width: 1024px) {
-  .cards { height: 100vh; height: 100lvh; padding: 0; }
-  .cards__row { position: absolute; inset-inline: 1.5rem; top: 2.25rem; display: flex; flex-direction: row; align-items: flex-start; gap: .75rem; padding: 0; }
+  /* r1: Kartenreihe im Fluss statt absolut, Sektion mindestens 100vh und waechst bei kurzen, breiten Fenstern
+     (z. B. 1920 x 700), statt dass die Karten in den Prozessblock ragen */
+  .cards { height: auto; min-height: 100vh; min-height: 100lvh; padding: 2.25rem 1.5rem 2.5rem; }
+  .cards__row { position: static; display: flex; flex-direction: row; align-items: flex-start; gap: .75rem; padding: 0; }
   .card { flex: 1; aspect-ratio: auto; height: 30rem; }   /* r1, Layout K-A (Kundenentscheid 09.10.2026): alle vier Karten gleich hoch */
   .card--tall { height: 30rem; }
 }
 @media (min-width: 1440px) {
-  .cards__row { inset-inline: 2.5rem; top: 6.1875rem; }
+  .cards { padding: 6.1875rem 2.5rem 2.5rem; }
   .card { height: 34rem; }
   .card--tall { height: 34rem; }
 }

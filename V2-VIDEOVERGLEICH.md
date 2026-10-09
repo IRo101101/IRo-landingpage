@@ -114,7 +114,13 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     auf 100 % Hoehe zentriert war und der Rahmen von der Mitte aus positioniert wurde, der Titel aber von oben; bei
     1366 x 768 mit 125 % Windows-Skalierung (1093 x 614 CSS-px) oder 150 % lagen Titelzeile 2 und Foto uebereinander.
     Umsetzung: Band im Fluss (Titel oben, Rahmen mit Liste und Mission zentriert im Rest, min 1.5rem Luft), Sektion
-    waechst bei Bedarf ueber 100vh. Status: erledigt in r1
+    waechst bei Bedarf ueber 100vh. Abstand Titel zu Foto fest 1.25rem (Entwurf 1440 x 800), Ueberschuss ueber dem
+    Titel und unter der Fotogruppe (Kundenwunsch 09.10.: Titel und Foto bleiben zusammen). Status: erledigt in r1
+43. [Bug] Kompetenzen ab 1024 px bei breiten, kurzen Fenstern (1920 x 700, 2200 x 800, 2560 x 800): Die Kartenreihe
+    (absolut, Hoehe in rem, Root-Schrift waechst ueber 1440 px mit) ragte unter der 100vh-Sektion in den Prozessblock.
+    Gefunden mit dem Raster 10 Breiten x 4 Hoehen x DE/EN. Umsetzung: Reihe im Fluss, Sektion min-height 100vh und
+    waechst. Status: erledigt in r1
+    Raster-Ergebnis sonst: keine ungewollte Ueberlappung von Text und Foto (Unternehmen, Team, Prozess) in DE und EN.
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
