@@ -787,62 +787,68 @@
      ===================================================================== */
   /* r1: Foto-Uebergaenge als Bibliothek (alle aus dem Prompt), waehlbar per data-transition am Rahmen:
      dissolve (About-Galerie), dissolve-settle (Team-Foto, Finale-Karte), wipe (Karten-Einstieg), clear (Team-Zeilen),
-     deal (Ladepanel-Karten), turn (Prozess-Buehne), push (wanderndes Team-Portraet). Kundenentscheid 09.10.2026 fuer
-     den Block Unternehmen: dissolve-settle im Takt 1.5 s (data-interval). */
+     deal (Ladepanel-Karten), turn (Prozess-Buehne), push (wanderndes Team-Portraet). data-interval = Takt in ms,
+     data-speed = Tempo-Faktor der Federn. Kundenentscheid 09.10.2026 fuer Unternehmen: clear, 2 s, Faktor 1.4. */
   var SLIDE = { tension: 480, friction: 42 };
   var SETTLE_SCALE = 1.12, WIPE_SCALE = 1.18, CLEAR_BLUR = 14, CLEAR_Y = -28, DEAL_SCALE = 0.82, DEAL_Y = 48, DEAL_TILT = 9, DEAL_START = 1.8, TURN_ANGLE = 4;
+  // Federn je Uebergang; PhotoSwap skaliert sie mit dem Tempo-Faktor k (data-speed): tension * k^2, friction * k
+  function springSet(k) {
+    function sc(c) { return { tension: c.tension * k * k, friction: c.friction * k, clamp: !!c.clamp }; }
+    return { FADE: sc(FADE), SETTLE: sc(SETTLE), MASK: sc(MASK), ROW: sc(ROW_REVEAL), CARD: sc(CARD), TURN: sc(TURN), SWAP: sc(SWAP_IMG), SLIDE: sc(SLIDE) };
+  }
   var TRANSITIONS = {
     'dissolve': {
-      build: function (p) { return [new Group(p, { from: { opacity: 0 }, config: FADE })]; },
+      build: function (p, S) { return [new Group(p, { from: { opacity: 0 }, config: S.FADE })]; },
       hide: function (g) { g[0].set({ opacity: 0 }); }, show: function (g) { g[0].set({ opacity: 1 }); },
-      enter: function (g, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, FADE, done); }
+      enter: function (g, S, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, S.FADE, done); }
     },
     'dissolve-settle': {
-      build: function (p) { return [new Group(p, { from: { opacity: 0 }, config: FADE }), new Group(p, { from: { scale: SETTLE_SCALE }, config: SETTLE })]; },
+      build: function (p, S) { return [new Group(p, { from: { opacity: 0 }, config: S.FADE }), new Group(p, { from: { scale: SETTLE_SCALE }, config: S.SETTLE })]; },
       hide: function (g) { g[0].set({ opacity: 0 }); g[1].set({ scale: SETTLE_SCALE }); }, show: function (g) { g[0].set({ opacity: 1 }); g[1].set({ scale: 1 }); },
-      enter: function (g, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, FADE, done); g[1].set({ scale: SETTLE_SCALE }).to({ scale: 1 }, SETTLE); }
+      enter: function (g, S, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, S.FADE, done); g[1].set({ scale: SETTLE_SCALE }).to({ scale: 1 }, S.SETTLE); }
     },
     'wipe': {
-      build: function (p) { return [new Group(p, { from: { opacity: 0, clip: [0, 0, 100, 0] }, config: MASK }), new Group(p.querySelector('img'), { from: { scale: WIPE_SCALE }, config: SETTLE })]; },
+      build: function (p, S) { return [new Group(p, { from: { opacity: 0, clip: [0, 0, 100, 0] }, config: S.MASK }), new Group(p.querySelector('img'), { from: { scale: WIPE_SCALE }, config: S.SETTLE })]; },
       hide: function (g) { g[0].set({ opacity: 0, clip: [0, 0, 100, 0] }); g[1].set({ scale: WIPE_SCALE }); }, show: function (g) { g[0].set({ opacity: 1, clip: [0, 0, 0, 0] }); g[1].set({ scale: 1 }); },
-      enter: function (g, step, done) { g[0].set({ opacity: 1, clip: [0, 0, 100, 0] }).to({ clip: [0, 0, 0, 0] }, MASK, done); g[1].set({ scale: WIPE_SCALE }).to({ scale: 1 }, SETTLE); }
+      enter: function (g, S, step, done) { g[0].set({ opacity: 1, clip: [0, 0, 100, 0] }).to({ clip: [0, 0, 0, 0] }, S.MASK, done); g[1].set({ scale: WIPE_SCALE }).to({ scale: 1 }, S.SETTLE); }
     },
     'clear': {
-      build: function (p) { return [new Group(p, { from: { opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }, config: ROW_REVEAL })]; },
+      build: function (p, S) { return [new Group(p, { from: { opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }, config: S.ROW })]; },
       hide: function (g) { g[0].set({ opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }); }, show: function (g) { g[0].set({ opacity: 1, blur: 0, y: 0 }); },
-      enter: function (g, step, done) { g[0].set({ opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }).to({ opacity: 1, blur: 0, y: 0 }, ROW_REVEAL, done); }
+      enter: function (g, S, step, done) { g[0].set({ opacity: 0, blur: CLEAR_BLUR, y: CLEAR_Y }).to({ opacity: 1, blur: 0, y: 0 }, S.ROW, done); }
     },
     'deal': {
-      build: function (p) { return [new Group(p, { from: { opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: 0 }, config: CARD })]; },
+      build: function (p, S) { return [new Group(p, { from: { opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: 0 }, config: S.CARD })]; },
       hide: function (g) { g[0].set({ opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: 0 }); }, show: function (g) { g[0].set({ opacity: 1, scale: 1, y: 0, rotate: 0 }); },
-      enter: function (g, step, done) { var tilt = (step % 2 ? -1 : 1) * DEAL_TILT; g[0].set({ opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: tilt * DEAL_START }).to({ opacity: 1, scale: 1, y: 0, rotate: 0 }, CARD, done); }
+      enter: function (g, S, step, done) { var tilt = (step % 2 ? -1 : 1) * DEAL_TILT; g[0].set({ opacity: 0, scale: DEAL_SCALE, y: DEAL_Y, rotate: tilt * DEAL_START }).to({ opacity: 1, scale: 1, y: 0, rotate: 0 }, S.CARD, done); }
     },
     'turn': {
-      build: function (p) { return [new Group(p, { from: { opacity: 0 }, config: SWAP_IMG })]; },
-      frame: function (el) { return new Group(el, { from: { rotate: -TURN_ANGLE }, config: TURN }); },
-      turn: function (fg, step) { fg.to({ rotate: (step % 2 ? 1 : -1) * TURN_ANGLE }, TURN); },
+      build: function (p, S) { return [new Group(p, { from: { opacity: 0 }, config: S.SWAP })]; },
+      frame: function (el, S) { return new Group(el, { from: { rotate: -TURN_ANGLE }, config: S.TURN }); },
+      turn: function (fg, S, step) { fg.to({ rotate: (step % 2 ? 1 : -1) * TURN_ANGLE }, S.TURN); },
       hide: function (g) { g[0].set({ opacity: 0 }); }, show: function (g) { g[0].set({ opacity: 1 }); },
-      enter: function (g, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, SWAP_IMG, done); }
+      enter: function (g, S, step, done) { g[0].set({ opacity: 0 }).to({ opacity: 1 }, S.SWAP, done); }
     },
     'push': {
-      build: function (p) { return [new Group(p, { from: { opacity: 0, y: '0%' }, config: SLIDE })]; },
+      build: function (p, S) { return [new Group(p, { from: { opacity: 0, y: '0%' }, config: S.SLIDE })]; },
       hide: function (g) { g[0].set({ opacity: 0, y: '0%' }); }, show: function (g) { g[0].set({ opacity: 1, y: '0%' }); },
-      enter: function (g, step, done) { g[0].set({ opacity: 1, y: '100%' }).to({ y: '0%' }, SLIDE, done); },
-      leave: function (g) { g[0].to({ y: '-30%', opacity: 0.6 }, SLIDE); }
+      enter: function (g, S, step, done) { g[0].set({ opacity: 1, y: '100%' }).to({ y: '0%' }, S.SLIDE, done); },
+      leave: function (g, S) { g[0].to({ y: '-30%', opacity: 0.6 }, S.SLIDE); }
     }
   };
-  // Stapel gestapelter Fotos in einem Rahmen; go(i) blendet Foto i mit dem gewaehlten Uebergang ueber das aktuelle
-  function PhotoSwap(frame, photos, name) {
-    var tr = TRANSITIONS[name] || TRANSITIONS.dissolve, z = 1, idx = 0, step = 0;
-    var h = Array.prototype.map.call(photos, function (p, i) { var g = tr.build(p); if (i === 0) { tr.show(g); p.style.zIndex = '1'; } else { tr.hide(g); p.style.zIndex = '0'; } return { el: p, g: g, gen: -1 }; });
-    var fg = tr.frame ? tr.frame(frame) : null;
+  // Stapel gestapelter Fotos in einem Rahmen; go(i) blendet Foto i mit dem gewaehlten Uebergang ueber das aktuelle.
+  // speed: Tempo-Faktor (1 = Prompt-Feder, 1.4 = 40 % schneller), kommt aus data-speed am Rahmen.
+  function PhotoSwap(frame, photos, name, speed) {
+    var tr = TRANSITIONS[name] || TRANSITIONS.dissolve, S = springSet(speed > 0 ? speed : 1), z = 1, idx = 0, step = 0;
+    var h = Array.prototype.map.call(photos, function (p, i) { var g = tr.build(p, S); if (i === 0) { tr.show(g); p.style.zIndex = '1'; } else { tr.hide(g); p.style.zIndex = '0'; } return { el: p, g: g, gen: -1 }; });
+    var fg = tr.frame ? tr.frame(frame, S) : null;
     function go(i) {
       i = i % h.length; if (i === idx) return;
       var hn = h[i], ho = h[idx], oldGen = ho.gen; idx = i; step += 1; hn.gen = step;
       z += 1; hn.el.style.zIndex = String(z);
-      tr.enter(hn.g, step, function () { if (ho.gen === oldGen) { tr.hide(ho.g); ho.el.style.zIndex = '0'; } });   // nur, wenn das alte Foto nicht inzwischen neu eingetreten ist
-      if (tr.leave) tr.leave(ho.g);
-      if (tr.turn && fg) tr.turn(fg, step);
+      tr.enter(hn.g, S, step, function () { if (ho.gen === oldGen) { tr.hide(ho.g); ho.el.style.zIndex = '0'; } });   // nur, wenn das alte Foto nicht inzwischen neu eingetreten ist
+      if (tr.leave) tr.leave(ho.g, S);
+      if (tr.turn && fg) tr.turn(fg, S, step);
     }
     return { go: go, index: function () { return idx; } };
   }
@@ -854,7 +860,7 @@
     new Words(title, { preset: 'head', delayIn: ENTRY_DELAY + 120 });
     new Words(mission, { preset: 'copy', mode: 'always', delayIn: ENTRY_DELAY + 280 });
     var frame = sec.querySelector('.about__frame'), photos = frame.querySelectorAll('.about__photo'), topics = sec.querySelectorAll('.about__topic');
-    var swap = PhotoSwap(frame, photos, frame.getAttribute('data-transition') || 'dissolve');
+    var swap = PhotoSwap(frame, photos, frame.getAttribute('data-transition') || 'dissolve', parseFloat(frame.getAttribute('data-speed')) || 1);
     var interval = parseInt(frame.getAttribute('data-interval'), 10) || STEP_INTERVAL;
     var tg = Array.prototype.map.call(topics, function (t, i) { return new Group(t, { from: { opacity: i === 0 ? 1 : TOPIC_DIM }, config: TOPIC }); });
     var idx = 0, timer = null, n = photos.length;

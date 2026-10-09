@@ -99,7 +99,11 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - `win.IRO` (Ende von main.js) stellt Group, ticker, Words, Inview, Scrub, Hover und die Federn fuer die Vorschauseiten bereit.
 - Foto-Uebergaenge: Bibliothek TRANSITIONS in main.js (dissolve, dissolve-settle, wipe, clear, deal, turn, push; alle
   aus dem Prompt), `PhotoSwap(frame, photos, name)` blendet gestapelte Fotos um. Am Rahmen waehlbar per
-  `data-transition` und `data-interval` (ms). Kundenentscheid 09.10.2026: Unternehmen = dissolve-settle, 1.5 s.
+  `data-transition`, `data-interval` (ms) und `data-speed` (Tempo-Faktor, Federn tension*k^2, friction*k).
+  Kundenentscheid 09.10.2026: Unternehmen = clear, 2 s, Faktor 1.4; andere Bloecke unveraendert (Prozess SWAP_IMG).
+- Unternehmen ab 1024 px liegt im Fluss (kein absolut zentriertes Band mehr): `.about` min-height 100lvh als Flex-Spalte,
+  `.about__head` oben, `.about__wrap` (Rahmen, Themenliste, Mission; die Mission steht im Markup IM Wrap) mit
+  margin-block auto zentriert im Rest. Bei kurzen Fenstern waechst die Sektion, Titel und Foto koennen nicht kollidieren.
 - Layouts ab 1024 px (Kundenentscheid 09.10.2026): Unternehmen U-A (Themenliste links, Mission rechts neben dem Foto,
-  beide an der Rahmenunterkante, kein Einzug), Karten K-A (alle 30rem, xl 34rem), Team T-B (Text 22rem, Zitat/Listen
-  30rem, gap 5rem, flex-start). Die Vorschauseiten bleiben als Nachschlagewerk in r1.
+  beide an der Rahmenunterkante, kein Einzug), Karten K-A (alle 30rem, xl 34rem), Team T-A (`.team__rows` max-width
+  64rem zentriert, Spalten wie Vorlage). Die Vorschauseiten bleiben als Nachschlagewerk in r1.

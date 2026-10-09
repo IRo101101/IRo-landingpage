@@ -109,6 +109,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     bei Scrollposition 0 statt 0). Beim Ausblenden des Panels rutschte das Bild um ca. 49 px (1440) bzw. 58 px (1920).
     Dazu auf Windows: klassischer Scrollbalken erscheint erst bei der Freigabe, Seite wird 17 px schmaler, Foto wird neu
     eingepasst. Umsetzung: Scrub mit Referenzelement (Buehne) statt Layer, html { scrollbar-gutter: stable }. Status: erledigt in r1
+42. [Bug] Unternehmen ab 1024 px (Kunde 09.10., Screenshot): Titel laeuft bei kurzen Fenstern ins Foto, weil das Band
+    auf 100 % Hoehe zentriert war und der Rahmen von der Mitte aus positioniert wurde, der Titel aber von oben; bei
+    1366 x 768 mit 125 % Windows-Skalierung (1093 x 614 CSS-px) oder 150 % lagen Titelzeile 2 und Foto uebereinander.
+    Umsetzung: Band im Fluss (Titel oben, Rahmen mit Liste und Mission zentriert im Rest, min 1.5rem Luft), Sektion
+    waechst bei Bedarf ueber 100vh. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
@@ -147,10 +152,12 @@ Umgesetzt in r1:
 - Pruefung r1: Sweep 48/48 (4 Seiten x 6 Viewports x DE/EN) ohne Overflow, Konsolenfehler, Ladepanel-Haenger;
   zwei unabhaengige Audit-Runden auf 390/360/320/768/1024 plus Unterseiten.
 Entschieden am 09.10.2026 (Vorschauseiten bleiben in r1 als Nachschlagewerk):
-- Fotowechsel Unternehmen: 02 Dissolve + Settle im Takt 1.5 s (`data-transition="dissolve-settle" data-interval="1500"`
-  am Rahmen). Alle sieben Uebergaenge aus `vorschau-uebergaenge.html` liegen als Bibliothek TRANSITIONS in main.js
-  (dissolve, dissolve-settle, wipe, clear, deal, turn, push) und sind per data-transition an jedem Fotostapel waehlbar.
+- Fotowechsel Unternehmen (zweiter Entscheid am selben Tag): 04 Clear im Takt 2 s mit 40 % schnellerer Feder
+  (`data-transition="clear" data-interval="2000" data-speed="1.4"` am Rahmen; Feder 55/22 wird zu 107.8/30.8, unscharf
+  zu scharf: 90 % nach 0.62 s statt 0.87 s). Alle sieben Uebergaenge aus `vorschau-uebergaenge.html` liegen als
+  Bibliothek TRANSITIONS in main.js (dissolve, dissolve-settle, wipe, clear, deal, turn, push), waehlbar per
+  data-transition, Takt per data-interval, Tempo per data-speed an jedem Fotostapel; die anderen Bloecke bleiben wie bisher.
 - Unternehmen U-A: Themenliste links und Mission rechts neben dem Foto, beide an der Rahmenunterkante, Mission ohne
-  Einzug (Punkt 19 erledigt). Karten K-A: alle vier gleich hoch (30rem, xl 34rem; Punkt 21 erledigt). Team T-B: zwei
-  Spalten links beieinander (Text 22rem, Zitat/Listen 30rem, 5rem Abstand).
+  Einzug (Punkt 19 erledigt). Karten K-A: alle vier gleich hoch (30rem, xl 34rem; Punkt 21 erledigt). Team T-A
+  (zweiter Entscheid): Zeilen auf 64rem begrenzt und zentriert, Spaltenbreiten wie in der Vorlage.
 Nicht in r1 (bewusst, Kunde): Hero-Text (spaeter), Karten bleiben vier, Teil-1-Punkte 4, 7, 8, 11, 15.

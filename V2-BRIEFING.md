@@ -8,7 +8,7 @@ Vorschau: https://iro101101.github.io/IRo-landingpage/ (GitHub Pages, Branch `v2
   (Ladepanel und Bodenwechsel doppelt, Prozesszeilen groesser, Mobil-Optimierung).
 - Entscheidungsseiten: https://iro101101.github.io/IRo-landingpage/r1/vorschau-uebergaenge.html (Fotouebergaenge)
   und https://iro101101.github.io/IRo-landingpage/r1/vorschau-layouts.html (Unternehmen, Karten, Team).
-- Entschieden 09.10.2026: Fotowechsel Dissolve + Settle (1.5 s), Layouts U-A, K-A, T-B; eingebaut in r1.
+- Entschieden 09.10.2026: Fotowechsel Clear (2 s, Feder 40 % schneller) im Block Unternehmen, Layouts U-A, K-A, T-A; eingebaut in r1.
 - Details und Status: `V2-VIDEOVERGLEICH.md`, Abschnitt "Runde 1".
 
 ## Entscheidungen

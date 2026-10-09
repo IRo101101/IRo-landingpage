@@ -259,6 +259,7 @@ section { position: relative; }
 .about__head { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 1.125rem; text-align: center; align-items: center; }
 .about h2 { font-size: 2rem; }
 .about__wrap { position: relative; }
+.about__stage { position: relative; }   /* r1: Bezug fuer die Themenliste im Foto (unter 768), damit die Mission im Wrap nichts verschiebt */
 .about__frame { position: relative; display: block; width: 100%; aspect-ratio: 358 / 458; overflow: hidden; background: #cfe8da; }
 .about__photo { position: absolute; inset: 0; opacity: 0; }
 .about__photo img { width: 100%; height: 100%; object-fit: cover; }
@@ -266,7 +267,7 @@ section { position: relative; }
 .about__btn { display: flex; align-items: center; gap: .5rem; background: var(--black); color: #fff; padding: 1rem 1.5rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); white-space: nowrap; }
 .about__btn .swap { transform: rotate(90deg); }
 .about__topics { position: absolute; left: 1rem; bottom: 1rem; z-index: 2; color: #fff; font-size: 1.125rem; line-height: 1.2; display: flex; flex-direction: column; gap: .2rem; }
-.about__mission { font-size: 1.125rem; line-height: 1.25; }
+.about__mission { font-size: 1.125rem; line-height: 1.25; margin-top: 1.5rem; }   /* r1: Mission liegt im Wrap (unter der Themenliste) */
 /* r1: Schleier unten im Rahmen, damit die weisse Themenliste auf hellen Fotos lesbar bleibt */
 @media (max-width: 767px) { .about__frame::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(17,20,24,.55), rgba(17,20,24,0) 45%); pointer-events: none; } }
 @media (min-width: 768px) {
@@ -276,27 +277,30 @@ section { position: relative; }
   .about__frame { aspect-ratio: 720 / 628; }
   .about__topics { position: static; color: inherit; margin-top: 1rem; }
 }
+/* r1 ab 1024: Band im Fluss statt absolut zentriert. Titel oben, der Rahmen mit Themenliste und Mission zentriert
+   sich im Rest der Hoehe (margin auto), kann aber nie in den Titel rutschen: bei kurzen Fenstern (z. B. 1366 x 614
+   bei 125 % Windows-Skalierung) waechst die Sektion ueber 100vh hinaus, statt dass sich Titel und Foto ueberlagern. */
 @media (min-width: 1024px) {
-  .about { display: block; padding: 0; height: 100vh; height: 100lvh; }
-  .about__band { display: block; position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: 100%; }
-  .about__head { position: absolute; left: 50%; top: 5.25rem; width: 30rem; transform: translateX(-50%); gap: 1.75rem; }
+  .about { display: flex; flex-direction: column; padding: 0; height: auto; min-height: 100vh; min-height: 100lvh; }
+  .about__band { display: flex; flex-direction: column; flex: 1 0 auto; gap: 0; position: static; transform: none; height: auto; padding-bottom: 2.5rem; }
+  .about__head { position: relative; left: auto; transform: none; flex: none; margin: 5.25rem auto 0; padding-bottom: 1.5rem; width: 30rem; gap: 1.75rem; }
   .about h2 { font-size: 2.5rem; }
-  .about__frame { position: absolute; left: 50%; top: calc(50% + 3.3125rem); transform: translate(-50%,-50%); width: 20rem; height: 24.625rem; aspect-ratio: auto; }
-  /* r1, Layout U-A (Kundenentscheid 09.10.2026): Themenliste links und Mission rechts neben dem Foto, beide an der
-     Unterkante des Rahmens ausgerichtet, je 2rem Luft; Mission ohne haengenden Einzug (kein Ueberlappen mehr) */
-  .about__topics { position: absolute; left: auto; right: calc(50% + 12rem); bottom: calc(50% - 15.625rem); margin: 0; align-items: flex-end; text-align: right; }
-  .about__mission { position: absolute; bottom: calc(50% - 15.625rem); left: calc(50% + 12rem); width: 19rem; }
+  .about__wrap { position: relative; flex: none; height: 24.625rem; margin-block: auto; }
+  .about__stage { position: static; }
+  .about__frame { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 20rem; height: 24.625rem; aspect-ratio: auto; }
+  /* Layout U-A (Kundenentscheid 09.10.2026): Themenliste links und Mission rechts neben dem Foto, beide an der
+     Unterkante des Rahmens ausgerichtet, je 2rem Luft; Mission ohne haengenden Einzug */
+  .about__topics { position: absolute; left: auto; right: calc(50% + 12rem); bottom: 0; margin: 0; align-items: flex-end; text-align: right; }
+  .about__mission { position: absolute; bottom: 0; left: calc(50% + 12rem); width: 19rem; margin: 0; }
   .about__mission .words__indent { width: 0; }
 }
 @media (min-width: 1440px) {
-  .about__band { height: 50rem; }
-  .about__head { top: 6.1875rem; }
+  .about__head { margin-top: 6.1875rem; width: 36rem; }
   .about h2 { font-size: 2.875rem; }
-  .about__head { width: 36rem; }
-  .about__frame { top: calc(50% + 4.4375rem); width: 20.8125rem; height: 25.5rem; }
-  .about__topics { right: calc(50% + 12.40625rem); bottom: calc(50% - 17.1875rem); }
-  .about__mission { bottom: calc(50% - 17.1875rem); left: calc(50% + 12.40625rem); width: 21rem; font-size: 1.25rem; }
-  .about__mission .words__indent { width: 0; }
+  .about__wrap { height: 25.5rem; }
+  .about__frame { width: 20.8125rem; height: 25.5rem; }
+  .about__topics { right: calc(50% + 12.40625rem); }
+  .about__mission { left: calc(50% + 12.40625rem); width: 21rem; font-size: 1.25rem; }
 }
 
 /* ---- 3 Kompetenzen (Karten) ----------------------------------------- */
@@ -394,19 +398,19 @@ section { position: relative; }
   .team { padding: 7.75rem 1.5rem 6rem; }
   .team h2 { font-size: 2.75rem; width: 24rem; }
   .team__intro { width: 21rem; }
-  /* r1, Layout T-B (Kundenentscheid 09.10.2026): zwei Spalten links beieinander, rechts bleibt Ruhe */
-  .trow { min-height: 12.1875rem; padding: 1.5rem; justify-content: flex-start; gap: 5rem; }
-  .trow__main { width: 22rem; }
-  .trow__side, .trow__quote { width: 30rem; flex: none; }
-  .trow--link .al { width: 30rem; flex: none; justify-content: flex-start; }
+  /* r1, Layout T-A (Kundenentscheid 09.10.2026): Zeilen auf 64rem begrenzt und zentriert, Spalten wie in der Vorlage */
+  .team__rows { max-width: 64rem; margin-inline: auto; }
+  .trow { min-height: 12.1875rem; padding: 1.5rem; }
+  .trow__main { width: 17.5rem; }
+  .trow__side { width: 22rem; }
 }
 @media (min-width: 1440px) {
   .team { padding: 8.125rem 2rem 6rem; }
   .team h2 { font-size: var(--section-title); width: 30.3125rem; }
   .team__intro { width: 20.9375rem; font-size: 1.125rem; }
   .trow { min-height: 12.6875rem; padding: 2rem; }
-  .trow__main { width: 22rem; }
-  .trow__side { width: 30rem; }
+  .trow__main { width: 17.3125rem; }
+  .trow__side { width: 24rem; }
 }
 
 /* ---- 6 Kontakt ------------------------------------------------------ */
