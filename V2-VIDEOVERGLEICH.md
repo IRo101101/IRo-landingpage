@@ -205,7 +205,16 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     `r1/vorschau-standort.html` (09.10.): je Variante Abspann der Startseite (50rem, Kachel in der Schiene zwischen
     Badges und Adresse, 12 x 7.5rem ab 768, 13.6875 x 8.55rem ab 1440, mobil volle Breite) und Footer B-1 (Kachel in
     Spalte 1 unter der Adresse). Kartenbild und Lageplan aus OpenStreetMap-Daten (overpass.osm.ch) selbst gerendert,
-    Ausschnitt 800 x 500 m, Beschriftung nur Hafenstrasse, Bahnhof, Hafen. Empfehlung S-1. Status: offen (Entscheid Kunde)
+    Ausschnitt 800 x 500 m, Beschriftung nur Hafenstrasse, Bahnhof, Hafen. Kundenentscheid 09.10.: keine Kachel in der
+    Schiene, stattdessen eigene Kontaktseite (Punkt 56); die Vorschauseite bleibt als Nachschlagewerk. Status: erledigt
+56. [Kunde 09.10.] Eigene Kontaktseite `kontakt.html` wie Karriere: Kontaktadresse mit Ansprechperson und Buttons, Karte
+    vom Geoportal des Bundes (map.geo.admin.ch, swisstopo, Zoom 9, graue Karte, OeV-Haltestellen, Marker Hafenstrasse 62,
+    Mausrad nur mit Ctrl/Cmd), Ladeverhalten A (laedt beim Scrollen zum Kartenbereich, vorher keine externe Anfrage),
+    Routen-Links Google Maps / Apple Karten / SBB-Fahrplan (DE/EN), Anreise mit Auto, Bahn und Bus, Faehre ab
+    Friedrichshafen, Eingang und Anlieferung; fehlende Fakten als Platzhalter [[...]]. Datenschutz Abschnitt 11 "Karte und
+    Routenplanung". Navigation, Menue, Footer und Schiene verlinken Kontakt auf die neue Seite. CSP: r1/.htaccess mit
+    frame-src map.geo.admin.ch. Offene Punkte (Kunde): Anfahrt Auto, Parkplaetze, Buslinie, Eingang, Anlieferung.
+    Status: erledigt in r1, Platzhalter offen
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

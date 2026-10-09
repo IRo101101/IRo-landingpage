@@ -446,6 +446,19 @@
       if (!l.hasAttribute('data-de-label')) l.setAttribute('data-de-label', l.getAttribute('aria-label') || '');
       l.setAttribute('aria-label', lang === 'en' ? l.getAttribute('data-en-label') : l.getAttribute('data-de-label'));
     }
+    // r1: Links mit sprachabhaengigem Ziel (data-en-href) und Titel-Attribute (data-en-title), z. B. SBB-Fahrplan und Karte
+    var hrefs = doc.querySelectorAll('[data-en-href]');
+    for (var h = 0; h < hrefs.length; h++) {
+      var a = hrefs[h];
+      if (!a.hasAttribute('data-de-href')) a.setAttribute('data-de-href', a.getAttribute('href') || '');
+      a.setAttribute('href', lang === 'en' ? a.getAttribute('data-en-href') : a.getAttribute('data-de-href'));
+    }
+    var titled = doc.querySelectorAll('[data-en-title]');
+    for (var t = 0; t < titled.length; t++) {
+      var ti = titled[t];
+      if (!ti.hasAttribute('data-de-title')) ti.setAttribute('data-de-title', ti.getAttribute('title') || '');
+      ti.setAttribute('title', lang === 'en' ? ti.getAttribute('data-en-title') : ti.getAttribute('data-de-title'));
+    }
     var codes = doc.querySelectorAll('[data-lang-code]');
     for (var k = 0; k < codes.length; k++) codes[k].textContent = lang.toUpperCase();
     var opts = doc.querySelectorAll('[data-lang]');
@@ -1057,6 +1070,29 @@
     });
     pg.querySelectorAll('.al').forEach(ArrowLink);
   }
+  /* r1: Kontaktseite - swisstopo-Karte (map.geo.admin.ch) laedt erst, wenn der Kartenbereich in die Naehe des
+     Viewports scrollt (Ladeverhalten A); vorher verlaesst keine Anfrage die Seite. Der Sprachwechsel tauscht nur
+     lang=de / lang=en im src. Der iFrame bleibt unveraendert (Nutzungsbedingungen geo.admin.ch), gestaltet wird nur
+     der Container .kmap. */
+  function initMapEmbed() {
+    var box = doc.querySelector('[data-map]'); if (!box) return;
+    var frame = null;
+    function src(lang) { return box.getAttribute(lang === 'en' ? 'data-src-en' : 'data-src') || box.getAttribute('data-src'); }
+    function build() {
+      if (frame) return;
+      frame = doc.createElement('iframe');
+      frame.setAttribute('title', currentLang() === 'en' ? (box.getAttribute('data-en-title') || box.getAttribute('data-title') || '') : (box.getAttribute('data-title') || ''));
+      frame.setAttribute('data-en-title', box.getAttribute('data-en-title') || ''); frame.setAttribute('data-de-title', box.getAttribute('data-title') || '');
+      frame.setAttribute('loading', 'lazy'); frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      frame.src = src(currentLang());
+      box.innerHTML = ''; box.appendChild(frame); box.classList.add('is-loaded');
+    }
+    if ('IntersectionObserver' in win) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); build(); } }); }, { rootMargin: '120px 0px' });
+      io.observe(box);
+    } else build();
+    langListeners.push(function (lang) { if (frame) { var s = src(lang); if (frame.src !== s) frame.src = s; } });
+  }
   function initYear() { doc.querySelectorAll('[data-year]').forEach(function (y) { y.textContent = String(new Date().getFullYear()); }); }
   function initAssetGuard() {
     doc.querySelectorAll('img').forEach(function (im) {
@@ -1082,6 +1118,7 @@
   initTeam();
   initContact();
   initSubpage();
+  initMapEmbed();
   initYear();
   initAssetGuard();
   initPreloader();

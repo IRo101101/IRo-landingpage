@@ -17,7 +17,10 @@ Vorschau: https://iro101101.github.io/IRo-landingpage/ (GitHub Pages, Branch `v2
 - Entschieden 09.10.2026: Footer der Unterseiten B-4 ohne Linien (schwarz, Versalien, vier Spalten auf 64rem, Rechtszeile
   mit vertikaler gestrichelter Linie und zwei Punkten), Hover-Regel fuer Textlinks (Fresh Mint auf dunkel, Signal Green
   auf hell), Rechtszeile mit "|" ohne Roll, Logo-Kachel L-4 (Original-Logo als Maske in Ice Mint, Hover Fresh Mint) im
-  Abspann und Footer, Badges als Masken mit Hover; eingebaut in r1. Standort (S-1 bis S-3) offen.
+  Abspann und Footer, Badges als Masken mit Hover; eingebaut in r1.
+- Entschieden 09.10.2026: Standort als eigene Kontaktseite kontakt.html (swisstopo-Karte vom Geoportal des Bundes, laedt
+  beim Scrollen; Routen-Links; Anreise mit Auto, Bahn, Faehre; Platzhalter fuer Parkplaetze, Anfahrt, Bus, Eingang,
+  Anlieferung) statt Standort-Kachel; eingebaut in r1. Vorschau: https://iro101101.github.io/IRo-landingpage/r1/kontakt.html
 - Details und Status: `V2-VIDEOVERGLEICH.md`, Abschnitt "Runde 1".
 
 ## Entscheidungen

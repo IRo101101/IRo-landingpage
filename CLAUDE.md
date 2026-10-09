@@ -55,7 +55,7 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Eine Variante B (Ordner `b/`, 08.10.2026) wurde dem Kunden gezeigt und verworfen: Der Stand vom 30.09. ist
   die Basis, Aenderungen daran nur Punkt fuer Punkt mit dem Kunden (Liste: `V2-VIDEOVERGLEICH.md`).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261009d; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261009e; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -135,6 +135,17 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   im Footer (`.subfoot__logo`), Farbe Ice Mint, Hover Fresh Mint, Klick zur Startseite. Header-Mark bleibt `.logo-mark`.
 - Badges `.badge--nafems` / `.badge--lehrbetrieb`: PNG als Maske in currentColor (#c4c8cc), Hover Fresh Mint ueber den
   umschliessenden Link; nie mehr als <img>.
+- Kontaktseite `kontakt.html` (Kundenentscheid 09.10., statt Standort-Kachel S-1 bis S-3): Aufbau wie Karriere mit drei
+  Zeilen (Kontaktadresse mit Ansprechperson und Buttons, Karte, Anreise). Karte = iFrame von map.geo.admin.ch (swisstopo,
+  LV95 2746262,1270375, z=9, pixelkarte-grau, Layer ch.bav.haltestellen-oev, crosshair marker, noSimpleZoom), gebaut von
+  main.js initMapEmbed erst, wenn `.kmap[data-map]` in die Naehe des Viewports scrollt (Ladeverhalten A, vorher keine
+  externe Anfrage); Sprachwechsel tauscht nur lang=de/en im src (data-src / data-src-en). Nur der Container wird gestaltet
+  (280 px mobil, 360 px ab 768), nichts ueber dem iFrame. Routen-Links Google Maps, Apple Karten, SBB (data-en-href fuer
+  die englische SBB-Seite). applyLang kennt zusaetzlich data-en-href und data-en-title. Anreise-Texte mit Platzhaltern
+  `[[...]]` (class todo), vom Kunden zu fuellen; keine erfundenen Fakten. Datenschutz Abschnitt 11 "Karte und
+  Routenplanung". `r1/.htaccess` = Root-.htaccess mit `frame-src https://map.geo.admin.ch` und ohne CARTO; beim Go-live
+  mit hochladen. Header-Navigation, Burger-Menue, Footer und Schiene verlinken "Kontakt" auf kontakt.html; "Projekt
+  starten" fuehrt weiter zum Abspann (#kontakt). v2 hat damit 5 Seiten; Sweep-Skript test_v2b.py prueft alle fuenf.
 - Rechtszeile: Trenner-Spans sind ausgeblendet, der gerade Strich "|" (Kundenwunsch 09.10., vorher Schraegstrich) haengt
   per `a ~ a::before` am Link (nie am Zeilenende) und bleibt gedaempft; die Links der Startseite haben kein RollLabel mehr,
   nur den Farbwechsel der Textlink-Regel.
