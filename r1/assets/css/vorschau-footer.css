@@ -25,6 +25,8 @@
 .vl .subfoot__bottom { flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-on-inverse-subtle); }
 .vl .subfoot__legal { border: 0; padding: 0; }
 .vl .subfoot__legal .mk { display: none; }
+.vl .subfoot__badges img { height: 3.25rem; width: auto; }   /* Block "Heute": Badges noch als Bilder */
+.vl a > .logo-lock { color: #fff; }                            /* Block "Heute": Wortmarke weiss wie zum Entscheid */
 .vl .vfb4__bottom .subfoot__legal { margin-left: auto; }
 @media (min-width: 768px) {
   .vl .subfoot__grid { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 2rem; }
