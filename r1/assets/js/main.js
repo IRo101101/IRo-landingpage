@@ -509,10 +509,15 @@
     function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
   }
+  // r1: Zielposition aus dem Layout (offsetTop-Kette), nicht aus getBoundingClientRect: Der Flow-Scrub verschiebt
+  // verlassene Bloecke um bis zu 50 px nach unten, und ein Sprung nach oben (Logo, Navigation, Schiene) landete
+  // sonst genau um diese Verschiebung zu tief.
+  function layoutTop(el) { var y = 0; while (el) { y += el.offsetTop; el = el.offsetParent; } return y; }
   function scrollToHash(hash) {
     var target = hash && hash.length > 1 ? doc.querySelector(hash) : null;
     if (!target) return false;
-    if (lenis) lenis.scrollTo(target, { offset: 0 }); else target.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
+    var y = Math.max(0, Math.round(layoutTop(target)));
+    if (lenis) lenis.scrollTo(y, { offset: 0 }); else win.scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' });
     return true;
   }
   function initAnchors() {

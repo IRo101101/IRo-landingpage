@@ -92,6 +92,8 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Kontakt-Parallaxe laeuft auf `.contact__layer` (innerer Layer 120 %), nicht mehr auf `.contact__photo`.
 - Header ab 768 px: `.hdr::after` zieht die gestrichelte Unterkante ueber die ganze Breite (wie im Original), der
   Aktions-Button (z-index 1) deckt sie ab; unter 768 px traegt `.hdr` die Unterkante selbst.
+- Anker-Sprung (scrollToHash) nimmt die Layout-Position (offsetTop-Kette), nicht getBoundingClientRect: Der Flow-Scrub
+  verschiebt verlassene Bloecke um bis zu 50 px, Spruenge nach oben (Logo, Navigation, Schiene) landeten sonst zu tief.
 - Scrub hat `ref` (Element, dessen Kanten den Scrollweg messen). Hero- und Kontakt-Parallaxe messen an der Buehne bzw.
   Aussenbox, nicht am ueberstehenden Layer; sonst steht das Hero-Foto bei Scrollposition 0 schon 5 % tiefer als die
   Finale-Karte und springt beim Ausblenden des Ladepanels. `html { scrollbar-gutter: stable }` gegen den Breitensprung

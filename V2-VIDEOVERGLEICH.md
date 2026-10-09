@@ -121,6 +121,10 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Gefunden mit dem Raster 10 Breiten x 4 Hoehen x DE/EN. Umsetzung: Reihe im Fluss, Sektion min-height 100vh und
     waechst. Status: erledigt in r1
     Raster-Ergebnis sonst: keine ungewollte Ueberlappung von Text und Foto (Unternehmen, Team, Prozess) in DE und EN.
+44. [Bug] Anker nach oben landen zu tief (Kunde 09.10.: Logo in der Kontakt-Schiene fuehrt nicht ganz nach oben): Der
+    Flow-Scrub verschiebt verlassene Bloecke um bis zu 50 px nach unten, Lenis mass das Ziel am verschobenen Block.
+    Umsetzung: scrollToHash nimmt die Layout-Position (offsetTop-Kette). Gilt fuer alle Anker (Header-Logo, Navigation,
+    Burger-Menue, Kontakt-Schiene, Hero-CTAs, Karten). Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
