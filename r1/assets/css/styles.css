@@ -270,13 +270,14 @@ section { position: relative; }
 .about__frame { position: relative; display: block; width: 100%; aspect-ratio: 358 / 458; overflow: hidden; background: #cfe8da; }
 .about__photo { position: absolute; inset: 0; opacity: 0; }
 .about__photo img { width: 100%; height: 100%; object-fit: cover; }
-.about__btnpos { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 3; }
+/* r1: Fotos im Rahmen belegen nur z 0-2 (PhotoSwap), Schleier 3, Button und Themenliste 4 */
+.about__btnpos { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 4; }
 .about__btn { display: flex; align-items: center; gap: .5rem; background: var(--black); color: #fff; padding: 1rem 1.5rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); white-space: nowrap; }
 .about__btn .swap { transform: rotate(90deg); }
-.about__topics { position: absolute; left: 1rem; bottom: 1rem; z-index: 2; color: #fff; font-size: 1.125rem; line-height: 1.2; display: flex; flex-direction: column; gap: .2rem; }
+.about__topics { position: absolute; left: 1rem; bottom: 1rem; z-index: 4; color: #fff; font-size: 1.125rem; line-height: 1.2; display: flex; flex-direction: column; gap: .2rem; }
 .about__mission { font-size: 1.125rem; line-height: 1.25; margin-top: 1.5rem; }   /* r1: Mission liegt im Wrap (unter der Themenliste) */
 /* r1: Schleier unten im Rahmen, damit die weisse Themenliste auf hellen Fotos lesbar bleibt */
-@media (max-width: 767px) { .about__frame::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(17,20,24,.55), rgba(17,20,24,0) 45%); pointer-events: none; } }
+@media (max-width: 767px) { .about__frame::after { content: ""; position: absolute; inset: 0; z-index: 3; background: linear-gradient(to top, rgba(17,20,24,.55), rgba(17,20,24,0) 45%); pointer-events: none; } }
 @media (min-width: 768px) {
   .about { padding-inline: 1.5rem; }
   .about h2 { font-size: 2.75rem; }

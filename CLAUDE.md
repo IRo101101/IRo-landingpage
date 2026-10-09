@@ -49,7 +49,7 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Eine Variante B (Ordner `b/`, 08.10.2026) wurde dem Kunden gezeigt und verworfen: Der Stand vom 30.09. ist
   die Basis, Aenderungen daran nur Punkt fuer Punkt mit dem Kunden (Liste: `V2-VIDEOVERGLEICH.md`).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261008), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261009), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler) und `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C).
   Nach dem Entscheid des Kunden wird `r1/` zum Root; die Vorschauseiten kommen nicht mit auf die Live-Site.
@@ -111,6 +111,9 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   aus dem Prompt), `PhotoSwap(frame, photos, name)` blendet gestapelte Fotos um. Am Rahmen waehlbar per
   `data-transition`, `data-interval` (ms) und `data-speed` (Tempo-Faktor, Federn tension*k^2, friction*k).
   Kundenentscheid 09.10.2026: Unternehmen = clear, 2 s, Faktor 1.4; andere Bloecke unveraendert (Prozess SWAP_IMG).
+  Ebenen im Rahmen sind fest: Fotos nur z-index 0 bis 2 (eintretend 2, aktuell 1, uebrige 0; NIE hochzaehlen),
+  Schleier `.about__frame::after` 3, `.about__btnpos` und `.about__topics` 4; sonst verdecken die Fotos nach wenigen
+  Wechseln den "Ueber uns"-Hover-Button (ab 1440 px mit Maus pro Hineinfahren sichtbar, darunter und auf Touch immer).
 - Unternehmen ab 1024 px liegt im Fluss (kein absolut zentriertes Band mehr): `.about` min-height 100lvh als Flex-Spalte,
   `.about__head` oben, `.about__wrap` (Rahmen, Themenliste, Mission; die Mission steht im Markup IM Wrap) mit
   mit festem Abstand 2rem zum Titel (gleich wie seitlich zum Foto); die Gruppe ist im Band zentriert (justify-content center, Ueberschuss oben und

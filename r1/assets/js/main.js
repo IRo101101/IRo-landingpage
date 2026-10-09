@@ -847,13 +847,16 @@
   // Stapel gestapelter Fotos in einem Rahmen; go(i) blendet Foto i mit dem gewaehlten Uebergang ueber das aktuelle.
   // speed: Tempo-Faktor (1 = Prompt-Feder, 1.4 = 40 % schneller), kommt aus data-speed am Rahmen.
   function PhotoSwap(frame, photos, name, speed) {
-    var tr = TRANSITIONS[name] || TRANSITIONS.dissolve, S = springSet(speed > 0 ? speed : 1), z = 1, idx = 0, step = 0;
+    var tr = TRANSITIONS[name] || TRANSITIONS.dissolve, S = springSet(speed > 0 ? speed : 1), idx = 0, step = 0;
     var h = Array.prototype.map.call(photos, function (p, i) { var g = tr.build(p, S); if (i === 0) { tr.show(g); p.style.zIndex = '1'; } else { tr.hide(g); p.style.zIndex = '0'; } return { el: p, g: g, gen: -1 }; });
     var fg = tr.frame ? tr.frame(frame, S) : null;
     function go(i) {
       i = i % h.length; if (i === idx) return;
       var hn = h[i], ho = h[idx], oldGen = ho.gen; idx = i; step += 1; hn.gen = step;
-      z += 1; hn.el.style.zIndex = String(z);
+      // Nur zwei Ebenen: eintretendes Foto 2, aktuelles 1, alle anderen 0. Ein wachsender z-index wuerde nach wenigen
+      // Wechseln ueber dem Hover-Button (.about__btnpos) und der Themenliste liegen.
+      h.forEach(function (x) { if (x !== hn && x !== ho) x.el.style.zIndex = '0'; });
+      ho.el.style.zIndex = '1'; hn.el.style.zIndex = '2';
       tr.enter(hn.g, S, step, function () { if (ho.gen === oldGen) { tr.hide(ho.g); ho.el.style.zIndex = '0'; } });   // nur, wenn das alte Foto nicht inzwischen neu eingetreten ist
       if (tr.leave) tr.leave(ho.g, S);
       if (tr.turn && fg) tr.turn(fg, S, step);

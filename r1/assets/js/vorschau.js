@@ -126,7 +126,7 @@
     this.el.appendChild(tpl.content.cloneNode(true));
     this.h = qsa('.about__photo', this.el).map(function (p) { var h = tr.build(p); h.el = p; h.gen = -1; return h; });
     this.fg = tr.frame ? tr.frame(this.el) : null;
-    this.idx = state.idx; this.z = 1;
+    this.idx = state.idx;
     this.h.forEach(function (h, i) {
       if (i === self.idx) { tr.show(h); h.el.style.zIndex = '1'; } else { tr.hide(h); h.el.style.zIndex = '0'; }
     });
@@ -139,7 +139,9 @@
     this.idx = idx;
     var hn = this.h[idx], ho = this.h[prev], oldGen = ho.gen;
     hn.gen = step;
-    this.z += 1; hn.el.style.zIndex = String(this.z);
+    // wie PhotoSwap in main.js: feste Ebenen 2 (eintretend), 1 (aktuell), 0 (uebrige) statt hochzaehlen
+    this.h.forEach(function (x) { if (x !== hn && x !== ho) x.el.style.zIndex = '0'; });
+    ho.el.style.zIndex = '1'; hn.el.style.zIndex = '2';
     tr.enter(hn, step, k, function () {
       if (ho.gen === oldGen) { tr.hide(ho); ho.el.style.zIndex = '0'; }   // nur, wenn das alte Foto nicht inzwischen neu eingetreten ist
     });

@@ -130,6 +130,13 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 46. [Kunde 09.10.] Unterseiten (Karriere, Impressum, Datenschutz) im Stil der Team-Zeilen: nummerierte Zeilen
     "0N //  Seitenname", Abschnittstitel links, Text rechts, mobil gestapelt, Breite 64rem, Einblenden wie die
     Team-Zeilen. Inserat unveraendert. Status: erledigt in r1
+47. [Bug] "Ueber uns"-Button im Unternehmen-Foto erschien ab 1440 px nur beim ersten Hineinfahren (Kunde 09.10.): Der
+    neue Fotowechsel (PhotoSwap) hob jedes eintretende Foto eine Ebene hoeher (z-index 2, 3, 4 ...), nach zwei bis drei
+    Wechseln lagen die Fotos ueber dem Button (Ebene 3); der Button wurde zwar eingeblendet, war aber verdeckt und die
+    Maus traf das Foto. Umsetzung: Fotos belegen fest nur Ebene 0 bis 2 (eintretend 2, aktuell 1, uebrige 0), Schleier 3,
+    Button und Themenliste 4. Gedacht ist: ab 1440 px mit Maus erscheint der Button bei jedem Hineinfahren und
+    verschwindet beim Verlassen; unter 1440 px und auf Touch-Geraeten ist er immer sichtbar (vgl. Punkt 20). Status:
+    erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
