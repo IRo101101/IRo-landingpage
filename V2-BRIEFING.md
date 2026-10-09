@@ -13,6 +13,8 @@ Vorschau: https://iro101101.github.io/IRo-landingpage/ (GitHub Pages, Branch `v2
   https://iro101101.github.io/IRo-landingpage/r1/vorschau-standort.html (Standort und Karte: S-1 Kartenbild, S-2 Lageplan,
   S-3 Zwei-Klick-Karte; offen).
 - Entschieden 09.10.2026: Fotowechsel Clear (2 s, Feder 40 % schneller) im Block Unternehmen, Layouts U-A, K-A, T-A; eingebaut in r1.
+- Entschieden 09.10.2026: Footer der Unterseiten B-2 (schwarz, Versalien, drei Spalten auf 64rem, Rechtszeile unten) und
+  Hover-Regel fuer Textlinks (Fresh Mint auf dunkel, Signal Green auf hell); eingebaut in r1. Standort (S-1 bis S-3) offen.
 - Details und Status: `V2-VIDEOVERGLEICH.md`, Abschnitt "Runde 1".
 
 ## Entscheidungen

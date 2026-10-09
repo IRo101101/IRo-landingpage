@@ -14,6 +14,8 @@
   --accent: #25C77A;
   --steel: #707981;
   --fg: #111418;
+  --link-hover-dark: #B7F3D0;    /* Textlinks auf dunklem Grund: Fresh Mint beim Hover (Kundenregel 09.10.2026) */
+  --link-hover-light: #25C77A;   /* Textlinks auf hellem Grund: Signal Green beim Hover */
 
   --on-inverse-muted: rgba(255,255,255,.55);
   --on-inverse-faint: rgba(255,255,255,.52);
@@ -523,8 +525,8 @@ section { position: relative; }
 .sub li { margin-top: .35rem; display: flex; gap: .6rem; }
 .sub li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: .55em; background: var(--black); border: 1px solid var(--border-on-muted); }
 .sub .lead { font-size: 1.25rem; line-height: 1.35; }
-.sub a:not(.dbtn):not(.al) { color: var(--fg); font-weight: 500; }   /* r1: keine Unterstreichung (Projektregel), Links tragen Gewicht statt Linie */
-.sub a:not(.dbtn):not(.al):hover { color: var(--steel, #707981); }
+.sub a:not(.dbtn):not(.al) { color: var(--fg); font-weight: 500; transition: color var(--duration-fast); }   /* r1: keine Unterstreichung (Projektregel), Links tragen Gewicht statt Linie */
+.sub a:not(.dbtn):not(.al):hover { color: var(--link-hover-light); }   /* Textlinks auf hellem Grund: Signal Green (Kundenregel 09.10.2026) */
 .sub .job { position: relative; border: 1px dashed var(--border-on-muted); padding: 1.5rem; margin-top: 1.5rem; background: rgba(255,255,255,.35); }
 .sub .job > :first-child { margin-top: 0; }
 .sub .actions { margin-top: 1.5rem; display: flex; gap: .75rem; flex-wrap: wrap; }
@@ -532,18 +534,36 @@ section { position: relative; }
 @media (min-width: 768px) { .sub { padding-inline: 1.5rem; } .sub h1 { font-size: 3rem; } }
 @media (min-width: 1440px) { .sub { padding-inline: 2rem; } .sub h1 { font-size: var(--section-title); } }
 
-.subfoot { position: relative; background: var(--black); color: #fff; padding: 3rem 1rem 2rem; }
-.subfoot__grid { display: flex; flex-direction: column; gap: 2rem; }
-.subfoot .rail__links { margin-top: 0; width: 100%; max-width: 16rem; }
-.subfoot__details { display: flex; flex-direction: column; gap: .75rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.3; }
-.subfoot__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border-on-inverse-subtle); text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); }
+/* r1: Footer der Unterseiten als B-2 (Kundenentscheid 09.10.2026, Vorbild mediawork.ch): dunkles Band, drei gleich
+   breite Spalten auf 64rem (Logo und Badges, Abschnitte als schlichte Versal-Links, Adresse), Rechtszeile unten.
+   Unter 768 px eine Spalte: Logo, Badges, Abschnitte, Adresse, Rechtszeile. Hover der Links in Fresh Mint. */
+.subfoot { position: relative; background: var(--black); color: #fff; padding: 3.5rem 1rem 3rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); line-height: 1.3; }
+.subfoot__inner { max-width: 64rem; margin-inline: auto; display: flex; flex-direction: column; gap: 2.5rem; }
+.subfoot__col { min-width: 0; }
+.subfoot__brand { display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+.subfoot__logo { display: block; color: #fff; }
+.subfoot__badges { display: flex; gap: 1rem; align-items: center; }
+.subfoot__badges img { height: 3.25rem; width: auto; }
+.subfoot__badges a { display: block; }
+.subfoot__links, .subfoot__details { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; }
+.subfoot__bottom { max-width: 64rem; margin: 3rem auto 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-on-inverse-subtle); color: var(--on-inverse-meta); }
 .subfoot__legal { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
-@media (min-width: 768px) { .subfoot { padding: 3.5rem 1.5rem 2rem; } .subfoot__grid { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 2rem; } .subfoot .rail__links { width: 13.6875rem; } }
+@media (min-width: 768px) {
+  .subfoot { padding: 4.5rem 1.5rem 4rem; }
+  .subfoot__inner { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 2rem; align-items: start; }
+}
 @media (min-width: 1440px) { .subfoot { padding-inline: 2rem; } }
+
+/* ---- Textlinks: Hover in Gruen (Kundenregel 09.10.2026) ----
+   Normaler verlinkter Text faerbt sich beim Hover gruen: auf dunklem Grund Fresh Mint, auf hellem Grund Signal Green.
+   Ausnahmen bleiben wie entworfen: Pfeil-Links (.al, Schiene, Burger-Menue, "Zur Lehrstelle"), Buttons (.dbtn, .cbtn,
+   Aktions-Button), Header-Navigation und Sprachwahl. Neue Seiten uebernehmen die Regel ueber dieselben Klassen. */
+.rail__details a, .contact__legal a, .subfoot__links a, .subfoot__details a, .subfoot__legal a, .consent__more { transition: color var(--duration-fast); }
+.rail__details a:hover, .contact__legal a:hover, .subfoot__links a:hover, .subfoot__details a:hover, .subfoot__legal a:hover, .consent__more:hover { color: var(--link-hover-dark); }
 
 /* ---- Tap-Ziele bis 1024 (iPad quer) und auf Touch-Geraeten (pointer: coarse), mindestens 40 px hoch; Desktop mit Maus unveraendert ---- */
 @media (max-width: 1024px), (pointer: coarse) {
-  .rail__details a, .subfoot__details a { display: inline-flex; align-items: center; min-height: 40px; margin-block: -.375rem; }
+  .rail__details a, .subfoot__details a, .subfoot__links a { display: inline-flex; align-items: center; min-height: 40px; margin-block: -.375rem; }
   .contact__legal, .subfoot__legal { align-items: center; }
   .contact__legal a, .subfoot__legal a { display: inline-flex; align-items: center; min-height: 40px; margin-block: -.375rem; }
   /* Textlinks auf den Unterseiten: Flaeche auf 42 px, Zeile bleibt gleich hoch, gestrichelte Linie als Hintergrund an der alten Stelle */

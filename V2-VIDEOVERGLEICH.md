@@ -147,7 +147,16 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Zweite Runde auf der Seite: B-1 wie Vorbild (Gemischtschreibung 1.0625rem, Logo und Adresse / Abschnitte / Badges und
     Rechtliches, Copyright unter der Adresse), B-2 im Stil der Site (Versalien .875rem, Logo und Badges / Abschnitte /
     Adresse, Rechtszeile unten wie heute), B-3 hell (Anordnung B-1 auf Ice Mint, Haarlinie oben, Badges in Anthrazit).
-    Alle ab 768 px drei Spalten in 64rem, darunter eine Spalte. Status: offen (Entscheid Kunde zwischen B-1 bis B-3)
+    Alle ab 768 px drei Spalten in 64rem, darunter eine Spalte. Kundenentscheid 09.10. (zweite Runde): B-2, schwarzer
+    Footer im Stil der Site. Eingebaut auf karriere, impressum, datenschutz (`.subfoot__inner` Grid 3 Spalten ab 768,
+    `.subfoot__brand` Logo und Badges, `.subfoot__links` schlichte Versal-Links, `.subfoot__details` Adresse, Telefon,
+    Mail, `.subfoot__bottom` Rechtszeile; aktive Seite mit aria-current). Status: erledigt in r1
+50. [Kunde 09.10.] Hover-Regel fuer Textlinks: Die gruene Hover-Farbe der Footer-Links (B-2) gilt fuer alle normalen
+    Textlinks der Site: auf dunklem Grund Fresh Mint, auf hellem Grund Signal Green (Fresh Mint waere auf Ice Mint und
+    in den Fresh-Mint-Zeilen unsichtbar). Umgesetzt fuer Telefon, Mail und Adresse in der Schiene, Rechtszeile der
+    Startseite (Roll-Effekt bleibt, dazu Gruen), Footer der Unterseiten, Links im Fliesstext der Unterseiten (vorher
+    Steel Gray), Link im Consent-Banner. Unveraendert: Pfeil-Links (Schiene, Menue, "Zur Lehrstelle"), Buttons, Header-
+    Navigation, Sprachwahl. Regel in CLAUDE.md (Inhalt / Wording). Status: erledigt in r1
 49. [Kunde 09.10.] Standortangabe mit Karte fehlt in v2 (v1 hat eine Leaflet-Karte im Kontaktblock). Recherche 09.10.:
     Der Prompt (Northwall, GetLayers) kennt keinen Standort- oder Kartenblock, die GetLayers-Bibliothek hat keine
     Kontakt- oder Kartensektion; Premium-Agenturseiten loesen den Standort typografisch (Adresse plus "Route planen")

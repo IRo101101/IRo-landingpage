@@ -10,6 +10,12 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Das Lehrstellen-Inserat auf karriere.html bleibt verbatim und nur auf Deutsch.
 - Alle Kontaktadressen auf iro.swiss (info@iro.swiss, datenschutz@iro.swiss).
 - Sichtbare Texte: "aus der Schweiz" statt "aus Romanshorn" (Meta/SEO darf Romanshorn nennen).
+- Textlinks (Kundenregel 09.10.2026, gilt fuer v2/r1 und jede neue Seite): Normaler verlinkter Text faerbt sich beim
+  Hover gruen, keine Linie. Auf dunklem Grund Fresh Mint `--link-hover-dark` (#B7F3D0), auf hellem Grund Signal Green
+  `--link-hover-light` (#25C77A), Uebergang `--duration-fast`. Gilt fuer Telefon, Mail, Adresse, Impressum / Datenschutz /
+  Cookie-Einstellungen (Startseite und Footer), Links im Fliesstext der Unterseiten (`.sub a`), Link im Consent-Banner.
+  Ausnahmen bleiben wie entworfen: Pfeil-Links `.al` (Schiene, Burger-Menue, "Zur Lehrstelle"), Buttons (`.dbtn`,
+  `.cbtn`, Aktions-Button), Header-Navigation, Sprachwahl. Neue Textlinks bekommen eine dieser Klassen oder liegen in `.sub`.
 
 ## Zweisprachigkeit (DE/EN) - immer beide Sprachen gleich stark pflegen
 - Deutsch ist der Default im HTML, Englisch steht in `data-en`-Attributen.
