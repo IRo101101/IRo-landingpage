@@ -15,7 +15,8 @@ daran anpassen kann, ohne diese Sitzung zu kennen.
   - `screens/` (Screenshots aller Bloecke, DE und EN, Desktop 1440 und Mobil 390)
 - Quellcode des Designs: `assets/css/styles.css` (Tokens ganz oben unter `:root`), `assets/js/main.js`
   (Bewegungs-Konstanten ganz oben), `index.html` (Texte DE im Text, EN in `data-en`).
-- Fotos: `assets/img/v2/01.webp` bis `21.webp` (1800 px breit, Hero 07 mit 2400 px) und `NN-m.webp` (1100 px).
+- Fotos: `assets/img/v2/01.webp` bis `23.webp` (1800 px breit, Hero 07 mit 2400 px) und `NN-m.webp` (1100 px); 22 und 23
+  (10.10.2026: 3D-Drucker mit Shore-Haertemustern, offene Glastuer zum Buero) sind im Fundus, aber noch nicht eingesetzt.
   Originale (6720 x 4480 JPG) liegen beim Kunden (Fotograf rsf, Pakete 1-5).
 - Verbindliche Projektregeln: `CLAUDE.md` im Repo (Wording, DE/EN, keine Gedankenstriche, keine Unterstreichungen,
   "aus der Schweiz" statt "aus Romanshorn", nie Siemens/NX/Ansys usw. erwaehnen).

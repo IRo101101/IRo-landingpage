@@ -91,8 +91,12 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   `data-en` auf Elementen mit Wort-Engine/RollLabel/Zaehler funktioniert ueber `el.__setText` (main.js applyLang).
 - Chrome rechnet `clip-path` des Ziels in IntersectionObserver ein: maskierte Elemente (`.card__mask`,
   `.team__mask`) nie direkt beobachten, sondern den unmaskierten Elternknoten (`Inview(..., {watch: el})`).
-- Fotos: `assets/img/v2/NN.webp` (Desktop) und `NN-m.webp` (mobil); Nummern = Kontaktblatt 01-21.
-  Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02.
+- Fotos: `assets/img/v2/NN.webp` (Desktop, 1800 px breit, Hero 2400) und `NN-m.webp` (mobil, 1100 px); Nummern = Kontaktblatt
+  01-23. Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02;
+  08 (Glasfront mit Terrasse) unbenutzt. 22 (3D-Drucker druckt Shore-Haertemuster) und 23 (offene Glastuer zum Buero, gruene
+  Saeulen, Kaffeebar) am 10.10.2026 nachgeliefert, noch frei; sie kamen als Chat-Upload nur mit 2000 px Breite (Originale
+  01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (scratchpad/add_photos.py).
+  Uebersicht aller Fotos mit Verwendung: scratchpad/bilduebersicht.py erzeugt bilduebersicht.png.
 - Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind PLATZHALTER, vom Kunden zu korrigieren.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
   `scratchpad/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel);
