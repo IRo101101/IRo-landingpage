@@ -146,9 +146,16 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   externe Anfrage; auf grossen Bildschirmen liegt der Kartenbereich bei Scrollposition 0 schon im Fenster, die Karte laedt
   dann direkt beim Aufruf - Hinweis in .kmap__note und Datenschutz Abschnitt 11 sagt das so, nie "beim Scrollen"
   versprechen); Sprachwechsel tauscht nur lang=de/en im src (data-src / data-src-en). Nur der Container wird gestaltet
-  (280 px mobil, 360 px ab 768), nichts ueber dem iFrame. Routen-Links Google Maps, Apple Karten, SBB (data-en-href fuer
-  die englische SBB-Seite). applyLang kennt zusaetzlich data-en-href und data-en-title. Anreise-Texte (10.10.2026) nach
-  Kundenangaben: drei Anfahrten ueber den Hub-Kreisel (Amriswil/Weinfelden; Zuerich via Ausfahrt Kreuzlingen Sued und
+  (280 px mobil, 360 px ab 768), nichts ueber dem iFrame. Zeile "Route und Fahrplan": Google Maps (dir/?api=1&destination=
+  IdeeRoth AG, Hafenstrasse 62, ...), Apple Karten in der Legacy-Form `maps.apple.com/?daddr=...&dirflg=d` (laeuft auf allen
+  iOS/macOS-Versionen, Ziel mit Firmenname; data-en-href mit "Switzerland"), SBB-Fahrplan (nach=..., data-en-href /en),
+  Faehrfahrplan (offizielle Seite der Faehrbetreiberin bodensee-schiffe.ch/faehre/fahrplan/, DE und EN gleich); darunter
+  Hinweis (.kmap__hint): Ziel ist eingetragen, Start nimmt die App vom Standort oder fragt danach. "Mit dem Schiff" nennt
+  den Takt (Ankunft Romanshorn stuendlich zur Minute 06, Abfahrt Friedrichshafen Minute 20, rund 45 Minuten, im Winter
+  teils Zweistundentakt; Quelle bsb.de und bodensee-schiffe.ch, Stand 10.10.2026, bei Fahrplanwechsel pruefen). Das Wort
+  "Bodensee" bleibt im sichtbaren Text tabu (Faehrbetreiberin statt Firmenname). applyLang kennt zusaetzlich data-en-href
+  und data-en-title. Anreise-Texte (10.10.2026) nach
+  Kundenangaben: drei Anfahrten ueber den Hubkreisel (Amriswil/Weinfelden; Zuerich via Ausfahrt Kreuzlingen Sued und
   Hauptstrasse 13; Osten via Verzweigung Meggenhus und A23), Parkplaetze (oeffentlich oder Anruf fuer die Schranke),
   Fussweg vom Bahnhof, der Faehre und den Kursschiffen unten am Hafenbecken entlang, Eingang Westseite/Hochparterre,
   Gebaeude des Restaurants Panem. Strassennamen aus OSM/OSRM belegt; keine erfundenen Fakten, Platzhalter-Klasse `todo`
