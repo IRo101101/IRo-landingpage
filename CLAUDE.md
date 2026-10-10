@@ -143,8 +143,12 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   dann direkt beim Aufruf - Hinweis in .kmap__note und Datenschutz Abschnitt 11 sagt das so, nie "beim Scrollen"
   versprechen); Sprachwechsel tauscht nur lang=de/en im src (data-src / data-src-en). Nur der Container wird gestaltet
   (280 px mobil, 360 px ab 768), nichts ueber dem iFrame. Routen-Links Google Maps, Apple Karten, SBB (data-en-href fuer
-  die englische SBB-Seite). applyLang kennt zusaetzlich data-en-href und data-en-title. Anreise-Texte mit Platzhaltern
-  `[[...]]` (class todo), vom Kunden zu fuellen; keine erfundenen Fakten. Datenschutz Abschnitt 11 "Karte und
+  die englische SBB-Seite). applyLang kennt zusaetzlich data-en-href und data-en-title. Anreise-Texte (10.10.2026) nach
+  Kundenangaben: drei Anfahrten ueber den Hub-Kreisel (Amriswil/Weinfelden; Zuerich via Ausfahrt Kreuzlingen Sued und
+  Hauptstrasse 13; Osten via Verzweigung Meggenhus und A23), Parkplaetze (oeffentlich oder Anruf fuer die Schranke),
+  Fussweg vom Bahnhof, der Faehre und den Kursschiffen unten am Hafenbecken entlang, Eingang Westseite/Hochparterre,
+  Gebaeude des Restaurants Panem. Strassennamen aus OSM/OSRM belegt; keine erfundenen Fakten, Platzhalter-Klasse `todo`
+  bleibt fuer kuenftige Luecken. Datenschutz Abschnitt 11 "Karte und
   Routenplanung" (Bundes-Link admin.ch/de/rechtliches, EN per data-en-href admin.ch/en/terms-and-conditions).
   `r1/.htaccess` = Root-.htaccess mit `frame-src https://map.geo.admin.ch` und ohne CARTO; beim Go-live
   mit hochladen. Header-Navigation, Burger-Menue, Footer und Schiene verlinken "Kontakt" auf kontakt.html; "Projekt
