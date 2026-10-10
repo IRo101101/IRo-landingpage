@@ -223,7 +223,12 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Ausfahrten aus OSM/OSRM, Wikipedia (A7, A23) und faehre-bodensee.de belegt (scratchpad/anreise_facts.md), keine
     Platzhalter mehr. Kunde 10.10.: Zeile "Route und Fahrplan" mit Google Maps zuerst (Ziel IdeeRoth AG eingetragen),
     Apple Karten mit Ziel inkl. Firmenname (Legacy-URL daddr), SBB-Fahrplan, neu Faehrfahrplan (Seite der Faehrbetreiberin)
-    und Hinweis zum Startort; "Mit dem Schiff" mit Stundentakt (Ankunft Minute 06) und Winterhinweis. Falls vor einer
+    und Hinweis zum Startort; "Mit dem Schiff" mit Stundentakt (Ankunft Minute 06) und Winterhinweis. Gegenpruefung 10.10.
+    (12 Pruefberichte, OSM/OSRM/swisstopo/romanshorn.ch): Rorschach faehrt direkt auf die A23, Ende der Autostrasse links
+    auf die H13; Bahnhof -> Hafenseite durch die Personenunterfuehrung (kein Hoehenunterschied); Panem steht schraeg
+    rechts gegenueber dem Quai-Ende; Parkplatz See 2 (Panem) direkt neben dem Haus, 7 bis 18 Uhr gebuehrenpflichtig,
+    Hafenstrasse Blaue Zone; Eingang Westseite bei der Zufahrt mit der Schranke. Zukunft: Tiefgarage Hafenpromenade
+    (Abstimmung 14.06.2026) ersetzt die oberirdischen Parkplaetze am See, Text dann anpassen. Falls vor einer
     Nutzerhandlung gar nichts Externes laden soll, waere Klick-zum-Laden (wie S-3) die Alternative zu A. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
