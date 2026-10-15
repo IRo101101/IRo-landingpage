@@ -230,6 +230,12 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Hafenstrasse Blaue Zone; Eingang Westseite bei der Zufahrt mit der Schranke. Zukunft: Tiefgarage Hafenpromenade
     (Abstimmung 14.06.2026) ersetzt die oberirdischen Parkplaetze am See, Text dann anpassen. Falls vor einer
     Nutzerhandlung gar nichts Externes laden soll, waere Klick-zum-Laden (wie S-3) die Alternative zu A. Status: erledigt in r1
+57. [Kunde 15.10.] Duenne durchgezogene Linie statt gestrichelter Haarlinien, Vorbild die schmale Linie im Hero
+    (`.hero__rule`, 1 px, Weiss 40 %): Header-Unterkante und Zellenlinien, Buttons `.dbtn` und `.cbtn`, Sprachpanel,
+    Lehrstellen-Inserat `.job`, Footer-Haarlinie `.subfoot__bottom`, Consent-Banner. Farben und Staerke unveraendert
+    (1 px, `--rule` bzw. `--border-on-*`), nur `dashed` -> `solid`; .mk-Punkte bleiben. Cache-Version 20261015.
+    Entscheid kam aus der PowerPoint-Vorlage (dort dieselbe Linie fuer Haarlinien, Tabellen und Rahmen).
+    Vorschauseiten (vorschau-*.css) unveraendert, sie gehen nicht live. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

@@ -115,7 +115,11 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen 12 px fuer Versal-Labels, Tap-Ziele 40 px (auch bei
   `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand, Hero-Foto 358/400 mit staerkerem Schleier.
 - Kontakt-Parallaxe laeuft auf `.contact__layer` (innerer Layer 120 %), nicht mehr auf `.contact__photo`.
-- Header ab 768 px: `.hdr::after` zieht die gestrichelte Unterkante ueber die ganze Breite (wie im Original), der
+- Linien (Kundenentscheid 15.10.2026): alle Haarlinien und Rahmen sind 1 px durchgezogen in der Linienfarbe (`--rule`,
+  `--border-on-inverse`, `--border-on-muted`), Vorbild `.hero__rule` (1 px, Weiss 40 % auf dunklem Grund). Keine
+  gestrichelten Linien mehr (Header-Unterkante, Header-Zellen, Buttons `.dbtn`/`.cbtn`, Sprachpanel, Inserat `.job`,
+  Footer-Haarlinie, Consent-Banner). Die .mk-Punkte bleiben. Gilt auch fuer die PowerPoint-Vorlage (Tabellen, Rahmen).
+- Header ab 768 px: `.hdr::after` zieht die duenne Unterkante ueber die ganze Breite (wie im Original), der
   Aktions-Button (z-index 1) deckt sie ab; unter 768 px traegt `.hdr` die Unterkante selbst. Am Desktop bleibt der
   Header ohne Hintergrund (Prompt, Kundenentscheid 09.10.); unter 1024 px Milchglas: `--ground-glass` (Bodenfarbe
   mit Alpha .72, schreibt main.js pro Frame) plus backdrop-filter blur(14px) mit -webkit-Praefix.
@@ -132,8 +136,8 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Footer der Unterseiten (Kundenentscheid 09.10., B-4 ohne Linien): `.subfoot__inner` vier Spalten auf 64rem (Logo-Kachel
   und Badges, Kompetenzen / Unternehmen / Leistungen, Team / Karriere / Kontakt, Adresse), 2 x 2 ab 768, eine Spalte
   darunter; `.subfoot__bottom` (Copyright links, Impressum | Datenschutz | Cookie-Einstellungen rechts, mobil gestapelt)
-  mit waagrechter gestrichelter Haarlinie oben und je einem .mk-Punkt links und rechts (Marker tl/tr statisch im Markup;
-  Kundenkorrektur 09.10.). Keine Rahmen, keine Spaltenlinien.
+  mit waagrechter duenner Haarlinie oben (seit 15.10. durchgezogen) und je einem .mk-Punkt links und rechts (Marker
+  tl/tr statisch im Markup; Kundenkorrektur 09.10.). Keine Rahmen, keine Spaltenlinien.
 - Logo-Kachel `.logo-tile` (Original-Logo `assets/img/logo/tile-white.png` als Maske, 5.5 x 5.5rem, Kachel und SWISS in
   currentColor, Marke als Ausschnitt): im Abspann der Startseite (`.rail__logo`, Schienen-Links ab 768 auf top 9rem) und
   im Footer (`.subfoot__logo`), Farbe Ice Mint, Hover Fresh Mint, Klick zur Startseite. Header-Mark bleibt `.logo-mark`.
