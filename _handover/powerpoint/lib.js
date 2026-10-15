@@ -111,11 +111,11 @@ function defineLayouts(pres, lang) {
   ]});
   pres.defineSlideMaster({ title: name('KONTAKT'), background: bgOf('dark'), slideNumber: slideNo('dark'), objects: [
     logo('dark'),
-    ph('title', 'title', { x: M, y: 1.45, w: 11.3, h: 1.2, ...titleOpts(44, MINT) }, t.contact),
+    ph('title', 'title', { x: M, y: 1.62, w: 11.3, h: 1.2, ...titleOpts(44, MINT) }, t.contact),
     ...footerV('dark', t.footer),
   ]});
   pres.defineSlideMaster({ title: name('FOTO'), background: bgOf('dark'), slideNumber: slideNo('dark'), objects: [
-    ph('photo', 'pic', { x: 0, y: 0, w: W, h: H, color: BLACK }, t.photo),
+    ph('photo', 'pic', { x: 0, y: 0, w: W, h: H, color: MINT, fontSize: 14 }, t.photo),
     ph('title', 'title', { x: M, y: 5.0, w: 9.5, h: 1.3, ...titleOpts(44, MINT) }, t.titlePhoto),
     ph('caption', 'body', { x: M, y: 6.45, w: 9, h: 0.3, ...eyebrowOpts('dark'), color: FRESH }, t.caption),
     ...footerV('dark', t.footer),
@@ -130,7 +130,7 @@ function defineLayouts(pres, lang) {
     pres.defineSlideMaster({ title: name('TEXT_FOTO_' + sfx), background: bgOf(k), slideNumber: slideNo(k), objects: [
       ...contentHead(k, t),
       ph('body', 'body', { x: M, y: 2.85, w: 5.5, h: 3.8, fontSize: 14, color: BLACK, lineSpacingMultiple: 1.2, paraSpaceAfter: 8 }, t.text),
-      ph('photo', 'pic', { x: 6.9, y: 2.85, w: R - 6.9, h: 3.75, color: BLACK }, t.photo),
+      ph('photo', 'pic', { x: 6.9, y: 2.85, w: R - 6.9, h: 3.75, color: BLACK, fontSize: 14 }, t.photo),
       ...footerV(k, t.footer),
     ]});
     pres.defineSlideMaster({ title: name('INHALT_' + sfx), background: bgOf(k), slideNumber: slideNo(k), objects: [...contentHead(k, t), ...footerV(k, t.footer)] });
@@ -200,11 +200,11 @@ function addReferenceSlides(pres, lang, N, hidden) {
     s.addText(d('Aufgabenstatus: erledigt, aktiv, offen (Markenfarben)', 'Task status: done, active, open (brand colours)'), { x: colX(2), y: by + 0.8, w: cw3, h: 0.26, fontSize: 9, color: STEEL, margin: 0, isTextBox: true, objectName: 'Status Erklärung' });
     [[d('VERTRAULICH', 'CONFIDENTIAL'), 'rot'], [d('IN PRÜFUNG', 'UNDER REVIEW'), 'orange'], [d('FREIGEGEBEN', 'RELEASED'), 'gruen']].forEach(([t, kind], i) => h.chip(s, colX(2) + i * 1.25, by + 1.25, t, kind, k, 1.15));
     s.addText(d('Freigabestatus als Ampel: Rot = Achtung, Verbot, vertraulich; Orange = in Prüfung, vorläufig; Grün = freigegeben. Nur für Labels, nie für Inhalte.', 'Release status as traffic light: red = attention, prohibition, confidential; amber = under review, preliminary; green = released. Labels only, never content.'), { x: colX(2), y: by + 1.6, w: cw3, h: 0.6, fontSize: 9, color: STEEL, lineSpacingMultiple: 1.2, margin: 0, isTextBox: true, valign: 'top', objectName: 'Ampel Erklärung' });
-    h.chip(s, colX(2), by + 2.3, d('INTERN', 'INTERNAL'), 'neutral', k, 1.15);
-    h.chip(s, colX(2) + 1.25, by + 2.3, d('ENTWURF', 'DRAFT'), 'neutral', k, 1.15);
-    s.addText(d('Neutrale Labels ohne Ampelbedeutung', 'Neutral labels without traffic-light meaning'), { x: colX(2), y: by + 2.65, w: cw3, h: 0.26, fontSize: 9, color: STEEL, margin: 0, isTextBox: true, objectName: 'Neutral Erklärung' });
-    s.addText(d('ZUR SIMULATION  →', 'TO THE SIMULATION  →'), { x: colX(2), y: by + 3.1, w: cw3, h: 0.3, fontSize: 10, color: BLACK, charSpacing: -0.3, margin: 0, isTextBox: true, objectName: 'Pfeil-Link' });
-    s.addText(d('Pfeil-Link als Verweis auf eine andere Folie', 'Arrow link as reference to another slide'), { x: colX(2), y: by + 3.4, w: cw3, h: 0.26, fontSize: 9, color: STEEL, margin: 0, isTextBox: true, objectName: 'Pfeil-Link Text' });
+    h.chip(s, colX(2), by + 2.45, d('INTERN', 'INTERNAL'), 'neutral', k, 1.15);
+    h.chip(s, colX(2) + 1.25, by + 2.45, d('ENTWURF', 'DRAFT'), 'neutral', k, 1.15);
+    s.addText(d('Neutrale Labels ohne Ampelbedeutung', 'Neutral labels without traffic-light meaning'), { x: colX(2), y: by + 2.8, w: cw3, h: 0.26, fontSize: 9, color: STEEL, margin: 0, isTextBox: true, objectName: 'Neutral Erklärung' });
+    s.addText(d('ZUR SIMULATION  →', 'TO THE SIMULATION  →'), { x: colX(2), y: by + 3.25, w: cw3, h: 0.3, fontSize: 10, color: BLACK, charSpacing: -0.3, margin: 0, isTextBox: true, objectName: 'Pfeil-Link' });
+    s.addText(d('Pfeil-Link als Verweis auf eine andere Folie', 'Arrow link as reference to another slide'), { x: colX(2), y: by + 3.55, w: cw3, h: 0.26, fontSize: 9, color: STEEL, margin: 0, isTextBox: true, objectName: 'Pfeil-Link Text' });
   }
   s.addNotes(d('Bausteine zum Kopieren. Diese Folie ist in der Vorlage ausgeblendet und wird nicht präsentiert.', 'Building blocks to copy. This slide is hidden in the template and is not presented.'));
 
@@ -263,10 +263,10 @@ function addReferenceSlides(pres, lang, N, hidden) {
       ['PowerPoint', 'Marken- und Statusfarben liegen als Designfarben im Farbwähler bereit, Abstufungen entstehen automatisch.'],
     ] : [
       ['Ground', 'One ground colour per slide. White for documents to read and print, Mint for presentations on screen, Dark for title, chapter, quote and closing. Do not switch between White and Mint within one presentation.'],
-      ['Proportions', 'Ground colour about 70 %, text and grey 25 %, Signal Green at most 5 %.'],
+      ['Proportions', 'Ground colour about 70%, text and grey 25%, Signal Green at most 5%.'],
       ['Signal Green', 'Accent only: active state, one key figure, today line, buttons, links, label "Recommended", series "New" in charts, IdeeRoth bars in the schedule. Never for body text, never as a surface behind text.'],
       ['Fresh Mint', 'Surface behind a highlight, links and hover on Dark, light schedule bars, label "Released".'],
-      ['Lines', 'Text colour at 40 % opacity: #A0A1A3 on White, #91A19B on Mint, #707274 (white) on Dark. 0.5 pt solid, like the line in the hero of the website.'],
+      ['Lines', 'Text colour at 40% opacity: #A0A1A3 on White, #91A19B on Mint, #707274 (white) on Dark. 0.5 pt solid, like the line in the hero of the website.'],
       ['Traffic light', 'Red, amber and green only for release labels: red = attention, prohibition, confidential; amber = under review, preliminary; green = released. Never for charts or text, otherwise the traffic light loses its meaning.'],
       ['Print', 'CMYK is the standard conversion without a colour profile. Signal Green lies outside the print gamut and will look duller; agree print values with the printer once.'],
       ['PowerPoint', 'Brand and status colours are available as theme colours in the colour picker; tints are generated automatically.'],
@@ -336,7 +336,7 @@ function addSampleSlides(pres, lang, N) {
   s.addImage({ path: A + 'mark-mint.png', x: M, y: 0.48, w: 0.95, h: 0.342, objectName: 'Logo' });
   h.hair(s, M, 4.75, CW, 'dark', 'Linie wie im Hero');
   s.addText(d('Von der ersten Idee. Bis zur Serie.', 'From the first idea. To series production.'), { placeholder: 'title' });
-  s.addText(d('FOTO 07  ·  GEGENLICHT DURCH DIE OFFENE TÜR', 'PHOTO 07  ·  BACKLIGHT THROUGH THE OPEN DOOR'), { placeholder: 'caption' });
+  s.addText(d('BLICK AUS DEM BÜRO AUF DIE TERRASSE', 'VIEW FROM THE OFFICE ONTO THE TERRACE'), { placeholder: 'caption' });
   s.addNotes(d('Foto in den Platzhalter einfügen, dann den Schleier (schwarzes Rechteck, 45 % transparent) darüber lassen.', 'Insert the photo into the placeholder and keep the veil (black rectangle, 45 % transparent) on top.'));
   // Karten
   s = pres.addSlide({ masterName: N.INHALT_MINT });
@@ -367,9 +367,9 @@ function addSampleSlides(pres, lang, N) {
   s = pres.addSlide({ masterName: N.INHALT_WEISS });
   s.addText(d('05 //  TEAM', '05 //  TEAM'), { placeholder: 'eyebrow' });
   s.addText(d('Wofür wir stehen', 'What we stand for'), { placeholder: 'title' });
-  const rows = [['01 //  VISION', 'Better products for life.', d('Mit dieser Vision lösen wir Probleme mit unseren Ideen. Im Innovationsnetzwerk unserer Kunden sind wir langfristige Partnerin - nachhaltig, ökologisch und effizient.', 'With this vision we solve problems with our ideas. In our customers’ innovation networks we are a long-term partner - sustainable, ecological and efficient.')],
+  const rows = [['01 //  VISION', 'Better products for life.', d('Mit dieser Vision lösen wir Probleme mit unseren Ideen. Im Innovationsnetzwerk unserer Kunden sind wir langfristige Partnerin - nachhaltig, ökologisch und effizient.', 'Guided by this vision, we solve problems with our ideas. In our customers’ innovation networks we are a long-term partner - sustainable, ecological and efficient.')],
                 ['02 //  MISSION', d('Aus weniger mehr entwickeln.', 'Develop more from less.'), d('Unser Team unterstützt Kunden bei der Produktentwicklung und verbessert so deren Wettbewerbsfähigkeit.', 'Our team supports customers in product development and so improves their competitiveness.')],
-                [d('03 //  LEITBILD', '03 //  VALUES'), d('Verantwortungsbewusst, ehrlich, loyal.', 'Responsible, honest, loyal.'), d('Mitarbeitende sind unser wichtigstes Gut. Wir bieten attraktive Arbeitsplätze und fördern die Menschen gezielt.', 'Our people are our most important asset. We offer attractive workplaces and develop people deliberately.')]];
+                [d('03 //  LEITBILD', '03 //  VALUES'), d('Verantwortungsbewusst, ehrlich, loyal.', 'Responsible, honest, loyal.'), d('Mitarbeitende sind unser wichtigstes Gut. Wir bieten attraktive Arbeitsplätze und fördern die Menschen gezielt.', 'Our people are our most important asset. We offer attractive workplaces and develop our people systematically.')]];
   rows.forEach(([e, name, b], i) => {
     const y = 2.95 + i * 1.3;
     h.eyebrow(s, e, M, y, 3, 'white');
@@ -387,7 +387,7 @@ function addSampleSlides(pres, lang, N) {
   s.addText(d('04 //  LEISTUNGEN', '04 //  SERVICES'), { placeholder: 'eyebrow' });
   s.addText(d('Ein Projekt in Zahlen', 'A project in figures'), { placeholder: 'title' });
   h.hair(s, M, 3.0, CW, 'mint', 'Linie Kennzahlen oben');
-  [['38 %', d('WENIGER TEILE', 'FEWER PARTS'), d('Baugruppe neu gedacht, Montage halbiert.', 'Assembly rethought, assembly time halved.')], ['6', d('WOCHEN BIS ZUM PROTOTYP', 'WEEKS TO THE PROTOTYPE'), d('Vom Kickoff bis zum ersten Funktionsmuster.', 'From kick-off to the first functional sample.')], ['100 %', d('IM EIGENEN HAUS', 'IN HOUSE'), d('Konstruktion, Simulation und Prototyp.', 'Design, simulation and prototype.')]].forEach(([num, l, dd], i) => {
+  [[d('38 %', '38%'), d('WENIGER TEILE', 'FEWER PARTS'), d('Baugruppe neu gedacht, Montage halbiert.', 'Assembly rethought, assembly time halved.')], ['6', d('WOCHEN BIS ZUM PROTOTYP', 'WEEKS TO PROTOTYPE'), d('Vom Kickoff bis zum ersten Funktionsmuster.', 'From kick-off to the first functional sample.')], [d('100 %', '100%'), d('IM EIGENEN HAUS', 'IN HOUSE'), d('Konstruktion, Simulation und Prototyp.', 'Design, simulation and prototype.')]].forEach(([num, l, dd], i) => {
     const cw = (CW - 2 * 0.45) / 3, x = M + i * (cw + 0.45);
     s.addText(num, { x, y: 3.25, w: cw, h: 1.1, fontSize: 60, color: i === 1 ? GREEN : BLACK, charSpacing: -1.5, margin: 0, isTextBox: true, objectName: 'Kennzahl ' + (i + 1) });
     h.eyebrow(s, l, x, 4.45, cw, 'mint');
@@ -396,7 +396,7 @@ function addSampleSlides(pres, lang, N) {
   h.hair(s, M, 5.6, CW, 'mint', 'Linie Kennzahlen unten');
   // Agenda
   s = pres.addSlide({ masterName: N.INHALT_MINT });
-  s.addText(d('AGENDA  ·  KUNDENPRÄSENTATION  ·  IRO0000', 'AGENDA  ·  CUSTOMER PRESENTATION  ·  IRO0000'), { placeholder: 'eyebrow' });
+  s.addText(d('AGENDA  ·  KUNDENPRÄSENTATION  ·  PROJEKTNUMMER', 'AGENDA  ·  CUSTOMER PRESENTATION  ·  PROJECT NUMBER'), { placeholder: 'eyebrow' });
   s.addText(d('Worum es heute geht', 'What today is about'), { placeholder: 'title' });
   [d('Ausgangslage und Ziel', 'Starting point and goal'), d('Konzeptvarianten', 'Concept variants'), d('Simulation und Ergebnisse', 'Simulation and results'), d('Prototyp und Tests', 'Prototype and tests'), d('Terminplan und Kosten', 'Schedule and costs'), d('Nächste Schritte', 'Next steps')].forEach((t, i) => {
     const y = 2.85 + i * 0.62;
@@ -404,8 +404,8 @@ function addSampleSlides(pres, lang, N) {
     s.addText(t, { x: M + 0.7, y, w: 5.6, h: 0.42, fontSize: 20, color: BLACK, charSpacing: -0.4, margin: 0, isTextBox: true, objectName: 'Agenda Punkt ' + (i + 1) });
     h.hair(s, M, y + 0.54, 6.4, 'mint', 'Linie Agenda ' + (i + 1));
   });
-  h.photo(s, 'p23.jpg', 8.0, 2.85, R - 8.0, 3.55, 'mint', 'Agendafoto');
-  h.eyebrow(s, d('15. OKTOBER 2026  ·  ROMANSHORN  ·  60 MINUTEN', '15 OCTOBER 2026  ·  ROMANSHORN  ·  60 MINUTES'), 8.0, 6.55, R - 8.0, 'mint');
+  h.photo(s, 'p23.jpg', 8.0, 2.85, R - 8.0, 3.4, 'mint', 'Agendafoto');
+  h.eyebrow(s, d('15. OKTOBER 2026  ·  ROMANSHORN  ·  60 MINUTEN', '15 OCTOBER 2026  ·  ROMANSHORN  ·  60 MINUTES'), 8.0, 6.6, R - 8.0, 'mint');
   // Tabelle (weiss)
   s = pres.addSlide({ masterName: N.INHALT_WEISS });
   s.addText(d('05 //  TERMINPLAN UND KOSTEN', '05 //  SCHEDULE AND COSTS'), { placeholder: 'eyebrow' });
@@ -418,11 +418,11 @@ function addSampleSlides(pres, lang, N) {
     const dn = d('ERLEDIGT', 'DONE'), ac = d('AKTIV', 'ACTIVE'), op = d('OFFEN', 'OPEN'), dy = d(' Tage', ' days');
     s.addTable([
       [hdr(d('NR', 'NO'), null, true), hdr(d('ARBEITSPAKET', 'WORK PACKAGE')), hdr(d('VERANTWORTLICH', 'RESPONSIBLE')), hdr(d('TERMIN', 'DUE'), 'right'), hdr(d('AUFWAND', 'EFFORT'), 'right'), { text: 'STATUS', options: { fontSize: 9, color: STEEL, charSpacing: -0.2, border: [bNone, bNone, bLine, bNone], valign: 'bottom', margin: [0, 0.08, 0.08, 0.35] } }],
-      [cell('01', { color: STEEL }, true), cell(d('Anforderungen und Lastenheft', 'Requirements and specification')), cell('A. Roth'), cell('31.03.2026', { align: 'right' }), cell('8' + dy, { align: 'right' }), st(dn)],
-      [cell('02', { color: STEEL }, true), cell(d('Konzeptvarianten A und B', 'Concept variants A and B')), cell(d('Team Konstruktion', 'Design team')), cell('30.06.2026', { align: 'right' }), cell('22' + dy, { align: 'right' }), st(dn)],
-      [cell('03', { color: GREEN }, true), cell(d('Simulation Festigkeit und Strömung', 'Simulation of strength and flow')), cell(d('Team Simulation', 'Simulation team')), cell('30.11.2026', { align: 'right' }), cell('12' + dy, { align: 'right' }), st(ac, 'aktiv')],
-      [cell('04', { color: STEEL }, true), cell(d('Prototyp und Funktionstest', 'Prototype and functional test')), cell(d('Werkstatt', 'Workshop')), cell('28.02.2027', { align: 'right' }), cell('18' + dy, { align: 'right' }), st(op, 'offen')],
-      [cell('05', { color: STEEL }, true), cell(d('Serienvorbereitung und Dokumentation', 'Series preparation and documentation')), cell('A. Roth'), cell('30.04.2027', { align: 'right' }), cell('10' + dy, { align: 'right' }), st(op, 'offen')],
+      [cell('01', { color: STEEL }, true), cell(d('Anforderungen und Lastenheft', 'Requirements and specification')), cell('A. Roth'), cell(d('31.03.2026', '31 Mar 2026'), { align: 'right' }), cell('8' + dy, { align: 'right' }), st(dn)],
+      [cell('02', { color: STEEL }, true), cell(d('Konzeptvarianten A und B', 'Concept variants A and B')), cell(d('Team Konstruktion', 'Design team')), cell(d('30.06.2026', '30 Jun 2026'), { align: 'right' }), cell('22' + dy, { align: 'right' }), st(dn)],
+      [cell('03', { color: GREEN }, true), cell(d('Simulation Festigkeit und Strömung', 'Simulation of strength and flow')), cell(d('Team Simulation', 'Simulation team')), cell(d('30.11.2026', '30 Nov 2026'), { align: 'right' }), cell('12' + dy, { align: 'right' }), st(ac, 'aktiv')],
+      [cell('04', { color: STEEL }, true), cell(d('Prototyp und Funktionstest', 'Prototype and functional test')), cell(d('Werkstatt', 'Workshop')), cell(d('28.02.2027', '28 Feb 2027'), { align: 'right' }), cell('18' + dy, { align: 'right' }), st(op, 'offen')],
+      [cell('05', { color: STEEL }, true), cell(d('Serienvorbereitung und Dokumentation', 'Series preparation and documentation')), cell('A. Roth'), cell(d('30.04.2027', '30 Apr 2027'), { align: 'right' }), cell('10' + dy, { align: 'right' }), st(op, 'offen')],
       [cell('', null, true), cell('Total'), cell(''), cell(''), cell('70' + dy, { align: 'right' }), cell('')],
     ], { x: M, y: 2.85, w: CW, colW: [0.7, 3.8, 2.4, 1.45, 1.35, 2.03], rowH: 0.48, fontFace: 'Inter', fill: { color: WHITE }, objectName: 'Tabelle Arbeitspakete' });
   }
@@ -441,10 +441,10 @@ function addSampleSlides(pres, lang, N) {
       catAxisLabelFontFace: '+mn-lt', catAxisLabelFontSize: 10, catAxisLabelColor: BLACK, catAxisLineShow: false, catGridLine: { style: 'none' },
       valAxisLabelFontFace: '+mn-lt', valAxisLabelFontSize: 9, valAxisLabelColor: STEEL, valAxisLineShow: false, valGridLine: { color: LINE_W, style: 'solid', size: LW }, valAxisMaxVal: 60, valAxisMajorUnit: 20,
       showLegend: true, legendPos: 'b', legendFontFace: '+mn-lt', legendFontSize: 10, legendColor: BLACK, showTitle: false, objectName: 'Diagramm Teile' });
-    s.addText(d('Anzahl je Baugruppe, Variante Ist gegenüber Variante Neu', 'Count per assembly, variant as is versus variant new'), { x: M, y: 6.45, w: 7.3, h: 0.25, fontSize: 9, color: STEEL, margin: 0, isTextBox: true, objectName: 'Diagrammlegende' });
+    s.addText(d('Anzahl je Baugruppe, Variante Ist gegenüber Variante Neu', 'Count per assembly, as-is variant versus new variant'), { x: M, y: 6.45, w: 7.3, h: 0.25, fontSize: 9, color: STEEL, margin: 0, isTextBox: true, objectName: 'Diagrammlegende' });
     h.vhair(s, 8.4, 2.85, 3.85, 'white', 'Trennlinie Kommentar');
     s.addText([
-      { text: d('38 % weniger Teile', '38 % fewer parts'), options: { fontSize: 20, color: BLACK, charSpacing: -0.4, breakLine: true, paraSpaceAfter: 10 } },
+      { text: d('38 % weniger Teile', '38% fewer parts'), options: { fontSize: 20, color: BLACK, charSpacing: -0.4, breakLine: true, paraSpaceAfter: 10 } },
       { text: d('Die neue Baugruppe fasst mehrere Blechteile zu Spritzgussteilen zusammen. Das reduziert die Montageschritte um fast die Hälfte und die Lieferanten von neun auf fünf.', 'The new assembly combines several sheet-metal parts into injection-moulded parts. This cuts assembly steps almost in half and suppliers from nine to five.'), options: { fontSize: 12, color: BLACK, lineSpacingMultiple: 1.2, breakLine: true, paraSpaceAfter: 10 } },
       { text: d('Nächster Schritt: Werkzeugkosten mit zwei Lieferanten verifizieren.', 'Next step: verify tooling costs with two suppliers.'), options: { fontSize: 12, color: STEEL, lineSpacingMultiple: 1.2 } },
     ], { x: 8.75, y: 2.85, w: R - 8.75, h: 3.85, margin: 0, isTextBox: true, valign: 'top', objectName: 'Kommentar' });
@@ -553,10 +553,10 @@ function addSampleSlides(pres, lang, N) {
   s.addText(d('Blech oder Spritzguss', 'Sheet metal or injection moulding'), { placeholder: 'title' });
   {
     const k = 'mint', cwv = (CW - 0.5) / 2;
-    [[d('VARIANTE A  ·  BLECH', 'VARIANT A  ·  SHEET METAL'), 'p14.jpg', [d('48 Teile, 9 Lieferanten', '48 parts, 9 suppliers'), d('Werkzeugkosten tief, Teilekosten hoch', 'Low tooling cost, high part cost'), d('Montage 31 Schritte', 'Assembly 31 steps')], d('48 Teile  ·  CHF 48.-  ·  Werkzeug CHF 9 000.-', '48 parts  ·  CHF 48.-  ·  tooling CHF 9 000.-'), false],
-     [d('VARIANTE B  ·  SPRITZGUSS', 'VARIANT B  ·  INJECTION MOULDING'), 'p22.jpg', [d('30 Teile, 5 Lieferanten', '30 parts, 5 suppliers'), d('Werkzeugkosten hoch, Teilekosten tief', 'High tooling cost, low part cost'), d('Montage 17 Schritte', 'Assembly 17 steps')], d('30 Teile  ·  CHF 31.-  ·  Werkzeug CHF 42 000.-', '30 parts  ·  CHF 31.-  ·  tooling CHF 42 000.-'), true]].forEach(([hd, f, pts, sum, rec], i) => {
+    [[d('VARIANTE A  ·  BLECH', 'VARIANT A  ·  SHEET METAL'), 'p14.jpg', [d('48 Teile, 9 Lieferanten', '48 parts, 9 suppliers'), d('Werkzeugkosten tief, Teilekosten hoch', 'Low tooling cost, high part cost'), d('Montage 31 Schritte', '31 assembly steps')], d('48 Teile  ·  CHF 48.-  ·  Werkzeug CHF 9 000.-', '48 parts  ·  CHF 48  ·  tooling CHF 9,000'), false],
+     [d('VARIANTE B  ·  SPRITZGUSS', 'VARIANT B  ·  INJECTION MOULDING'), 'p22.jpg', [d('30 Teile, 5 Lieferanten', '30 parts, 5 suppliers'), d('Werkzeugkosten hoch, Teilekosten tief', 'High tooling cost, low part cost'), d('Montage 17 Schritte', '17 assembly steps')], d('30 Teile  ·  CHF 31.-  ·  Werkzeug CHF 42 000.-', '30 parts  ·  CHF 31  ·  tooling CHF 42,000'), true]].forEach(([hd, f, pts, sum, rec], i) => {
       const x = M + i * (cwv + 0.5);
-      h.eyebrow(s, hd, x, 2.85, cwv, k, { color: rec ? BLACK : STEEL });
+      h.eyebrow(s, hd, x, 2.85, cwv, k);
       h.photo(s, f, x, 3.3, cwv, 1.7, k, 'Foto ' + hd);
       s.addText(pts.map((t, j) => h.bul(t, { breakLine: j < pts.length - 1 })), { x, y: 5.2, w: cwv, h: 1.1, fontSize: 12, color: BLACK, lineSpacingMultiple: 1.2, margin: 0, isTextBox: true, valign: 'top', objectName: 'Punkte ' + hd });
       h.hair(s, x, 6.33, cwv, k, 'Linie Bewertung ' + (i + 1));
@@ -569,9 +569,9 @@ function addSampleSlides(pres, lang, N) {
   s.addText(d('04 //  PROTOTYP UND TESTS', '04 //  PROTOTYPE AND TESTS'), { placeholder: 'eyebrow' });
   s.addText(d('Vom Muster zum Funktionsprototyp', 'From sample to functional prototype'), { placeholder: 'title' });
   {
-    const k = 'white', gcw = (CW - 2 * 0.45) / 3, gch = 1.4;
-    [['01', d('SHORE-HÄRTEMUSTER', 'SHORE HARDNESS SAMPLES'), 'p22.jpg'], ['02', d('DREHTEIL', 'TURNED PART'), 'p03.jpg'], ['03', d('BAUGRUPPE', 'ASSEMBLY'), 'p09.jpg'], ['04', d('MESSUNG', 'MEASUREMENT'), 'p10.jpg'], ['05', d('FUNKTIONSMUSTER', 'FUNCTIONAL SAMPLE'), 'p13.jpg'], ['06', d('MONTAGE', 'ASSEMBLY'), 'p15.jpg']].forEach(([num, t, f], i) => {
-      const r = Math.floor(i / 3), c = i % 3, x = M + c * (gcw + 0.45), y = 2.85 + r * (gch + 0.72);
+    const k = 'white', gcw = (CW - 2 * 0.45) / 3, gch = 1.3;
+    [['01', d('SHORE-HÄRTEMUSTER', 'SHORE HARDNESS SAMPLES'), 'p22.jpg'], ['02', d('DREHTEIL', 'TURNED PART'), 'p03.jpg'], ['03', d('BAUGRUPPE', 'SUB-ASSEMBLY'), 'p09.jpg'], ['04', d('MESSUNG', 'MEASUREMENT'), 'p10.jpg'], ['05', d('FUNKTIONSMUSTER', 'FUNCTIONAL SAMPLE'), 'p13.jpg'], ['06', d('MONTAGE', 'FINAL ASSEMBLY'), 'p15.jpg']].forEach(([num, t, f], i) => {
+      const r = Math.floor(i / 3), c = i % 3, x = M + c * (gcw + 0.45), y = 2.85 + r * (gch + 0.85);
       h.photo(s, f, x, y, gcw, gch, k, 'Bild ' + num);
       h.eyebrow(s, num + ' //  ' + t, x, y + gch + 0.2, gcw, k);
     });
@@ -580,7 +580,7 @@ function addSampleSlides(pres, lang, N) {
   s = pres.addSlide({ masterName: N.INHALT_MINT });
   s.addText(d('06 //  KONTAKT', '06 //  CONTACT'), { placeholder: 'eyebrow' });
   s.addText(d('Ihre Ansprechpersonen', 'Your contacts'), { placeholder: 'title' });
-  [['Alain Roth', d('GESCHÄFTSFÜHRER  ·  ENTWICKLUNG', 'MANAGING DIRECTOR  ·  DEVELOPMENT'), '+41 71 855 88 55', 'alain.roth@iro.swiss', 'p15.jpg'], [d('Vorname Name', 'Firstname Lastname'), d('PROJEKTLEITUNG  ·  KONSTRUKTION', 'PROJECT LEAD  ·  DESIGN'), '+41 71 855 88 55', 'vorname.name@iro.swiss', 'p10.jpg']].forEach(([name, r, t, m, f], i) => {
+  [['Alain Roth', d('GESCHÄFTSFÜHRER  ·  ENTWICKLUNG', 'MANAGING DIRECTOR  ·  DEVELOPMENT'), '+41 71 855 88 55', 'alain.roth@iro.swiss', 'p15.jpg'], [d('Vorname Name', 'Firstname Lastname'), d('PROJEKTLEITUNG  ·  KONSTRUKTION', 'PROJECT LEAD  ·  DESIGN'), '+41 71 855 88 55', d('vorname.name@iro.swiss', 'firstname.lastname@iro.swiss'), 'p10.jpg']].forEach(([name, r, t, m, f], i) => {
     const k = 'mint', tw = 2.9, x = M + i * (2.75 + tw + 0.43), tx = x + 2.75;
     h.photo(s, f, x, 2.85, 2.4, 2.9, k, 'Porträt ' + name);
     s.addText(name, { x: tx, y: 2.85, w: tw, h: 0.45, fontSize: 22, color: BLACK, charSpacing: -0.4, margin: 0, isTextBox: true, objectName: 'Name ' + name });
@@ -595,7 +595,7 @@ function addSampleSlides(pres, lang, N) {
   s.addText(d('Drei Bauteile, drei Freigabestände', 'Three parts, three release states'), { placeholder: 'title' });
   {
     const k = 'mint', gcw = (CW - 2 * 0.45) / 3;
-    [['p22.jpg', d('VERTRAULICH', 'CONFIDENTIAL'), 'rot', d('01 //  SHORE-HÄRTEMUSTER  ·  NICHT WEITERGEBEN', '01 //  SHORE HARDNESS SAMPLES  ·  DO NOT DISTRIBUTE')], ['p03.jpg', d('IN PRÜFUNG', 'UNDER REVIEW'), 'orange', d('02 //  DREHTEIL  ·  MASSE IN PRÜFUNG', '02 //  TURNED PART  ·  DIMENSIONS UNDER REVIEW')], ['p13.jpg', d('FREIGEGEBEN', 'RELEASED'), 'gruen', d('03 //  FUNKTIONSMUSTER  ·  FREIGEGEBEN 12.10.', '03 //  FUNCTIONAL SAMPLE  ·  RELEASED 12 OCT')]].forEach(([f, t, kind, cap], i) => {
+    [['p22.jpg', d('VERTRAULICH', 'CONFIDENTIAL'), 'rot', d('01 //  SHORE-HÄRTEMUSTER  ·  NICHT WEITERGEBEN', '01 //  SHORE SAMPLES  ·  DO NOT DISTRIBUTE')], ['p03.jpg', d('IN PRÜFUNG', 'UNDER REVIEW'), 'orange', d('02 //  DREHTEIL  ·  MASSE IN PRÜFUNG', '02 //  TURNED PART  ·  DIMENSIONS UNDER REVIEW')], ['p13.jpg', d('FREIGEGEBEN', 'RELEASED'), 'gruen', d('03 //  FUNKTIONSMUSTER  ·  FREIGEGEBEN 12.10.', '03 //  FUNCTIONAL SAMPLE  ·  RELEASED 12 OCT')]].forEach(([f, t, kind, cap], i) => {
       const x = M + i * (gcw + 0.45);
       h.photo(s, f, x, 2.85, gcw, 2.0, k, 'Bild ' + (i + 1));
       h.chip(s, x + 0.15, 3.0, t, kind, k, 1.05, 'Label ' + t);
@@ -604,7 +604,7 @@ function addSampleSlides(pres, lang, N) {
     h.hair(s, M, 5.5, CW, k, 'Linie Erklärung');
     s.addText([
       { text: d('Rot heisst Achtung und Verbot, Orange heisst in Prüfung, Grün heisst freigegeben. ', 'Red means attention and prohibition, amber means under review, green means released. '), options: { color: BLACK } },
-      { text: d('Das Label oben rechts gilt für die ganze Folie, die Labels an den Bildern für das einzelne Element. Die Kurzform des Schutzvermerks steht unter dem Label.', 'The label at the top right applies to the whole slide, the labels on the pictures to the single element. The short form of the protection notice sits below the label.'), options: { color: STEEL } },
+      { text: d('Das Label oben rechts gilt für die ganze Folie, die Labels an den Bildern für das einzelne Element. Die Kurzform des Schutzvermerks steht unter dem Label.', 'The label at the top right applies to the whole slide, the labels on the pictures apply to the individual item. The short form of the protection notice sits below the label.'), options: { color: STEEL } },
     ], { x: M, y: 5.6, w: CW, h: 0.8, fontSize: 9.5, lineSpacingMultiple: 1.2, margin: 0, isTextBox: true, valign: 'top', objectName: 'Erklärung Kennzeichnung' });
   }
   // Kontakt
