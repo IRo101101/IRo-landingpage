@@ -236,6 +236,9 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     (1 px, `--rule` bzw. `--border-on-*`), nur `dashed` -> `solid`; .mk-Punkte bleiben. Cache-Version 20261015.
     Entscheid kam aus der PowerPoint-Vorlage (dort dieselbe Linie fuer Haarlinien, Tabellen und Rahmen).
     Vorschauseiten (vorschau-*.css) unveraendert, sie gehen nicht live. Status: erledigt in r1
+58. [Kunde 15.10.] Punkte statt Rechtecke: Eckmarker `.mk` und Aufzaehlungszeichen (`.sub li::before`, `.trow__side
+    li::before`) rund (`border-radius: 50%`), Groesse und Farben unveraendert; Entscheid aus der PowerPoint-Vorlage
+    (dort runde Eckmarker und Punkt-Aufzaehlung). Cache-Version 20261015b. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

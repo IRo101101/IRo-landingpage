@@ -118,7 +118,9 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Linien (Kundenentscheid 15.10.2026): alle Haarlinien und Rahmen sind 1 px durchgezogen in der Linienfarbe (`--rule`,
   `--border-on-inverse`, `--border-on-muted`), Vorbild `.hero__rule` (1 px, Weiss 40 % auf dunklem Grund). Keine
   gestrichelten Linien mehr (Header-Unterkante, Header-Zellen, Buttons `.dbtn`/`.cbtn`, Sprachpanel, Inserat `.job`,
-  Footer-Haarlinie, Consent-Banner). Die .mk-Punkte bleiben. Gilt auch fuer die PowerPoint-Vorlage (Tabellen, Rahmen).
+  Footer-Haarlinie, Consent-Banner). Die .mk-Punkte bleiben, sind aber seit 15.10. rund (`border-radius: 50%`), ebenso
+  die Aufzaehlungspunkte `.sub li::before` und `.trow__side li::before` (Kundenentscheid, wie in der PowerPoint-Vorlage).
+  Gilt auch fuer die PowerPoint-Vorlage (Tabellen, Rahmen).
 - Header ab 768 px: `.hdr::after` zieht die duenne Unterkante ueber die ganze Breite (wie im Original), der
   Aktions-Button (z-index 1) deckt sie ab; unter 768 px traegt `.hdr` die Unterkante selbst. Am Desktop bleibt der
   Header ohne Hintergrund (Prompt, Kundenentscheid 09.10.); unter 1024 px Milchglas: `--ground-glass` (Bodenfarbe
