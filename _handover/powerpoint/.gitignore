@@ -1,0 +1,7 @@
+node_modules/
+*_raw.pptx
+_*.pptx
+_*.pdf
+review/
+xmlcheck/
+*.png

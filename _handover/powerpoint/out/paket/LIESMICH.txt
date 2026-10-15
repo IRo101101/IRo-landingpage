@@ -1,0 +1,18 @@
+IdeeRoth AG · PowerPoint-Vorlage · Stand 15. Oktober 2026
+
+Inhalt
+  IdeeRoth_Vorlage.potx            Vorlage: 32 Layouts (16 Deutsch, 16 Englisch), Designfarben, 3 ausgeblendete
+                                   Referenzfolien (Bausteine, Farbkonzept, Farbregeln)
+  IdeeRoth_Beispiel_DE.pptx        Beispielpraesentation Deutsch, 22 Folien + Anhang (Bausteine, Farben)
+  IdeeRoth_Beispiel_EN.pptx        Beispielpraesentation Englisch, gleiche Folien
+  IdeeRoth_Beispiel_DE.pdf         dieselben Beispiele als PDF (zum Anschauen ohne PowerPoint)
+  IdeeRoth_Beispiel_EN.pdf
+  IdeeRoth_Vorlage_Anleitung.pdf   einseitige Anleitung
+  fonts/                           Schrift Inter (Regular, Medium, Bold), zuerst installieren
+
+Schnellstart
+  1. fonts/ installieren (alle drei Dateien), PowerPoint neu starten.
+  2. IdeeRoth_Vorlage.potx in den Ordner fuer benutzerdefinierte Office-Vorlagen kopieren.
+  3. Datei > Neu > Benutzerdefiniert > IdeeRoth_Vorlage.
+  4. Einfuegen > Kopf- und Fusszeile: Fusszeile und Foliennummer einschalten, Text eintragen, "Fuer alle uebernehmen".
+  Alles Weitere steht in der Anleitung.

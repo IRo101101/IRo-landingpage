@@ -81,6 +81,15 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - `.nojekyll` muss im Root bleiben (sonst ignoriert Pages `_`-Ordner).
 - Alle uebrigen Regeln oben (Wording, DE/EN, Cache-Version, Effekte) gelten auch fuer v2.
 
+## PowerPoint-Vorlage (Stand 15.10.2026, `_handover/powerpoint/`)
+- Vorlage `out/IdeeRoth_Vorlage.potx` (32 Layouts DE/EN, Designfarben, 3 ausgeblendete Referenzfolien), Beispieldecks
+  DE/EN, Anleitung; Quellen `lib.js`, `build_template.js`, `build_samples.js`, `finish.py`; Bauanleitung im README dort.
+- Kundenentscheide 15.10.: Linie 0.5 pt durchgezogen (Textfarbe 40 %), Fusszeile F-2 senkrecht rechts mit waagrechter
+  zentrierter Seitenzahl, Grundfarben Weiss / Mint / Dark, Punkte statt Rechtecke, Ampel-Labels Rot #B8463A / Orange
+  #E2A33D / Fresh Mint nur fuer Labels, Kennzeichnung V-2 rot mit Kurzform "Schutzvermerk ISO 16016 beachten",
+  Terminplan nach der alten Folie 10, Bausteine als eigene Folie, Schrift Inter (mitgeliefert). Alle Wording-Regeln
+  der Website gelten auch dort.
+
 ### v2-Technik (Stand 30.09.2026)
 - Aufbau nach der "Northwall"-Bauanleitung (Feder-Engine, ein Ticker, Wort-fuer-Wort-Text, Ladepanel,
   fester Boden Carbon Black <-> Ice Mint, Header-Thema per Viewport-Mitte). Alle Zahlen stehen als

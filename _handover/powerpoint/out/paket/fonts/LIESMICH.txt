@@ -1,0 +1,2 @@
+Inter (Regular, Medium, Bold), SIL Open Font License 1.1, https://rsms.me/inter/
+Alle drei Dateien installieren (Rechtsklick > Installieren, Windows: "Fuer alle Benutzer installieren"), danach PowerPoint neu starten.
