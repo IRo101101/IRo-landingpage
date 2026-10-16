@@ -16,6 +16,8 @@ Bausteine als eigene (ausgeblendete) Folie, Layouts in Deutsch und Englisch.
   Layouts; dazu die PDFs.
 - `out/IdeeRoth_Vorlage_Anleitung.pdf` (aus `anleitung.html`): einseitige Anleitung.
 - `out/paket/`: Lieferpaket (ZIP-Inhalt) mit LIESMICH.txt und `fonts/` (Inter, SIL OFL).
+- `referenz/vorlage_iro_praesentation_20201010.pptx`: die alte Kundenvorlage von 2020 (Vorbild fuer den Terminplan,
+  Folie 10). Nur zum Nachschlagen; nicht weitergeben.
 
 ## Bauen
 

@@ -220,7 +220,7 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Amriswil/Weinfelden, Zuerich via Ausfahrt Kreuzlingen Sued und H13, Osten via Verzweigung Meggenhus und A23;
     oeffentliche Parkplaetze oder Anruf fuer die Schranke; Fussweg vom Bahnhof, der Faehre und den Kursschiffen unten am
     Hafenbecken entlang; Eingang Westseite, Hochparterre, Buero im Gebaeude des Restaurants Panem); Strassennamen und
-    Ausfahrten aus OSM/OSRM, Wikipedia (A7, A23) und faehre-bodensee.de belegt (scratchpad/anreise_facts.md), keine
+    Ausfahrten aus OSM/OSRM, Wikipedia (A7, A23) und faehre-bodensee.de belegt (`_handover/recherche/anreise_facts.md`), keine
     Platzhalter mehr. Kunde 10.10.: Zeile "Route und Fahrplan" mit Google Maps zuerst (Ziel IdeeRoth AG eingetragen),
     Apple Karten mit Ziel inkl. Firmenname (Legacy-URL daddr), SBB-Fahrplan, neu Faehrfahrplan (Seite der Faehrbetreiberin)
     und Hinweis zum Startort; "Mit dem Schiff" mit Stundentakt (Ankunft Minute 06) und Winterhinweis. Gegenpruefung 10.10.

@@ -3,6 +3,9 @@
 Diese Regeln gelten fuer jede Aenderung an dieser Website. Sie stammen aus den
 Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 
+Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kundenentscheide stehen in
+`V2-VIDEOVERGLEICH.md`. Alle Skripte und Recherchen liegen in `_handover/` (`tools/`, `recherche/`, `powerpoint/`).
+
 ## Inhalt / Wording
 - NIE erwaehnen: Siemens, NX, Ansys, Flow-3D, Simcenter, Teamcenter, Nastran, "Bodensee".
 - Keine Gedankenstriche (– oder —). Nur Bindestriche (-). Mittelpunkte (·) sind erlaubt.
@@ -65,7 +68,7 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   (Standort und Karte, Kundenwunsch 09.10.: S-1 statisches Kartenbild `assets/img/map/standort.webp`, 1600 x 1000,
   43 KB, aus OpenStreetMap-Daten gerendert, S-2 gezeichneter Lageplan als Inline-SVG-Symbol `#lageplan`, S-3 Zwei-Klick-
   Karte mit Leaflet lokal unter `assets/vendor/leaflet/` und swisstopo-Kacheln; CSS `vorschau-standort.css`, JS
-  `vorschau-standort.js`). Die Karten entstehen aus `scratchpad/osm/make_maps.py` (Overpass-Daten der Schweizer
+  `vorschau-standort.js`). Die Karten entstehen aus `_handover/tools/osm/make_maps.py` (Overpass-Daten der Schweizer
   Instanz overpass.osm.ch, ODbL; Quellenangabe "Kartendaten: OpenStreetMap" bleibt Pflicht, kein Seename im Bild).
   Leaflet und die Vorschau-Assets gehoeren nicht auf die Live-Site, solange S-3 nicht gewaehlt ist.
   Dazu `r1/vorschau-logo.html` (+ `assets/css/vorschau-logo.css`): Logo-Kachel nach dem Original (`_handover/logo/
@@ -104,12 +107,13 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
   01-23. Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02;
   08 (Glasfront mit Terrasse) unbenutzt. 22 (3D-Drucker druckt Shore-Haertemuster) und 23 (offene Glastuer zum Buero, gruene
   Saeulen, Kaffeebar) am 10.10.2026 nachgeliefert, noch frei; sie kamen als Chat-Upload nur mit 2000 px Breite (Originale
-  01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (scratchpad/add_photos.py).
-  Uebersicht aller Fotos mit Verwendung: scratchpad/bilduebersicht.py erzeugt bilduebersicht.png.
+  01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (`_handover/tools/add_photos.py`).
+  Uebersicht aller Fotos mit Verwendung: `_handover/tools/bilduebersicht.py` erzeugt `_handover/bilduebersicht.png`.
 - Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind PLATZHALTER, vom Kunden zu korrigieren.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
-  `scratchpad/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel);
-  fuer r1: `scratchpad/test_v2b.py <port> r1/` (Server auf dem Repo-Root). Nur Chromium verfuegbar: Android-Browser
+  `_handover/tools/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel);
+  fuer r1: `_handover/tools/test_v2b.py <port> r1/` (Server auf dem Repo-Root; Screenshots landen in
+  `_handover/tools/shots_b/`, nicht einchecken). Nur Chromium verfuegbar: Android-Browser
   (Chrome, Edge, Samsung) sind damit abgedeckt, iOS (alle Browser = WebKit) nicht; WebKit/Firefox liessen sich nur
   installieren, wenn die Netzwerkrichtlinie der Umgebung `playwright.download.prss.microsoft.com` erlaubt.
 

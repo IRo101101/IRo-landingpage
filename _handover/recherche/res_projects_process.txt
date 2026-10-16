@@ -1,0 +1,91 @@
+ZUSAMMENFASSUNG: Projects/Kompetenzen und Process/Leistungen sind technisch sehr nah an der Northwall-Vorlage: Maskenrichtung (oben nach unten), Foto-Settle, Label-Verzoegerung, Scrim, Parallaxe, Hover-Button-Logik, Dimmung/Blur der Schritte, Stapelung (aktiver Schritt ueber dem Foto), Drehwinkel pro Schritt, Foto-Crossfade, Eyebrow-Position und der wortweise Neuaufbau der Caption entsprechen Spec und Video (Belege a_0052-a_0069 vs b_0112-b_0138 bzw. a_0070-a_0091 vs b_0132-b_0163). Die eine klare Abweichung mit hoher Sichtbarkeit ist die Schrittzeile: das Original setzt "01 / Planning" in EINER Groesse (72 px, regular, weiss), wir setzen die Nummer klein, grau und hochgestellt neben einem fetten Namen (B1, B2). Dazu kommen Layout-Entscheidungen bei den Karten: wir zeigen 4 statt 3 Karten (336 statt 462 px breit, Rhythmus kurz-LANG-LANG-kurz statt kurz-LANG-kurz) mit kleineren Hoehen und geringerem Hoehenkontrast als die Spec (A1, A2); die schmalen Hochformate schneiden bei unseren Personenfotos Gesichter an (A7). Kleinere Punkte: die Caption sitzt mit 15.5rem statt 18.875rem zu nah unter der gedrehten Buehne (B3); der Karten-Stagger wirkt im Original enger als 180 ms, das Video ist dafuer aber nicht eindeutig (A4). Was das Video zeigt, die Spec aber nicht beschreibt: die Karten oeffnen, sobald die Reihe am unteren Rand erscheint (bei uns gleich geloest, threshold 0.15); die Schritte zeigen einen Hand-Cursor; der Karten-Hover-Button kommt im Original-Video nie vor (Zeiger im Leerraum), ist bei uns aber belegt funktionsfaehig (b_0119). Empfohlene Reihenfolge: B1+B2 (Schrittzeile, eine Aenderung in styles.css 315/317 plus Leerzeichen in index.html 211-220), dann Entscheidung 3 oder 4 Karten (A1/A2), dann B3 (Caption-Abstand) und A7 (object-position).
+----------------------------------------------------------------------------------------------------
+[mittel/anders] A1 - Kartenanzahl und Reihen-Rhythmus: 3 Karten kurz-LANG-kurz im Original, bei uns 4 Karten kurz-LANG-LANG-kurz
+  MUSTER: a_0057 (t=3.73) und a_0062 (t=4.07): drei Karten je ca. 462 px breit (1.5rem Rand, 12 px Luecke), oben buendig, mittlere Karte deutlich hoeher (gemessen 478 / 605 / 466 px, entspricht den lg-Werten 29.375 / 37.5 / 29.3125rem). Keine vierte Karte, rechts endet die Reihe am Rand.
+  IRO: b_0127 (t=8.40): vier Karten je 336 px breit (x = 40-376, 388-724, 736-1072, 1084-1420), Karten 2 und 3 hoch (class card--tall), 1 und 4 kurz. index.html Zeilen 172-203, styles.css Zeilen 300-308.
+  SPEC: "Three cards in a row ... The middle card is taller by design." Hoehen lg 29.375 / 37.5 / 29.3125rem, xl 32.75 / 41.8125 / 32.75rem.
+  VORSCHLAG: Entscheidung noetig: (a) auf 3 Karten zurueck (eine Kompetenz, z.B. Simulation, nur im Prozessblock zeigen) und Hoehen exakt nach Spec; oder (b) 4 Karten behalten und Proportionen angleichen (siehe A2). Bei 4 Karten bleibt die Reihe 336 px schmal, das Original lebt von fast quadratischen 462-px-Flaechen.
+----------------------------------------------------------------------------------------------------
+[niedrig/anders] A2 - Kartenhoehen und Hoehenkontrast kleiner als Spec/Original
+  MUSTER: a_0062: Karte 1 Hoehe ca. 478 px, Karte 2 ca. 605 px, Karte 3 ca. 466 px bei 462 px Breite. Seitenverhaeltnis kurz ca. 1:1, lang ca. 0.77. Hoehenunterschied ca. 130 px (8.1rem).
+  IRO: styles.css Zeile 302-303: .card height 26rem, .card--tall 32rem (ab 1024); Zeile 307-308: 30rem / 36rem (ab 1440). Bei 336 px Breite ergibt das 0.70 (kurz) und 0.58 (lang); Unterschied nur 6rem. Unsere kurze Karte ist damit schon schmaler als die lange Karte des Originals (b_0127).
+  SPEC: lg: 29.375rem / 37.5rem / 29.3125rem; xl: 32.75rem / 41.8125rem / 32.75rem.
+  VORSCHLAG: Bei 3 Karten: Spec-Werte uebernehmen (.card 29.375rem, .card--tall 37.5rem; ab 1440 32.75rem / 41.8125rem). Bei 4 Karten: Proportion des Originals nachbilden statt absolute Hoehen: .card 21rem, .card--tall 27rem (ab 1440: 22rem / 29rem), damit kurz ca. 1:1 und lang ca. 0.75 wie im Original.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] A3 - Maske oeffnet von oben nach unten, Foto setzt sich, Label 420 ms nach der Maske
+  MUSTER: a_0052 (t=3.40): Karte 1 offen, Karte 2 als schmaler Streifen oben; a_0053: Karte 2 halb, Karte 3 Streifen; a_0054: alle offen. Label COMMERCIAL erscheint a_0062 (t=4.07, blass, leicht tiefer) und ist a_0064 (t=4.20) voll da, RESIDENTIAL a_0066-a_0068. Also ca. 650-700 ms nach Maskenstart, Woerter steigen von unten.
+  IRO: b_0112 (t=7.40) Streifen Karte 1, b_0115 (t=7.60) voll; IDEATION blass b_0123 (t=8.13), voll b_0127 (t=8.40), DEVELOPMENT b_0128-b_0130. main.js 790-793: Words head, wordOut y 90%, stagger 50, MASK {70,24,clamp}, SETTLE {60,26}, LABEL_AFTER_MASK 420; Scrub auf .card__drift mit DRIFTS [90,55,55,90], Layer top -18% / height 136% (styles.css 285).
+  SPEC: clip-path inset(0 0 100% 0) -> inset(0), {tension 70, friction 24, clamp}, delay ENTRY_DELAY + index*180; Foto scale 1.18 -> 1 auf {60,26}; Label 420 ms nach der Maske; Parallaxe -drift..+drift auf {120,26}, 32 ms.
+  VORSCHLAG: Nicht anfassen. Reihenfolge, Maskenrichtung, Label-Verzoegerung und Parallaxe-Konstanten entsprechen Spec und Video.
+----------------------------------------------------------------------------------------------------
+[niedrig/timing] A4 - Stagger zwischen den Karten wirkt im Original enger als 180 ms (nicht eindeutig)
+  MUSTER: a_0052 -> a_0053 (67 ms): Karte 2 geht von Streifen auf halb offen, Karte 3 beginnt. a_0053 -> a_0054: Karte 3 auf ca. 35 %. Drei Karten starten innerhalb von ca. 2 Bildern (130 ms), also Stagger ca. 70-130 ms. Das Video ruckelt, der Wert ist nicht sicher.
+  IRO: Streifen Karte 1 b_0112 (7.40), Karte 2 b_0115 (7.60), Karte 3 b_0118 (7.80), Karte 4 b_0121 (8.00): ca. 200 ms Abstand, die ganze Reihe braucht 600 ms. main.js Zeile 49: MASK_STAGGER = 180.
+  SPEC: "delayed ENTRY_DELAY + index * 180 so the cards take their turn left to right".
+  VORSCHLAG: Spec-Wert ist belegt, Video nicht eindeutig. Wenn 4 Karten bleiben: MASK_STAGGER auf 120 setzen, damit die Reihe insgesamt wie bei 3 Karten in ca. 360 ms laeuft. Bei 3 Karten: 180 behalten.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] A5 - Scrim und Label-Typografie stimmen
+  MUSTER: a_0062: COMMERCIAL ca. 20 px, Versalien, weiss, zentriert, ca. 24 px ueber der Kartenunterkante, auf einem weichen dunklen Verlauf (unteres Viertel der Karte leicht abgedunkelt und unscharf).
+  IRO: b_0127: IDEATION gleich gross, gleiche Position auf dunklem Band; b_0138: DEVELOPMENT / SIMULATION ebenso. styles.css 287-291: drei Scrim-Lagen (blur 2 / blur 4 / Verlauf) mit Masken, Label bottom 1.5rem, 1.25rem Versalien.
+  SPEC: Scrim 5.875rem aus zwei maskierten Blur-Lagen plus Verlauf rgba(17,17,17,0) -> 0.2; Label bottom 1.5rem, uppercase 1.25rem, weiss.
+  VORSCHLAG: Nicht anfassen. Einzige Abweichung ist die Scrim-Farbe rgba(17,20,24) (Carbon Black) statt rgba(17,17,17), gewollt.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] A6 - Hover-Button auf der Karte: im Original-Video nicht gezeigt, bei uns funktionsfaehig
+  MUSTER: a_0057 bis a_0066: der Mauszeiger steht bei ca. (1000, 690), rechts neben Karte 2 im Leerraum unter Karte 3. Ueber keiner Karte, deshalb erscheint im ganzen Video kein explore-Button. Kein Vergleich moeglich.
+  IRO: b_0119 (t=7.87) bis b_0127: EXPLORE mit Pfeil erscheint mittig auf Karte 2, weil der Zeiger mittig steht; der Button liegt innerhalb der Maske und wird mit ihr aufgedeckt. main.js 796-800: RollLabel + SwapArrow, Hover nur bei VW >= 1440 und nicht touch, <= 768 immer sichtbar, dazwischen unsichtbar.
+  SPEC: Button schwarz/weiss, padding 1rem 1.5rem, springt {opacity 0->1, scale 0.94->1} auf {420,30}; nur ab 1440 per Hover, bis 768 immer sichtbar.
+  VORSCHLAG: Nicht anfassen. Einziger sichtbarer Unterschied: unser Pfeil-Glyph ist ein Diagonalpfeil (siehe b_0120 EXPLORE, START PROJECT), das Original zeigt einen Hakenpfeil (a_0057 START PROJECT). Das ist die SwapArrow-Grafik, global (ARROW_SVG in main.js Zeile 341), nicht kartenspezifisch.
+----------------------------------------------------------------------------------------------------
+[niedrig/layout] A7 - Bildausschnitte bei 336 px Breite schneiden Gesichter an
+  MUSTER: a_0057 / a_0062: Architekturfotos ohne Personen, jeder Ausschnitt funktioniert bei jeder Breite und Parallaxe.
+  IRO: b_0120 / b_0127: Karte 1 (09.webp) Gesicht am rechten Rand, zweite Person links angeschnitten; Karte 2 (11.webp) Kopf am linken Rand, Bildschirm rechts angeschnitten; Karte 4 (14.webp) Gesicht am rechten Rand. Die Querformat-Fotos werden durch die schmalen Hochformat-Karten hart beschnitten, dazu verschiebt die Parallaxe (+-55/90 px) den Ausschnitt weiter.
+  SPEC: nicht geregelt (Spec setzt Architekturmotive voraus).
+  VORSCHLAG: Pro Karte object-position setzen (styles.css .card__photo): z.B. Karte 1 '65% 50%', Karte 2 '35% 40%', Karte 4 '70% 50%'; alternativ in index.html mobile Varianten (NN-m.webp, Hochformat) auch ab 1024 verwenden, wenn 4 Karten bleiben. Bei 3 Karten (462 px) entschaerft sich das Problem von selbst.
+----------------------------------------------------------------------------------------------------
+[hoch/anders] B1 - Schrittzeile in EINER Schriftgroesse: Nummer, Slash und Name gleich gross
+  MUSTER: a_0074 (t=4.87): "01 / Planning" durchgehend ca. 72 px (4.5rem), gleiche Farbe weiss, gleiche Strichstaerke, Nummer auf der Grundlinie. a_0084: "05 / Handover" ebenso. Die fuenf Zeilen stehen als einheitliche Liste mit ca. 80 px Zeilenabstand (72 * 0.95 + 11 px gap).
+  IRO: b_0138 (t=9.13): "01 /" klein (0.38em, ca. 27 px), grau, hochgestellt, "Idea" 72 px fett. b_0156: "05 /" klein neben "Prototype". styles.css Zeile 317: .pstep__n { font-size: .38em; vertical-align: .9em; margin-right: .35em; color: var(--on-inverse-muted); font-weight: 400 }. index.html 211-220: Nummer und Name in getrennten Spans ohne Leerzeichen dazwischen.
+  SPEC: "01 / Planning" als eine Zeile, "centred text at 1.375rem -> 2.5rem (sm) -> 3.5rem (md) -> 4.5rem (lg, white-space: nowrap), line-height: 0.95, white". Keine Sondergroesse fuer die Nummer.
+  VORSCHLAG: styles.css Zeile 317 ersetzen durch .pstep__n { font-size: inherit; font-weight: inherit; letter-spacing: inherit; vertical-align: baseline; color: inherit; margin-right: 0; white-space: pre; } und in index.html die Nummer-Spans auf '01 / ' (mit Leerzeichen am Ende) aendern, damit "01 / Idee" als ein Lauf gesetzt wird. DE-Zeilen pruefen: "04 / Entwicklung" ist bei 72 px ca. 520 px breit, passt in 1400 px.
+----------------------------------------------------------------------------------------------------
+[mittel/anders] B2 - Schriftstaerke und Laufweite der Schritte: Original regular, bei uns medium
+  MUSTER: a_0074 / a_0084: "Planning", "Handover" in normaler Staerke (DM Sans 400), duenne Striche, ruhige Zeile; der Kontrast zu den gedimmten Zeilen entsteht nur durch Deckkraft und Blur, nicht durch Fettung.
+  IRO: b_0138 / b_0156: "Idea", "Prototype" deutlich fetter. styles.css Zeile 315: .pstep { font-weight: 500; letter-spacing: -.02em }.
+  SPEC: Keine Staerke fuer die Schritte genannt; Seite nutzt DM Sans 400/500, nur Namen im Team sind 500.
+  VORSCHLAG: styles.css Zeile 315: font-weight: 400; letter-spacing: -.01em. Zusammen mit B1 entsteht die einheitliche Zeile des Originals.
+----------------------------------------------------------------------------------------------------
+[niedrig/layout] B3 - Caption sitzt zu nah unter der gedrehten Buehne
+  MUSTER: a_0084 (t=5.53) und a_0086: Buehne bei 05 um 30 Grad gedreht, tiefste Ecke bei ca. y=730, Caption "We complete the final details ..." beginnt bei ca. y=800, also ca. 70 px Luft. Rechnerisch Listenmitte + 302 px = Spec 18.875rem.
+  IRO: b_0156 (t=10.33) / b_0157: tiefste Buehnenecke bei ca. y=520, Caption bei ca. y=548, nur ca. 25-30 px Luft; die Caption klebt an der Ecke. styles.css Zeile 329: .process__caption { top: calc(50% + 15.5rem) } (= 250 px) statt 18.875rem (= 302 px). Vermutlich wegen min-height 46rem reduziert.
+  SPEC: "from lg top: calc(50% + 18.875rem) with that step's own caption width".
+  VORSCHLAG: styles.css Zeile 329: top: calc(50% + 18.875rem); gleichzeitig .process { min-height: 50rem } statt 46rem, damit bei 50 % + 302 px + drei Zeilen (ca. 70 px) kein Ueberlauf entsteht.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] B4 - Aktiver Schritt scharf ueber der Buehne, andere weich und gedimmt, Buehne zentriert hinter der Liste
+  MUSTER: a_0074: "01 / Planning" scharf ueber der Oberkante des Fotos, "02 / Design & Engineering" bis "05 / Handover" unscharf (ca. blur 5) und gedimmt (ca. 30 %) hinter dem Foto; a_0084: "05 / Handover" scharf ueber dem Foto, 01-04 weich dahinter. Buehne 330 x 400 px, mittig im Block, Liste mittig, der aktive Schritt ueberlappt das Foto.
+  IRO: b_0138: "01 / Idea" scharf ueber der Buehne, "02 / Engineering", "03 / Simulation" weich dahinter; b_0156: "05 / Prototype" scharf, "04 / Development" weich rechts hinter dem Foto. main.js 814, 831: DIM_OPACITY 0.3, DIM_BLUR 5, STEPC {220,30}; styles.css 314-316: .process__steps ohne Transform, .pstep.is-active z-index 20, .process__stagepos z-index 10 mit pointer-events none.
+  SPEC: aktiver Schritt opacity 1, blur 0, z-index 20; Rest opacity 0.3, blur 5, z-index 0 auf {220,30}; Liste per Flex zentriert, nicht per Transform; Buehne 20.625 x 25rem.
+  VORSCHLAG: Nicht anfassen. Stapelung, Dimmung und Buehnengroesse stimmen mit Video und Spec ueberein.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] B5 - Drehung der Buehne pro Schritt und Foto-Crossfade
+  MUSTER: a_0074: 01 -> Buehne ca. -10 Grad (Oberkante steigt nach rechts); a_0076 (t=5.00): 02 -> 0 Grad, Foto Treppenhaus; a_0078 (t=5.13): 03 -> ca. +10 Grad, Foto Fassade; a_0081-a_0084: 05 -> +30 Grad, Foto Haus; Fotos wechseln per Ueberblendung, dazwischen ist kurz keine Zeile scharf (a_0081).
+  IRO: b_0138: 01 -> ca. -10 Grad; b_0147-b_0150: Ueberblendung 02 -> 03 -> 04 mit Drehung; b_0151: 04 -> ca. +20 Grad; b_0156: 05 -> +30 Grad. main.js 816, 833: rotate = 30 - (4 - i) * 10 auf TURN {170,22}; 815, 832: Foto-Gruppen auf SWAP_IMG {320,34}.
+  SPEC: "the last step holds 30 and each step above it sits 10 further anticlockwise", TURN {170,22}, Crossfade {320,34}.
+  VORSCHLAG: Nicht anfassen.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] B6 - Eyebrow und Einlauf des Prozessblocks
+  MUSTER: a_0067 (t=4.40): "OUR PROCESS" (12 px Versalien) taucht am unteren Viewport-Rand auf, waehrend die Karten oben noch sichtbar sind; a_0070 (t=4.60): "01 / Planning" scharf am unteren Rand, Buehne darunter angeschnitten; a_0073: Eyebrow ca. 99 px unter Blockoberkante, Liste darunter zentriert.
+  IRO: b_0132 (t=8.73): "FIVE SERVICES · ONE PROCESS" am unteren Rand; b_0133-b_0137: "01 / Idea" mit Buehne von unten einlaufend; b_0138: Eyebrow 99 px unter Blockoberkante (482 -> 581). main.js 811: Inview {opacity 0->1, y 12->0}, REVEAL, ENTRY_DELAY; styles.css 313, 329: top 5.5rem / 6.1875rem, z-index 20.
+  SPEC: Eyebrow uppercase 12px, absolut zentriert top 5.5rem (lg 6.1875rem), Inview delay ENTRY_DELAY auf {210,28}.
+  VORSCHLAG: Nicht anfassen. Textlich ist der Eyebrow bei uns laenger (Fuenf Leistungen · Ein Prozess), was gewollt ist.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] B7 - Caption baut sich bei jedem Schrittwechsel Wort fuer Wort neu auf
+  MUSTER: a_0078 (03 aktiv, t=5.13): "We bring the ..." beginnt unten; a_0079: "We bring the project to life with experienced teams, careful ..." steigt wortweise; a_0083-a_0086: "We complete the final details and deliver a space ready for what comes next." dreizeilig, zentriert, ca. 255 px breit. Bei 02 (a_0076/a_0077) ist keine Caption zu sehen, der Zeiger war schon weiter.
+  IRO: b_0151 (04 aktiv): "Systematic and methodical from concept ..." beginnt; b_0156-b_0159: "Our in-house workshop delivers functional samples fast ..." wortweise bis vierzeilig. main.js 821-827: setCaption setzt textContent, maxWidth aus data-capw und erzeugt eine neue Words-Instanz (copy, manual) mit play(0); Sprachwechsel ueber langListeners.
+  SPEC: "Re-mount the text engine on every change (key it on the caption) so each new sentence assembles word by word with the copy preset", Breite je Schritt 15.875-21.75rem.
+  VORSCHLAG: Nicht anfassen. Unsere Captions sind laenger (20-22rem, 3-4 Zeilen) als die des Originals (2-3 Zeilen); wenn kuerzer gewuenscht, Texte in index.html 212-220 straffen, nicht den Code.
+----------------------------------------------------------------------------------------------------
+[niedrig/bereits-korrekt] B8 - Neigung der Buehne zum Zeiger (Tilt/Parallaxe) im Video nur schwach belegbar
+  MUSTER: a_0074 -> a_0075 (Zeiger bewegt sich wenig): die Buehne aendert ihre perspektivische Lage minimal; a_0081 -> a_0082 (Zeiger von rechts oben nach rechts unten): die Buehne kippt sichtbar mit. Hand-Cursor liegt dabei auf den Schrittzeilen, nicht auf dem Foto.
+  IRO: b_0145 -> b_0146 (Playwright-Maus faehrt die Schritte an): leichte Lageaenderung der Buehne erkennbar. main.js 848-855: pointermove auf der Sektion, nur pointerType mouse, rotateX = -py*24, rotateY = px*24 auf TILT {150,24}, innere Lage x/y = +-18 px bei scale 1.12, Rueckstellung bei pointerleave; styles.css 320-323: perspective 900px, preserve-3d. Scroll-Parallaxe y 70 -> -70 auf .process__par (819).
+  SPEC: Pointer tilt ueber die Sektion normalisiert, MAX_TILT 12 (verdoppelt), Lag 18 px, scale 1.12, {150,24}; Scroll-Parallaxe y 70 -> -70 auf {120,26}.
+  VORSCHLAG: Nicht anfassen. Hinweis: Scrub misst die Kanten von .process__par (400 px hoch), nicht der Sektion; die Spec laesst das offen, das Video erlaubt keine Unterscheidung.

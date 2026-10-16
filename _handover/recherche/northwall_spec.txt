@@ -1,0 +1,881 @@
+@"/root/.claude/uploads/c9806be7-89d8-58d3-909f-76db2d1050a3/e82b4b09-paket1.zip" @"/root/.claude/uploads/c9806be7-89d8-58d3-909f-76db2d1050a3/4850d2d3-paket2.zip" @"/root/.claude/uploads/c9806be7-89d8-58d3-909f-76db2d1050a3/178128a6-paket3.zip" @"/root/.claude/uploads/c9806be7-89d8-58d3-909f-76db2d1050a3/f5b0bdea-paket4.zip" @"/root/.claude/uploads/c9806be7-89d8-58d3-909f-76db2d1050a3/b81a06cb-paket5.zip" hier mal die bilder und die anweisung. warte aber mit starten und frage zuerst nach was nicht klar ist, de und en, texte, usw.... Übrigens, falls die Qualität der bilder nicht ausreicht oder sonstige formatierungen und änderungen gemacht werden müssen, nutze higsfiled. beachte auch die neuen farben auf dem bild IMG_2137.PNG.
+
+hier die anleitung: 
+
+# Recreate this site as a single HTML file: NORTHWALL
+
+You are an expert creative front-end developer. Produce a **single self-contained `index.html`**
+that reproduces the project below **exactly** — same layout, copy, visuals, motion and interaction.
+Pure HTML/CSS/JS in one file: no build step, no framework, no bundler. ES modules inline in a
+`<script type="module">`. **Lenis is the only external code**, pulled through an import map; there
+is no three.js and no canvas on this page. The spring solver, the shared ticker, the in-view
+observer, the word-by-word text engine, the loading panel, the counting figures, the rolling
+labels and every hover are all written by hand. Hardcode every value given here as a fixed
+constant.
+
+Every number below is the shipped default, measured off the 1440×800 design frame. Nothing in
+this document is a suggestion.
+
+## What it is
+
+A one-page site for **Northwall Construction**, a construction firm ("Building spaces that last.",
+"Built for today. / Created for generations.", "123 Madison ave., new york, 10016, usa"). Six
+blocks alternating between **black** (`#000000`) and an **off-white** (`#f5f5f5`), set entirely in
+**DM Sans**, with architectural photography and a drafting-drawing vocabulary throughout: dashed
+hairline rules, 4px square markers pinned to the corners of every box, uppercase 14px labels at
+−0.03em tracking.
+
+The page opens behind a black panel where a monogram fills white from the bottom like a gauge
+while photo cards are dealt beneath it; the last card is the hero's photo, and it grows out of the
+centre until it covers the hero exactly, the monogram flies into the header's logo slot, and the
+panel fades over a hero that already looks identical to it. Only then does the hero's copy play in.
+
+Scrolling is smoothed by Lenis. One fixed background layer serves the whole page and springs
+between black and off-white as blocks pass the middle of the viewport, so the surface never cuts
+at a section edge; the fixed header recolours itself on the same line. Every block's contents
+drift down and fade as the block scrolls out. Almost everything moves on a spring — there are
+essentially no CSS keyframes on this page.
+
+## Page shell & libraries
+
+```html
+<script type="importmap">
+{ "imports": { "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.mjs" } }
+</script>
+```
+
+- **Font**: DM Sans from Google Fonts (400/500), `display=swap`. It is the only family on the page.
+  `font-family: "DM Sans", sans-serif` on `html`.
+- **Reset**: `*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }`,
+  `img { display: block; max-width: 100% }`, `ul { list-style: none }`,
+  `a { color: inherit; text-decoration: none }`, `button, input, select, textarea { font: inherit;
+  color: inherit }`.
+- **Smooth scroll**: `const lenis = new Lenis({ smoothWheel: true })`, driven by a
+  `requestAnimationFrame` loop (`lenis.raf(time)`). The loading panel calls `lenis.stop()` while it
+  is up and `lenis.start()` when it leaves; `window.scrollTo(0, 0)` on load. In-page `#anchor`
+  clicks go through `lenis.scrollTo(target)`.
+- **Body** paints nothing — the ground layer below does. `body { color: #171717; background: #fff }`
+  is only the page's fallback beneath the fixed ground.
+
+### The adaptive rem grid (this is how the whole layout scales)
+
+Every size on this page is in `rem`, and the root font-size scales with the viewport so a value
+taken off a design frame lands 1:1 at that frame's width:
+
+```css
+html { font-size: 16px; }                                   /* 1024–1439 and 1440 hold 1:1 */
+@media (max-width: 1023px) { html { font-size: 2.083333vw } } /* 16 * 100 / 768  */
+@media (max-width: 767px)  { html { font-size: 4.102564vw } } /* 16 * 100 / 390  */
+```
+
+Above 1440px a script damps the scale-up: set
+`document.documentElement.style.fontSize = 16 * (1 + (window.innerWidth - 1440) / 1440 * 0.5) + "px"`
+on load and resize, so the design grows with the viewport without the type ballooning.
+
+Breakpoints, used exactly as named below: **md = 768px**, **lg = 1024px**, **xl = 1440px**
+(the design base). Media queries measure rem against the initial 16px, so the scaling grid above
+never moves a breakpoint.
+
+### Colour tokens (bake these in as CSS custom properties)
+
+```css
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --surface-muted: #f5f5f5;        /* the light blocks */
+  --surface-muted-raised: #ebebeb;  /* the team rows */
+  --foreground: #171717;
+
+  --on-inverse-muted: rgba(255,255,255,0.55);
+  --on-inverse-faint: rgba(255,255,255,0.52);
+  --on-inverse-meta:  rgba(255,255,255,0.60);
+  --border-on-inverse: rgba(255,255,255,0.40);
+  --border-on-inverse-subtle: rgba(255,255,255,0.30);
+
+  --on-muted-label: rgba(0,0,0,0.58);
+  --on-muted-meta:  rgba(0,0,0,0.68);
+  --border-on-muted: rgba(0,0,0,0.40);
+  --border-field:    rgba(0,0,0,0.35);
+
+  --scrim-from: rgba(17,17,17,0);
+  --scrim-to:   rgba(17,17,17,0.2);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-entrance: cubic-bezier(0.2, 0, 0, 1);
+
+  --leading-display-tight: 0.95;   /* all display type */
+  --leading-body: 1.2;             /* nav and body copy */
+  --tracking-nav: -0.03em;         /* the 14px uppercase labels */
+  --header-height: 4.0625rem;      /* 65px at the 1440 base */
+  --section-title: 3.4375rem;      /* 55px at the 1440 base */
+  --button-radius: 0.125rem;
+}
+```
+
+Type scale, as used: `text-xs` 0.75rem, `text-sm` 0.875rem, `text-base` 1rem, `text-lg` 1.125rem,
+`text-xl` 1.25rem, `text-2xl` 1.5rem, `text-5xl` 3rem, `text-7xl` 4.5rem.
+
+## The animation engine (write this once, use it everywhere)
+
+Every moving thing on this page is a critically-ish damped spring integrated on one shared ticker.
+Implement this first — the sections below refer to its parts by name.
+
+### 1. Spring solver
+
+A spring is `{ tension, friction, clamp? }` integrated per frame at a fixed 1/60s step:
+
+```js
+const STEP = 1 / 60;
+function advance(s, dt) {              // s = { value, velocity, target, tension, friction, clamp }
+  let acc = Math.min(dt, 0.064);       // never integrate more than ~4 frames of catch-up
+  while (acc > 0) {
+    const h = Math.min(STEP, acc);
+    const force = -s.tension * (s.value - s.target);
+    const damp  = -s.friction * s.velocity;
+    s.velocity += (force + damp) * h;
+    s.value    += s.velocity * h;
+    acc -= h;
+  }
+  if (s.clamp && ((s.velocity > 0 && s.value > s.target) || (s.velocity < 0 && s.value < s.target))) {
+    s.value = s.target; s.velocity = 0;
+  }
+  if (Math.abs(s.value - s.target) < 0.0005 && Math.abs(s.velocity) < 0.0005) {
+    s.value = s.target; s.velocity = 0; return true;   // at rest
+  }
+  return false;
+}
+```
+
+A "spring group" animates several named channels at once (`{ opacity, y, scale, … }`) from a `from`
+object to a `to` object, writes them to a element's style each frame, and reports when all channels
+rest. Units: `y`/`x` given as a number are **px**; given as a string ending in `%` they are a
+percentage of the element's own box (use `translate3d(x, y, 0)` with the `%` unit). `scale`,
+`scaleX`, `scaleY`, `rotate` (deg), `rotateX`, `rotateY` (deg), `blur` (px, into
+`filter: blur(Npx)`) and `clipPath` (interpolate the inset percentages) are all channels.
+Compose transforms in this order: `translate3d(…) rotate(…) rotateX(…) rotateY(…) scale(…)`.
+
+### 2. One ticker
+
+A single `requestAnimationFrame` loop drives every live spring. Springs that have come to rest are
+removed from it. Some consumers ask to be sampled at a lower rate — a `frameInterval` in ms, which
+the loop honours by skipping frames for that consumer. Used below as: **scroll scrub 32ms (~30fps)**,
+**the ground watcher 150ms**, **the header watcher 80ms**. These exist because each of those
+callbacks does a `getBoundingClientRect` — a forced layout — and the travel is slow enough that
+sampling faster buys nothing.
+
+### 3. The four behaviours
+
+- **`Inview(el, {from, to, config, delayIn, once})`** — an `IntersectionObserver` starts the spring
+  the first time the element enters the viewport. `once` latches; otherwise it plays back out when
+  the element leaves.
+- **`Hover(el, trigger, {from, to, config})`** — the spring targets `to` while `trigger` is hovered
+  (or focused) and returns to `from` on leave. **Disabled at ≤768px**, where there is no hover:
+  those elements render in their `to` state outright (each section below says where this matters).
+- **`Spring(el, {from, to, config})`** — a plain state-driven spring, retargeted whenever the state
+  it reads changes.
+- **`Scrub(el, {start, end, from, to, config, frameInterval})`** — scroll-linked. `start` and `end`
+  are two-word pairs read as `<element edge> <viewport edge>` — `"top bottom"` means "the element's
+  top reaches the viewport's bottom". Compute progress 0→1 between those two moments each sampled
+  frame and set the spring's **target** to the interpolated value, so the spring still smooths the
+  scroll rather than tracking it rigidly.
+
+### 4. The word-by-word text engine
+
+Several headings and every body paragraph animate word by word. Split the text on spaces and wrap
+each word in a `<span>`; the words are **flex items** in a `display: flex; flex-wrap: wrap`
+container (so set `column-gap: 0.266em` to carry the spaces — that is DM Sans's space advance and
+anything else re-wraps the paragraph), each word clipped by an `overflow: hidden` wrapper so it can
+rise out of nothing. Set `justify-content` from the alignment the section asks for. Two presets:
+
+```js
+// Display headings
+const HEAD_IN  = { y: "0%",  opacity: 1, scale: 1   };
+const HEAD_OUT = { y: "80%", opacity: 0, scale: 0.9 };
+const HEAD_STAGGER = 55;                       // ms between words
+const HEAD_CONFIG  = { tension: 180, friction: 26 };
+
+// Body copy — every description on the page runs exactly this
+const COPY_IN  = { y: "0%",  opacity: 1, scale: 1    };
+const COPY_OUT = { y: "60%", opacity: 0, scale: 0.94 };
+const COPY_STAGGER = 22;
+const COPY_CONFIG  = { tension: 210, friction: 28 };
+```
+
+Give the container `line-height: 1.1` minimum so a clipped reveal is not cropped by the line box.
+Mode `once` latches on first entry; mode `always` replays on re-entry.
+
+Shared section-entry timing: **`ENTRY_DELAY = 180`ms** (the surface arrives first, the copy after
+it), **`ENTRY_STAGGER = 110`ms** between successive items inside one section.
+
+### 5. Reduced motion
+
+`@media (prefers-reduced-motion: reduce)`: every spring lands immediately, the loading panel
+resolves at once, the about gallery and the process steps hold a single frame instead of looping.
+
+## The loading panel (this is the hero moment — build it precisely)
+
+A fixed `inset: 0`, `z-index: 60` black panel over the whole page.
+
+**The gauge.** A centred monogram — `mark-northwall.svg`, drawn twice as a CSS mask
+(`-webkit-mask: url(…) center/contain no-repeat; background: currentColor`) so it takes the panel's
+colour. The bottom copy is white at `opacity: 0.20` and always visible, so the shape reads from the
+first frame; a white copy on top of it is clipped by
+`clip-path: inset(${(1 - progress) * 100}% 0 0 0)` and fills from the bottom as progress rises.
+The monogram box is `aspect-ratio: 52/32`, `width: 46vw; max-width: 22rem` (≥640px: `34vw`,
+≥1024px: `26vw`).
+
+**Progress.** It creeps toward **`HOLD_AT = 0.72`** while the page is still loading and only runs
+the last stretch once `window.load` **and** `document.fonts.ready` have both resolved — with a
+**`MAX_WAIT = 4000`ms** failsafe so a slow asset can never trap the site behind the panel. Two
+configs: the creep is `{ tension: 60, friction: 30 }`, the closing run to 1 is
+`{ tension: 150, friction: 30, clamp: true }` so the mark tops out instead of easing at it.
+
+**The readout.** Bottom of the panel, `1.5rem` from the edge (≥1024px: `2rem`), `1rem` side gutter
+(≥640px: `2rem`), uppercase 12px at `--tracking-nav` in `--on-inverse-muted`: the word `Loading`
+on the left, and on the right the percentage, zero-padded to two digits —
+`String(Math.round(progress * 100)).padStart(2, "0") + "%"`.
+
+**The deck.** Beneath the mark, a centred slot sized
+`13.25rem × 16.25rem` (≥768px `18rem × 22rem`, ≥1024px `20.625rem × 25rem`). Five photo cards are
+dealt into it on a fixed beat independent of loading, so the sequence always reads as one:
+**`CARD_LEAD = 180`ms** then one card every **`CARD_INTERVAL = 240`ms**. Each card springs in with
+`{ opacity: 0→1, scale: 0.82→1, y: 48→0, rotate: tilt*1.8 → tilt }` on
+`{ tension: 190, friction: 24 }` — it swings past its angle and settles on it. The cards, in order,
+with their resting tilt in degrees:
+
+| # | photo | tilt |
+|---|---|---|
+| 1 | `hero/project-1.webp` | −12 |
+| 2 | `about/about-6.webp` | 9 |
+| 3 | `hero/project-2.webp` | −5 |
+| 4 | `about/about-9.webp` | 14 |
+| 5 | `hero/project-3.webp` | −8 |
+
+**The finale.** The sixth and last card is the hero's photo, `hero/project-4.webp`. It is dealt
+square on top of the deck (`{ opacity: 0→1, scale: 0.82→1, y: 48→0 }`, same card config) and holds
+there for **`FINALE_HOLD = 280`ms** once everything is in. Then, in one move:
+
+1. **It grows onto the hero.** Its frame is animated as `left` / `top` / `width` / `height` in
+   **viewport pixels** — not a transform, because `object-cover` has to re-crop the photo as it
+   grows. It starts at the deck slot's own `getBoundingClientRect()` and targets the rect of
+   `[data-hero-stage]` (the whole viewport if that element is missing). Config
+   `{ tension: 80, friction: 16, clamp: true }` — it arrives at speed and stops dead at size.
+2. **The monogram flies to the header.** The panel carries an invisible copy of the mark in the
+   header's own slot (same row height and gutter), so the travel is measured against the real
+   layout rather than guessed and lands correctly at any width: take both
+   `getBoundingClientRect()`s and spring `x`, `y` to the centre-to-centre delta and `scale` to
+   `to.width / from.width`, on `{ tension: 210, friction: 34, clamp: true }`. The readout's veil
+   fades to 0 on the same spring. The mark stays where it lands — the header's own copy is exactly
+   beneath it and takes over as the panel fades.
+3. **Then the panel lifts.** When the frame rests, call `lenis.start()` first (the scrollbar
+   returns and narrows the hero by its width), re-measure the stage on the next
+   `requestAnimationFrame` and snap the photo to it, then fade the panel's opacity to 0 on
+   `{ tension: 320, friction: 30, clamp: true }`. Remove it from the DOM on rest.
+
+**The handoff.** As the panel's opacity crosses **`RELEASE_AT = 0.35`** on the way down, fire a
+one-shot `handoff` signal. Every piece of the hero's copy is held invisible until that signal and
+then plays its entrance — late enough that the first words rise in view rather than behind the
+panel, early enough that there is no pause after the photo lands. The copy is in the document the
+whole time (visible to crawlers and screen readers), just `visibility: hidden`.
+
+**Both draw the photo identically** — this is what makes the handover seamless. The panel's last
+card and the hero's backdrop use the same layer inside their frame:
+`position: absolute; inset-inline: 0; bottom: 0; height: 130%` with the image `object-fit: cover`.
+The layer is taller than the frame and bottom-aligned so the hero's parallax can sink it without
+exposing the top edge.
+
+**Media warm-up.** Only **after** `window.load`, in a `requestIdleCallback` (timeout 2000, falling
+back to a 500ms `setTimeout`), prefetch the rest of the page's photos with a **3000ms** budget.
+Never during load — the hero photo is the largest contentful paint and thirty below-the-fold images
+racing it costs far more than the smooth first scroll it buys.
+
+Without scripting the curtain would never lift, so add `<noscript><style>[data-preloader]{display:none}</style></noscript>`.
+
+## The page ground and the section flow
+
+**One background for the whole page.** A `position: fixed; inset: 0; z-index: -10` layer. Every
+section declares `data-ground="dark"` or `"light"`; a watcher sampled every **150ms** finds the
+section covering `window.innerHeight / 2` and springs the layer's `background-color` between
+`#000000` and `#f5f5f5` on `{ tension: 90, friction: 26 }`. The blocks paint no ground of their own,
+so the surface changes on its own clock while one block's contents leave and the next arrive — the
+seam never appears.
+
+**Every section's contents drift out.** Wrap each of the six sections in a scrub that runs
+`start: "bottom bottom"` → `end: "bottom top"`, `from { y: 0, opacity: 1 }` → `to { y: 50, opacity: 0.25 }`,
+config `{ tension: 110, friction: 26 }`, sampled at **32ms**. This moves content only — the ground
+is a separate fixed layer and stays untouched.
+
+## The fixed header
+
+`position: fixed; inset-inline: 0; top: 0; z-index: 50; height: var(--header-height)`. It never
+moves or relayouts — **colour is the only thing that changes.** Sections declare
+`data-header-theme="dark" | "light" | "hidden"`, and a watcher sampled every **80ms** picks the
+theme the same way the ground does, testing the **viewport's mid-line** (not the header's own), so
+the type never flips a beat before or after the surface and read as black on black for that beat.
+Iterate the sections **backwards**, because at a boundary an outgoing section still holds its box
+and two cross the mid-line at once — the later one is painted over the header and owns the colour.
+A `hidden` section wins as soon as its top passes `innerHeight * 0.5`. Transition
+`color, opacity 250ms var(--ease-entrance)`.
+
+| theme | text | dashed rules | markers | action button |
+|---|---|---|---|---|
+| dark | `#fff` | `rgba(255,255,255,0.30)` | white on `rgba(255,255,255,0.40)` border | white bg, black text |
+| light | `#000` | `rgba(0,0,0,0.40)` | black on `rgba(0,0,0,0.40)` border | black bg, white text |
+| hidden | as dark, `opacity: 0; pointer-events: none` | | | |
+
+**Layout** — a single row of cells divided by dashed 1px rules, each cell's rule fading with the
+theme. Left: a `9rem`-wide logo cell (`lg: 9.25rem`, `xl: 10.3125rem`) with `1rem` left padding
+(`sm: 2rem`) holding the wordmark, drawn as a CSS mask of `hero/logo-northwall.png` at
+`6.3125rem × 1rem` so it takes the header's colour. Then a flexible empty cell. Then, from 768px:
+a `4rem` language cell (`lg: 4.5rem`, `xl: 5.125rem`) and a `9.5rem` action button
+(`lg: 10.125rem`, `xl: 11.625rem`). Below 768px the last two are replaced by a `4.5rem` burger cell
+and the bar carries a dashed bottom border.
+
+**Nav**, absolutely centred and shifted left of true centre so it balances against the cells on the
+right: `left: calc(50% - 2.25rem)` with `translateX(-50%)` (`lg: calc(50% - 2.6875rem)`,
+`xl: 50%`). Items `gap: 1rem` (`lg: 2rem`, `xl: 2.5rem`), each 14px uppercase, `--tracking-nav`,
+`line-height: 1.2`: **Projects · About · Process · Team · Contacts**, linking to
+`#projects #about #process #team #contacts`.
+
+**Corner markers.** Every cell edge and every dashed box on the site carries 4px squares at its
+corners — `position: absolute; width/height: 0.25rem`, offset `-0.125rem` outside the corner, in
+the theme's marker colour with its 1px border. The header's cells use the `edge` variant: the two
+markers on the leading (left) edge only. On a box with a hover trigger the four corners ease
+outwards by **3px** each, diagonally, on `{ tension: 300, friction: 22 }` — as if the box were
+being pulled open.
+
+**The action button** — `start Project`, uppercase 14px, centred, with a `SwapArrow` and a
+`RollLabel` (both below).
+
+**Language switcher** — the code `EN` with a chevron (`contact/chevron-b.svg`, as a mask). Opens on
+hover with a **`CLOSE_DELAY = 260`ms** grace on the way out so the pointer can travel down to the
+list; click toggles it for touch and keyboard. The panel springs open on
+`{ tension: 300, friction: 30 }` and the chevron turns on `{ tension: 300, friction: 26 }`.
+Languages: `EN English`, `ES Español`, `FR Français`.
+
+**Burger, below 768px.** Two 1px full-width rules inside a `1.5rem × 1rem` box, at `y: 5` and
+`y: 11`. Open, they spring to `y: 8` with `rotate: 45` and `−45` on `{ tension: 320, friction: 26 }`
+— the same two lines, turned. The panel is `position: fixed; inset: 0; top: var(--header-height);
+z-index: 40`, black, `padding: 2rem 1rem 2.5rem`, and locks `body { overflow: hidden }` while open.
+It lists the five nav items as rows separated by `rgba(255,255,255,0.30)` hairlines, each an
+`ArrowLink`; then a quieter `Language` row with the switcher; and the `start Project` button filling
+the bottom, white on black.
+
+## The shared interaction primitives
+
+Write these once — they are used on every button on the page.
+
+**`RollLabel`** — the label lifts out of the top while a second copy rises into its place, both
+clipped by the line box (`position: relative; overflow: hidden`, the second copy absolutely
+positioned). On hover: first copy `y: 0% → -100%`, second `y: 100% → 0%`, both on
+**`{ tension: 260, friction: 26 }`**.
+
+**`SwapArrow`** — a `0.625rem` square box, `overflow: hidden`, holding two copies of
+`about/icon-arrow-light.svg` (or `hero/icon-arrow.svg` on the dark header) drawn as masks so they
+take the button's colour and rotated 90°. On hover the first leaves right (`x: 0 → 16`) and the
+second arrives from the left (`x: -16 → 0`) on **`{ tension: 300, friction: 26 }`**. It reads as
+the mark being handed on rather than nudged.
+
+**`ArrowLink`** — a row whose label drifts `x: 0 → 4` on `{ tension: 300, friction: 26 }` while its
+`SwapArrow` hands over.
+
+**`RollLink`** — an anchor wrapping a `RollLabel`.
+
+**Counting figures.** Any figure written as text — `"18 years "`, `"120+"`, `"2.4M m² "`,
+`"15+ years "` — is split on its first number with `/-?\d+(?:[.,]\d+)?/` into prefix, value and
+suffix. Only the number animates, counting from 0 to the value on
+**`{ tension: 90, friction: 34 }`** when the figure first enters view (latched — it reads as an
+arrival, not a loop), rendered to 1 decimal place if the source had one, else 0. The prefix, unit
+and label never move, so the reading stays stable while only the digits tick.
+
+## Layout & sections (in order)
+
+The page is `<main>` holding six `<section>`s, each wrapped in the section-flow scrub.
+
+---
+
+### 1 — Hero  ·  `data-ground="dark"` `data-header-theme="dark"`
+
+**From 1024px up this is one shot**: `height: 100lvh`, the full-bleed photo filling it and the copy
+pinned to the viewport — top, centre and bottom. Below 1024px it becomes a plain stack, because the
+narrow frames are a different composition: the headline carries the closing line with it as one
+centred block, the photo is a card in the flow with the figures inside it, and the rule, intro and
+calls to action follow underneath. Text is white throughout.
+
+**The stage** is the element marked **`data-hero-stage`** — this is what the loading panel's last
+card grows into. From 1024px it is `position: absolute; inset: 0; z-index: 0`; below that it is a
+card: `margin: 1rem 1rem 0`, `aspect-ratio: 358/448` (≥768px `margin: 2.5rem 1.5rem 0`,
+`aspect-ratio: 720/495`).
+
+**The photo** — `hero/project-4.webp`, alt "Concrete hillside house lit from within" — fills the
+stage in the shared `bottom: 0; height: 130%` layer with `object-fit: cover`, and carries scroll
+parallax: scrub `start: "top top"` → `end: "bottom top"`, `y: "0%" → "22%"`, config
+`{ tension: 120, friction: 26 }`, sampled at **32ms**. It sinks slower than the page.
+
+**Headline** (`h1`, released by the handoff, head preset): **"Building spaces that last."**
+From 1024px: `position: absolute; inset-inline: 0; top: 5.625rem; z-index: 10; padding-inline: 1.5rem`
+(`xl: top: 6.1875rem; padding-inline: 2rem`), `max-width: 24rem` / `font-size: 3rem`
+(`xl: max-width: 33rem; font-size: 4.5rem`), left-aligned, `line-height: 0.95`.
+At 768–1023px: `width: 26rem`, `font-size: 2.875rem`, left. Below 768: centred, `font-size: 1.75rem`.
+
+**Closing line** (head preset, `delayIn: 160` then `+90` per line): two lines, right-aligned —
+**"Built for today."** / **"Created for generations."** From 1024px: `position: absolute;
+bottom: 2rem; right: 1.5rem; z-index: 10` (`xl: right: 2rem`), `font-size: 2.75rem`
+(`xl: 4.5rem`). At 768–1023: its own row at the bottom of the block, `font-size: 2.875rem`,
+`padding-top: 3.5rem`. Below 768 it sits directly under the headline as one centred block.
+
+**The figures** — `18 years / of building`, `120+ / completed projects`, `2.4M m² / of built space`
+— the value in white, the label in `--on-inverse-muted`, each row counting up as above. Rows slide
+in `{ opacity: 0→1, y: 18→0 }` on `{ tension: 210, friction: 28 }`, staggered **110ms**. Their
+place changes by frame: **below 768px they sit inside the photo**, absolutely centred
+(`top: 50%; translateY(-50%)`, centred text, 1rem). At **768–1023px** they sit beside the headline,
+right-aligned at `1.125rem`, bottom-aligned in the first row. From **1024px** they return to the
+copy row at `1.125rem`, `width: 13.125rem`, right-aligned.
+
+**The rule** — `hero/line-divider.svg`, a 1px full-width hairline. From 1024px it belongs to a block
+at `position: absolute; inset-inline: 0; top: 50%; z-index: 10; padding-inline: 1.5rem`
+(`xl: 2rem`), with the intro and the figures in a row beneath it (`padding-top: 1rem`,
+`justify-content: space-between`).
+
+**Intro** (copy preset, `delayIn: 120`): **"From concept to completion — we deliver construction
+projects with precision, transparency and full accountability."** `max-width: 17.0625rem`,
+`font-size: 1.125rem`, left-aligned from 1024px; `width: 15.625rem` at 1rem at 768–1023; centred at
+1rem below 768.
+
+**Calls to action** (`Spring` in on `delayIn: 320`, `{ opacity: 0→1, y: 16→0 }`,
+`{ tension: 170, friction: 26 }`): two dashed boxes — **`explore Projects`** → `#projects` and
+**`our PROCESS`** → `#process`. Each is `border: 1px dashed rgba(255,255,255,0.40)`, uppercase 14px
+(`lg: 1rem`), `padding: 0.875rem 1rem` (`md: 1rem 1.25rem`, `lg: 0.875rem`, `xl: 1rem 1.5rem`),
+`white-space: nowrap`, with `box` corner markers. From 1024px they sit
+`position: absolute; bottom: 2rem; left: 1.5rem; z-index: 10` (`xl: left: 2rem`); below 768 they
+share a row, each `flex: 1`.
+
+**Their hover** — the design gives these no hover state, so the motion is built from what the box
+already is. Three things at once: a white panel fills the box from the bottom
+(`transform-origin: bottom`, `scaleY: 0 → 1`, `{ tension: 240, friction: 30 }`); the label rolls
+over to a **black** copy so it reads through the fill (`{ tension: 260, friction: 26 }`); and the
+four corner markers pull outwards. Together it reads as the box turning over rather than a panel
+sliding in.
+
+---
+
+### 2 — About  ·  `data-ground="light"` `data-header-theme="light"`
+
+`min-height: 100lvh` (`sm: height: 100lvh`), black text on the light ground. Ten photo states, one
+layout — **only the centre photo changes**.
+
+From 1024px the contents live in a **band fixed to the design's 800px and centred in it**
+(`position: absolute; top: 50%; translateY(-50%); height: 100%`, `xl: height: 50rem`): the photo is
+centre-anchored and the copy bottom-anchored, so on a taller viewport they would otherwise drift
+apart and the mission text would fall clear of the photo instead of running beside it. Below 1024px
+it is a plain stack that grows with its content (`padding: 6rem 1rem 2.5rem`), because the phone
+frame is too short to pin to and the topics ended up behind the photo.
+
+**Eyebrow** (`Inview`, `delayIn: ENTRY_DELAY`, `{ opacity: 0→1, y: 12→0 }`,
+`{ tension: 210, friction: 28 }`): **"Northwall Construction"**, uppercase 12px, centred.
+
+**Title** (`h2`, head preset, `delayIn: ENTRY_DELAY + 120`): **"Where precision builds the future"**,
+`text-transform: capitalize`, centred, `font-size: 2rem` → `2.75rem` (md) → `var(--section-title)`
+(xl), `line-height: 0.95`. Eyebrow and title share a column, `gap: 1.125rem` (`lg: 1.75rem`),
+placed at `left: 50%; top: 5.25rem; width: 28rem; translateX(-50%)` from 1024px (`xl: top: 6.1875rem`).
+
+**The rotating photo.** A frame at `left: 50%; top: calc(50% + 3.3125rem)`, `translate(-50%, -50%)`,
+`20rem × 24.625rem` from 1024px (`xl: top: calc(50% + 4.4375rem); 20.8125rem × 25.5rem`); below that
+it is `aspect-ratio: 358/458` full width (`md: 720/628`). All ten photos are stacked and
+cross-faded on **`{ tension: 420, friction: 38 }`** — softer than a snap, so the slower cadence
+reads as a dissolve. The loop starts **`START_DELAY = 450`ms** after the frame enters view and
+advances every **`STEP_INTERVAL = 520`ms**, wrapping. The photos never resize — the design fixes
+the frame. In order:
+
+`about/about-1.webp` "Fluted-concrete civic building above landscaped steps" · `about-2.webp`
+"Curved concrete staircase with lit treads" · `about-3.webp` "Glass and concrete house on a planted
+terrace at dusk" · `about-4.webp` "Curved-balcony residential tower planted with greenery" ·
+`about-5.webp` "Colonnaded office building lit from within at evening" · `about-6.webp` "Resort pool
+lined with loungers and palms" · `about-7.webp` "Bedroom opening through full-height glass onto
+palms" · `about-8.webp` "Stone-clad facade with a cantilevered balcony" · `about-9.webp` "Glass
+pavilion under a tree at sunset" · `about-10.webp` "Dining room with pendant lights facing woodland".
+
+**The topics.** Five, sharing the photos' clock — **each topic holds for two photos**:
+`activeTopic = Math.floor(index * 5 / 10)`. They are, in order: **Precision Engineering ·
+Material Expertise · Structural Integrity · Timeless Architecture · End-to-end Construction**.
+The active one springs to `opacity: 1`, the rest rest at **`0.55`** on
+`{ tension: 260, friction: 30 }`. (The design draws them at 20%, which is 1.6:1 on this surface —
+unreadable. 55% black over `#f5f5f5` lands at `#767676`, exactly the 4.5:1 threshold, and the
+active topic is still full black, so the emphasis survives.) From 1024px they sit
+`position: absolute; bottom: 1.5rem; left: 1.5rem` (`xl: 2rem`) at `1.125rem`; below 768 they move
+**inside the photo**, bottom-left, in white.
+
+**The button.** The whole photo frame is the link (`#about`); the button is its visible affordance,
+centred on the frame: `background: #000; color: #fff; padding: 1rem 1.5rem`, uppercase 14px, a
+`SwapArrow` and a `RollLabel` reading **`about us`**. On hover it springs
+`{ opacity: 0→1, scale: 0.94→1 }` on `{ tension: 420, friction: 30 }`. **Below 1440px it is simply
+always visible** — every narrower frame draws it outright, and a hover-only reveal is unreachable
+on touch.
+
+**Mission** (copy preset, mode `always`, `delayIn: ENTRY_DELAY + 280`): **"Our mission is to turn
+bold architectural concepts into reality — with precision, reliability and a commitment to lasting
+quality."** From 1024px: `position: absolute; bottom: 1.5rem; left: 40.6875rem; width: 19.5rem`,
+`font-size: 1.125rem` (`xl: bottom: 2rem; left: calc(50% + 5.9375rem); width: 23.625rem;
+font-size: 1.5rem`), left-aligned. **The first line is indented 83px to clear the photo above it** —
+words are flex items, where `text-indent` does nothing, so the indent is a leading spacer element
+of `width: calc(4.3125rem - 0.266em)` (`xl: calc(5.1875rem - 0.266em)`), the subtraction cancelling
+the word gap so the first word lands exactly on 83px.
+
+---
+
+### 3 — Projects  ·  `data-ground="dark"` `data-header-theme="dark"`
+
+`height: 100lvh` from 1024px (below: `padding-block: 6rem`). Three cards in a row from `x = 40px,
+y = 99px` with a 12px gutter, **top-aligned**, the row spanning `inset-inline: 1.5rem; top: 2.25rem`
+(`xl: inset-inline: 2.5rem; top: 6.1875rem; gap: 0.75rem`). The cards share the row equally
+(`flex: 1`) so above 1440 — where the root font-size is damped — they still reach the right gutter.
+**The middle card is taller by design.** Below 1024 they stack (`gap: 0.75rem`); at 768–1023 they
+are a 2-column grid where the last card spans both (`aspect-ratio: 720/392`).
+
+| card | label | photo (alt) | height from lg | photo drift |
+|---|---|---|---|---|
+| 1 | **Commercial** | `projects/card-commercial.webp` — "Colonnaded commercial building lit at dusk" | `29.375rem` (`xl: 32.75rem`) | 90px |
+| 2 | **Residential** | `projects/card-residential.webp` — "Two-storey residential house with glazed balconies" | `37.5rem` (`xl: 41.8125rem`) | 55px |
+| 3 | **Hospitality** | `projects/card-hospitality.webp` — "Covered restaurant terrace overlooking the sea" | `29.3125rem` (`xl: 32.75rem`) | 90px |
+
+Each links to `#commercial` / `#residential` / `#hospitality`. Card aspect below lg:
+`358/430` (`md: 352/435`).
+
+**Entry — the card opens top to bottom as if a mask were drawn down over it.** An `Inview` (once)
+animates `clip-path` from `inset(0% 0% 100% 0%)` to `inset(0% 0% 0% 0%)` on
+**`{ tension: 70, friction: 24, clamp: true }`**, delayed `ENTRY_DELAY + index * 180` so the cards
+take their turn left to right. **The mask carries everything drawn on the card** — the scrim and
+the label open with the photo instead of floating over an empty frame. Underneath, the photo settles
+from `scale: 1.18 → 1` on `{ tension: 60, friction: 26 }` at the same delay, and the label follows
+**420ms** after its card's mask.
+
+**Parallax.** Inside the mask, the frame stays put and the photo drifts: scrub
+`start: "top bottom"` → `end: "bottom top"`, `y: -drift → +drift` px, `{ tension: 120, friction: 26 }`,
+sampled at **32ms**. The photo layer is `top: -18%; height: 136%` so no edge is exposed at either
+end of the travel.
+
+**The scrim** — 94px (`5.875rem`) of gradient at the bottom carrying the label. Figma's background
+blur ramps in with the layer's own fill, but a bare `backdrop-filter` is uniform and leaves a
+visible seam at the top edge, so build it from **two masked blur layers of increasing radius**, each
+faded out upwards, plus a gradient:
+
+```css
+/* layer 1 */ backdrop-filter: blur(2px);
+              mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 100%);
+/* layer 2 */ backdrop-filter: blur(4px);
+              mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 62%);
+/* layer 3 */ background: linear-gradient(to bottom, var(--scrim-from), var(--scrim-to));
+```
+
+**The label** sits `bottom: 1.5rem`, `padding-inline: 0.625rem`, centred, uppercase `1.25rem`,
+white, animated with the head preset but `wordOut: { y: "90%", opacity: 0, scale: 0.9 }`,
+`wordStagger: 50`, `{ tension: 190, friction: 28 }`.
+
+**The button.** The card is the link; a centred `explore` button — black background, white text,
+`padding: 1rem 1.5rem`, uppercase 14px, `SwapArrow` + `RollLabel` — springs
+`{ opacity: 0→1, scale: 0.94→1 }` on `{ tension: 420, friction: 30 }` on hover. **Shown only from
+1440px**; at or below 768px it renders visible outright.
+
+---
+
+### 4 — Process  ·  `data-ground="dark"` `data-header-theme="dark"`
+
+`height: 37.5rem` (`md: 53.625rem`, `lg: 100lvh`), `overflow: hidden`. Four frames, one layout:
+only which step is lit, the caption under it, and the photo change.
+
+**Eyebrow** (`Inview`, `delayIn: ENTRY_DELAY`, `{ opacity: 0→1, y: 12→0 }`,
+`{ tension: 210, friction: 28 }`): **"OUR PROCESS"**, uppercase 12px white, absolutely centred at
+`top: 5.5rem` (`lg: 6.1875rem`), `z-index: 20`.
+
+**The steps.** Five rows, centred with flex (**not** a transform — a transformed ancestor opens a
+stacking context and traps the active step's z-index below the photo), `gap: 0.5rem`
+(`sm: 0.6875rem`), centred text at `1.375rem` → `2.5rem` (sm) → `3.5rem` (md) → `4.5rem` (lg,
+`white-space: nowrap`), `line-height: 0.95`, white:
+
+1. **01 / Planning** — "We start by understanding the project, its requirements and what success looks like." (caption width `lg: 18.4375rem`)
+2. **02 / Design & Engineering** — "We coordinate ideas, technical requirements and systems into a clear, build-ready plan." (`16.6875rem`)
+3. **03 / Construction** — "We bring the project to life with experienced teams, careful coordination and control on site." (`21.75rem`)
+4. **04 / Control** — "We monitor quality, progress and every moving part to keep the project on track." (`16.8125rem`)
+5. **05 / Handover** — "We complete the final details and deliver a space ready for what comes next." (`15.875rem`)
+
+Hovering (or focusing, or tapping) a step makes it active. The active one springs to
+`opacity: 1, blur(0)` and sits **above** the photo (`z-index: 20`); the rest rest at
+**`opacity: 0.3`, `filter: blur(5px)`** behind it (`z-index: 0`), on
+**`{ tension: 220, friction: 30 }`**. `cursor: pointer`, `tabindex="0"`.
+
+**Auto-advance.** Below 1440px there is no pointer to move the stage on, so it advances itself every
+**`AUTO_STEP_MS = 3800`** — but only while the section is at least 40% in view
+(`IntersectionObserver`, `threshold: 0.4`). A real mouse entering the stage switches it off
+permanently. At the design base the steps stay on hover, as the desktop frames draw them.
+
+**The photo stage**, centred and layered under the active step:
+`13.25rem × 16.25rem` (`sm: 16.5 × 20rem`, `md: 28.125 × 30rem`, `lg: 20.625 × 25rem`),
+`overflow: hidden`. Every step's photo is stacked and cross-faded on
+**`{ tension: 320, friction: 34 }`** — brisk enough to keep up with a pointer sweeping down the
+list, and a swap never waits on a load. The photos are, per step:
+`process/process-step.webp` "Fluted-concrete building above landscaped steps" ·
+`about/about-2.webp` · `about/about-8.webp` · `about/about-5.webp` · `about/about-3.webp`
+(alts as in the about section).
+
+Three transforms compose on it, outermost first:
+
+1. **Scroll parallax** — scrub `start: "top bottom"` → `end: "bottom top"`, `y: 70 → -70` px,
+   `{ tension: 120, friction: 26 }`, sampled at **32ms**.
+2. **Pointer tilt** — the stage element (`perspective: 900px` on its parent,
+   `transform-style: preserve-3d`) tilts toward the pointer. Normalise the pointer to −0.5…0.5
+   across the **section**: `rotateX = -py * 24`, `rotateY = px * 24` (i.e. `MAX_TILT = 12`, doubled),
+   on `{ tension: 150, friction: 24 }`, returning to 0 on leave. The inner photo layer lags behind
+   for depth: `x = px * 18`, `y = py * 18` with a constant `scale: 1.12` so the lag never exposes an
+   edge.
+3. **The turn** — the photo's resting angle per step: the last step holds **30°** and each step
+   above it sits **10° further anticlockwise** (so 01 → −10°, 02 → 0°, 03 → 10°, 04 → 20°,
+   05 → 30°): `rotate = 30 - (steps.length - 1 - active) * 10`, on
+   `{ tension: 170, friction: 22 }` — a touch of give so it lands softly.
+
+**The caption**, under the stage: `bottom: 2rem; left: 50%; translateX(-50%)`,
+`width: calc(100% - 2rem); max-width: 16.25rem` (`md: 17.75rem`; from lg
+`top: calc(50% + 18.875rem)` with that step's own caption width), centred, `1.125rem`, white,
+`z-index: 20`. **Re-mount the text engine on every change** (key it on the caption) so each new
+sentence assembles word by word with the copy preset rather than cross-fading as one block.
+
+---
+
+### 5 — Team  ·  `data-ground="light"` `data-header-theme="light"`
+
+Taller than the full-screen blocks around it, so it **grows with its content** rather than being
+pinned to the viewport: `padding: 6rem 0 4rem` (`md: 8.4375rem / 4.6875rem`,
+`lg: 7.75rem / 13.1875rem`, `xl: 8.125rem / 6rem`), `padding-inline: 1rem` (`md: 1.5rem`, `xl: 2rem`).
+
+**Title** (`h2`, head preset, `delayIn: ENTRY_DELAY`): **"The people behind every project."**,
+left-aligned, `text-transform: capitalize`, `2.25rem` → `3rem` (sm) → `2.5rem` (md) → `2.75rem` (lg)
+→ `var(--section-title)` (xl), width `23rem` (md) → `24rem` (lg) → `30.3125rem` (xl).
+
+**Intro** (copy preset, mode `always`, `delayIn: ENTRY_DELAY + 160`): **"A team of professionals
+united by expertise, precision and a shared commitment to lasting quality."** From 1440px it is
+pinned `top: 2.40625rem; right: 2rem; width: 20.9375rem`; from 1024 `bottom: 0; right: 1.5rem;
+width: 21rem`; from 768 `bottom: 0; left: 28.125rem; width: 18.125rem`; below that it simply follows
+the title.
+
+**The rows.** Three, `background: #ebebeb`, `padding: 1rem` (`sm/lg: 1.5rem`, `xl: 2rem`),
+`gap: 0.75rem` between them (`md: 1.4375rem`), height `13.5rem` (md) → `12.1875rem` (lg) →
+`12.6875rem` (xl), laid out as a row from 768px and `align-items: flex-end`. `tabindex="0"`.
+
+**Row entry** — each card drifts down into place while it clears from a blur:
+`{ opacity: 0, y: -28, filter: blur(14px) }` → `{ opacity: 1, y: 0, filter: blur(0px) }` on
+**`{ tension: 55, friction: 22 }`**, delayed `ENTRY_DELAY + index * 220`. Low tension and generous
+friction keep it slow and cushioned; the stagger is long enough that the rows read as a sequence
+rather than a block.
+
+Each row's left column (`width: 19rem` md, `17.5rem` lg, `17.3125rem` xl) holds the eyebrow
+(uppercase 12px, `--on-muted-label`, `white-space: pre-wrap` — the double space is in the copy),
+the name (`1.5rem`, `font-weight: 500`) and the bio (copy preset, mode `always`, `1.125rem`, left).
+Then the portrait (`aspect-ratio: 43/35`, `width: 10.625rem` → `10.6875rem` md → `9.5rem` lg),
+springing in `{ opacity: 0→1, scale: 1.06→1 }` on `{ tension: 480, friction: 42 }` at
+`ENTRY_DELAY + index * 220 + 120`. Then the role pair: a 6px black square with a
+`rgba(0,0,0,0.40)` border beside the role, and the experience figure counting up with its label in
+`--on-muted-meta`.
+
+| # | eyebrow | name | role | experience | portrait (alt) |
+|---|---|---|---|---|---|
+| 1 | `01 //  Founder & CEO` | **Alex North** | leadership | `15+ years` | `team/member-1.webp` — "Alex North in a dark coat against a concrete wall" |
+| 2 | `02 //  Head of Architecture` | **Kate Morrison** | architecture | `12+ years` | `team/member-2.webp` — "Kate Morrison looking past the camera against a concrete wall" |
+| 3 | `03 //  Head of Construction` | **Daniel Lee** | construction manager | `18+ years` | `team/member-3.webp` — "Daniel Lee in a hard hat on site" |
+
+Bios: "Leads Northwall with a vision for precision, quality and long-term value in every project." ·
+"Brings ideas to life through thoughtful design and functional, timeless architecture." ·
+"Ensures every detail is executed with precision, on time and to the highest standards."
+
+**From 1440px only — the travelling portrait.** The design draws **one** portrait, parked in the
+first row. There, hide the per-row portraits and instead float a single slot at
+`left: 23.6875rem; top: 2rem`, `10.4375rem × 8.6875rem`, which **carries itself to the hovered row**
+and switches the photo: `y = active * pitch` on **`{ tension: 480, friction: 42 }`** (travel and
+dissolve share one config, so matched timing reads as a single move), with the three photos stacked
+and cross-faded `{ opacity, scale: 1.06 → 1 }` on the same config. **Measure `pitch` off the
+rendered rows** (`rows[1].top - rows[0].top`) rather than assuming the design's 203+12 — the rows
+are shorter below 1440 and a hard-coded step drops the portrait into the gutter between two of them.
+Re-measure on resize. The slot arrives with the first row (same entry spring and delay).
+Also at 1440 the role/experience pair pins to `bottom: 2rem; left: 45.375rem; right: 2rem`, the
+figure column taking the intro's width (`20.9375rem`) at the same right gutter.
+
+---
+
+### 6 — Contact  ·  `data-ground="dark"` `data-header-theme="hidden"`
+
+The footer — a full-bleed photo with a black rail down the left carrying the section links and the
+office details, and the form card floating on the right. **The fixed header steps aside over this
+block** (that is what `hidden` means), because the rail carries its own navigation.
+
+`height: 47.75rem` (md) → `100lvh` (lg), `min-height: 50rem` (xl); below 768 it is a stack with
+`padding-bottom: 2.5rem`.
+
+The block fills the viewport, so the slack has to go somewhere: **every tight relationship in the
+design sits at the bottom** — the details and the legal line on the 32px gutter, the card 32px above
+the legal line — so those are pinned there and the links stay at `y = 112px`. The gap that grows is
+the empty stretch of rail the design already leaves in the middle. At the design's 800px the result
+is identical to the frame.
+
+**The photo** — `contact/contact-background.webp`, alt "Timber and stone house at dusk" — fills the
+block, rising slower than it: scrub `start: "top bottom"` → `end: "bottom bottom"`,
+`y: "-15%" → "0%"`, `{ tension: 120, friction: 26 }`. The layer is `top: 0; height: 120%`, hanging
+below the block by more than its travel so the bottom edge is never exposed.
+
+**The rail** — `position: absolute; inset-block: 0; left: 0; width: 15rem` (`xl: 17.625rem`), solid
+black, from 768px up.
+
+**The lockup** — the wordmark again (masked `hero/logo-northwall.png`, `6.3125rem × 1rem`, white),
+at `left: 1.5rem; top: 2rem` (`lg: left: 2rem`).
+
+**Section links** — `left: 1.5rem; top: 7rem; width: 12rem` (`xl: left: 2rem; width: 13.6875rem`).
+The same five (Projects, About, Process, Team, Contacts), each an `ArrowLink` on its own row,
+`padding-block: 1rem`, uppercase 14px `--tracking-nav` white, rows separated by
+`rgba(255,255,255,0.30)` hairlines (the last one closed with a bottom border). Each springs in
+`{ opacity: 0→1, y: 14→0 }` on `{ tension: 200, friction: 30 }` at
+`ENTRY_DELAY + index * ENTRY_STAGGER`.
+
+**The details** (`<address>`, `font-style: normal`, `delayIn: ENTRY_DELAY + 140`,
+`{ opacity: 0→1, y: 16→0 }`) — `bottom: 2.5rem; left: 1.5rem` (`xl: bottom: 2rem; left: 2rem`),
+uppercase 14px white, `gap: 0.75rem` between blocks:
+
+```
++1 (212) 555 - 01 98
+ingo@northwall.com
+123 Madison ave.
+new york, 10016, usa
+```
+
+(the last two are one block, two lines).
+
+**The form card** — white, `padding: 1.25rem` (`md: 1.5rem`, `lg: 2rem`), pinned
+`top: 1.5rem; bottom: 4.75rem; left: 16.5rem; right: 1.5rem` (md), `left: 32.5rem; bottom: 4.5rem`
+(lg), `top: 2rem; right: 2rem; bottom: 5.0625rem; left: auto; width: 35.375rem` (xl). Below 768 it
+is simply `margin: 1.5rem 1rem 0`. Fields, in order, `gap: 1.5rem`:
+
+1. `first name *` — required text
+2. the phone row — a country picker (`+1` with the US flag `contact/flag-us.svg`; the others fall
+   back to their dial code: `GB +44`, `DE +49`, `FR +33`, `AE +971`), a `|` separator, then a `tel`
+   input placeholdered `+1 (XXX) XXX-XXXX`. The dial code lives in the picker, not the text field.
+3. `email *` — required email
+4. `Project type` — a select with `Commercial`, `Residential`, `Hospitality`, its own chevron
+   (`contact/chevron-b.svg`, rotated 90°) at the right, `appearance: none`
+5. `Location *` — required text
+6. `Tell us about your project` — a textarea, `height: 13.0625rem`, `resize: none`. **This field
+   absorbs whatever height the viewport adds beyond the design's 800px frame** (`flex: 1` from md),
+   since the card is pinned top and bottom.
+
+Every field is `width: 100%; background: transparent; border: none; border-bottom: 1px solid
+var(--border-field); padding-block: 0.75rem`, uppercase 14px black, placeholder in the same black.
+On focus the border goes solid black — a `transition: border-color 150ms var(--ease-entrance)`, the
+one thing on this page that is a CSS transition rather than a spring, because it is a discrete state
+change.
+
+Then the agreement row: a 12px square checkbox (`appearance: none`, `border: 0.3px solid #000`,
+black when checked), `required`, beside **"I agree to be contacted about my inquiry and accept the
+Privacy Policy."** — the policy underlined, and a real link to `/privacy-policy` only from 1440px
+(below the design base it is plain underlined text, because on a narrow screen a link inside the
+label competes with the checkbox for the same tap).
+
+The submit button: full width, `background: #000; color: #fff; padding: 1rem;
+border-radius: var(--button-radius)`, uppercase 14px `font-weight: 500`, a `SwapArrow` and a
+`RollLabel` reading **`Discuss Project`**. On submit, `preventDefault` and show
+`Thanks — we'll be in touch shortly.` in 12px under the button — the message is rendered **only
+once there is something to say**, so the resting card keeps the design's 687px height.
+
+**The legal line** — `bottom: 2rem`, uppercase 14px in `--on-inverse-meta`:
+`Privacy Policy` `/` `Terms of Use` (two `RollLink`s with the separator between them) at
+`left: 16.5rem` (`lg: 32.5rem`, `xl: calc(100% - 37.375rem)`), delayed `ENTRY_DELAY + 320`; and
+**"© 2026 northwall contruction."** at `right: 1.5rem` (`xl: 2rem`), `white-space: nowrap`, delayed
+`ENTRY_DELAY + 400`. Both `{ opacity: 0→1, y: 10→0 }` on `{ tension: 200, friction: 30 }`.
+
+## Fixed parameters (bake these in)
+
+```js
+// Loading panel
+HOLD_AT = 0.72; MAX_WAIT = 4000; WARM_BUDGET = 3000;
+CARD_LEAD = 180; CARD_INTERVAL = 240; FINALE_HOLD = 280; RELEASE_AT = 0.35;
+FILL     = { tension:  60, friction: 30 };
+FINISH   = { tension: 150, friction: 30, clamp: true };
+HANDOFF  = { tension: 210, friction: 34, clamp: true };
+CARD     = { tension: 190, friction: 24 };
+EXPAND   = { tension:  80, friction: 16, clamp: true };
+LEAVE    = { tension: 320, friction: 30, clamp: true };
+
+// Page-wide
+ENTRY_DELAY = 180; ENTRY_STAGGER = 110; WORD_GAP = 0.266;
+GROUND   = { tension:  90, friction: 26 };   // sampled every 150ms
+FLOW     = { tension: 110, friction: 26 };   // sampled every  32ms
+HEADER   sampled every 80ms
+PARALLAX = { tension: 120, friction: 26 };   // sampled every  32ms
+HEAD     = { tension: 180, friction: 26 }, stagger 55
+COPY     = { tension: 210, friction: 28 }, stagger 22
+REVEAL   = { tension: 210, friction: 28 };
+COUNT    = { tension:  90, friction: 34 };
+ROLL     = { tension: 260, friction: 26 };
+SWAP     = { tension: 300, friction: 26 }, travel 16px
+CORNER   = { tension: 300, friction: 22 }, spread 3px
+BURGER   = { tension: 320, friction: 26 };
+
+// Hero
+HERO_INTRO_DELAY = 120; TAGLINE_DELAY = 160; TAGLINE_STAGGER = 90; LINKS_DELAY = 320;
+HERO_PARALLAX = "0%" → "22%";
+LINK_FILL = { tension: 240, friction: 30 };
+
+// About
+START_DELAY = 450; STEP_INTERVAL = 520; TOPIC_DIM = 0.55;
+FADE     = { tension: 420, friction: 38 };
+TOPIC    = { tension: 260, friction: 30 };
+BUTTON   = { tension: 420, friction: 30 };
+
+// Projects
+MASK_STAGGER = 180; LABEL_AFTER_MASK = 420; DRIFTS = [90, 55, 90];
+MASK     = { tension:  70, friction: 24, clamp: true };
+SETTLE   = { tension:  60, friction: 26 };
+LABEL    = { tension: 190, friction: 28 };
+
+// Process
+AUTO_STEP_MS = 3800; MAX_TILT = 12; MAX_DEPTH = 18; DIM_OPACITY = 0.3; DIM_BLUR = 5;
+LAST_TILT = 30; TILT_STEP = 10; PERSPECTIVE = 900;
+TILT     = { tension: 150, friction: 24 };
+STEP     = { tension: 220, friction: 30 };
+SWAP_IMG = { tension: 320, friction: 34 };
+TURN     = { tension: 170, friction: 22 };
+
+// Team
+ROW_STAGGER = 220;
+ROW_REVEAL = { tension:  55, friction: 22 };
+SLIDE/FADE = { tension: 480, friction: 42 };
+
+// Breakpoints
+md = 768, lg = 1024, xl = 1440 (the design base)
+```
+
+## Assets
+
+Every photo and glyph loads from the public bucket. `ASSET_BASE_URL =
+https://storage.getlayers.ai/assets/northwall-aab9fcbef2`
+
+**Photography**
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/project-1.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/project-2.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/project-3.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/project-4.webp` — the hero photo
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/about/about-1.webp` … `about-10.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/projects/card-commercial.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/projects/card-residential.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/projects/card-hospitality.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/process/process-step.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/team/member-1.webp` … `member-3.webp`
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/contact/contact-background.webp`
+
+**Marks and glyphs** (all drawn as CSS masks so they take the surrounding colour, except the flag)
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/mark-northwall.svg` — the loading monogram
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/logo-northwall.png` — the wordmark
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/line-divider.svg` — the hero's hairline
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/hero/icon-arrow.svg` — arrow on dark
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/about/icon-arrow-light.svg` — arrow on light
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/contact/chevron-a.svg` — the country picker's chevron
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/contact/chevron-b.svg` — the select's and language chevron
+- `https://storage.getlayers.ai/assets/northwall-aab9fcbef2/contact/flag-us.svg` — drawn as an image, not a mask
+
+If an asset fails to load, say so visibly on the page — a blank stage with a console error is how a
+broken build ships unnoticed.

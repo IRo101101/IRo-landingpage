@@ -3,3 +3,12 @@ Thumbs.db
 *.log
 node_modules/
 .vscode/
+__pycache__/
+# Erzeugte Dateien der Werkzeuge in _handover/tools (Screenshots des Sweeps, gerenderte Karten)
+_handover/tools/shots/
+_handover/tools/shots_b/
+_handover/tools/osm/standort-s1.svg
+_handover/tools/osm/standort-s1.png
+_handover/tools/osm/standort.webp
+_handover/tools/osm/lageplan-s2.png
+_handover/tools/osm/render.html
