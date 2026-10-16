@@ -262,6 +262,10 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     (C-3), Arbeitsweise (C-2), Steckbrief (C-1) nur mit oeffentlichen Angaben: Der Kunde will keine Angaben zu Gruendung,
     Team, Kunden und Referenzen auf der Seite, Branchen hoechstens allgemein. Leistung 01 hat heute denselben Text wie die
     Ideation-Karte; Hero-Intro ("unter einem Dach") und CTA "Unser Prozess" passen nicht mehr zu L-4. Status: offen
+64. [Review 16.10.] Englisch geglaettet, Deutsch unveraendert: Leitsatz "We guide customers" statt "accompany",
+    Kartentexte Entwicklung ("before they reach the customer"), Simulation ("In our projects" statt "With us"),
+    Prototyping ("hold your product in your hands", "production tooling"), Leistung 04 ("matures during development and
+    not in the customer's hands"). Vision-Zitat in Schweizer Anfuehrungszeichen «». Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
