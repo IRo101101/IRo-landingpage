@@ -26,7 +26,7 @@
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/img/v2/07.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="assets/vendor/lenis/lenis.css">
-<link rel="stylesheet" href="assets/css/styles.css?v=20261015b">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261016">
 <noscript><style>[data-preloader]{display:none}.hero .words .w__i{visibility:visible}.card__mask,.team__mask{clip-path:none}.card__btn{opacity:1}</style></noscript>
 <script type="application/ld+json">
 {
@@ -74,8 +74,8 @@
   <a class="hdr__cell hdr__logo" href="#top" aria-label="IdeeRoth AG - Startseite" data-en-label="IdeeRoth AG - Home"><span class="logo-mark" role="img" aria-label="iro.swiss"></span></a>
   <div class="hdr__cell hdr__spacer" aria-hidden="true"></div>
   <nav class="hdr__nav" aria-label="Hauptnavigation">
-    <a href="#kompetenzen" data-en="Expertise">Kompetenzen</a>
     <a href="#unternehmen" data-en="Company">Unternehmen</a>
+    <a href="#kompetenzen" data-en="Expertise">Kompetenzen</a>
     <a href="#leistungen" data-en="Services">Leistungen</a>
     <a href="#team">Team</a>
     <a href="kontakt.html" data-en="Contact">Kontakt</a>
@@ -93,8 +93,8 @@
 
 <div class="menu" id="menu" hidden>
   <div class="menu__links">
-    <a class="al" href="#kompetenzen"><span class="al__label" data-en="Expertise">Kompetenzen</span><span class="al__arrow" aria-hidden="true"></span></a>
     <a class="al" href="#unternehmen"><span class="al__label" data-en="Company">Unternehmen</span><span class="al__arrow" aria-hidden="true"></span></a>
+    <a class="al" href="#kompetenzen"><span class="al__label" data-en="Expertise">Kompetenzen</span><span class="al__arrow" aria-hidden="true"></span></a>
     <a class="al" href="#leistungen"><span class="al__label" data-en="Services">Leistungen</span><span class="al__arrow" aria-hidden="true"></span></a>
     <a class="al" href="#team"><span class="al__label">Team</span><span class="al__arrow" aria-hidden="true"></span></a>
     <a class="al" href="karriere.html"><span class="al__label" data-en="Careers">Karriere</span><span class="al__arrow" aria-hidden="true"></span></a>
@@ -163,52 +163,93 @@
           <li class="about__topic" data-en="Vocational training">Berufsbildung</li>
         </ul>
         </div>
-        <p class="about__mission left" data-indent data-en="We develop more from less - our team accompanies customers from the first idea to finished series production and strengthens their competitiveness.">Wir entwickeln aus weniger mehr - unser Team begleitet Kunden von der ersten Idee bis zur fertigen Serienentwicklung und stärkt so ihre Wettbewerbsfähigkeit.</p>
+        <p class="about__mission left" data-indent data-en="For us, developing more from less means fewer parts, fewer detours, less risk. We accompany customers from the first idea to series production and make their products more competitive.">Aus weniger mehr entwickeln heisst für uns: weniger Teile, weniger Umwege, weniger Risiko. Wir begleiten Kunden von der ersten Idee bis zur Serie und machen ihre Produkte wettbewerbsfähiger.</p>
       </div>
     </div>
   </section>
 
   <!-- ===================== 3 Kompetenzen ===================== -->
+  <!-- r1 K-B / KL-A (Kundenentscheid 16.10.2026): Kurzzeile auf der Karte, Klick klappt den Kompetenztext auf, darin der Link zum passenden Leistungsschritt -->
   <section class="cards" id="kompetenzen" data-ground="dark" data-header-theme="dark" data-flow aria-label="Kompetenzen">
     <div class="cards__row">
-      <a class="card" href="#leistungen">
+      <div class="card">
         <div class="card__mask">
         <div class="card__drift"><img class="card__photo" src="assets/img/v2/09.webp" alt="Zwei Mitarbeiter besprechen ein Konzept am Tablet" loading="lazy" data-warm></div>
         <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
-        <h3 class="card__label center">Ideation</h3>
-        <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        <div class="card__foot">
+          <h3 class="card__label center">Ideation</h3>
+          <p class="card__short center" data-en="Finding the simplest solution before it gets expensive.">Die einfachste Lösung finden, bevor sie teuer wird.</p>
         </div>
-      </a>
-      <a class="card card--tall" href="#leistungen">
+        <button class="card__hit" type="button" aria-expanded="false" aria-controls="kompetenz-ideation" aria-label="Ideation entdecken" data-en-label="Explore Ideation">
+          <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        </button>
+        <div class="card__more" id="kompetenz-ideation" role="region" aria-label="Ideation" inert>
+          <div class="card__top"><span class="card__kicker">Ideation</span><button class="card__close" type="button" aria-label="Schliessen" data-en-label="Close"></button></div>
+          <p class="card__text" data-en="Develop more from less - ideas become viable concepts. We assess feasibility, cost and benefit before the first line is drawn.">Aus weniger mehr entwickeln - Ideen werden zu tragfähigen Konzepten. Wir prüfen Machbarkeit, Kosten und Nutzen, bevor der erste Strich gezeichnet wird.</p>
+          <a class="al card__link" href="#leistungen" data-step="0"><span class="al__label" data-en="To step 01 · Idea">Zu Schritt 01 · Idee</span><span class="al__arrow" aria-hidden="true"></span></a>
+        </div>
+        </div>
+      </div>
+      <div class="card card--tall">
         <div class="card__mask">
         <div class="card__drift"><img class="card__photo" src="assets/img/v2/11.webp" alt="Konstruktionsbesprechung mit 3D-CAD am Bildschirm" loading="lazy" data-warm></div>
         <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
-        <h3 class="card__label center" data-en="Development">Entwicklung</h3>
-        <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        <div class="card__foot">
+          <h3 class="card__label center" data-en="Development">Entwicklung</h3>
+          <p class="card__short center" data-en="Design, material and manufacturing considered together.">Konstruktion, Werkstoff und Fertigung zusammen gedacht.</p>
         </div>
-      </a>
-      <a class="card card--tall" href="#leistungen">
+        <button class="card__hit" type="button" aria-expanded="false" aria-controls="kompetenz-entwicklung" aria-label="Entwicklung entdecken" data-en-label="Explore Development">
+          <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        </button>
+        <div class="card__more" id="kompetenz-entwicklung" role="region" aria-label="Entwicklung" data-en-label="Development" inert>
+          <div class="card__top"><span class="card__kicker" data-en="Development">Entwicklung</span><button class="card__close" type="button" aria-label="Schliessen" data-en-label="Close"></button></div>
+          <p class="card__text" data-en="Our team knows materials and manufacturing processes from practice, from injection-moulded to milled parts. Methods such as FMEA, DFM and design reviews catch errors during development rather than at the customer.">Unser Team kennt Werkstoffe und Fertigungsverfahren aus der Praxis, vom Spritzgussteil bis zum Frästeil. Methoden wie FMEA, DFM und Designreviews fangen Fehler in der Entwicklung ab und nicht erst beim Kunden.</p>
+          <a class="al card__link" href="#leistungen" data-step="3"><span class="al__label" data-en="To step 04 · Development">Zu Schritt 04 · Entwicklung</span><span class="al__arrow" aria-hidden="true"></span></a>
+        </div>
+        </div>
+      </div>
+      <div class="card card--tall">
         <div class="card__mask">
         <div class="card__drift"><img class="card__photo" src="assets/img/v2/13.webp" alt="Büro mit Arbeitsplätzen und Bildschirmen" loading="lazy" data-warm></div>
         <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
-        <h3 class="card__label center">Simulation</h3>
-        <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        <div class="card__foot">
+          <h3 class="card__label center">Simulation</h3>
+          <p class="card__short center" data-en="Calculating before building.">Rechnen, bevor gebaut wird.</p>
         </div>
-      </a>
-      <a class="card" href="#leistungen">
+        <button class="card__hit" type="button" aria-expanded="false" aria-controls="kompetenz-simulation" aria-label="Simulation entdecken" data-en-label="Explore Simulation">
+          <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        </button>
+        <div class="card__more" id="kompetenz-simulation" role="region" aria-label="Simulation" inert>
+          <div class="card__top"><span class="card__kicker">Simulation</span><button class="card__close" type="button" aria-label="Schliessen" data-en-label="Close"></button></div>
+          <p class="card__text" data-en="With us, simulation runs alongside the design from the first draft. FEM shows how parts behave under load, CFD how air and liquids flow. As a member of NAFEMS, the international association for engineering analysis and simulation, we keep our methods and validation up to date.">Simulation läuft bei uns vom ersten Entwurf an parallel zur Konstruktion. FEM zeigt, wie Bauteile unter Last reagieren, CFD, wie Luft und Flüssigkeiten strömen. Als Mitglied von NAFEMS, der internationalen Vereinigung für Berechnung und Simulation, halten wir Methoden und Validierung auf dem aktuellen Stand.</p>
+          <a class="al card__link" href="#leistungen" data-step="2"><span class="al__label" data-en="To step 03 · Simulation">Zu Schritt 03 · Simulation</span><span class="al__arrow" aria-hidden="true"></span></a>
+        </div>
+        </div>
+      </div>
+      <div class="card">
         <div class="card__mask">
         <div class="card__drift"><img class="card__photo" src="assets/img/v2/14.webp" alt="Mitarbeiter an der Fräsmaschine" loading="lazy" data-warm></div>
         <div class="card__scrim card__scrim--1"></div><div class="card__scrim card__scrim--2"></div><div class="card__scrim card__scrim--3"></div>
-        <h3 class="card__label center">Prototyping</h3>
-        <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        <div class="card__foot">
+          <h3 class="card__label center">Prototyping</h3>
+          <p class="card__short center" data-en="Touch, test, improve before tooling is ordered.">Anfassen, testen, verbessern, bevor Werkzeuge bestellt werden.</p>
         </div>
-      </a>
+        <button class="card__hit" type="button" aria-expanded="false" aria-controls="kompetenz-prototyping" aria-label="Prototyping entdecken" data-en-label="Explore Prototyping">
+          <span class="card__btnpos"><span class="card__btn"><span class="sw" aria-hidden="true"></span><span class="rl" data-en="explore">Entdecken</span></span></span>
+        </button>
+        <div class="card__more" id="kompetenz-prototyping" role="region" aria-label="Prototyping" inert>
+          <div class="card__top"><span class="card__kicker">Prototyping</span><button class="card__close" type="button" aria-label="Schliessen" data-en-label="Close"></button></div>
+          <p class="card__text" data-en="Early tests on real parts show whether a concept works. You check your product in your hands and in use before expensive series tooling is made. That lowers risk and cost.">Frühe Tests an echten Teilen zeigen, ob ein Konzept funktioniert. Sie prüfen Ihr Produkt in der Hand und im Einsatz, bevor teure Serienwerkzeuge entstehen. Das senkt Risiko und Kosten.</p>
+          <a class="al card__link" href="#leistungen" data-step="4"><span class="al__label" data-en="To step 05 · Prototype">Zu Schritt 05 · Prototyp</span><span class="al__arrow" aria-hidden="true"></span></a>
+        </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ===================== 4 Leistungen / Prozess ===================== -->
   <section class="process" id="leistungen" data-ground="dark" data-header-theme="dark" data-flow aria-label="Leistungen">
-    <span class="eyebrow" data-en="Five services · one process">Fünf Leistungen · Ein Prozess</span>
+    <span class="eyebrow" data-en="Five steps to series production">Fünf Schritte zur Serie</span>
     <ul class="process__steps">
       <li class="pstep" tabindex="0" data-capw="21rem"><span class="pstep__n">01 /</span><span data-en="Idea">Idee</span>
         <span class="pstep__src" data-en="Develop more from less - ideas become viable concepts. We assess feasibility, cost and benefit before the first line is drawn.">Aus weniger mehr entwickeln - Ideen werden zu tragfähigen Konzepten. Wir prüfen Machbarkeit, Kosten und Nutzen, bevor der erste Strich gezeichnet wird.</span></li>
@@ -301,8 +342,8 @@
     <div class="rail">
       <a class="rail__logo" href="#top" aria-label="IdeeRoth AG - nach oben" data-en-label="IdeeRoth AG - to top"><span class="logo-tile" role="img" aria-label="iro.swiss"></span></a>
       <nav class="rail__links" aria-label="Abschnitte" data-en-label="Sections">
-        <a class="al" href="#kompetenzen"><span class="al__label" data-en="Expertise">Kompetenzen</span><span class="al__arrow" aria-hidden="true"></span></a>
         <a class="al" href="#unternehmen"><span class="al__label" data-en="Company">Unternehmen</span><span class="al__arrow" aria-hidden="true"></span></a>
+        <a class="al" href="#kompetenzen"><span class="al__label" data-en="Expertise">Kompetenzen</span><span class="al__arrow" aria-hidden="true"></span></a>
         <a class="al" href="#leistungen"><span class="al__label" data-en="Services">Leistungen</span><span class="al__arrow" aria-hidden="true"></span></a>
         <a class="al" href="#team"><span class="al__label">Team</span><span class="al__arrow" aria-hidden="true"></span></a>
         <a class="al" href="karriere.html"><span class="al__label" data-en="Careers">Karriere</span><span class="al__arrow" aria-hidden="true"></span></a>
@@ -335,6 +376,6 @@
 </main>
 
 <script src="assets/vendor/lenis/lenis.min.js"></script>
-<script src="assets/js/main.js?v=20261015b"></script>
+<script src="assets/js/main.js?v=20261016"></script>
 </body>
 </html>

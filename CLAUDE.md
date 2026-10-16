@@ -58,7 +58,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Eine Variante B (Ordner `b/`, 08.10.2026) wurde dem Kunden gezeigt und verworfen: Der Stand vom 30.09. ist
   die Basis, Aenderungen daran nur Punkt fuer Punkt mit dem Kunden (Liste: `V2-VIDEOVERGLEICH.md`).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261009f; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261016; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -128,6 +128,10 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen 12 px fuer Versal-Labels, Tap-Ziele 40 px (auch bei
   `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand, Hero-Foto 358/400 mit staerkerem Schleier.
 - Kontakt-Parallaxe laeuft auf `.contact__layer` (innerer Layer 120 %), nicht mehr auf `.contact__photo`.
+- Kompetenzkarten (Kundenentscheid K-B/KL-A 16.10.2026): `div.card` mit `.card__foot` (Titel und Kurzzeile),
+  `button.card__hit` ueber der ganzen Karte (aria-expanded) und `.card__more` (inert, Feder PANEL auf clip-path,
+  Esc schliesst). Der Link `a[data-step]` in der Tafel scrollt zu #leistungen und setzt den Prozessschritt;
+  STEP_LINK_HOLD (2 s) verhindert, dass der stehende Mauszeiger den Schritt danach ueberschreibt.
 - Linien (Kundenentscheid 15.10.2026): alle Haarlinien und Rahmen sind 1 px durchgezogen in der Linienfarbe (`--rule`,
   `--border-on-inverse`, `--border-on-muted`), Vorbild `.hero__rule` (1 px, Weiss 40 % auf dunklem Grund). Keine
   gestrichelten Linien mehr (Header-Unterkante, Header-Zellen, Buttons `.dbtn`/`.cbtn`, Sprachpanel, Inserat `.job`,

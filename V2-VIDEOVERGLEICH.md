@@ -71,7 +71,7 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     .card 21rem / .card--tall 27rem (xl 22 / 29rem), MASK_STAGGER 180 -> 120. Status: offen
 22. [Bug] Schmale Karten schneiden Gesichter an (09, 11, 14). Umsetzung: object-position je Karte. Status: offen
 23. [Bug] Explore-Button zwischen 769 und 1439 px nie sichtbar (weder Hover noch fest). Umsetzung: unter 1440
-    fest sichtbar wie beim About-Rahmen. Status: offen
+    fest sichtbar wie beim About-Rahmen. Status: erledigt in r1 (16.10.2026, mit K-B)
 
 ### F. Leistungen / Prozess
 24. [Spec] Schrittzeile "01 / Idee" im Original in EINER Groesse, regular, weiss; bei uns kleine graue Nummer
@@ -239,6 +239,29 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 58. [Kunde 15.10.] Punkte statt Rechtecke: Eckmarker `.mk` und Aufzaehlungszeichen (`.sub li::before`, `.trow__side
     li::before`) rund (`border-radius: 50%`), Groesse und Farben unveraendert; Entscheid aus der PowerPoint-Vorlage
     (dort runde Eckmarker und Punkt-Aufzaehlung). Cache-Version 20261015b. Status: erledigt in r1
+
+59. [Kunde 16.10.] Menue M-A: Reihenfolge wie auf der Seite (Unternehmen, Kompetenzen, Leistungen, Team, Kontakt) in
+    Header, Burger-Menue, Schiene und Unterseiten-Footer aller fuenf Seiten. Status: erledigt in r1
+60. [Kunde 16.10.] Leitsatz U-2 unter "Spezialanbieterin fuer Produktentwicklung": "Aus weniger mehr entwickeln heisst
+    fuer uns: weniger Teile, weniger Umwege, weniger Risiko. Wir begleiten Kunden von der ersten Idee bis zur Serie und
+    machen ihre Produkte wettbewerbsfaehiger." (EN "For us, developing more from less means ..."). Stichworte ST-A
+    bleiben wie sie sind. Status: erledigt in r1
+61. [Kunde 16.10.] Leistungen L-4: Kicker "Fuenf Schritte zur Serie" / "Five steps to series production" statt
+    "Fuenf Leistungen · Ein Prozess". Status: erledigt in r1
+62. [Kunde 16.10.] Kompetenzen K-B mit KL-A: Kurzzeile unter dem Kartentitel; Klick auf die Karte legt den
+    Kompetenztext als Tafel ueber das Foto (Feder PANEL 140/24 auf clip-path, Kreuz und Esc schliessen, immer nur eine
+    offen), darin der Link zum passenden Schritt (Ideation 01, Entwicklung 04, Simulation 03, Prototyping 05). Texte:
+    Ideation = Text des Kunden, Entwicklung E-1, Simulation S-1 (ohne "und nicht erst am Ende", hoechstens zwei
+    Antithesen pro Seite), Prototyping P-2; Kurzzeilen aus I-1, E-1, S-1, P-2. Die Karte ist jetzt ein div mit
+    button.card__hit statt a. Dazu: "Entdecken" unter 1440 px immer sichtbar (Punkt 23), Kartentitel ab 768 px auf
+    gleicher Hoehe, Verlauf unten staerker (.45). Optik zur Freigabe als Screenshots im Projekt
+    (website-textrunde/kompetenzkarten-k-b_2026-10-16.png). Cache-Version 20261016. Status: umgesetzt in r1, Freigabe offen
+63. [Kunde 16.10.] Offen aus der Textrunde (Runde 2): Hero-Kennzahlen Zeile 2 und 3 ("20+ Jahre Erfahrung" bleibt,
+    "100+ Projekte" und "5 Leistungen unter einem Dach" werden ersetzt), Ergebniszeile pro Schritt (LE-B gewaehlt,
+    Wortlaut offen), Zusatzleistungen X-1 bis X-9 als Satz statt Liste, Text zu Diskretion und Kundenvertraulichkeit
+    (C-3), Arbeitsweise (C-2), Steckbrief (C-1) nur mit oeffentlichen Angaben: Der Kunde will keine Angaben zu Gruendung,
+    Team, Kunden und Referenzen auf der Seite, Branchen hoechstens allgemein. Leistung 01 hat heute denselben Text wie die
+    Ideation-Karte; Hero-Intro ("unter einem Dach") und CTA "Unser Prozess" passen nicht mehr zu L-4. Status: offen
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

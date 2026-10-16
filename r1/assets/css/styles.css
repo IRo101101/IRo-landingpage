@@ -344,9 +344,34 @@ section { position: relative; }
 .card__btnpos { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 3; }
 .card__btn { display: flex; align-items: center; gap: .5rem; background: var(--black); color: #fff; padding: 1rem 1.5rem; text-transform: uppercase; font-size: .875rem; letter-spacing: var(--tracking-nav); white-space: nowrap; opacity: 0; }
 .card__btn .swap { transform: rotate(90deg); }
+/* r1 K-B (Kundenentscheid 16.10.2026): Titel und Kurzzeile unten auf der Karte, die ganze Karte ist Schalter,
+   der Kompetenztext liegt als Tafel ueber dem Foto (JS: Feder auf clip-path), darin der Link zum Leistungsschritt (KL-A) */
+.card .card__scrim { height: 9rem; }
+.card .card__scrim--3 { background: linear-gradient(to bottom, rgba(17,20,24,0), rgba(17,20,24,.45)); }   /* Kurzzeile braucht mehr Kontrast als der Titel allein */
+.card__foot { position: absolute; inset-inline: 0; bottom: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: .5rem; padding-inline: 1rem; z-index: 2; pointer-events: none; }
+.card__foot .card__label { position: static; padding-inline: 0; }
+.card__short { max-width: 17rem; font-size: .9375rem; line-height: 1.25; color: rgba(255,255,255,.85); }
+.card__hit { position: absolute; inset: 0; z-index: 3; display: block; width: 100%; padding: 0; text-align: inherit; }
+.card__hit:focus-visible { outline: 2px solid #fff; outline-offset: -.5rem; }
+.card__more { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem; overflow-y: auto; background: rgba(17,20,24,.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); clip-path: inset(100% 0 0 0); }
+.card__top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.card__kicker { text-transform: uppercase; font-size: max(.75rem, 12px); letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); }
+.card__close { position: relative; flex: none; width: 2.5rem; height: 2.5rem; margin: -.75rem -.75rem -.75rem 0; }
+.card__close::before, .card__close::after { content: ""; position: absolute; left: 50%; top: 50%; width: 1rem; height: 1px; background: currentColor; }
+.card__close::before { transform: translate(-50%,-50%) rotate(45deg); }
+.card__close::after { transform: translate(-50%,-50%) rotate(-45deg); }
+.card__close:focus-visible, .card__link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.card__text { margin-top: auto; font-size: .9375rem; line-height: 1.3; }
+.card__link { padding-top: .875rem; border-top: 1px solid var(--rule); }
 @media (min-width: 768px) {
   .cards__row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; padding-inline: 1.5rem; }
   .card { aspect-ratio: 352 / 435; }
+  .card__foot { top: calc(100% - 7.25rem); bottom: auto; }   /* Karten nebeneinander: Titel auf gleicher Hoehe, Kurzzeile darf 1 bis 3 Zeilen haben */
+  .card__text { font-size: 1rem; }
+}
+@media (min-width: 1440px) {
+  .card__more { padding: 1.5rem; }
+  .card__text { font-size: 1.0625rem; }
 }
 @media (min-width: 1024px) {
   /* r1: Kartenreihe im Fluss statt absolut, Sektion mindestens 100vh und waechst bei kurzen, breiten Fenstern

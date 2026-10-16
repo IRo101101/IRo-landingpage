@@ -49,6 +49,9 @@
   var BUTTON = { tension: 420, friction: 30 };
 
   var MASK_STAGGER = 180, LABEL_AFTER_MASK = 420, DRIFTS = [90, 55, 55, 90];
+  var SHORT_AFTER_LABEL = 160;                       // r1 K-B: Kurzzeile startet kurz nach dem Kartentitel
+  var PANEL = { tension: 140, friction: 24, clamp: true };   // r1 K-B: Kompetenztext faehrt von unten ueber das Foto
+  var STEP_LINK_HOLD = 2000;                         // r1 KL-A: so lange (ms) nach dem Sprung von einer Karte bleibt der gewaehlte Schritt stehen
   var MASK = { tension: 70, friction: 24, clamp: true };
   var SETTLE = { tension: 60, friction: 26 };
   var LABEL = { tension: 190, friction: 28 };
@@ -910,7 +913,7 @@
      ===================================================================== */
   function initCards() {
     var sec = doc.querySelector('.cards'); if (!sec) return;
-    var cards = sec.querySelectorAll('.card');
+    var cards = sec.querySelectorAll('.card'), panels = [];
     cards.forEach(function (card, i) {
       var mask = card.querySelector('.card__mask'), photo = card.querySelector('.card__photo'), label = card.querySelector('.card__label'), btn = card.querySelector('.card__btn');
       var w = new Words(label, { preset: 'head', manual: true, wordOut: { y: '90%', opacity: 0, scale: 0.9 }, stagger: 50, config: LABEL });
@@ -921,10 +924,39 @@
       Scrub(inner, { start: 'top bottom', end: 'bottom top', from: { y: -drift }, to: { y: drift }, config: PARALLAX, frameInterval: 32 });
       if (btn) {
         RollLabel(btn.querySelector('.rl'), card); SwapArrow(btn.querySelector('.sw'), card);
+        // r1 K-B: unter 1440 (und auf Touch) immer sichtbar, sonst sieht man nicht, dass die Karte aufklappt (Punkt 23)
         if (VW() >= XL && !isTouchOnly) Hover(btn, card, { from: { opacity: 0, scale: 0.94 }, to: { opacity: 1, scale: 1 }, config: BUTTON });
-        else if (VW() <= MD) new Group(btn, { from: { opacity: 1, scale: 1 } });
-        else new Group(btn, { from: { opacity: 0, scale: 0.94 } });
+        else new Group(btn, { from: { opacity: 1, scale: 1 } });
       }
+      // r1 K-B (Kundenentscheid 16.10.2026): Kurzzeile nach dem Titel, Klick klappt den Kompetenztext auf
+      var short = card.querySelector('.card__short');
+      if (short) {
+        var sw = new Words(short, { preset: 'copy', manual: true });
+        new IntersectionObserver(function (es, io) { es.forEach(function (e) { if (e.isIntersecting) { delay(ENTRY_DELAY + i * MASK_STAGGER + LABEL_AFTER_MASK + SHORT_AFTER_LABEL, function () { sw.play(0); }); io.unobserve(card); } }); }, { threshold: 0.15 }).observe(card);
+      }
+      var hit = card.querySelector('.card__hit'), more = card.querySelector('.card__more');
+      if (hit && more) {
+        var p = { card: card, hit: hit, more: more, open: false, g: new Group(more, { from: { clip: [100, 0, 0, 0] }, config: PANEL }) };
+        panels.push(p);
+        hit.addEventListener('click', function (e) { togglePanel(p, true, e.detail === 0); });
+        var close = more.querySelector('.card__close');
+        if (close) close.addEventListener('click', function (e) { togglePanel(p, false, e.detail === 0); });
+        more.querySelectorAll('.al').forEach(ArrowLink);
+      }
+    });
+    // immer nur eine Tafel offen; Tastatur: Fokus in die Tafel und beim Schliessen zurueck auf die Karte
+    function togglePanel(p, on, keyboard) {
+      if (on) panels.forEach(function (q) { if (q !== p && q.open) togglePanel(q, false, false); });
+      p.open = on;
+      p.card.classList.toggle('is-open', on);
+      p.hit.setAttribute('aria-expanded', on ? 'true' : 'false');
+      if (on) p.more.removeAttribute('inert'); else p.more.setAttribute('inert', '');
+      p.g.to({ clip: on ? [0, 0, 0, 0] : [100, 0, 0, 0] });
+      if (keyboard) (on ? p.more.querySelector('.card__link') || p.more : p.hit).focus({ preventScroll: true });
+    }
+    doc.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      panels.forEach(function (q) { if (q.open) togglePanel(q, false, q.more.contains(doc.activeElement)); });
     });
   }
 
@@ -955,7 +987,7 @@
       bar.appendChild(b); dots.push(b);
     });
     caption.parentNode.insertBefore(bar, caption.nextSibling);
-    var active = 0, capWords = null, tapped = false;
+    var active = 0, capWords = null, tapped = false, holdUntil = 0;
     function setCaption(i) {
       var src = steps[i].querySelector('.pstep__src');
       caption.textContent = src ? src.textContent : '';
@@ -974,8 +1006,15 @@
     }
     setCaption(0); steps[0].classList.add('is-active');
     langListeners.push(function () { setCaption(active); });
+    // r1 KL-A (Kundenentscheid 16.10.2026): Link aus einer Kompetenzkarte (data-step) zeigt den passenden Schritt;
+    // das Scrollen zu #leistungen uebernimmt initAnchors, das Auto-Weiterschalten bleibt danach aus
+    doc.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[data-step]'); if (!a) return;
+      var i = parseInt(a.getAttribute('data-step'), 10);
+      if (i >= 0 && i < steps.length) { tapped = true; holdUntil = Date.now() + STEP_LINK_HOLD; if (i !== active) setActive(i); }
+    });
     steps.forEach(function (s, i) {
-      s.addEventListener('pointerenter', function () { if (i !== active) setActive(i); });
+      s.addEventListener('pointerenter', function () { if (i !== active && Date.now() >= holdUntil) setActive(i); });   // r1 KL-A: waehrend des Sprungs nicht vom stehenden Mauszeiger ueberschreiben
       s.addEventListener('focus', function () { if (i !== active) setActive(i); });
       s.addEventListener('click', function () { tapped = true; if (i !== active) setActive(i); });
     });
