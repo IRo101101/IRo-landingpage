@@ -255,13 +255,15 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Antithesen pro Seite), Prototyping P-2; Kurzzeilen aus I-1, E-1, S-1, P-2. Die Karte ist jetzt ein div mit
     button.card__hit statt a. Dazu: "Entdecken" unter 1440 px immer sichtbar (Punkt 23), Kartentitel ab 768 px auf
     gleicher Hoehe, Verlauf unten staerker (.45). Optik zur Freigabe als Screenshots im Projekt
-    (website-textrunde/kompetenzkarten-k-b_2026-10-16.png). Cache-Version 20261016. Status: umgesetzt in r1, Freigabe offen
+    (website-textrunde/kompetenzkarten-k-b_2026-10-16.png). Cache-Version 20261016. Status: erledigt in r1, freigegeben
+    18.10.2026 (Diktat); Simulation-Kurzzeile wieder S-1 "Simulation laeuft bei uns parallel zur Konstruktion."
 63. [Kunde 16.10.] Offen aus der Textrunde (Runde 2): Hero-Kennzahlen Zeile 2 und 3 ("20+ Jahre Erfahrung" bleibt,
     "100+ Projekte" und "5 Leistungen unter einem Dach" werden ersetzt), Ergebniszeile pro Schritt (LE-B gewaehlt,
     Wortlaut offen), Zusatzleistungen X-1 bis X-9 als Satz statt Liste, Text zu Diskretion und Kundenvertraulichkeit
     (C-3), Arbeitsweise (C-2), Steckbrief (C-1) nur mit oeffentlichen Angaben: Der Kunde will keine Angaben zu Gruendung,
     Team, Kunden und Referenzen auf der Seite, Branchen hoechstens allgemein. Leistung 01 hat heute denselben Text wie die
-    Ideation-Karte; Hero-Intro ("unter einem Dach") und CTA "Unser Prozess" passen nicht mehr zu L-4. Status: offen
+    Ideation-Karte; Hero-Intro ("unter einem Dach") und CTA "Unser Prozess" passen nicht mehr zu L-4. Status: erledigt
+    mit Runde 2 (Eintraege 66 bis 73)
 64. [Review 16.10.] Englisch geglaettet, Deutsch unveraendert: Leitsatz "We guide customers" statt "accompany",
     Kartentexte Entwicklung ("before they reach the customer"), Simulation ("In our projects" statt "With us"),
     Prototyping ("hold your product in your hands", "production tooling"), Leistung 04 ("matures during development and
@@ -273,6 +275,45 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     data-en, CSP in .htaccess, Link Cookie-Einstellungen im Footer, theme-color Carbon Black). Neu offen: siehe
     UEBERGABE.md Abschnitt 3. Faktenbasis mit Quellen: `_handover/recherche/karte-anfahrt-faktenbasis.md`. Hausstil fuer
     Texte aus dessen Projektanweisungen in CLAUDE.md uebernommen. Status: erledigt
+66. [Kunde 18.10.] Gross- und Kleinschreibung: alle Versalien (26 Regeln `text-transform: uppercase` in styles.css) auf
+    allen fuenf Seiten durch normale Schreibung ersetzt, DE nach deutschen, EN nach englischen Regeln (Satzanfang gross,
+    "Start project", "Send an e-mail"); Abkuerzungen (AG, FEM, CFD, EFZ, DE/EN) bleiben gross, info@iro.swiss klein.
+    Laufweite `--tracking-nav` -.01em statt -.03em, fruehere 12-px-Labels auf .875rem. ZU-1: Zeile ueber der Unternehmen-
+    Headline "IdeeRoth AG · Swiss" (beide Sprachen). SP-1: Sprachwahl Kuerzel DE/EN gross, Sprachnamen normal.
+    Anfuehrungszeichen «» auch in Datenschutz und Consent-Text. Status: erledigt in r1
+67. [Kunde 18.10.] Hero: Titel ein Satz "Von der ersten Idee / bis zur Serie." / "From the first idea / to series
+    production."; Intro bleibt (HI-4), nur EN geglaettet ("through to series development"). Zweiter Button CT-2 "Fuenf
+    Schritte" / "Five steps". Kennzahlen: "20+ Jahre / Erfahrung" bleibt (Wert vom Kunden noch zu bestaetigen),
+    HK-1 "1 Adresse / von Skizze bis Prototyp" (EN "1 partner / from sketch to prototype", zaehlt nicht hoch), dritte
+    Kennzahl nach Diktat "130 dB / lacht der Chef, wenn der Zwanziger faellt" (EN "the boss's laugh when it clicks"),
+    Idee nach dem Vorbild Ing. Raimund Brandauer GmbH, Wortlaut eigen. Status: erledigt in r1
+68. [Kunde 18.10.] Unternehmen: Leitsatz LS-3 "Der Erfolg eines Produkts steckt in seiner Einfachheit. Darum heisst
+    «Aus weniger mehr entwickeln» fuer uns: weniger Teile, weniger Komplexitaet, weniger Aufwand bis zur Serie. Was ein
+    Produkt nicht braucht, lassen wir weg." Headline mit Punkt (Hausstil). Steckbrief weggelassen (SB-1). Status: erledigt in r1
+69. [Kunde 18.10.] Kompetenzen: Ideation-Kurzzeile KZ-2 "Ideen auf das Wesentliche bringen."; Simulation-Karte
+    Grammatik ("und CFD, wie ...", "bleiben wir bei Methoden und Validierung auf dem aktuellen Stand"). Status: erledigt in r1
+70. [Kunde 18.10.] Leistungen: Kicker TI-1 "In fuenf Schritten zur Serie" / "Five steps to series production"; Schritt-
+    texte LT-1 (01, 03, 04, 05 neu); Ergebniszeile ER-1 unter dem Schritttext ("Ergebnis" / "Deliverable", blendet nach
+    den Woertern ein, `.pstep__out` in der Quelle, `.process__out` in der Caption). Damit die Caption nicht ueberlaeuft:
+    Prozess unter 640 px 53rem, 640-767 64rem, 768-1023 58rem hoch, ab 1024 min-height 56rem und Caption hoechstens
+    bis 100 % - 12rem; data-capw 28/24/24/26/24rem. Gemessen 320 bis 2560 px DE/EN ohne Ueberlauf. Status: erledigt in r1
+71. [Kunde 18.10.] Team-Zeile 05 Diskretion (D-1, Ort O-1): "Ihr Produkt traegt Ihren Namen." Text D-1 unveraendert,
+    der erste Satz als Text, die beiden kurzen Saetze als Punkte rechts (sonst stand die Zeile zehnzeilig neben einer
+    leeren Spalte). Status: erledigt in r1
+72. [Kunde 18.10.] Team-Zeile 06 Branchen (BR-3 mit Branchen aus dem Diktat): "Vom Start-up bis zum
+    Industrieunternehmen." / "Wir arbeiten ueberall, wo Teile in Serie entstehen." Liste: Werkzeugbau; Kunststoffspritz-
+    guss, Druckguss und Blechbearbeitung; Maschinen- und Anlagenbau, etwa fuer die Abfuellung; Maschinen fuer die
+    Lebensmittelverarbeitung in Haushalt, Gastronomie und Industrie; Pharma und Medizinaltechnik. Aus Diskretion bewusst
+    weggelassen (Rueckschluss auf einzelne Kunden moeglich): Schwerindustrie/Stahlseile, Druckgussmaschinen, einzelne
+    Lebensmittel, Medikamentenverpackungen, Diebstahlsicherungen. Form nach Vergleich mit 21 Anbietern (8 CH, 13 DE/AT):
+    Textliste ohne Namen, Logos oder Unterseite. Status: erledigt in r1
+73. [Kunde 18.10.] Team-Zeile 07 Zusammenarbeit "So beginnt ein Projekt.": Erstgespraech bei Ihnen oder bei uns,
+    Geheimhaltungsvereinbarung auf Wunsch, ausfuehrliche Klaerung, danach Offerte mit Aufwand und Terminen und feste
+    Ansprechperson (W, ohne Video). Dazu XS-1 wortgetreu und Kleinserien nach Diktat: mit der Schwesterfirma ohne Namen,
+    Teile ueber die IdeeRoth AG, eine einzige Ansprechperson, auch fuer die Serie (Diktat ersetzt Klick SY-3).
+    Abweichung: XS-1 und Kleinserien stehen in Zeile 07 statt unter den fuenf Schritten, dort waere nur mit einem neuen
+    Element Platz. Team-Zeilen: Einblend-Staffel ab Zeile 04 gedeckelt (sonst 1.5 s Wartezeit bei Zeile 07).
+    Cache-Version 20261018b. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

@@ -1055,8 +1055,9 @@
       Inview(photo.querySelector('img'), { watch: photo, from: { scale: 1.18 }, to: { scale: 1 }, config: SETTLE, delayIn: ENTRY_DELAY, threshold: 0.15 });
       Scrub(photo.querySelector('.team__drift'), { start: 'top bottom', end: 'bottom top', from: { y: -60 }, to: { y: 60 }, config: PARALLAX, frameInterval: 32 });
     }
+    // r1: sieben Zeilen seit 18.10.2026; Staffel nach Zeile 04 gedeckelt, sonst kaeme Zeile 07 erst nach 1.5 s
     sec.querySelectorAll('.trow').forEach(function (row, i) {
-      Inview(row, { from: { opacity: 0, y: -28, blur: 14 }, to: { opacity: 1, y: 0, blur: 0 }, config: ROW_REVEAL, delayIn: ENTRY_DELAY + i * ROW_STAGGER, threshold: 0.1 });
+      Inview(row, { from: { opacity: 0, y: -28, blur: 14 }, to: { opacity: 1, y: 0, blur: 0 }, config: ROW_REVEAL, delayIn: ENTRY_DELAY + Math.min(i, 3) * ROW_STAGGER, threshold: 0.1 });
       var bio = row.querySelector('.trow__bio'); if (bio) new Words(bio, { preset: 'copy', mode: 'always' });
       var c = row.querySelector('[data-count]'); if (c) Counter(c);
       Corners(row, 'box', row.classList.contains('trow--link') ? row : null);

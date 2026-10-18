@@ -122,7 +122,8 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Saeulen, Kaffeebar) am 10.10.2026 nachgeliefert, noch frei; sie kamen als Chat-Upload nur mit 2000 px Breite (Originale
   01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (`_handover/tools/add_photos.py`).
   Uebersicht aller Fotos mit Verwendung: `_handover/tools/bilduebersicht.py` erzeugt `_handover/bilduebersicht.png`.
-- Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind PLATZHALTER, vom Kunden zu korrigieren.
+- Kennzahlen im Hero (r1, 18.10.2026): "20+ Jahre" (vom Kunden noch zu bestaetigen), "1 Adresse" (ohne data-count, sonst
+  zaehlt 0 bis 1), "130 dB" (Diktat). Counter() braucht eine Zahl im Wert, sonst haengt er "0" an.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
   `_handover/tools/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel);
   fuer r1: `_handover/tools/test_v2b.py <port> r1/` (Server auf dem Repo-Root; Screenshots landen in
@@ -209,6 +210,11 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   unter 3:1. Textlinks in `.sub` wechseln nur beim Hover auf Signal Green, bei Fokus bleibt der Text schwarz (Ring zeigt
   den Fokus); auf dunklem Grund bleibt Fresh Mint auch bei Fokus. `.dbtn` der Unterseiten (initSubpage) fuellen sich bei
   focusin wie Hero und Abspann, sonst stuende die weisse Beschriftung auf Mint.
+- Textrunde 2 (18.10.2026, V2-VIDEOVERGLEICH 65-72): keine Versalien mehr (kein `text-transform: uppercase`, Labels
+  .875rem, `--tracking-nav` -.01em). Prozessschritte tragen `.pstep__out` (Ergebniszeile, setCaption baut `.process__out`);
+  Prozesshoehen und Caption-Grenze 100 % - 12rem wegen dieser Zeile. Team-Block hat sieben Zeilen (05 Diskretion,
+  06 Branchen, 07 Zusammenarbeit); Branchen nur allgemein, nie Stahlseile/Schwerindustrie, Druckgussmaschinen, einzelne
+  Lebensmittel, Medikamentenverpackungen, Diebstahlsicherungen (Rueckschluss auf Kunden). Schwesterfirma ohne Namen.
 - `win.IRO` (Ende von main.js) stellt Group, ticker, Words, Inview, Scrub, Hover und die Federn fuer die Vorschauseiten bereit.
 - Foto-Uebergaenge: Bibliothek TRANSITIONS in main.js (dissolve, dissolve-settle, wipe, clear, deal, turn, push; alle
   aus dem Prompt), `PhotoSwap(frame, photos, name)` blendet gestapelte Fotos um. Am Rahmen waehlbar per
