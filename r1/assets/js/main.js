@@ -495,7 +495,7 @@
     wrap.innerHTML =
       '<div class="consent__inner">' +
         '<p class="consent__text" data-en="We use Google Analytics to understand how our website is used - only with your consent. You can withdraw your choice at any time via “Cookie settings” in the footer.">' +
-        'Wir verwenden Google Analytics, um die Nutzung unserer Website zu verstehen - nur mit Ihrer Einwilligung. Sie können Ihre Wahl jederzeit über „Cookie-Einstellungen“ im Footer widerrufen.</p>' +
+        'Wir verwenden Google Analytics, um die Nutzung unserer Website zu verstehen - nur mit Ihrer Einwilligung. Sie können Ihre Wahl jederzeit über «Cookie-Einstellungen» im Footer widerrufen.</p>' +
         '<div class="consent__actions">' +
           '<a class="consent__more" href="datenschutz.html" data-en="Privacy policy">Datenschutzerklärung</a>' +
           '<button class="cbtn cbtn--ghost" type="button" data-consent="deny" data-en="Decline">Ablehnen</button>' +
@@ -994,6 +994,15 @@
       caption.style.maxWidth = steps[i].getAttribute('data-capw') || '';
       capWords = new Words(caption, { preset: 'copy', manual: true });
       capWords.play(0);
+      // r1 ER-1 (Kundenentscheid 18.10.2026): Ergebniszeile unter dem Schritttext, blendet nach den Woertern ein
+      var out = steps[i].querySelector('.pstep__out');
+      if (out) {
+        var o = doc.createElement('span'), ol = doc.createElement('span'), ot = doc.createElement('span');
+        o.className = 'process__out'; ol.className = 'process__outl'; ot.className = 'process__outt';
+        ol.textContent = out.querySelector('.pstep__outl').textContent; ot.textContent = out.querySelector('.pstep__outt').textContent;
+        o.appendChild(ol); o.appendChild(ot); caption.appendChild(o);
+        requestAnimationFrame(function () { requestAnimationFrame(function () { o.classList.add('is-in'); }); });
+      }
     }
     function setActive(i) {
       active = i;
