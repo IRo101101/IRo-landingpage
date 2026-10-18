@@ -59,11 +59,17 @@ Beim Kunden:
 - Originale der Fotos 22 und 23 als ZIP (6720 px) nachliefern; dann mit `_handover/tools/add_photos.py` neu rechnen.
 - Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind Platzhalter, vom Kunden zu korrigieren.
 - Go-live-Entscheid: Wann wird `r1/` zum Root?
+- Google-Unternehmensprofil pruefen (vorhanden, verifiziert, Adresse aktuell?) und bei Bedarf beanspruchen. Mit der
+  Place-ID liesse sich der Google-Maps-Link auf kontakt.html genau auf den Eintrag richten (`destination_place_id`).
+- Datenschutz Abschnitt 11 "Karte und Routenplanung" bei Bedarf rechtlich pruefen lassen (Recherche ist keine
+  Rechtsberatung).
 
 Spaeter zu pruefen:
 - Umbau untere Bahnhofstrasse Romanshorn bis April 2027 (Hinweis auf kontakt.html), danach Einbahnregelung pruefen.
 - Tiefgarage Hafenpromenade (Abstimmung 14.06.2026) ersetzt die oberirdischen Parkplaetze am See; Text anpassen.
 - Faehrfahrplan (Takt, Winterfahrplan) bei Fahrplanwechsel pruefen; Quelle bsb.de und bodensee-schiffe.ch.
+- Nutzungsbedingungen geo.admin.ch (iFrame, BGDI-Fair-Use) vor dem Go-live in der aktuellen Fassung pruefen.
+- Idee aus der Recherche 09.10.: QR-Code zur Anfahrt (SBB- oder Kartenlink) auf Drucksachen.
 
 ## 4. Go-live (wenn der Kunde freigibt)
 
@@ -116,7 +122,8 @@ Notizen `scratchpad/...`). Alle Pfade sind relativ zum Skript; die Skripte laufe
   pymupdf, defusedxml, LibreOffice Impress fuer PDFs, Inter als Systemschrift, Chromium fuer die Anleitung).
 - **Textregeln pruefen:** `grep -nE "–|—"` auf die HTML- oder Textdumps (keine Gedankenstriche), `grep -i` auf die
   verbotenen Woerter, kein `ß`.
-- **Recherche-Notizen:** `_handover/recherche/` (Anreise-Fakten mit Quellen, Bauanleitung "Northwall" als Textfassung,
+- **Recherche-Notizen:** `_handover/recherche/` (Anreise-Fakten mit Quellen, Faktenbasis Karte und Anfahrt
+  (swisstopo-Parameter, Nutzungsbedingungen, Routen-Links, Datenschutz, Quellen), Bauanleitung "Northwall" als Textfassung,
   Analysen der Referenzseite).
 
 Einrichtung in einer neuen Cloud-Sitzung (nur was fehlt): `pip install playwright python-pptx pymupdf defusedxml
@@ -181,3 +188,4 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
 - 10.10.: Anreise-Texte mit Quellen, Routen- und Fahrplan-Links, Fotos 22 und 23.
 - 15.10.: PowerPoint-Vorlage in drei Vorschaurunden entwickelt und geliefert; Website: duenne Linie, runde Punkte.
 - 16.10.: Uebergabe an das Claude-Projekt.
+- 18.10.: Nebenprojekt "Karte und Anfahrt" uebernommen; Website-Arbeit nur noch im Claude-Projekt.

@@ -20,6 +20,19 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Ausnahmen bleiben wie entworfen: Pfeil-Links `.al` (Schiene, Burger-Menue, "Zur Lehrstelle"), Buttons (`.dbtn`,
   `.cbtn`, Aktions-Button), Header-Navigation, Sprachwahl. Neue Textlinks bekommen eine dieser Klassen oder liegen in `.sub`.
 
+## Hausstil fuer Texte (aus den Projektanweisungen vom 18.10.2026, Skill iro-textstil, wenn verfuegbar)
+- Anfuehrungszeichen «so». Tausender mit Apostroph (10'000), Dezimalkomma im Fliesstext (2,5 mm).
+- Anrede "Sie". Die Firma spricht als "wir" und bezeichnet sich feminin (Spezialanbieterin, Partnerin). Immer
+  "Ansprechperson".
+- Headlines sind Aussagesaetze mit Punkt, darueber ein Kicker aus zwei bis vier Woertern.
+- Absaetze hoechstens drei Saetze, Verben vor Substantiven, keine Floskeln (massgeschneidert, ganzheitlich, innovativ).
+- Schreibweise "IRo" (I und R gross, o klein), in Dateinamen und Domain klein (iro.swiss).
+- Keine Fakten erfinden (Zahlen, Referenzen, Zitate, Gehzeiten, Parkplaetze): Platzhalter `[[...]]`, unter offenen
+  Punkten sammeln.
+- Jeder neue externe Dienst bekommt einen Abschnitt in datenschutz.html; heikle Stellen zur rechtlichen Pruefung markieren.
+- Vor jeder Veroeffentlichung zusaetzlich zum Sweep: Tastaturbedienung, Netzwerk-Tab ohne Cookie-Zustimmung (keine
+  Anfrage an Google oder Apple), HTML-Validator.
+
 ## Zweisprachigkeit (DE/EN) - immer beide Sprachen gleich stark pflegen
 - Deutsch ist der Default im HTML, Englisch steht in `data-en`-Attributen.
 - `data-en` nur auf Blatt-Elementen (Text wird per textContent ersetzt, Kind-Tags gehen verloren).

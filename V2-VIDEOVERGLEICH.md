@@ -266,6 +266,13 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Kartentexte Entwicklung ("before they reach the customer"), Simulation ("In our projects" statt "With us"),
     Prototyping ("hold your product in your hands", "production tooling"), Leistung 04 ("matures during development and
     not in the customer's hands"). Vision-Zitat in Schweizer Anfuehrungszeichen «». Status: erledigt in r1
+65. [Kunde 18.10.] Die ganze Arbeit an der Website laeuft nur noch im Claude-Projekt 0000-iro-website. Das
+    Nebenprojekt "Karte und Anfahrt" (Unterhaltung 09.10.) ist uebernommen: Seine Entscheide (swisstopo-Karte statt
+    Google, kein Google-Maps-Embed) decken sich mit Punkt 56 und sind in r1 umgesetzt; seine offenen Punkte bezogen sich
+    auf die Live-Site v1 und sind fuer r1 erledigt (Ladeverhalten A, Zoom 9, Anreise, Hosting Hostpoint, DE/EN per
+    data-en, CSP in .htaccess, Link Cookie-Einstellungen im Footer, theme-color Carbon Black). Neu offen: siehe
+    UEBERGABE.md Abschnitt 3. Faktenbasis mit Quellen: `_handover/recherche/karte-anfahrt-faktenbasis.md`. Hausstil fuer
+    Texte aus dessen Projektanweisungen in CLAUDE.md uebernommen. Status: erledigt
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
