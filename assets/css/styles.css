@@ -235,6 +235,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__meta { position: static; border-top: none; }
   .hero__meta ul { gap: var(--sp-5); }
 }
+/* Sehr schmale Geraete (< 338px): Abstand zwischen Titelspalte und Liste verkleinern, sonst schneidet der Hero die Liste rechts ab */
+@media (max-width: 337px) {
+  .hero__inner { padding-right: var(--sp-2); }
+  .hero__meta { padding-inline: var(--sp-2) var(--sp-3); }
+}
 
 /* ---------- Leistungen: Hairline-Raster gap:1px ---------- */
 .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--iro-line); border: 1px solid var(--iro-line); }
@@ -274,7 +279,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 .stat__value em { font-style: normal; color: var(--iro-green-text); }
 .nowrap { white-space: nowrap; }
 .stat__label { margin-top: var(--sp-3); font: 500 13px/1.4 var(--font-sans); color: var(--iro-muted); }
-@media (max-width: 420px) { .stats { grid-template-columns: 1fr; } }
+/* Einspaltig bis 720px: zweispaltig passt der laengste Wert ("Swiss engineered", 249px bei 26px) nicht in die Karte.
+   Unter 367px skaliert die Schrift mit der Breite (Gutter, Rahmen und Padding abgezogen), damit er einzeilig in der Karte bleibt. */
+@media (max-width: 720px) {
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .stat__value { font-size: min(26px, calc((100vw - 2 * var(--gutter) - 2px - 2 * var(--sp-6)) * .103)); }
+}
 
 /* ---------- Zitat ---------- */
 .quote { max-width: 46ch; }
@@ -413,6 +423,8 @@ html[lang="en"] [data-only="en"] { display: revert; }
 /* ---------- Rechtstext-Layout ---------- */
 .legal { padding-block: var(--sp-8) var(--sp-9); }
 .legal h1 { font: 600 clamp(28px,4vw,38px)/1.1 var(--font-sans); letter-spacing: -.015em; }
+/* Sehr schmale Geraete: der laengste Titel ("Datenschutzerklaerung", 293px bei 28px) bleibt einzeilig im Inhaltsbereich */
+@media (max-width: 345px) { .legal h1 { font-size: min(28px, calc((100vw - 2 * var(--gutter)) * .094)); } }
 .legal h2 { font: 600 20px/1.25 var(--font-sans); margin-top: var(--sp-7); }
 .legal h3 { font: 600 16px/1.3 var(--font-sans); margin-top: var(--sp-5); }
 .legal p, .legal li { color: var(--iro-body-strong); margin-top: var(--sp-3); max-width: 72ch; }

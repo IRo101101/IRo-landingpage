@@ -30,6 +30,9 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Effekte muessen `prefers-reduced-motion` respektieren (Titel statisch, keine Pixel-Buttons).
 - Safari: `backdrop-filter` immer mit `-webkit-`-Praefix.
 - Sehr schmale Geraete (<= 350px): Kontaktzeilen stapeln (siehe Media-Query 420px).
+- Einzeilige Texte (Kennzahlen `.stat__value`, Titel `.legal h1`): die Faktoren in styles.css haengen an der Textbreite von
+  "Swiss engineered" bzw. "Datenschutzerklaerung". Bei Text- oder Schriftaenderung nachrechnen und im Sweep zusaetzlich pruefen,
+  dass kein Text aus seiner Karte ragt (scrollWidth > clientWidth), auch wenn die Seite nicht scrollt.
 - Nach Aenderungen: Playwright-Sweep ueber 4 Seiten x Viewports (320-1440) x DE/EN,
   Kriterien: kein horizontaler Overflow, keine Konsolenfehler.
 
