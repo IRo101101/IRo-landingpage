@@ -65,6 +65,12 @@ Beim Kunden:
 - Datenschutz Abschnitt 11 "Karte und Routenplanung" bei Bedarf rechtlich pruefen lassen (Recherche ist keine
   Rechtsberatung).
 
+Vorgemerkt fuer das naechste Ueberarbeiten der Seite (Kundenauftrag 19.11.2026):
+- Mobilvarianten der Fotos einbinden. Heute laden alle Geraete `NN.webp` (1800 px, Hero 2400 px). Die Dateien
+  `NN-m.webp` (1100 px) liegen bereit, sind aber nur im Ladepanel eingebunden (09, 03, 13, 19, 14); es gibt kein
+  `<picture>` und kein `srcset`. Beim Umbau `srcset` mit `sizes` oder `<picture>` setzen und auf Handybreite pruefen.
+  Vorlage: Die verworfene Variante B hatte das einmal gebaut (Commit 93cb8cb, `b/index.html`).
+
 Spaeter zu pruefen:
 - Umbau untere Bahnhofstrasse Romanshorn bis April 2027 (Hinweis auf kontakt.html), danach Einbahnregelung pruefen.
 - Tiefgarage Hafenpromenade (Abstimmung 14.06.2026) ersetzt die oberirdischen Parkplaetze am See; Text anpassen.

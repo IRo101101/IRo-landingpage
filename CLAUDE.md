@@ -124,6 +124,9 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Saeulen, Kaffeebar) am 10.10.2026 nachgeliefert, noch frei; sie kamen als Chat-Upload nur mit 2000 px Breite (Originale
   01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (`_handover/tools/add_photos.py`).
   Uebersicht aller Fotos mit Verwendung: `_handover/tools/bilduebersicht.py` erzeugt `_handover/bilduebersicht.png`.
+  Ladepanel: Karten 09-m/03-m/13-m/19-m/14-m, Schlussbild 07. Die uebrigen `-m`-Dateien sind nirgends eingebunden
+  (kein picture, kein srcset, geprueft 19.11.2026): alle Geraete laden `NN.webp`. Vorgemerkt (Kundenauftrag 19.11.):
+  beim naechsten Ueberarbeiten der Seite die Mobilvarianten einbinden (siehe UEBERGABE.md, offene Punkte).
 - Kennzahlen im Hero (r1, 18.10.2026): "20+ Jahre" (vom Kunden noch zu bestaetigen), "1 Adresse" (ohne data-count, sonst
   zaehlt 0 bis 1), "130 dB" (Diktat). Counter() braucht eine Zahl im Wert, sonst haengt er "0" an.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
