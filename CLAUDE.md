@@ -73,7 +73,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261016; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261018b; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -127,6 +127,13 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Ladepanel: Karten 09-m/03-m/13-m/19-m/14-m, Schlussbild 07. Die uebrigen `-m`-Dateien sind nirgends eingebunden
   (kein picture, kein srcset, geprueft 19.11.2026): alle Geraete laden `NN.webp`. Vorgemerkt (Kundenauftrag 19.11.):
   beim naechsten Ueberarbeiten der Seite die Mobilvarianten einbinden (siehe UEBERGABE.md, offene Punkte).
+- Erfundene Personen (Stand 19.11.2026): Auf den Fotos 09, 10, 11, 12, 15, 16, 18, 19, 20, 21 sind die Koepfe der
+  Mitarbeitenden durch erfundene Personen ersetzt (Inhaber unveraendert; 04 Mitarbeiterin bleibt Original; 05 und 14
+  zeigen den Inhaber). Basis sind Master in Originalgroesse aus den unveraenderten Originalfotos, im Higgsfield-Konto
+  des Kunden (ZIP `IRo_Fotomaster_2026-11-19.zip`), nicht im Repository. Web-Groessen nur aus diesen Mastern rechnen
+  (`_handover/tools/fotomaster/web_einsetzen.py`), nie aus den Bearbeitungen vom 24.09.2026 (Farbstich, weicher).
+  Verfahren, Pruefung, Tabelle der 18 Master und offene Punkte: `_handover/tools/fotomaster/README.md`. Keine Namen
+  echter Personen und keine Links auf Originale oder Master ins Repository schreiben (wird oeffentlich ausgeliefert).
 - Kennzahlen im Hero (r1, 18.10.2026): "20+ Jahre" (vom Kunden noch zu bestaetigen), "1 Adresse" (ohne data-count, sonst
   zaehlt 0 bis 1), "130 dB" (Diktat). Counter() braucht eine Zahl im Wert, sonst haengt er "0" an.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript

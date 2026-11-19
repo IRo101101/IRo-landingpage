@@ -314,6 +314,19 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Abweichung: XS-1 und Kleinserien stehen in Zeile 07 statt unter den fuenf Schritten, dort waere nur mit einem neuen
     Element Platz. Team-Zeilen: Einblend-Staffel ab Zeile 04 gedeckelt (sonst 1.5 s Wartezeit bei Zeile 07).
     Cache-Version 20261018b. Status: erledigt in r1
+74. [Kunde 19.11.] Fotos mit erfundenen Personen: alle Bearbeitungen auf Plausibilitaet pruefen (Teint, Haarton,
+    Arme und Haende passend zum Gesicht), der Lehrling passte nicht. Umgesetzt: 18 Master in Originalgroesse aus den
+    unveraenderten Originalfotos neu aufgebaut, Lehrling neu und auf sechs Fotos dieselbe Person, Haende des zweiten
+    Mannes an das Gesicht angeglichen, Farben wie im Original (kein Farbstich mehr). Die Mitarbeiterin bleibt auf
+    allen Fotos original (Kundenkorrektur 19.11.). Zehn Fotos im Fundus von r1 ersetzt (09, 10, 11, 12, 15, 16, 18, 19,
+    20, 21, je mit Mobilvariante), Bildausschnitt unveraendert, kein Eingriff in HTML, CSS oder JS, Cache-Version
+    bleibt. Sweep 60/60 ohne Befund. Verfahren und Pruefung: `_handover/tools/fotomaster/README.md`.
+    Status: erledigt in r1. Offen (Entscheid Kunde): fuenf uebernommene Koepfe gleichen im Gesichtsvergleich noch der
+    echten Person, davon drei auf der Seite (16 rechts, 21, 11); Fotos der PowerPoint-Vorlage und der Fundus im Root
+    zeigen noch den alten Stand.
+75. [Kunde 19.11.] Mobilvarianten der Fotos (`NN-m.webp`) sind ausser im Ladepanel nirgends eingebunden, alle Geraete
+    laden die grosse Datei. Vorgemerkt fuer das naechste Ueberarbeiten der Seite (picture oder srcset).
+    Status: offen (vorgemerkt, siehe UEBERGABE.md)
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

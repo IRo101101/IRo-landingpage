@@ -23,11 +23,16 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
   - **Ordner `r1/` = Arbeitskopie**, hier wird gearbeitet: https://iro101101.github.io/IRo-landingpage/r1/
     Fuenf Seiten: index, karriere, kontakt, impressum, datenschutz. Dazu fuenf Vorschauseiten `vorschau-*.html`
     (Entscheidungshilfen, bleiben als Nachschlagewerk, kommen nicht live).
-  - Cache-Version in allen r1-HTML-Dateien: `?v=20261015b`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
+  - Cache-Version in allen r1-HTML-Dateien: `?v=20261018b`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
     `r1/assets/js/main.js` hochzaehlen (`YYYYMMDD`, am selben Tag Buchstabe anhaengen).
   - Alle Kundenentscheide bis 15.10.2026 sind eingebaut (Liste: `V2-VIDEOVERGLEICH.md`, Punkte 1 bis 58).
     Letzte Entscheide 15.10.: duenne durchgezogene Linie statt gestrichelter Haarlinien (Vorbild `.hero__rule`),
     runde Eckmarker und runde Aufzaehlungspunkte.
+  - **Fotos mit erfundenen Personen (19.11.2026):** Die Fotos 09, 10, 11, 12, 15, 16, 18, 19, 20, 21 im Fundus
+    `r1/assets/img/v2` zeigen erfundene Personen (Koepfe ersetzt, Inhaber unveraendert, Foto 04 bleibt Original).
+    Sie sind seit 19.11. aus neuen Mastern in Originalgroesse gerechnet: natuerliche Farben, Lehrling neu, Haende
+    der dunkleren Figur farblich angeglichen. Verfahren, Pruefung und offene Punkte:
+    `_handover/tools/fotomaster/README.md`. Die Fundusdateien nie mehr aus den alten Bearbeitungen rechnen.
 - **Variante B** (Ordner `b/`, 08.10.) wurde dem Kunden gezeigt und verworfen; Aenderungen am Design nur Punkt fuer
   Punkt mit dem Kunden. Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie
   (angelegt mit Commit 93cb8cb, entfernt mit Commit 2e70474).
@@ -64,6 +69,19 @@ Beim Kunden:
   Place-ID liesse sich der Google-Maps-Link auf kontakt.html genau auf den Eintrag richten (`destination_place_id`).
 - Datenschutz Abschnitt 11 "Karte und Routenplanung" bei Bedarf rechtlich pruefen lassen (Recherche ist keine
   Rechtsberatung).
+
+Fotos mit erfundenen Personen (Stand 19.11.2026, Einzelheiten in `_handover/tools/fotomaster/README.md`):
+- Entscheid des Kunden offen: Fuenf uebernommene Koepfe sind der echten Person laut Gesichtsvergleich noch aehnlich
+  (Teamfoto 16 rechts, 3D-Drucker 21, Besprechung 11 und zwei Fotos ausserhalb der Website). Bei Bedarf wie beim
+  Lehrling mit einem neuen erfundenen Gesicht ersetzen.
+- Die Figuren aus der frueheren Bearbeitung sind von Foto zu Foto nicht streng dieselbe Person. Vereinheitlichen
+  nur auf Wunsch des Kunden.
+- PowerPoint-Vorlage: Die Fotos `_handover/powerpoint/assets/p09.jpg` und weitere stammen aus dem alten Stand
+  (Farbstich, alter Lehrling). Bei der naechsten Lieferung aus den Mastern neu rechnen.
+- Der eingefrorene Fundus im Root (`assets/img/v2`) zeigt weiter den alten Stand (Vergleichsbasis).
+- Alt-Texte der Fotos gibt es nur auf Deutsch, `applyLang` uebersetzt `alt` nicht.
+- Rechtlich pruefen lassen: Verarbeitung von Mitarbeiterfotos bei einem externen KI-Dienst, allfaellige
+  Kennzeichnung KI-bearbeiteter Bilder (Recherche ist keine Rechtsberatung).
 
 Vorgemerkt fuer das naechste Ueberarbeiten der Seite (Kundenauftrag 19.11.2026):
 - Mobilvarianten der Fotos einbinden. Heute laden alle Geraete `NN.webp` (1800 px, Hero 2400 px). Die Dateien
@@ -125,6 +143,9 @@ Notizen `scratchpad/...`). Alle Pfade sind relativ zum Skript; die Skripte laufe
   Standort noetig.
 - **Generatoren** (`generatoren/`): `build_subpages.py`, `build_kontakt.py`, `build_logo.py` haben die Unterseiten,
   die Kontaktseite und die Logo-Vorschau einmalig erzeugt; die HTML-Dateien werden seither direkt gepflegt.
+- **Fotos mit erfundenen Personen:** `_handover/tools/fotomaster/` (README mit Verfahren und Tabelle der 18 Master,
+  `web_einsetzen.py` setzt die Web-Groessen in den Fundus ein). Die Bildarbeit selbst laeuft in der Bildwerkstatt
+  von Higgsfield, die Skripte dazu liegen im Lieferpaket des Kunden.
 - **PowerPoint:** siehe `_handover/powerpoint/README.md` (Node mit pptxgenjs und jszip, Python mit python-pptx,
   pymupdf, defusedxml, LibreOffice Impress fuer PDFs, Inter als Systemschrift, Chromium fuer die Anleitung).
 - **Textregeln pruefen:** `grep -nE "–|—"` auf die HTML- oder Textdumps (keine Gedankenstriche), `grep -i` auf die
@@ -147,8 +168,8 @@ _handover/
   DESIGN-HANDOVER.md    Designbeschreibung v2 (Farben, Schrift, Vokabular, Bloecke, Texte), Stand 30.09.
   palette.png, logo/, screens/, bilduebersicht.png
   powerpoint/           Vorlage, Beispieldecks, Anleitung, Quellen, Referenz (alte Vorlage)
-  tools/                Sweep (test_v2b.py), Fotos (add_photos.py, bilduebersicht.py, v1img/), Karten (osm/),
-                        Generatoren (generatoren/)
+  tools/                Sweep (test_v2b.py), Fotos (add_photos.py, bilduebersicht.py, v1img/, fotomaster/),
+                        Karten (osm/), Generatoren (generatoren/)
   recherche/            Anreise-Fakten, Northwall-Bauanleitung, Analysen
   PROJEKT-ANWEISUNGEN.md Text fuer die Projektanweisungen des Claude-Projekts
 CLAUDE.md               verbindliche Regeln und Technik-Notizen (Pflichtlektuere)
@@ -162,6 +183,9 @@ UEBERGABE.md            dieses Dokument
 
 - Die Foto-Originale (6720 x 4480 JPG, Pakete 1 bis 5 des Fotografen) und die Chat-Uploads der Fotos 22 und 23
   (2000 px). Sie liegen beim Kunden. Im Repo sind nur die berechneten WebP-Dateien.
+- Die 18 Fotomaster mit erfundenen Personen in Originalgroesse (rund 100 MB), die Protokolle und die Skripte der
+  Bildwerkstatt: als ZIP `IRo_Fotomaster_2026-11-19.zip` im Higgsfield-Konto des Kunden. Dort liegen auch die
+  Originale und die Bearbeitungen vom 24.09.2026.
 - Fremde Praesentationen, die der Kunde als Beispiel hochgeladen hat (Folienmaster eines Drittunternehmens). Die
   daraus uebernommenen Ideen (Vergleich, Bildraster, Ansprechpersonen, senkrechte Fusszeile) sind in der Vorlage.
 - Zugangsdaten (Hostpoint, Google Analytics) liegen beim Kunden.
@@ -195,3 +219,5 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
 - 15.10.: PowerPoint-Vorlage in drei Vorschaurunden entwickelt und geliefert; Website: duenne Linie, runde Punkte.
 - 16.10.: Uebergabe an das Claude-Projekt.
 - 18.10.: Nebenprojekt "Karte und Anfahrt" uebernommen; Website-Arbeit nur noch im Claude-Projekt.
+- 19.11.: Fotos mit erfundenen Personen geprueft und als Master in Originalgroesse neu aufgebaut, zehn Fotos im
+  Fundus `r1` ersetzt.
