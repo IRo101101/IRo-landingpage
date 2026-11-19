@@ -29,7 +29,8 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
     Letzte Entscheide 15.10.: duenne durchgezogene Linie statt gestrichelter Haarlinien (Vorbild `.hero__rule`),
     runde Eckmarker und runde Aufzaehlungspunkte.
 - **Variante B** (Ordner `b/`, 08.10.) wurde dem Kunden gezeigt und verworfen; Aenderungen am Design nur Punkt fuer
-  Punkt mit dem Kunden.
+  Punkt mit dem Kunden. Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie
+  (angelegt mit Commit 93cb8cb, entfernt mit Commit 2e70474).
 
 ### PowerPoint-Vorlage (fertig geliefert 15.10.2026)
 - `_handover/powerpoint/out/IdeeRoth_Vorlage.potx`: 32 Layouts (16 Deutsch `DE · 01` bis `DE · 16`, 16 Englisch),
@@ -135,7 +136,6 @@ Inter-Schriften aus `_handover/powerpoint/out/paket/fonts/` nach `/usr/local/sha
 ```
 /                       Root dieses Branches = v2-Stand vom 30.09.2026 (Vergleichsbasis, nicht anfassen)
 r1/                     v2 Runde 1, Arbeitskopie (5 Seiten, 5 Vorschauseiten, eigene assets/)
-b/                      Variante B vom 08.10.2026, verworfen (nur Referenz)
 _parkiert/              geparkte Inhalte (Offene Stellen), Wiedereinsetzen laut README dort
 _handover/
   DESIGN-HANDOVER.md    Designbeschreibung v2 (Farben, Schrift, Vokabular, Bloecke, Texte), Stand 30.09.

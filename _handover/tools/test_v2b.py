@@ -2,7 +2,7 @@ import asyncio, sys, json, os
 from playwright.async_api import async_playwright
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8771
-PREFIX = sys.argv[2] if len(sys.argv) > 2 else 'b/'
+PREFIX = sys.argv[2] if len(sys.argv) > 2 else 'r1/'
 BASE = f'http://127.0.0.1:{PORT}/{PREFIX}'
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[3] if len(sys.argv) > 3 else os.path.join(HERE, 'shots_b')   # Screenshots, nicht einchecken
