@@ -69,12 +69,13 @@
   var SLIDE = { tension: 480, friction: 42 };
 
   var MD = 768, LG = 1024, XL = 1440;
+  var SHORT_LANDSCAPE = '(orientation: landscape) and (max-height: 500px)', HDR_AWAY_DELTA = 6;   // r1 20.11.: Handy quer (siehe initHeaderAway)
   var CLOSE_DELAY = 260;
 
   /* ---- Root-Schriftgroesse ueber 1440 daempfen ------------------------ */
   function fitRoot() {
-    var w = VW();
-    root.style.fontSize = w > XL ? (16 * (1 + (w - XL) / XL * 0.5)) + 'px' : '';
+    var w = VW(), fs = w > XL ? (16 * (1 + (w - XL) / XL * 0.5)) + 'px' : '';
+    if (root.style.fontSize !== fs) root.style.fontSize = fs;   // r1 20.11.: nur bei Aenderung (iOS feuert resize beim Ein-/Ausblenden der Leisten)
   }
   fitRoot();
   win.addEventListener('resize', fitRoot);
@@ -279,8 +280,12 @@
   // o.ref: Element, dessen Kanten den Scrollweg bestimmen (Standard: el selbst). Noetig, wenn el ein ueberstehender
   // Layer ist (Hero-Foto 130 % hoch): sonst liegt sein Anfang schon ueber dem Viewport und die Parallaxe startet bei
   // Scrollposition 0 nicht bei 0 - das Foto stand 5 % tiefer als die Finale-Karte, der Sprung am Ende des Ladens.
+  // o.still ('from' | 'to', sonst die Mitte): Stand auf Touch-Geraeten. Dort scrollt der Browser selbst (Lenis glaettet
+  // nur das Mausrad); Federn, die dem Scrollweg nachlaufen, hingen sichtbar hinterher (Hero-Foto lief nach dem Loslassen
+  // 0,3 s nach, die ganze Startsektion rutschte und blendete aus) und kosteten pro Bild Layout. Kunde 20.11.2026.
   function Scrub(el, o) {
     var g = new Group(el, { from: o.from, config: o.config }), lastT = -1, ref = o.ref || el;
+    if (isTouchOnly) { g.set(o.still === 'from' ? o.from : o.still === 'to' ? o.to : lerpState(o.from, o.to, 0.5)); return g; }
     ticker.add(function () {
       var a = edgePos(ref, o.start), b = edgePos(ref, o.end);
       var t = b === a ? 0 : Math.min(1, Math.max(0, a / (a - b)));
@@ -574,13 +579,22 @@
     var cur = first ? first.getAttribute('data-ground') : 'light';
     var grp = new Group(g, { from: { bg: cur === 'dark' ? DARK : LIGHT }, config: GROUND });
     root.setAttribute('data-ground-now', cur);
-    // r1: aktuelle Bodenfarbe als CSS-Variable (Header unter 1024 px deckend in Bodenfarbe)
+    // r1: aktuelle Bodenfarbe als CSS-Variable fuer den Milchglas-Header unter 1024 px. Seit 20.11.2026 nur am Header
+    // gesetzt (an <html> loeste jeder Schritt eine Stilberechnung der ganzen Seite aus), nur bei Aenderung und mit
+    // hoechstens einem Nachfuehr-Ticker (vorher kam unter 768 px bei jedem neuen Ziel einer dazu).
+    var hdrEl = doc.querySelector('.hdr') || root, lastGlass = '', mirroring = false;
     var mirror = function () {
-      var c = g.style.backgroundColor; root.style.setProperty('--ground-rgb', c);
-      var m = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(c); if (m) root.style.setProperty('--ground-glass', 'rgba(' + m[1] + ',' + m[2] + ',' + m[3] + ',.72)');   // Milchglas-Header unter 1024 px
+      var c = g.style.backgroundColor, m = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(c);
+      if (!m) return;
+      var glass = 'rgba(' + m[1] + ',' + m[2] + ',' + m[3] + ',.72)';
+      if (glass !== lastGlass) { lastGlass = glass; hdrEl.style.setProperty('--ground-glass', glass); }
     };
     mirror();
-    function follow(cfg) { grp.to({ bg: lastTarget }, cfg); ticker.add(function () { mirror(); if (!grp.active) return false; }); }
+    function follow(cfg) {
+      grp.to({ bg: lastTarget }, cfg);
+      if (mirroring) return; mirroring = true;
+      ticker.add(function () { mirror(); if (!grp.active) { mirroring = false; return false; } });
+    }
     var lastTarget = cur === 'dark' ? DARK : LIGHT;
     function colorOf(el) { return el.getAttribute('data-ground') === 'dark' ? DARK : LIGHT; }
     function mix(a, b, t) { var A = parseColor(a), B = parseColor(b); return 'rgb(' + A.map(function (x, i) { return Math.round(x + (B[i] - x) * t); }).join(',') + ')'; }
@@ -623,9 +637,23 @@
       if (theme !== cur) { cur = theme; h.setAttribute('data-theme', theme); }
     }, 80);
   }
+  // r1 20.11.2026 (Kunde: Handy quer, Header nimmt viel Platz, der Scrollbalken laeuft ueber den Header): In niedrigen
+  // Querformat-Fenstern weicht der Header beim Runterscrollen nach oben aus und kommt beim Hochscrollen zurueck. Bleibt
+  // stehen ganz oben, bei offenem Menue und solange der Tastaturfokus im Header liegt.
+  function initHeaderAway() {
+    var h = doc.querySelector('.hdr'); if (!h || !win.matchMedia) return;
+    var mq = win.matchMedia(SHORT_LANDSCAPE), lastY = win.pageYOffset || 0, away = false;
+    function setAway(v) { if (v !== away) { away = v; h.classList.toggle('is-away', v); } }
+    win.addEventListener('scroll', function () {
+      var y = win.pageYOffset || 0, dy = y - lastY;
+      if (!mq.matches || menuOpen || h.contains(doc.activeElement) || y < h.offsetHeight) { setAway(false); lastY = y; return; }
+      if (dy > HDR_AWAY_DELTA) { setAway(true); lastY = y; } else if (dy < -HDR_AWAY_DELTA) { setAway(false); lastY = y; }
+    }, { passive: true });
+    h.addEventListener('focusin', function () { setAway(false); });
+  }
   function initFlow() {
     var secs = doc.querySelectorAll('[data-flow]');
-    for (var i = 0; i < secs.length; i++) Scrub(secs[i], { start: 'bottom bottom', end: 'bottom top', from: { y: 0, opacity: 1 }, to: { y: 50, opacity: 0.25 }, config: FLOW, frameInterval: 32 });
+    for (var i = 0; i < secs.length; i++) Scrub(secs[i], { start: 'bottom bottom', end: 'bottom top', from: { y: 0, opacity: 1 }, to: { y: 50, opacity: 0.25 }, config: FLOW, frameInterval: 32, still: 'from' });
   }
 
   /* =====================================================================
@@ -810,7 +838,7 @@
   function initHero() {
     var hero = doc.querySelector('.hero'); if (!hero) return;
     var photo = hero.querySelector('.hero__photo');
-    if (photo) Scrub(photo, { ref: hero.querySelector('.hero__stage') || hero, start: 'top top', end: 'bottom top', from: { y: '0%' }, to: { y: '22%' }, config: PARALLAX, frameInterval: 32 });
+    if (photo) Scrub(photo, { ref: hero.querySelector('.hero__stage') || hero, start: 'top top', end: 'bottom top', from: { y: '0%' }, to: { y: '22%' }, config: PARALLAX, frameInterval: 32, still: 'from' });
     var h1 = hero.querySelector('h1'), lines = hero.querySelectorAll('.hero__line'), intro = hero.querySelector('.hero__intro');
     var wH1 = new Words(h1, { preset: 'head', manual: true });
     var wLines = Array.prototype.map.call(lines, function (l) { return new Words(l, { preset: 'head', manual: true }); });
@@ -1109,7 +1137,7 @@
     var sec = doc.querySelector('.contact'); if (!sec) return;
     // r1: Parallaxe auf der inneren Ebene (.contact__layer, 120 % hoch), die Aussenbox bleibt stehen
     var photo = sec.querySelector('.contact__layer') || sec.querySelector('.contact__photo');
-    if (photo) Scrub(photo, { ref: sec.querySelector('.contact__photo') || photo, start: 'top bottom', end: 'bottom bottom', from: { y: '-15%' }, to: { y: '0%' }, config: PARALLAX, frameInterval: 32 });
+    if (photo) Scrub(photo, { ref: sec.querySelector('.contact__photo') || photo, start: 'top bottom', end: 'bottom bottom', from: { y: '-15%' }, to: { y: '0%' }, config: PARALLAX, frameInterval: 32, still: 'to' });
     sec.querySelectorAll('.rail__links .al').forEach(function (a, i) {
       ArrowLink(a);
       Inview(a, { from: { opacity: 0, y: 14 }, to: { opacity: 1, y: 0 }, config: { tension: 200, friction: 30 }, delayIn: ENTRY_DELAY + i * ENTRY_STAGGER });
@@ -1202,6 +1230,7 @@
   initHeader();
   initGround();
   initHeaderTheme();
+  initHeaderAway();
   initFlow();
   initHero();
   initAbout();

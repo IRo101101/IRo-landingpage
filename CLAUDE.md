@@ -73,7 +73,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261120f; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261120g; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -172,6 +172,16 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Bild. Dazu `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen 12 px fuer Labels, Tap-Ziele 40 px (auch bei
   `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand. Header: Die Menue-Striche sind
   `.hdr__burger span i`; ein Selektor `.hdr__burger i` traefe auch die Eckpunkte `.mk` (ebenfalls `<i>`).
+- Touch-Geraete (`isTouchOnly` = hover: none, Kunde 20.11.2026 "beim Anscrollen unruhig"): Scrub-Effekte (Flow der
+  verlassenen Sektionen, alle Parallaxen) laufen dort nicht, der Browser scrollt nativ und die Federn hingen hinterher
+  (gemessen: Startsektion rutschte 24 px und blendete aus, Foto lief 0,3 s nach, Bildzeiten p95 64 ms bei 4-facher
+  CPU-Drosselung, danach 31 ms). Stand dort per `o.still` ('from' Hero und Flow, 'to' Kontakt, sonst Mitte). Die
+  Bodenfarbe fuer den Milchglas-Header (`--ground-glass`) schreibt initGround nur noch am `.hdr`, nur bei Aenderung und
+  mit einem einzigen Nachfuehr-Ticker; `--ground-rgb` entfiel (nirgends verwendet).
+- Handy quer (`(orientation: landscape) and (max-height: 500px)`, Konstante SHORT_LANDSCAPE): Header 3rem statt
+  4.0625rem, weicht beim Runterscrollen nach oben aus (`.hdr.is-away`, initHeaderAway, Schwelle 6 px) und kommt beim
+  Hochscrollen zurueck; bleibt ganz oben, bei offenem Menue und mit Tastaturfokus im Header. Unter 768 px Breite quer
+  Grundschrift max(14px, 2.083333vw) statt 4.1vw (bei 740 x 360 waren es 30 px, der Header 123 px hoch).
 - Ladepanel "nur Logo" ist Standard (Kundenentscheid 20.11.2026, `data-preloader="logo"` am Panel): ohne Fotokarten und
   Finale-Karte (`.pre--logo`), das Zeichen fuellt sich, fliegt in den Header, das Panel blendet ab drei Vierteln des Flugs
   aus (initPreloader `expandLogo`). Das alte Panel mit Fotos zum Vergleich: `r1/?lade=fotos`. Die Kartenbilder tragen

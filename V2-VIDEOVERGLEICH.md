@@ -377,6 +377,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Rechtszeile und Copyright im Foto wie am Desktop. Header: Eckpunkte der Menue-Zelle waren zu einem Strich verzogen,
     der Punkt unten fehlte (Selektor `.hdr__burger i` traf auch die Punkte), behoben auf allen Seiten. Geprueft 320 bis
     767 px in DE und EN, Sweep ohne Befund. Cache 20261120f. Status: erledigt in r1
+85. [Kunde 20.11.] Beim Anscrollen des Startbilds auf dem Handy "sehr unruhig": Die scroll-gekoppelten Federn (Startsektion
+    rutscht und blendet aus, Foto-Parallaxe) hingen dem nativen Scrollen hinterher. Auf Touch-Geraeten abgeschaltet,
+    Header-Farbe schlanker nachgefuehrt. Handy quer: Header kompakter (3rem) und beim Runterscrollen ausgeblendet, beim
+    Hochscrollen sofort zurueck; der Scrollbalken des Systems laesst sich nicht verschieben, laeuft so aber beim
+    Runterscrollen nicht mehr ueber den Header. Cache 20261120g. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

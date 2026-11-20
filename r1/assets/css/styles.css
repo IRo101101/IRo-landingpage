@@ -722,3 +722,16 @@ section { position: relative; }
   .contact__legal { grid-row: 4; grid-column: 1; order: 0; z-index: 2; padding: 2.5rem 1rem 0; }
   .contact__copy { grid-row: 5; grid-column: 1; order: 0; z-index: 2; padding: .75rem 1rem 1.5rem; }
 }
+
+/* r1 20.11.2026, Handy quer (niedrige Fenster bis 500 px Hoehe): Header kompakter (3rem statt 4.0625rem) und beim
+   Runterscrollen ausgeblendet (main.js initHeaderAway setzt .is-away), beim Hochscrollen sofort zurueck. Unter 768 px
+   Breite richtet sich die Grundschrift quer nicht mehr nach der Breite (4.1vw ergab bei 740 x 360 rund 30 px). */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root { --header-height: 3rem; }
+  .hdr { transition: color var(--duration-normal) var(--ease-entrance), opacity var(--duration-normal) var(--ease-entrance), transform var(--duration-normal) var(--ease-entrance); }
+  .hdr.is-away { transform: translateY(calc(-100% - .25rem)); }
+}
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 767px) {
+  html { font-size: max(14px, 2.083333vw); }
+}
+@media (prefers-reduced-motion: reduce) { .hdr { transition: none; } }
