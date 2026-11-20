@@ -226,3 +226,4 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
 - 20.11.: Foto 01 (Espressomaschine, Geraet gibt es nicht mehr) aus r1 entfernt, in der Rotation durch 08 ersetzt.
 - 20.11.: Foto 12 aus der Rotation (durch 27 Team am langen Tisch ersetzt), Prozess mit ruhigem Bildwechsel clear,
   Texte zu Ideation, Simulation, Schritten 01/02/04/05 und Team ueberarbeitet (V2-VIDEOVERGLEICH 78 bis 80).
+- 20.11.: Foto 22 mit neuem IRo-Logo auf den Mustern (Lieferung Kunde) im Fundus, Prozessschritt 05 Prototyp zeigt 22.

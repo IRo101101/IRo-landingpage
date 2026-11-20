@@ -348,10 +348,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     3 s nur ohne Mausbedienung; das Schwenken und Kippen der Buehne entfaellt. Status: erledigt in r1 (Cache 20261120).
     Kundenentscheid 20.11.: 04 Entwicklung bleibt 21, 05 Prototyp bekommt 22 (3D-Drucker mit Mustern), sobald das alte
     Logo auf den Mustern ersetzt ist (Kunde liefert das Bild). Foto 06 bleibt in der Rotation (alte Kaffeemaschine nur
-    klein im Hintergrund). Status: 05 offen bis Bild 22 mit neuem Logo vorliegt.
+    klein im Hintergrund). Kunde lieferte 22 mit neuem Logo (2000 x 1333, gleicher Ausschnitt), 22.webp und 22-m.webp neu,
+    05 Prototyp zeigt 22. Status: erledigt in r1
 80. [Kunde 20.11.] Texte: Ideation-Karte (Pruefung vor der Detailkonstruktion mit Skizzen, 3D-Entwuerfen und
     Kostenschaetzung), Simulation-Karte (NAFEMS-Satz: Mitgliedschaft haelt uns auf dem aktuellen Stand), Schritte 01 Idee
-    (Kundentext), 02 Konstruktion (Basis fuer Simulation und erste Prototypen), 04 Entwicklung (senkt das Risiko teurer
+    (Kundentext), 02 Konstruktion (Kundentext: "Mit moderner CAD-Software ... Basis fuer Simulation und fuer erste Prototypen"), 04 Entwicklung (senkt das Risiko teurer
     Aenderungen beim Serienanlauf), 05 Prototyp (Zulieferer, die in ihrer Disziplin zu den besten gehoeren: CNC-Fraesen und
     -Drehen, additive Fertigung, Schweissen, Giessen), Team-Einleitung (Fachleute fuer Konstruktion, Simulation und
     Prototypenbau). Je DE und EN, Karten und Captions in allen Breiten ohne Ueberlauf. Status: erledigt in r1
