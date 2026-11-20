@@ -370,7 +370,13 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     dort: Hero mit Titel oben, Foto 358/448 mit Kennzahlen, Intro, Linie, Buttons; Mission zentriert; Prozess mit dem
     aktiven Schritt ueber dem Foto, Leiste 01-05 direkt darunter, Text und Ergebnis darunter; Kontakt zuerst Foto mit
     Aufruf, dann schwarze Spalte mit Links und Adresse. Tablet und Desktop unveraendert. Geprueft 320 bis 767 px in DE
-    und EN, Sweep ohne Befund. Cache 20261120e. Status: erledigt in r1
+    und EN, Sweep ohne Befund. Cache 20261120e. Status: ersetzt durch 84
+84. [Kunde 20.11.] Hochformat "mehr wie die Desktop-Version" (Handy quer passte schon): Hero vollflaechig mit Titel
+    links oben, Linie, Intro links, Kennzahlen rechts (Unterzeile gedaempft), Schlusszeile rechts, Buttons; Unternehmen
+    mit Themenliste neben dem Foto; Prozess mit grossen Schrittzeilen um das Foto; Kontakt mit Aufruf, Buttons,
+    Rechtszeile und Copyright im Foto wie am Desktop. Header: Eckpunkte der Menue-Zelle waren zu einem Strich verzogen,
+    der Punkt unten fehlte (Selektor `.hdr__burger i` traf auch die Punkte), behoben auf allen Seiten. Geprueft 320 bis
+    767 px in DE und EN, Sweep ohne Befund. Cache 20261120f. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

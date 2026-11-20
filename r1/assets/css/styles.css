@@ -149,8 +149,8 @@ a:hover > .badge, a:focus-visible > .badge { color: var(--link-hover-dark); }
 .hdr__action .swap { transform: rotate(90deg); }
 .hdr__burger { width: 4.5rem; display: flex; align-items: center; justify-content: center; }
 .hdr__burger span { position: relative; display: block; width: 1.5rem; height: 1rem; }
-.hdr__burger i { position: absolute; left: 0; top: 0; width: 100%; height: 1px; background: currentColor; transform: translate3d(0,5px,0); }
-.hdr__burger i + i { transform: translate3d(0,11px,0); }
+.hdr__burger span i { position: absolute; left: 0; top: 0; width: 100%; height: 1px; background: currentColor; transform: translate3d(0,5px,0); }
+.hdr__burger span i + i { transform: translate3d(0,11px,0); }   /* r1 20.11.: nur die zwei Striche; vorher ".hdr__burger i", das zog die Eckpunkte .mk (auch <i>) zu einem Strich oben quer */
 .hdr__nav a { position: relative; padding: .8rem .25rem; margin-inline: -.25rem; }   /* r1: Tap-Ziel >= 40 px (Tablet quer), Text und Abstaende bleiben gleich */
 /* r1: Header unter 1024 px als Milchglas in der aktuellen Bodenfarbe (--ground-glass schreibt main.js pro Frame), bei offenem Menue schwarz */
 @media (max-width: 1023px) { .hdr { background: var(--ground-glass, rgba(17,20,24,.72)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); } }   /* r1: Milchglas (Kundenentscheid 09.10.2026) */
@@ -664,42 +664,61 @@ section { position: relative; }
 }
 
 /* =========================================================================
-   r1 Mobile nach der Vorlage (Kundenauftrag 20.11.2026, Spec "below 768" und Mobile-Video der Vorlage).
-   Nur unter 768 px; Tablet und Desktop bleiben unberuehrt.
+   r1 Hochformat wie Desktop (Kundenauftrag 20.11.2026: "Hochkant-Design mehr wie die Desktop-Version").
+   Nur unter 768 px; Tablet (auch Handy quer) und Desktop bleiben unberuehrt.
    ========================================================================= */
 @media (max-width: 767px) {
-  /* Hero: Titel und Schlusszeile als ein zentrierter Block oben, dann das Foto als Karte mit den Kennzahlen,
-     darunter Intro, Linie und die zwei Buttons (Reihenfolge wie in der Vorlage) */
-  .hero__top { order: 1; }
-  .hero__close { order: 2; }
-  .hero__stage { order: 3; margin-top: 1.5rem; aspect-ratio: 358 / 448; }
-  .hero__mid { order: 4; display: flex; flex-direction: column-reverse; margin-top: 1.25rem; }
-  .hero__row { padding-top: 0; padding-bottom: 1.25rem; }
-  .hero__ctas { order: 5; margin-top: 1.25rem; }
+  /* Hero wie Desktop: Foto ueber die ganze Flaeche, Titel links oben, Linie mit Intro links und Kennzahlen rechts,
+     Schlusszeile gross rechts, darunter die Buttons. Raster mit Subgrid: die Buehne liegt ueber allen Zeilen, die
+     Kennzahlen (im Markup in der Buehne) landen in der Zeile von Linie und Intro. Ohne Subgrid bleibt die Fotokarte. */
+  @supports (grid-template-rows: subgrid) {
+    .hero { position: relative; display: grid; padding: 0; min-height: 100vh; min-height: 100svh;
+      grid-template-columns: 1rem minmax(0, 1fr) minmax(0, 1fr) 1rem;
+      grid-template-rows: calc(var(--header-height) + 1.25rem) auto minmax(2rem, 1fr) auto auto auto 1.5rem; }
+    .hero__stage { grid-row: 1 / -1; grid-column: 1 / -1; display: grid; grid-template-rows: subgrid; grid-template-columns: subgrid; position: relative; z-index: 0; margin: 0; aspect-ratio: auto; }
+    .hero__top, .hero__mid, .hero__close, .hero__ctas { position: relative; z-index: 1; padding-inline: 0; }
+    .hero__top { grid-row: 2; grid-column: 2 / 4; text-align: left; }
+    .hero h1 { font-size: 2.5rem; max-width: 8.15em; }   /* bricht wie am Desktop nach "Aus weniger" / "Develop more" */
+    .hero__top .words { justify-content: flex-start; }
+    .hero__mid { grid-row: 4; grid-column: 2 / 4; margin: 0; }
+    .hero__row { padding-top: 1rem; }
+    .hero__intro { flex: 0 0 calc(50% - .5rem); max-width: none; margin: 0; text-align: left; }
+    .hero__intro.words { justify-content: flex-start; }
+    .figs { position: relative; grid-row: 4; grid-column: 3; align-self: start; left: auto; right: auto; top: auto; transform: none; padding: calc(1rem + 1px) 0 0 .5rem; text-align: right; font-size: .9375rem; gap: .5rem; }
+    .fig__l { color: var(--on-inverse-muted); }   /* wie Desktop: Wert weiss, Unterzeile gedaempft */
+    .hero__close { grid-row: 5; grid-column: 2 / 4; margin-top: 2rem; text-align: right; font-size: 2.125rem; }   /* laengste Zeile "to series production." 9.43em passt bei 320 px einzeilig */
+    .hero__close .words { justify-content: flex-end; }
+    .hero__ctas { grid-row: 6; grid-column: 2 / 4; margin-top: 1.25rem; }
+    .layer::after, .hero__photo::after { background: linear-gradient(to bottom, rgba(17,20,24,.62) 0%, rgba(17,20,24,.45) 22%, rgba(17,20,24,.26) 38%, rgba(17,20,24,.36) 54%, rgba(17,20,24,.7) 100%); }   /* Titel oben liegt auf hellem Laub: oben dichter als am Desktop */
+  }
 
-  /* Unternehmen: Mission zentriert unter dem Foto */
-  .about__mission { text-align: center; }
-  .about__mission.words, .about__mission .words { justify-content: center; }
+  /* Unternehmen wie Desktop: Themenliste links neben dem Foto (rechtsbuendig, an der Unterkante), Mission darunter
+     linksbuendig; die Themen wechseln wie am Desktop zwischen dunkel und gedaempft */
+  .about__stage { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 1rem; align-items: end; }
+  .about__frame { grid-column: 2; grid-row: 1; aspect-ratio: 20 / 24.625; }
+  .about__frame::after { content: none; }
+  .about__topics { position: static; grid-column: 1; grid-row: 1; color: inherit; align-items: flex-end; text-align: right; font-size: 1rem; }
+  .about__mission { text-align: left; }
   .about__mission .words__indent { width: 0; }
 
-  /* Prozess: wie die Vorlage - Schritte zentriert hinter dem Foto, der aktive liegt darueber, die Beschreibung
-     mit Ergebnis darunter; die Leiste 01-05 bleibt als Tap-Ziel (die Schrittnamen sind schmaler als das Foto) */
-  .process { height: 46.5rem; }
-  .process__stagepos { top: 8.5rem; transform: translateX(-50%); }
-  .process__stage { width: 13.25rem; height: 16.25rem; }
-  .process__steps { inset: 8.5rem 0 auto; height: 16.25rem; gap: .5rem; }
-  .pstep { font-size: 1.375rem; }
-  .process__bar { top: 25.25rem; bottom: auto; }
-  .process__caption { top: calc(26.25rem + 44px); bottom: auto; max-width: 21rem; font-size: 1.0625rem; }   /* 1rem unter der Leiste (44 px Tap-Ziel); laengste Caption DE 320 px endet bei rund 43rem */
+  /* Prozess wie Desktop: grosse Schrittzeilen zentriert hinter dem Foto, sie ragen seitlich und oben/unten hinaus;
+     der aktive Schritt liegt ueber dem Foto, die uebrigen gedaempft. Beschreibung mit Ergebnis darunter, Leiste 01-05
+     unten wie im Querformat */
+  .process { height: 48rem; }
+  .process__stagepos { top: 10.5rem; transform: translateX(-50%); }
+  .process__stage { width: 11.5rem; height: 14rem; }
+  .process__steps { inset: 10.5rem 0 auto; height: 14rem; gap: .5rem; }
+  .pstep { font-size: 2.75rem; white-space: nowrap; }
+  .process__caption { top: 27.25rem; bottom: auto; max-width: 21rem; font-size: 1.0625rem; }
 
-  /* Kontakt: zuerst das Foto mit dem Aufruf, dann die schwarze Spalte mit Logo, Links, Badges und Adresse,
-     zuletzt Rechtszeile und Copyright (Reihenfolge wie die Vorlage: Foto mit Karte, dann Links und Details) */
-  .contact { display: grid; grid-template-columns: 100%; }
-  .contact__photo { grid-row: 1; grid-column: 1; order: 0; height: auto; min-height: 24rem; }
-  .contact__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(17,20,24,.78) 0%, rgba(17,20,24,.35) 45%, rgba(17,20,24,0) 75%); pointer-events: none; }
-  .contact__close { grid-row: 1; grid-column: 1; order: 0; align-self: end; z-index: 2; padding: 6rem 1rem 1.5rem; text-align: right; }
+  /* Kontakt wie Desktop: schwarze Spalte (Logo, Links, Badges, Adresse) zuerst, dann das Foto ueber eine ganze
+     Bildschirmhoehe, darin unten Aufruf, Buttons, Rechtszeile und Copyright */
+  .contact { display: grid; grid-template-columns: 100%; grid-template-rows: auto minmax(8rem, 1fr) auto auto auto; padding-bottom: 0; }
+  .rail { grid-row: 1; order: 0; }
+  .contact__photo { grid-row: 2 / 6; grid-column: 1; order: 0; height: auto; min-height: 100vh; min-height: 100svh; }
+  .contact__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(17,20,24,.82) 0%, rgba(17,20,24,.5) 38%, rgba(17,20,24,0) 70%); pointer-events: none; }
+  .contact__close { grid-row: 3; grid-column: 1; order: 0; z-index: 2; padding: 0 1rem; text-align: right; }
   .contact__ctas { justify-content: flex-end; }
-  .rail { grid-row: 2; order: 0; }
-  .contact__legal { grid-row: 3; order: 0; }
-  .contact__copy { grid-row: 4; order: 0; }
+  .contact__legal { grid-row: 4; grid-column: 1; order: 0; z-index: 2; padding: 2.5rem 1rem 0; }
+  .contact__copy { grid-row: 5; grid-column: 1; order: 0; z-index: 2; padding: .75rem 1rem 1.5rem; }
 }
