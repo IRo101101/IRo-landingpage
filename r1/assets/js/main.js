@@ -2,7 +2,7 @@
    IdeeRoth AG - iro.swiss - v2
    Feder-Engine (Spring), gemeinsamer Ticker, Wort-fuer-Wort-Text, Ladepanel,
    Boden- und Header-Beobachter, Sektionen, Sprache (DE/EN), Consent (GA4).
-   Kein externer Code ausser Lenis (lokal gehostet, globales `Lenis`).
+   Kein externer Code; Google Analytics laedt erst nach Zustimmung (initConsent).
    ========================================================================= */
 (function () {
   'use strict';
@@ -43,7 +43,7 @@
   var HERO_INTRO_DELAY = 120, TAGLINE_DELAY = 160, TAGLINE_STAGGER = 90, LINKS_DELAY = 320;
   var LINK_FILL = { tension: 240, friction: 30 };
 
-  var START_DELAY = 450, STEP_INTERVAL = 520, TOPIC_DIM = 0.55;
+  var START_DELAY = 450, STEP_INTERVAL = 520, TOPIC_DIM = 0.6; 
   var FADE = { tension: 420, friction: 38 };
   var TOPIC = { tension: 260, friction: 30 };
   var BUTTON = { tension: 420, friction: 30 };
@@ -280,12 +280,12 @@
   // o.ref: Element, dessen Kanten den Scrollweg bestimmen (Standard: el selbst). Noetig, wenn el ein ueberstehender
   // Layer ist (Hero-Foto 130 % hoch): sonst liegt sein Anfang schon ueber dem Viewport und die Parallaxe startet bei
   // Scrollposition 0 nicht bei 0 - das Foto stand 5 % tiefer als die Finale-Karte, der Sprung am Ende des Ladens.
-  // o.still ('from' | 'to', sonst die Mitte): Stand auf Touch-Geraeten. Dort scrollt der Browser selbst (Lenis glaettet
-  // nur das Mausrad); Federn, die dem Scrollweg nachlaufen, hingen sichtbar hinterher (Hero-Foto lief nach dem Loslassen
+  // o.still ('from' | 'to', sonst die Mitte): Stand auf Touch-Geraeten und bei reduzierter Bewegung. Dort scrollt der Browser selbst (SmoothScroll
+  // glaettet nur das Mausrad); Federn, die dem Scrollweg nachlaufen, hingen sichtbar hinterher (Hero-Foto lief nach dem Loslassen
   // 0,3 s nach, die ganze Startsektion rutschte und blendete aus) und kosteten pro Bild Layout. Kunde 20.11.2026.
   function Scrub(el, o) {
     var g = new Group(el, { from: o.from, config: o.config }), lastT = -1, ref = o.ref || el;
-    if (isTouchOnly) { g.set(o.still === 'from' ? o.from : o.still === 'to' ? o.to : lerpState(o.from, o.to, 0.5)); return g; }
+    if (isTouchOnly || RM) { g.set(o.still === 'from' ? o.from : o.still === 'to' ? o.to : lerpState(o.from, o.to, 0.5)); return g; }
     ticker.add(function () {
       var a = edgePos(ref, o.start), b = edgePos(ref, o.end);
       var t = b === a ? 0 : Math.min(1, Math.max(0, a / (a - b)));
@@ -498,12 +498,22 @@
     var s = doc.createElement('script'); s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
     doc.head.appendChild(s);
-    gtag('js', new Date()); gtag('config', GA_ID, { anonymize_ip: true });
+    gtag('js', new Date()); gtag('config', GA_ID);
+  }
+  // Widerruf: Google Analytics fuer diese Seite abschalten und die Analyse-Cookies (_ga, _ga_*) loeschen
+  function revokeGA() {
+    if (win.gtag) win.gtag('consent', 'update', { analytics_storage: 'denied' });
+    win['ga-disable-' + GA_ID] = true;
+    var host = win.location.hostname, doms = ['', host, '.' + host, '.' + host.replace(/^www\./, '')];
+    doc.cookie.split(';').forEach(function (c) {
+      var n = c.split('=')[0].trim(); if (!/^_ga/.test(n)) return;
+      doms.forEach(function (d) { doc.cookie = n + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : ''); });
+    });
   }
   function buildBanner() {
     if (doc.querySelector('.consent')) return;
     var wrap = doc.createElement('div');
-    wrap.className = 'consent'; wrap.setAttribute('role', 'dialog'); wrap.setAttribute('aria-label', 'Cookie-Hinweis');
+    wrap.className = 'consent'; wrap.setAttribute('role', 'dialog'); wrap.setAttribute('aria-label', 'Cookie-Hinweis'); wrap.setAttribute('data-en-label', 'Cookie notice');
     wrap.innerHTML =
       '<div class="consent__inner">' +
         '<p class="consent__text" data-en="We use Google Analytics to understand how our website is used - only with your consent. You can withdraw your choice at any time via “Cookie settings” in the footer.">' +
@@ -515,7 +525,7 @@
         '</div></div>';
     doc.body.appendChild(wrap);
     wrap.querySelector('[data-consent="allow"]').addEventListener('click', function () { consentSet('granted'); loadGA(); wrap.remove(); });
-    wrap.querySelector('[data-consent="deny"]').addEventListener('click', function () { consentSet('denied'); wrap.remove(); });
+    wrap.querySelector('[data-consent="deny"]').addEventListener('click', function () { consentSet('denied'); revokeGA(); wrap.remove(); });
     applyLang(currentLang());
   }
   function initConsent() {
@@ -528,14 +538,52 @@
   }
 
   /* =====================================================================
-     Lenis (lokal) + Anker
+     Weiches Scrollen mit dem Mausrad + Anker
+     Eigene Umsetzung: Das Mausrad setzt ein Ziel, die Seite folgt gedaempft (Abstand schrumpft pro Sekunde um den
+     Faktor e^-SMOOTH_DAMP, bei 60 Hz rund 10 % pro Bild). Touch, Tastatur und Scrollbalken bleiben nativ; greift
+     der Besucher so ein, endet die Daempfung sofort. Verschachtelte scrollbare Bereiche behalten ihr Mausrad.
      ===================================================================== */
-  var lenis = null;
-  function initLenis() {
-    if (!win.Lenis || RM) return;
-    lenis = new win.Lenis({ smoothWheel: true });
-    function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
+  var SMOOTH_DAMP = 6, WHEEL_LINE = 100 / 6, SMOOTH_EPS = 0.5;
+  var smooth = null;
+  function SmoothScroll() {
+    var target = 0, current = 0, running = false, stopped = false, last = 0;
+    function maxY() { return Math.max(0, doc.documentElement.scrollHeight - VH()); }
+    function clampY(v) { return Math.min(maxY(), Math.max(0, v)); }
+    function frame(t) {
+      if (!running) return;
+      var dt = last ? Math.min(0.1, (t - last) / 1000) : 1 / 60; last = t;
+      current += (target - current) * (1 - Math.exp(-SMOOTH_DAMP * dt));
+      if (Math.abs(target - current) < SMOOTH_EPS) { current = target; running = false; }
+      win.scrollTo(0, current);
+      if (running) requestAnimationFrame(frame);
+    }
+    function run() { if (!running) { running = true; last = 0; requestAnimationFrame(frame); } }
+    function halt() { running = false; current = target = win.pageYOffset; }
+    function ownScroller(el) {
+      for (; el && el !== doc.body && el !== root; el = el.parentElement) {
+        var oy = win.getComputedStyle(el).overflowY;
+        if ((oy === 'auto' || oy === 'scroll') && el.scrollHeight > el.clientHeight + 1) return true;
+      }
+      return false;
+    }
+    win.addEventListener('wheel', function (e) {
+      if (stopped || e.ctrlKey || e.defaultPrevented) return;
+      var k = e.deltaMode === 1 ? WHEEL_LINE : e.deltaMode === 2 ? VH() : 1, dy = e.deltaY * k;
+      if (!dy || Math.abs(e.deltaX * k) > Math.abs(dy) || ownScroller(e.target)) return;
+      e.preventDefault();
+      if (!running) current = target = win.pageYOffset;
+      target = clampY(target + dy);
+      run();
+    }, { passive: false });
+    win.addEventListener('scroll', function () { if (!running) current = target = win.pageYOffset; }, { passive: true });
+    ['keydown', 'pointerdown', 'touchstart'].forEach(function (n) { win.addEventListener(n, function () { if (running) halt(); }, { passive: true }); });
+    this.scrollTo = function (y) { if (stopped) return; if (!running) current = win.pageYOffset; target = clampY(y); run(); };
+    this.stop = function () { stopped = true; running = false; };
+    this.start = function () { stopped = false; current = target = win.pageYOffset; };
+  }
+  function initSmooth() {
+    if (RM || isTouchOnly) return;
+    smooth = new SmoothScroll();
   }
   // r1: Zielposition aus dem Layout (offsetTop-Kette), nicht aus getBoundingClientRect: Der Flow-Scrub verschiebt
   // verlassene Bloecke um bis zu 50 px nach unten, und ein Sprung nach oben (Logo, Navigation, Schiene) landete
@@ -544,8 +592,8 @@
   function scrollToHash(hash) {
     var target = hash && hash.length > 1 ? doc.querySelector(hash) : null;
     if (!target) return false;
-    var y = Math.max(0, Math.round(layoutTop(target)));
-    if (lenis) lenis.scrollTo(y, { offset: 0 }); else win.scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' });
+    var y = Math.max(0, Math.round(layoutTop(target) - (parseFloat(win.getComputedStyle(target).scrollMarginTop) || 0)));   // scroll-margin-top beachten (z. B. .srow[id] unter dem Header)
+    if (smooth) smooth.scrollTo(y); else win.scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' });
     return true;
   }
   function initAnchors() {
@@ -555,7 +603,7 @@
       var h = a.getAttribute('href'); if (h === '#') return;
       if (!doc.querySelector(h)) return;
       e.preventDefault();
-      closeMenu();                       // zuerst Lenis wieder starten, sonst ignoriert es scrollTo
+      closeMenu();                       // zuerst das weiche Scrollen wieder freigeben, sonst ignoriert es scrollTo
       scrollToHash(h);
     });
   }
@@ -666,7 +714,7 @@
     var btn = doc.querySelector('.hdr__burger'); if (btn) btn.setAttribute('aria-expanded', 'false');
     if (burgerA) { burgerA.to({ y: 5, rotate: 0 }); burgerB.to({ y: 11, rotate: 0 }); }
     if (menuGroup) menuGroup.to({ opacity: 0, y: -8 }, REVEAL, function () { var m = doc.querySelector('.menu'); if (m && !menuOpen) m.hidden = true; });
-    if (lenis) lenis.start();
+    if (smooth) smooth.start();
   }
   function openMenu() {
     menuOpen = true;
@@ -675,7 +723,7 @@
     var m = doc.querySelector('.menu'); m.hidden = false;
     burgerA.to({ y: 8, rotate: 45 }); burgerB.to({ y: 8, rotate: -45 });
     menuGroup.set({ opacity: 0, y: -8 }).to({ opacity: 1, y: 0 });
-    if (lenis) lenis.stop();
+    if (smooth) smooth.stop();
   }
   function initHeader() {
     var h = doc.querySelector('.hdr'); if (!h) return;
@@ -718,6 +766,8 @@
       var menu = doc.querySelector('.menu');
       menuGroup = new Group(menu, { from: { opacity: 0, y: -8 }, config: REVEAL });
       burger.addEventListener('click', function () { menuOpen ? closeMenu() : openMenu(); });
+      // Go-Live 20.11.2026: Esc schliesst das Menue und gibt den Fokus an den Menue-Knopf zurueck
+      doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuOpen) { closeMenu(); burger.focus(); } });
       menu.querySelectorAll('.al').forEach(ArrowLink);
       var mact = menu.querySelector('.menu__action');
       if (mact) { RollLabel(mact.querySelector('.rl'), mact); SwapArrow(mact.querySelector('.sw'), mact); }
@@ -744,7 +794,7 @@
     // Kundenentscheid 20.11.2026: "nur Logo" ist Standard (data-preloader="logo"); ?lade=fotos zeigt zum Vergleich das alte Panel
     var logoOnly = (panel.getAttribute('data-preloader') === 'logo' && !/[?&]lade=fotos(&|$)/.test(win.location.search)) || /[?&]lade=logo(&|$)/.test(win.location.search);
     if (logoOnly) panel.classList.add('pre--logo');
-    if (lenis) lenis.stop();
+    if (smooth) smooth.stop();
     try { win.scrollTo(0, 0); } catch (e) {}
     doc.body.classList.add('loading');
 
@@ -780,7 +830,7 @@
       finale.style.transform = '';
       var eg = new Group(finale, { from: from, config: EXPAND });
       eg.to(to, EXPAND, function () {
-        if (lenis) lenis.start();
+        if (smooth) smooth.start();
         doc.body.classList.remove('loading');
         requestAnimationFrame(function () {
           var t2 = stage ? rectOf(stage) : to; eg.set(t2);
@@ -809,7 +859,7 @@
       ticker.add(function () { if (left) return false; if (Math.hypot(mg.get('x') - tx, mg.get('y') - ty) < dist * 0.25) { leave(); return false; } });
       function leave() {
         if (left) return; left = true;
-        if (lenis) lenis.start();
+        if (smooth) smooth.start();
         doc.body.classList.remove('loading');
         var lg = new Group(panel, { from: { opacity: 1 }, config: LEAVE }), released = false;
         ticker.add(function () { if (!released && lg.get('opacity') <= RELEASE_AT) { released = true; fireHandoff(); return false; } if (!lg.active) return false; });
@@ -817,7 +867,7 @@
       }
     }
     function finish() {                                   // reduzierte Bewegung / Notausstieg: sofort
-      if (lenis) lenis.start(); doc.body.classList.remove('loading'); if (panel.parentNode) panel.remove(); fireHandoff();
+      if (smooth) smooth.start(); doc.body.classList.remove('loading'); if (panel.parentNode) panel.remove(); fireHandoff();
     }
     // Notausstieg: Das Panel darf die Seite nie dauerhaft verdecken.
     setTimeout(function () { if (panel.parentNode && !done) { console.warn('Ladepanel: Notausstieg'); finish(); } }, MAX_WAIT + 7000);
@@ -1188,44 +1238,10 @@
     });
     pg.querySelectorAll('.al').forEach(ArrowLink);
   }
-  /* r1: Kontaktseite - swisstopo-Karte (map.geo.admin.ch) laedt erst, wenn der Kartenbereich im Viewport sichtbar wird
-     (Ladeverhalten A, kein Vorlauf: rootMargin 0); vorher verlaesst keine Anfrage die Seite. Auf grossen Bildschirmen
-     liegt der Kartenbereich bei Scrollposition 0 bereits im Fenster, die Karte laedt dann direkt beim Aufruf - die
-     Texte auf der Kontaktseite und in der Datenschutzerklaerung sagen das so. Der Sprachwechsel tauscht nur
-     lang=de / lang=en im src. Der iFrame bleibt unveraendert (Nutzungsbedingungen geo.admin.ch), gestaltet wird nur
-     der Container .kmap. */
-  function initMapEmbed() {
-    var box = doc.querySelector('[data-map]'); if (!box) return;
-    var frame = null;
-    function src(lang) { return box.getAttribute(lang === 'en' ? 'data-src-en' : 'data-src') || box.getAttribute('data-src'); }
-    function build() {
-      if (frame) return;
-      frame = doc.createElement('iframe');
-      frame.setAttribute('title', currentLang() === 'en' ? (box.getAttribute('data-en-title') || box.getAttribute('data-title') || '') : (box.getAttribute('data-title') || ''));
-      frame.setAttribute('data-en-title', box.getAttribute('data-en-title') || ''); frame.setAttribute('data-de-title', box.getAttribute('data-title') || '');
-      frame.setAttribute('loading', 'lazy'); frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-      frame.src = src(currentLang());
-      box.innerHTML = ''; box.appendChild(frame); box.classList.add('is-loaded');
-    }
-    if ('IntersectionObserver' in win) {
-      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); build(); } }); }, { rootMargin: '0px', threshold: 0 });
-      io.observe(box);
-    } else build();
-    langListeners.push(function (lang) { if (frame) { var s = src(lang); if (frame.src !== s) frame.src = s; } });
-  }
   function initYear() { doc.querySelectorAll('[data-year]').forEach(function (y) { y.textContent = String(new Date().getFullYear()); }); }
-  function initAssetGuard() {
-    doc.querySelectorAll('img').forEach(function (im) {
-      im.addEventListener('error', function () {
-        var n = doc.createElement('div'); n.className = 'asset-error'; n.textContent = 'Bild fehlt: ' + (im.getAttribute('src') || '');
-        (im.parentNode || doc.body).appendChild(n);
-      });
-    });
-  }
-
   /* ---- Start ------------------------------------------------------------ */
   setLang(detect(), false);
-  initLenis();
+  initSmooth();
   initAnchors();
   initHeader();
   initGround();
@@ -1239,9 +1255,7 @@
   initTeam();
   initContact();
   initSubpage();
-  initMapEmbed();
   initYear();
-  initAssetGuard();
   initPreloader();
   warmUp();
   initConsent();

@@ -382,6 +382,13 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Header-Farbe schlanker nachgefuehrt. Handy quer: Header kompakter (3rem) und beim Runterscrollen ausgeblendet, beim
     Hochscrollen sofort zurueck; der Scrollbalken des Systems laesst sich nicht verschieben, laeuft so aber beim
     Runterscrollen nicht mehr ueber den Header. Cache 20261120g. Status: erledigt in r1
+86. [Kunde 20.11.] Go-Live vorbereiten mit Endkontrolle, ohne externe Dienste ausser Google, Seite soll wie selbst
+    entwickelt wirken. Entscheide: Karte auf der Kontaktseite durch Button «Route in Google Maps» ersetzt, Routenlinks
+    (Apple, SBB, Faehre) und Badge-Links bleiben, «20+ Jahre» stimmt. Umgesetzt: Lenis durch eigenes SmoothScroll
+    ersetzt, toter Link berufsbildungplus.ch durch karriere.html#lehrstelle ersetzt, 404-Seite, neue .htaccess,
+    Social-Media-Bild og.jpg, Datenschutz an das tatsaechliche Verhalten angepasst (keine Karte, Sprachwahl im
+    localStorage, GA4 ohne IP-Speicherung, Widerruf loescht _ga-Cookies), Kontraste der Labels, Esc schliesst das Menue,
+    Build-Skript mit ZIP. Cache 20261120h. Status: erledigt, Paket _release/iro-swiss-www-20261120.zip
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

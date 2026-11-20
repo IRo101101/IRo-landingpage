@@ -1,74 +1,74 @@
-# IdeeRoth AG — iro.swiss · Apache-Konfiguration für Hostpoint
-# Diese Datei kommt mit ins www-Verzeichnis. Sie ist optional, verbessert
-# aber Performance, Caching und Sicherheit. Falls etwas nicht greift,
-# ignoriert Apache die betreffende Zeile — die Seite läuft trotzdem.
+# IdeeRoth AG - www.iro.swiss - Apache-Konfiguration (Hostpoint)
+# Liegt im www-Verzeichnis. Zeilen, die ein Modul nicht kennt, ueberspringt Apache.
 
-# UTF-8 als Standard
 AddDefaultCharset UTF-8
-
-# Startseite
 DirectoryIndex index.html
+ErrorDocument 404 /404.html
 
-# Interne, parkierte Inhalte nie ausliefern (falls versehentlich hochgeladen)
-RedirectMatch 404 ^/_parkiert
+# Interne Ordner nie ausliefern, falls versehentlich hochgeladen
+RedirectMatch 404 ^/(_parkiert|_handover|_release|r1|\.git)(/|$)
+# Keine Ordnerlisten unter assets/
+RedirectMatch 404 ^/assets(/.*)?/$
 
-# ---- Kompression (schnellere Ladezeit) ----
+# ---- Domain und HTTPS ----
+# Kanonisch ist https://www.iro.swiss. iro.swiss und ideeroth.ch (mit/ohne www) leiten dauerhaft (301) dorthin.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} (^|\.)ideeroth\.ch$ [NC]
+  RewriteRule ^ https://www.iro.swiss%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} ^iro\.swiss$ [NC]
+  RewriteRule ^ https://www.iro.swiss%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # /index.html auf / (eine Adresse fuer die Startseite)
+  RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [L,R=301]
+</IfModule>
+
+# ---- Typen ----
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# ---- Kompression ----
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
-  AddOutputFilterByType DEFLATE application/javascript application/json
-  AddOutputFilterByType DEFLATE image/svg+xml application/manifest+json
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml
+  AddOutputFilterByType DEFLATE application/javascript text/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml application/manifest+json image/x-icon
 </IfModule>
 
 # ---- Browser-Caching ----
-# CSS/JS werden 1 Jahr gecacht. Damit Aenderungen sofort ankommen, tragen die
-# Verweise in den HTML-Dateien eine Version (…/styles.css?v=YYYYMMDD…). Bei jeder
-# CSS/JS-Aenderung diese Versionsnummer in allen HTML-Dateien erhoehen.
+# CSS und JS ein Jahr: die HTML-Dateien verweisen mit ?v=... auf die aktuelle Fassung.
 <IfModule mod_expires.c>
   ExpiresActive On
+  ExpiresDefault "access plus 1 month"
   ExpiresByType text/html "access plus 0 seconds"
   ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
   ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/webp "access plus 6 months"
   ExpiresByType image/jpeg "access plus 6 months"
   ExpiresByType image/png "access plus 6 months"
   ExpiresByType image/svg+xml "access plus 6 months"
   ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType text/plain "access plus 1 day"
+  ExpiresByType application/xml "access plus 1 day"
 </IfModule>
 
 # ---- Sicherheits-Header ----
 <IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set X-Frame-Options "SAMEORIGIN"
-  # Nur eigene Ressourcen erlaubt — keine externen Skripte/Tracker/Fonts.
-  # 'unsafe-inline' nur für Style (Inline-Styles) und den Struktur-Daten-Block.
-  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; frame-src https://map.geo.admin.ch"
-  # Nicht benötigte Browser-Funktionen abschalten.
-  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
-  # Schriften/Assets dürfen geladen werden
-  <FilesMatch "\.(woff2)$">
-    Header set Access-Control-Allow-Origin "*"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # Nur eigene Dateien; Google Analytics erst nach Zustimmung im Cookie-Hinweis.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://*.googletagmanager.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache"
   </FilesMatch>
-</IfModule>
-
-# ---- Domain-Weiterleitung & HTTPS ----
-# Hauptdomain: www.iro.swiss (kanonisch). Die Zweitdomain www.ideeroth.ch
-# bleibt erreichbar, wird aber dauerhaft (301) auf die Hauptdomain geleitet —
-# so gibt es bei Google keinen doppelten Inhalt.
-# Voraussetzung: In Hostpoint sind beide Domains auf dieses www-Verzeichnis
-# aufgeschaltet und das SSL-Zertifikat (Let's Encrypt) ist aktiv.
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-
-  # 1) ideeroth.ch (mit/ohne www) → https://www.iro.swiss
-  RewriteCond %{HTTP_HOST} (^|\.)ideeroth\.ch$ [NC]
-  RewriteRule ^ https://www.iro.swiss%{REQUEST_URI} [L,R=301]
-
-  # 2) nackte Hauptdomain iro.swiss → https://www.iro.swiss
-  RewriteCond %{HTTP_HOST} ^iro\.swiss$ [NC]
-  RewriteRule ^ https://www.iro.swiss%{REQUEST_URI} [L,R=301]
-
-  # 3) HTTP → HTTPS erzwingen
-  RewriteCond %{HTTPS} off
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>

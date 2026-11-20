@@ -23,7 +23,7 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
   - **Ordner `r1/` = Arbeitskopie**, hier wird gearbeitet: https://iro101101.github.io/IRo-landingpage/r1/
     Fuenf Seiten: index, karriere, kontakt, impressum, datenschutz. Dazu fuenf Vorschauseiten `vorschau-*.html`
     (Entscheidungshilfen, bleiben als Nachschlagewerk, kommen nicht live).
-  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120g`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
+  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120h`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
     `r1/assets/js/main.js` hochzaehlen (`YYYYMMDD`, am selben Tag Buchstabe anhaengen).
   - Alle Kundenentscheide bis 15.10.2026 sind eingebaut (Liste: `V2-VIDEOVERGLEICH.md`, Punkte 1 bis 58).
     Letzte Entscheide 15.10.: duenne durchgezogene Linie statt gestrichelter Haarlinien (Vorbild `.hero__rule`),
@@ -94,17 +94,26 @@ Spaeter zu pruefen:
 - Nutzungsbedingungen geo.admin.ch (iFrame, BGDI-Fair-Use) vor dem Go-live in der aktuellen Fassung pruefen.
 - Idee aus der Recherche 09.10.: QR-Code zur Anfahrt (SBB- oder Kartenlink) auf Drucksachen.
 
-## 4. Go-live (wenn der Kunde freigibt)
+## 4. Go-live (vorbereitet 20.11.2026, Kunde laedt hoch)
 
-1. `r1/` wird zum Root: Dateien von `r1/` in den Root des Branches kopieren (ohne `vorschau-*.html`, ohne
-   `assets/css/vorschau*.css`, ohne `assets/js/vorschau*.js`, ohne `assets/vendor/leaflet/`, ohne Kartenbilder
-   `assets/img/map/`, solange S-3 nicht gewaehlt ist).
-2. `<meta name="robots" content="noindex, nofollow">` auf allen Seiten entfernen, `robots.txt` auf Allow setzen,
-   `sitemap.xml` neu anlegen (fuenf Seiten), `r1/.htaccess` als Root-`.htaccess` uebernehmen (frame-src map.geo.admin.ch).
-3. Cache-Version hochzaehlen, Sweep laufen lassen (siehe Abschnitt 6).
-4. ZIP fuer Hostpoint: `.htaccess`, 5 HTML, robots.txt, sitemap.xml, site.webmanifest, Favicons, `assets/`.
-   Nicht: `_parkiert/`, `_handover/`, `README.md`, `CLAUDE.md`, `UEBERGABE.md`, `V2-*.md`, `.git`.
-5. Nach dem Livegang: Google Search Console, sitemap einreichen (siehe `README.md`).
+Der Kunde hat am 20.11.2026 den Stand von `r1/` freigegeben. Das Upload-Paket entsteht nur noch per Build, das
+Repository bleibt wie es ist (Root = Stand 30.09. als Vergleich, `r1/` = Quelle):
+
+1. `python3 _handover/tools/golive/build_release.py` (im Repo-Root). Ergebnis: `_release/www/` (nicht eingecheckt)
+   und `_release/iro-swiss-www-YYYYMMDD.zip`. Upload-Anleitung fuer FileZilla: `_release/ANLEITUNG-UPLOAD.md`
+   (Sicherung, alte v1-Dateien loeschen, Upload inkl. `.htaccess`, Kontrolle im Browser).
+2. Der Build nimmt nur die Live-Seiten und referenzierten Dateien, entfernt noindex (404 bleibt noindex), schreibt
+   robots.txt und sitemap.xml, minifiziert ohne Kommentare und bricht bei Entwicklungsspuren oder fehlenden Dateien ab.
+3. Endkontrolle 20.11.2026 am Paket: W3C-Validator (vnu) ohne Fehler, 316 interne Verweise und Anker ok, externe Links
+   per Firecrawl geprueft (berufsbildungplus.ch war tot: Lehrbetrieb-Badge zeigt jetzt auf karriere.html#lehrstelle),
+   keine externe Anfrage und kein Cookie vor der Zustimmung, nach «Akzeptieren» nur googletagmanager.com,
+   Tastatur (alle Stopps sichtbar mit Fokusring, Esc schliesst das Menue), axe und Lighthouse (SEO und Best Practices
+   100; Kontrastmeldungen im Prozessblock sind Fehlmessungen, weil die Werkzeuge den festen Boden nicht erkennen),
+   Sweep 6 Seiten x 6 Viewports x DE/EN ohne Befund.
+4. Kundenentscheide zum Go-Live: nur Google als externer Dienst; swisstopo-Karte durch «Route in Google Maps» ersetzt;
+   Routenlinks Apple/SBB/Faehre und Badge-Links (NAFEMS, Berufsberatung) bleiben; «20+ Jahre» bestaetigt; Lenis durch
+   eigenen Code ersetzt.
+5. Nach dem Livegang: Google Search Console, Sitemap einreichen. GitHub-Pages-Vorschau kann danach abgeschaltet werden.
 
 ## 5. Arbeitsweise
 

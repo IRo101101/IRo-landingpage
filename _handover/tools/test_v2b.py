@@ -7,7 +7,7 @@ BASE = f'http://127.0.0.1:{PORT}/{PREFIX}'
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[3] if len(sys.argv) > 3 else os.path.join(HERE, 'shots_b')   # Screenshots, nicht einchecken
 os.makedirs(OUT, exist_ok=True)
-PAGES = ['index.html', 'karriere.html', 'kontakt.html', 'impressum.html', 'datenschutz.html']
+PAGES = ['index.html', 'karriere.html', 'kontakt.html', 'impressum.html', 'datenschutz.html', '404.html']
 VIEWS = [(320, 640), (390, 844), (768, 1024), (1024, 768), (1440, 800), (1920, 1080)]
 
 async def main():
@@ -23,7 +23,7 @@ async def main():
                     errors = []
                     pg.on('console', lambda m: errors.append(m.text) if m.type == 'error' else None)
                     pg.on('pageerror', lambda e: errors.append(str(e)))
-                    pg.on('requestfailed', lambda r: errors.append('REQFAIL ' + r.url) if 'map.geo.admin.ch' not in r.url else None)   # Karten-iFrame ist im Container gesperrt
+                    pg.on('requestfailed', lambda r: errors.append('REQFAIL ' + r.url))
                     await pg.goto(BASE + page_name, wait_until='load')
                     await pg.wait_for_timeout(6000 if page_name == 'index.html' else 800)
                     pre = await pg.evaluate("!!document.querySelector('[data-preloader]')")

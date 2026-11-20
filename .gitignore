@@ -12,3 +12,6 @@ _handover/tools/osm/standort-s1.png
 _handover/tools/osm/standort.webp
 _handover/tools/osm/lageplan-s2.png
 _handover/tools/osm/render.html
+
+# Upload-Paket: nur ZIP und Anleitung einchecken, der entpackte Ordner entsteht beim Build
+_release/www/

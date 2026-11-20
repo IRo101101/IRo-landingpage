@@ -57,8 +57,13 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 
 ## Deployment
 - Hostpoint, Upload ins `www`-Verzeichnis per FTP (FileZilla). `.htaccess` (versteckt) mit hochladen.
-- Das ZIP fuer den Upload enthaelt: .htaccess, 4 HTML, robots.txt, sitemap.xml, site.webmanifest,
-  Favicons, assets/. NICHT: _parkiert/, README.md, CLAUDE.md, .git.
+- Upload-Paket (seit Go-Live 20.11.2026) nur per Build: `python3 _handover/tools/golive/build_release.py` baut aus `r1/`
+  den Ordner `_release/www/` (nicht eingecheckt) und `_release/iro-swiss-www-YYYYMMDD.zip`; Anleitung fuer FileZilla:
+  `_release/ANLEITUNG-UPLOAD.md`. Inhalt: .htaccess, 6 HTML (inkl. 404.html), robots.txt (Allow), sitemap.xml,
+  site.webmanifest, Favicons, nur die referenzierten assets/. Der Build entfernt noindex (ausser 404), Kommentare und
+  Vorschauseiten, minifiziert (minify.js: html-minifier-terser konservativ, clean-css Stufe 1, terser), macht 404.html
+  absolut (/assets/...), Links auf index.html zu "./" und bricht ab bei Entwicklungsspuren (Liste FORBIDDEN) oder
+  fehlenden Dateien. Vor dem Upload alte v1-Dateien in www loeschen (alte Fotos, Leaflet, alte Schriften).
 - www.iro.swiss ist kanonisch; ideeroth.ch leitet per 301 um.
 
 ## Geparkte Inhalte
@@ -73,7 +78,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261120g; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261120h; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -113,7 +118,8 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 ### v2-Technik (Stand 30.09.2026)
 - Aufbau nach der "Northwall"-Bauanleitung (Feder-Engine, ein Ticker, Wort-fuer-Wort-Text, Ladepanel,
   fester Boden Carbon Black <-> Ice Mint, Header-Thema per Viewport-Mitte). Alle Zahlen stehen als
-  Konstanten oben in `assets/js/main.js`. Lenis lokal unter `assets/vendor/lenis/`.
+  Konstanten oben in `assets/js/main.js`. Weiches Scrollen mit dem Mausrad: eigene Umsetzung `SmoothScroll` in main.js
+  (seit Go-Live 20.11.2026, ersetzt Lenis; nur Mausrad, nicht auf Touch und nicht bei reduzierter Bewegung).
 - Farben: Carbon Black #111418, Ice Mint #E7FFF2, Signal Green #25C77A, Steel Gray #707981, Fresh Mint #B7F3D0.
 - Logo als CSS-Maske (`assets/img/logo/mark-white.png`, `lockup-white.png`, `word-white.png`), nimmt `currentColor`.
 - Wort-Engine: Leerzeichen haengt am Wort-Span (`.w__i`, white-space:pre), `column-gap:0` - crawler-sicher.
@@ -143,7 +149,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   (`_handover/tools/fotomaster/web_einsetzen.py`), nie aus den Bearbeitungen vom 24.09.2026 (Farbstich, weicher).
   Verfahren, Pruefung, Tabelle der 21 Master und offene Punkte: `_handover/tools/fotomaster/README.md`. Keine Namen
   echter Personen und keine Links auf Originale oder Master ins Repository schreiben (wird oeffentlich ausgeliefert).
-- Kennzahlen im Hero (r1, 18.10.2026): "20+ Jahre" (vom Kunden noch zu bestaetigen), "1 Adresse" (ohne data-count, sonst
+- Kennzahlen im Hero (r1, 18.10.2026): "20+ Jahre" (vom Kunden am 20.11.2026 bestaetigt), "1 Adresse" (ohne data-count, sonst
   zaehlt 0 bis 1), "130 dB" (Diktat). Counter() braucht eine Zahl im Wert, sonst haengt er "0" an.
 - Playwright im Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`, Test-Skript
   `_handover/tools/test_v2.py <port>` (4 Seiten x 6 Viewports x DE/EN, prueft Overflow, Konsolenfehler, Ladepanel);
@@ -221,6 +227,10 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   im Footer (`.subfoot__logo`), Farbe Ice Mint, Hover Fresh Mint, Klick zur Startseite. Header-Mark bleibt `.logo-mark`.
 - Badges `.badge--nafems` / `.badge--lehrbetrieb`: PNG als Maske in currentColor (#c4c8cc), Hover Fresh Mint ueber den
   umschliessenden Link; nie mehr als <img>.
+- Kontaktseite seit Go-Live (Kundenentscheid 20.11.2026, nur Google als externer Dienst): KEINE eingebettete Karte mehr;
+  Zeile 02 hat den Button «Route in Google Maps» und darunter «Weitere Routen und Fahrplaene» (Apple Karten, SBB, Faehre,
+  bleiben laut Kunde). initMapEmbed, `.kmap` und frame-src sind entfernt, Datenschutz Abschnitt 09 heisst «Routenplanung».
+  Der folgende Absatz beschreibt den frueheren Stand mit swisstopo-Karte (nur noch Geschichte):
 - Kontaktseite `kontakt.html` (Kundenentscheid 09.10., statt Standort-Kachel S-1 bis S-3): Aufbau wie Karriere mit drei
   Zeilen (Kontaktadresse mit Ansprechperson und Buttons, Karte, Anreise). Karte = iFrame von map.geo.admin.ch (swisstopo,
   LV95 2746262,1270375, z=9, pixelkarte-grau, Layer ch.bav.haltestellen-oev, crosshair marker, noSimpleZoom), gebaut von
@@ -243,8 +253,8 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Gebaeude des Restaurants Panem. Strassennamen aus OSM/OSRM belegt; keine erfundenen Fakten, Platzhalter-Klasse `todo`
   bleibt fuer kuenftige Luecken. Datenschutz Abschnitt 11 "Karte und
   Routenplanung" (Bundes-Link admin.ch/de/rechtliches, EN per data-en-href admin.ch/en/terms-and-conditions).
-  `r1/.htaccess` = Root-.htaccess mit `frame-src https://map.geo.admin.ch` und ohne CARTO; beim Go-live
-  mit hochladen. Header-Navigation, Burger-Menue, Footer und Schiene verlinken "Kontakt" auf kontakt.html; "Projekt
+  `r1/.htaccess` (seit Go-Live neu: 404-Seite, /index.html -> /, HSTS, CSP nur 'self' plus Google-Analytics-Hosts,
+  frame-src 'none', Sperre fuer _parkiert/_handover/_release/r1) kommt ueber den Build ins Paket. Header-Navigation, Burger-Menue, Footer und Schiene verlinken "Kontakt" auf kontakt.html; "Projekt
   starten" fuehrt weiter zum Abspann (#kontakt). v2 hat damit 5 Seiten; Sweep-Skript test_v2b.py prueft alle fuenf.
 - Rechtszeile: Trenner-Spans sind ausgeblendet, der gerade Strich "|" (Kundenwunsch 09.10., vorher Schraegstrich) haengt
   per `a ~ a::before` am Link (nie am Zeilenende) und bleibt gedaempft; die Links der Startseite haben kein RollLabel mehr,
