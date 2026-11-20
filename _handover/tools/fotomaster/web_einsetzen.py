@@ -2,6 +2,7 @@
 # Quelle je Foto: zwei JPEG-Haelften NN_L.jpg und NN_R.jpg (zusammen 1800 x 1200), erzeugt von web.py in der Bildwerkstatt.
 # Ziel: NN.webp (1800 x 1200) und NN-m.webp (1100 x 733), gleiche Einstellungen wie add_photos.py (WebP 85, method 6).
 # Aufruf: python3 web_einsetzen.py <ordner_mit_haelften> [NN ...]      (ohne Nummern: alle gefundenen)
+#         Neue Nummer als Variante eines bestehenden Fotos: NN:MM (z. B. 24:16), geprueft wird dann gegen MM.webp.
 # Schutz: Das neue Bild muss denselben Ausschnitt zeigen wie die bisherige Fundus-Datei, sonst wird nichts geschrieben.
 import os, sys, glob, math
 from PIL import Image
@@ -21,13 +22,14 @@ def main():
         sys.exit('Aufruf: web_einsetzen.py <ordner_mit_haelften> [NN ...]')
     src = sys.argv[1]
     nums = sys.argv[2:] or sorted({os.path.basename(p)[:2] for p in glob.glob(os.path.join(src, '[0-9][0-9]_L.jpg'))})
-    for num in nums:
+    for arg in nums:
+        num, _, basis = arg.partition(':')
         left = Image.open(os.path.join(src, num + '_L.jpg')).convert('RGB')
         right = Image.open(os.path.join(src, num + '_R.jpg')).convert('RGB')
         if left.height != 1200 or right.height != 1200 or left.width + right.width != 1800:
             sys.exit(f'{num}: unerwartete Masse {left.size} + {right.size}')
         im = Image.new('RGB', (1800, 1200)); im.paste(left, (0, 0)); im.paste(right, (left.width, 0))
-        alt_pfad = os.path.join(OUT, num + '.webp')
+        alt_pfad = os.path.join(OUT, (basis or num) + '.webp')
         if os.path.exists(alt_pfad):
             alt = Image.open(alt_pfad).convert('RGB')
             if alt.size != (1800, 1200):
@@ -35,6 +37,8 @@ def main():
             k = aehnlich(alt, im)
             if k < 0.90:
                 sys.exit(f'{num}: Ausschnitt weicht von der bisherigen Datei ab (Kennwert {k:.3f}), nichts geschrieben')
+        elif basis:
+            sys.exit(f'{num}: Ausgangsfoto {basis}.webp fehlt, nichts geschrieben')
         else:
             k = float('nan')
         for suffix, width in (('', 1800), ('-m', 1100)):
