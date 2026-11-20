@@ -327,6 +327,14 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 75. [Kunde 19.11.] Mobilvarianten der Fotos (`NN-m.webp`) sind ausser im Ladepanel nirgends eingebunden, alle Geraete
     laden die grosse Datei. Vorgemerkt fuer das naechste Ueberarbeiten der Seite (picture oder srcset).
     Status: offen (vorgemerkt, siehe UEBERGABE.md)
+76. [Kunde 20.11.] Entscheide zu den offenen Punkten aus 74: (1) Die drei Koepfe auf der Seite, die der echten Person
+    noch glichen (16 rechts, 21, 11), neu erzeugen, aber als zusaetzliche Bilder: Fundus 24, 25, 26 (Gesichtsvergleich
+    0.11, 0.16, 0.22 statt 0.62, 0.44, 0.43; gleiche Person ab 0.363), die Seiten zeigen weiter 16, 21, 11.
+    (2) Uneinheitliche Figuren so belassen. (3) PowerPoint-Fotos aktualisieren: Beispieldecks aus den Mastern, dabei
+    alle Fotos zugeschnitten statt gestaucht (Fehler seit 15.10.) und auf der Folie "Ihre Ansprechpersonen" Foto 14
+    (Inhaber) statt einer erfundenen Person (Kundenwunsch). (4) Die Taetowierung am Knoechel darf sichtbar bleiben.
+    Master-Paket `IRo_Fotomaster_2026-11-20.zip` (21 Master) im Higgsfield-Konto.
+    Status: erledigt. Offen (Entscheid Kunde): welche Fassung auf die Seite kommt (16/21/11 oder 24/25/26).
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

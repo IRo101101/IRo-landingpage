@@ -102,6 +102,8 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 ## PowerPoint-Vorlage (Stand 15.10.2026, `_handover/powerpoint/`)
 - Vorlage `out/IdeeRoth_Vorlage.potx` (32 Layouts DE/EN, Designfarben, 3 ausgeblendete Referenzfolien), Beispieldecks
   DE/EN, Anleitung; Quellen `lib.js`, `build_template.js`, `build_samples.js`, `finish.py`; Bauanleitung im README dort.
+- Fotos der Beispieldecks seit 20.11. aus den Mastern, mit `coverImage()` in lib.js zugeschnitten (vorher gestaucht);
+  Folie "Ihre Ansprechpersonen" zeigt unter "Alain Roth" den Inhaber (`p14_portrait.jpg`). Logo-PNG liegen in assets/.
 - Kundenentscheide 15.10.: Linie 0.5 pt durchgezogen (Textfarbe 40 %), Fusszeile F-2 senkrecht rechts mit waagrechter
   zentrierter Seitenzahl, Grundfarben Weiss / Mint / Dark, Punkte statt Rechtecke, Ampel-Labels Rot #B8463A / Orange
   #E2A33D / Fresh Mint nur fuer Labels, Kennzeichnung V-2 rot mit Kurzform "Schutzvermerk ISO 16016 beachten",
@@ -119,7 +121,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Chrome rechnet `clip-path` des Ziels in IntersectionObserver ein: maskierte Elemente (`.card__mask`,
   `.team__mask`) nie direkt beobachten, sondern den unmaskierten Elternknoten (`Inview(..., {watch: el})`).
 - Fotos: `assets/img/v2/NN.webp` (Desktop, 1800 px breit, Hero 2400) und `NN-m.webp` (mobil, 1100 px); Nummern = Kontaktblatt
-  01-23. Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02;
+  01-23 (24-26 = Fassungen von 16, 21, 11, siehe unten). Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02;
   08 (Glasfront mit Terrasse) unbenutzt. 22 (3D-Drucker druckt Shore-Haertemuster) und 23 (offene Glastuer zum Buero, gruene
   Saeulen, Kaffeebar) am 10.10.2026 nachgeliefert, noch frei; sie kamen als Chat-Upload nur mit 2000 px Breite (Originale
   01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (`_handover/tools/add_photos.py`).
@@ -127,12 +129,15 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Ladepanel: Karten 09-m/03-m/13-m/19-m/14-m, Schlussbild 07. Die uebrigen `-m`-Dateien sind nirgends eingebunden
   (kein picture, kein srcset, geprueft 19.11.2026): alle Geraete laden `NN.webp`. Vorgemerkt (Kundenauftrag 19.11.):
   beim naechsten Ueberarbeiten der Seite die Mobilvarianten einbinden (siehe UEBERGABE.md, offene Punkte).
-- Erfundene Personen (Stand 19.11.2026): Auf den Fotos 09, 10, 11, 12, 15, 16, 18, 19, 20, 21 sind die Koepfe der
+- Erfundene Personen (Stand 20.11.2026): Auf den Fotos 09, 10, 11, 12, 15, 16, 18, 19, 20, 21 sind die Koepfe der
   Mitarbeitenden durch erfundene Personen ersetzt (Inhaber unveraendert; 04 Mitarbeiterin bleibt Original; 05 und 14
-  zeigen den Inhaber). Basis sind Master in Originalgroesse aus den unveraenderten Originalfotos, im Higgsfield-Konto
-  des Kunden (ZIP `IRo_Fotomaster_2026-11-19.zip`), nicht im Repository. Web-Groessen nur aus diesen Mastern rechnen
+  zeigen den Inhaber). 24, 25, 26 sind zusaetzliche Fassungen von 16, 21, 11 mit neu erzeugtem Kopf (20.11., der
+  bisherige glich der echten Person noch); nirgends eingebunden, Wahl der Fassung offen beim Kunden. Figuren bleiben
+  uneinheitlich, Taetowierung auf dem Foto mit drei Sitzenden darf sichtbar bleiben (Kundenentscheide 20.11.).
+  Basis sind Master in Originalgroesse aus den unveraenderten Originalfotos, im Higgsfield-Konto
+  des Kunden (ZIP `IRo_Fotomaster_2026-11-20.zip`, 21 Master), nicht im Repository. Web-Groessen nur aus diesen Mastern rechnen
   (`_handover/tools/fotomaster/web_einsetzen.py`), nie aus den Bearbeitungen vom 24.09.2026 (Farbstich, weicher).
-  Verfahren, Pruefung, Tabelle der 18 Master und offene Punkte: `_handover/tools/fotomaster/README.md`. Keine Namen
+  Verfahren, Pruefung, Tabelle der 21 Master und offene Punkte: `_handover/tools/fotomaster/README.md`. Keine Namen
   echter Personen und keine Links auf Originale oder Master ins Repository schreiben (wird oeffentlich ausgeliefert).
 - Kennzahlen im Hero (r1, 18.10.2026): "20+ Jahre" (vom Kunden noch zu bestaetigen), "1 Adresse" (ohne data-count, sonst
   zaehlt 0 bis 1), "130 dB" (Diktat). Counter() braucht eine Zahl im Wert, sonst haengt er "0" an.

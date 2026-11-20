@@ -17,6 +17,9 @@ FREE = {
   '08': ('Glasfront und Terrasse des Firmengebäudes', 'unused', 'NICHT VERWENDET'),
   '22': ('3D-Drucker druckt Härtemuster 27 bis 95 Shore (Vero White) mit IdeeRoth-Beschriftung', 'new', 'NEU 10.10., NOCH FREI'),
   '23': ('Offene Glastür zum Büro mit grünen Säulen und Kaffeebar', 'new', 'NEU 10.10., NOCH FREI'),
+  '24': ('Fassung von 16 (Team am Tisch) mit neu erzeugtem Kopf rechts', 'new', 'NEU 20.11., NOCH FREI'),
+  '25': ('Fassung von 21 (3D-Drucker) mit neu erzeugtem Kopf', 'new', 'NEU 20.11., NOCH FREI'),
+  '26': ('Fassung von 11 (Besprechung mit Flasche) mit neu erzeugtem Kopf', 'new', 'NEU 20.11., NOCH FREI'),
 }
 # Alle uebrigen Bilddateien unter r1/assets/img: (Datei, Name, Verwendung, Kachelgrund, Zustand). Von Hand gepflegt und am
 # 19.11.2026 gegen Markup und CSS geprueft (Klassen .logo-mark, .logo-tile, .badge--* auf den fuenf Seiten; .logo-lock und

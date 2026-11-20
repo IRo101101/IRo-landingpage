@@ -33,6 +33,8 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
     Sie sind seit 19.11. aus neuen Mastern in Originalgroesse gerechnet: natuerliche Farben, Lehrling neu, Haende
     der dunkleren Figur farblich angeglichen. Verfahren, Pruefung und offene Punkte:
     `_handover/tools/fotomaster/README.md`. Die Fundusdateien nie mehr aus den alten Bearbeitungen rechnen.
+    Seit 20.11. liegen zusaetzlich 24, 25, 26 im Fundus: 16, 21 und 11 mit neu erzeugtem Kopf (der bisherige glich
+    der echten Person noch). Die Seiten zeigen weiter 16, 21 und 11; eingebunden ist 24 bis 26 nirgends.
 - **Variante B** (Ordner `b/`, 08.10.) wurde dem Kunden gezeigt und verworfen; Aenderungen am Design nur Punkt fuer
   Punkt mit dem Kunden. Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie
   (angelegt mit Commit 93cb8cb, entfernt mit Commit 2e70474).
@@ -70,14 +72,12 @@ Beim Kunden:
 - Datenschutz Abschnitt 11 "Karte und Routenplanung" bei Bedarf rechtlich pruefen lassen (Recherche ist keine
   Rechtsberatung).
 
-Fotos mit erfundenen Personen (Stand 19.11.2026, Einzelheiten in `_handover/tools/fotomaster/README.md`):
-- Entscheid des Kunden offen: Fuenf uebernommene Koepfe sind der echten Person laut Gesichtsvergleich noch aehnlich
-  (Teamfoto 16 rechts, 3D-Drucker 21, Besprechung 11 und zwei Fotos ausserhalb der Website). Bei Bedarf wie beim
-  Lehrling mit einem neuen erfundenen Gesicht ersetzen.
-- Die Figuren aus der frueheren Bearbeitung sind von Foto zu Foto nicht streng dieselbe Person. Vereinheitlichen
-  nur auf Wunsch des Kunden.
-- PowerPoint-Vorlage: Die Fotos `_handover/powerpoint/assets/p09.jpg` und weitere stammen aus dem alten Stand
-  (Farbstich, alter Lehrling). Bei der naechsten Lieferung aus den Mastern neu rechnen.
+Fotos mit erfundenen Personen (Stand 20.11.2026, Einzelheiten in `_handover/tools/fotomaster/README.md`):
+- Entscheid des Kunden offen: Fassung 16, 21 und 11 (bisheriger Kopf, der echten Person noch aehnlich) oder die
+  zusaetzlichen Fassungen 24, 25, 26 (neuer Kopf). Tausch auf der Seite: `src` und Ladepanel-Verweise in
+  `r1/index.html` von 16/21/11 auf 24/25/26 aendern, Sweep.
+- Kundenentscheide 20.11.: Die Figuren bleiben so, wie sie sind (von Foto zu Foto nicht streng dieselbe Person);
+  die Taetowierung am Knoechel auf dem Foto mit den drei Sitzenden darf sichtbar bleiben.
 - Der eingefrorene Fundus im Root (`assets/img/v2`) zeigt weiter den alten Stand (Vergleichsbasis).
 - Alt-Texte der Fotos gibt es nur auf Deutsch, `applyLang` uebersetzt `alt` nicht.
 - Rechtlich pruefen lassen: Verarbeitung von Mitarbeiterfotos bei einem externen KI-Dienst, allfaellige
@@ -183,9 +183,9 @@ UEBERGABE.md            dieses Dokument
 
 - Die Foto-Originale (6720 x 4480 JPG, Pakete 1 bis 5 des Fotografen) und die Chat-Uploads der Fotos 22 und 23
   (2000 px). Sie liegen beim Kunden. Im Repo sind nur die berechneten WebP-Dateien.
-- Die 18 Fotomaster mit erfundenen Personen in Originalgroesse (rund 100 MB), die Protokolle und die Skripte der
-  Bildwerkstatt: als ZIP `IRo_Fotomaster_2026-11-19.zip` im Higgsfield-Konto des Kunden. Dort liegen auch die
-  Originale und die Bearbeitungen vom 24.09.2026.
+- Die 21 Fotomaster mit erfundenen Personen in Originalgroesse (rund 120 MB), die Protokolle und die Skripte der
+  Bildwerkstatt: als ZIP `IRo_Fotomaster_2026-11-20.zip` im Higgsfield-Konto des Kunden (das Paket vom 19.11. mit 18
+  Mastern ist darin enthalten). Dort liegen auch die Originale und die Bearbeitungen vom 24.09.2026.
 - Fremde Praesentationen, die der Kunde als Beispiel hochgeladen hat (Folienmaster eines Drittunternehmens). Die
   daraus uebernommenen Ideen (Vergleich, Bildraster, Ansprechpersonen, senkrechte Fusszeile) sind in der Vorlage.
 - Zugangsdaten (Hostpoint, Google Analytics) liegen beim Kunden.
@@ -221,3 +221,6 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
 - 18.10.: Nebenprojekt "Karte und Anfahrt" uebernommen; Website-Arbeit nur noch im Claude-Projekt.
 - 19.11.: Fotos mit erfundenen Personen geprueft und als Master in Originalgroesse neu aufgebaut, zehn Fotos im
   Fundus `r1` ersetzt.
+- 20.11.: Drei Koepfe, die der echten Person noch glichen, neu erzeugt (zusaetzliche Fotos 24, 25, 26). PowerPoint-
+  Beispieldecks: Fotos aus den Mastern, Ihre-Ansprechpersonen-Folie mit Foto 14 (Inhaber) statt einer erfundenen
+  Person, alle Fotos zugeschnitten statt gestaucht (Fehler seit 15.10.), Logo-Dateien fuer den Bau ins Repository.

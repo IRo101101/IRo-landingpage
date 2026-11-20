@@ -1,4 +1,4 @@
-# PowerPoint-Vorlage IdeeRoth AG (Stand 15.10.2026)
+# PowerPoint-Vorlage IdeeRoth AG (Stand 15.10.2026, Fotos 20.11.2026)
 
 Die Vorlage uebertraegt das Design der Website (r1) auf PowerPoint. Alle Entscheide des Kunden vom 15.10.2026 sind
 eingebaut: duenne durchgezogene Linie (0.5 pt, Textfarbe 40 %), Fusszeile F-2 senkrecht rechts mit waagrechter
@@ -39,7 +39,13 @@ python3 finish.py out/IdeeRoth_Beispiel_EN_raw.pptx out/IdeeRoth_Beispiel_EN.ppt
 - `finish.py`: macht die senkrechte Fusszeile jedes Layouts zum Fusszeilen-Platzhalter (type ftr, idx 11), ergaenzt den
   Master (Platzhalter, `hf ftr=1 sldNum=1`), setzt auf den Beispielfolien den Fusszeilentext, entfernt das leere
   Standard-Layout von pptxgenjs und setzt fuer die .potx den Inhaltstyp `presentationml.template`.
-- `assets/`: Logo-Masken (mark, tile, word in Mint und Schwarz), Badges, Fotos als JPEG (aus `r1/assets/img/v2`).
+- `assets/`: Logo-Masken (`mark-mint`, `mark-black`, `tile-mint`), Badges (`badge-*-grey`), Fotos als JPEG
+  1600 x 1067 (aus `r1/assets/img/v2`, die Fotos mit erfundenen Personen seit 20.11.2026 aus den Mastern, siehe
+  `_handover/tools/fotomaster/README.md`) und `p14_portrait.jpg` (Inhaber, hochkant fuer die Folie
+  "Ihre Ansprechpersonen").
+- Fotos werden mit `coverImage()` in `lib.js` eingepasst: Das Bild fuellt seine Box und wird mittig beschnitten.
+  pptxgenjs braucht dafuer das Seitenverhaeltnis des Bildes in w/h und die Box in `sizing`; bis 20.11.2026 stand die
+  Box in beiden, der Ausschnitt blieb 0 und alle Fotos der Beispieldecks waren gestaucht.
 - Pruefen: `validate.py` aus dem pptx-Skill (fuer die .potx eine Kopie mit Endung .pptx pruefen), LibreOffice-PDF,
   `markitdown` fuer die Textregeln (keine Gedankenstriche, keine verbotenen Woerter, kein ß).
 
@@ -48,3 +54,15 @@ python3 finish.py out/IdeeRoth_Beispiel_EN_raw.pptx out/IdeeRoth_Beispiel_EN.ppt
 Alle Wording-Regeln der Website gelten: keine Gedankenstriche, nie Siemens/NX/Ansys/Flow-3D/Simcenter/Teamcenter/
 Nastran/"Bodensee", keine Unterstreichungen, Schweizer Schreibweise (ss). Signal Green nur als Akzent, Ampelfarben nur
 fuer Labels. Kennzahlen (20+, 100+, 5) und Projektzahlen in den Beispielen sind Platzhalter.
+
+## Aenderungen 20.11.2026
+
+- Fotos p09, p10, p11, p15, p16, p19, p21 aus den Mastern neu gerechnet (natuerliche Farben, neuer Lehrling).
+- Folie "Ihre Ansprechpersonen": unter "Alain Roth" steht jetzt der Inhaber (`p14_portrait.jpg`, Ausschnitt aus Foto 14)
+  statt einer erfundenen Person (vorher p15).
+- Alle Fotos der Beispieldecks zugeschnitten statt gestaucht (siehe `coverImage()`).
+- Die Logo- und Badge-PNG lagen wegen `*.png` in `.gitignore` nicht im Repository, der Bau lief nur mit lokalen
+  Dateien. Sie sind aus den Decks zurueckgeholt und eingecheckt (`!assets/*.png`).
+- Die Decks wurden gezielt nachgefuehrt (Fotos und Ausschnitt), nicht neu gebaut. Ein Neubau aus diesem Ordner
+  (pptxgenjs 4.0.1) ergibt dieselben Folien; abweichend sind nur Zeitstempel und die zufaelligen Abschnitts-IDs.
+  Die Vorlage (.potx) enthaelt keine Fotos und ist unveraendert.

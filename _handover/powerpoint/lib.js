@@ -4,6 +4,23 @@
 const pptxgen = require('pptxgenjs');
 const { applyTheme } = require('./apply_theme.js');
 const A = __dirname + '/assets/';
+// Fotos "cover" einpassen: pptxgenjs schneidet nur zu, wenn w/h das Seitenverhaeltnis des Bildes tragen und sizing die
+// Box. Mit w/h = Box blieb der Ausschnitt 0 und die Fotos wurden gestaucht (Befund 20.11.2026).
+const fs = require('fs');
+function jpegSize(file) {
+  const b = fs.readFileSync(file); let i = 2;
+  while (i < b.length) {
+    if (b[i] !== 0xFF) { i++; continue; }
+    const m = b[i + 1], len = b.readUInt16BE(i + 2);
+    if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC) return { w: b.readUInt16BE(i + 7), h: b.readUInt16BE(i + 5) };
+    i += 2 + len;
+  }
+  throw new Error('JPEG ohne Groessenangabe: ' + file);
+}
+function coverImage(file, opt) {
+  const { w: iw, h: ih } = jpegSize(A + file);
+  return Object.assign({}, opt, { path: A + file, w: opt.h * iw / ih, h: opt.h, sizing: { type: 'cover', w: opt.w, h: opt.h } });
+}
 
 const THEME = {
   name: 'IdeeRoth', headFontFace: 'Inter', bodyFontFace: 'Inter',
@@ -154,7 +171,7 @@ function helpers(pres) {
   h.vhair = (s, x, y, hh, k, name) => s.addShape(pres.ShapeType.line, { x, y, w: 0, h: hh, line: ln(k), objectName: name || 'Linie senkrecht' });
   h.frame = (s, x, y, w, hh, k, name, fill) => s.addShape(pres.ShapeType.rect, { x, y, w, h: hh, fill: fill || { color: G(k).bg, transparency: 100 }, line: ln(k), objectName: name || 'Rahmen' });
   h.eyebrow = (s, text, x, y, w, k, extra) => s.addText(text, Object.assign({ x, y, w, h: 0.28, fontSize: 10, color: G(k).muted, charSpacing: -0.3, margin: 0, isTextBox: true, objectName: 'Eyebrow ' + text }, extra || {}));
-  h.photo = (s, file, x, y, w, hh, k, name) => { s.addImage({ path: A + file, x, y, w, h: hh, sizing: { type: 'cover', w, h: hh }, objectName: name || 'Foto' }); h.marks(s, x, y, w, hh, k); };
+  h.photo = (s, file, x, y, w, hh, k, name) => { s.addImage(coverImage(file, { x, y, w, h: hh, objectName: name || 'Foto' })); h.marks(s, x, y, w, hh, k); };
   const CHIP = { rot: [RED, WHITE, RED], orange: [AMBER, BLACK, AMBER], gruen: [FRESH, BLACK, FRESH], fest: [BLACK, MINT, BLACK], aktiv: [GREEN, BLACK, GREEN] };
   h.chip = (s, x, y, text, kind, k, w, name) => {
     const [fill, col, lc] = kind === 'neutral' ? [G(k).bg, G(k).fg, G(k).fg] : kind === 'offen' ? [G(k).bg, G(k).muted, G(k).line] : CHIP[kind];
@@ -327,11 +344,11 @@ function addSampleSlides(pres, lang, N) {
     { text: d('Jede Entscheidung wird im Modell geprüft, bevor sie Geld kostet: Toleranzen, Montage, Materialwahl und Serientauglichkeit.', 'Every decision is checked in the model before it costs money: tolerances, assembly, choice of material and suitability for series production.'), options: { breakLine: true, paraSpaceAfter: 10 } },
     { text: d('Das Ergebnis sind weniger Teile, kürzere Wege und Produkte, die lange halten.', 'The result: fewer parts, shorter paths and products that last.') },
   ], { placeholder: 'body' });
-  s.addImage({ path: A + 'p11.jpg', placeholder: 'photo', x: 6.9, y: 2.85, w: R - 6.9, h: 3.75, sizing: { type: 'cover', w: R - 6.9, h: 3.75 }, objectName: 'Foto Konstruktion' });
+  s.addImage(coverImage('p11.jpg', { placeholder: 'photo', x: 6.9, y: 2.85, w: R - 6.9, h: 3.75, objectName: 'Foto Konstruktion' }));
   h.marks(s, 6.9, 2.85, R - 6.9, 3.75, 'mint');
   // Foto vollflaechig
   s = pres.addSlide({ masterName: N.FOTO });
-  s.addImage({ path: A + 'p07.jpg', placeholder: 'photo', x: 0, y: 0, w: W, h: H, sizing: { type: 'cover', w: W, h: H }, objectName: 'Foto vollflächig' });
+  s.addImage(coverImage('p07.jpg', { placeholder: 'photo', x: 0, y: 0, w: W, h: H, objectName: 'Foto vollflächig' }));
   s.addShape(pres.ShapeType.rect, { x: 0, y: 0, w: W, h: H, fill: { color: BLACK, transparency: 45 }, line: { color: BLACK, width: 0 }, objectName: 'Schleier' });
   s.addImage({ path: A + 'mark-mint.png', x: M, y: 0.48, w: 0.95, h: 0.342, objectName: 'Logo' });
   h.hair(s, M, 4.75, CW, 'dark', 'Linie wie im Hero');
@@ -580,7 +597,7 @@ function addSampleSlides(pres, lang, N) {
   s = pres.addSlide({ masterName: N.INHALT_MINT });
   s.addText(d('06 //  KONTAKT', '06 //  CONTACT'), { placeholder: 'eyebrow' });
   s.addText(d('Ihre Ansprechpersonen', 'Your contacts'), { placeholder: 'title' });
-  [['Alain Roth', d('GESCHÄFTSFÜHRER  ·  ENTWICKLUNG', 'MANAGING DIRECTOR  ·  DEVELOPMENT'), '+41 71 855 88 55', 'alain.roth@iro.swiss', 'p15.jpg'], [d('Vorname Name', 'Firstname Lastname'), d('PROJEKTLEITUNG  ·  KONSTRUKTION', 'PROJECT LEAD  ·  DESIGN'), '+41 71 855 88 55', d('vorname.name@iro.swiss', 'firstname.lastname@iro.swiss'), 'p10.jpg']].forEach(([name, r, t, m, f], i) => {
+  [['Alain Roth', d('GESCHÄFTSFÜHRER  ·  ENTWICKLUNG', 'MANAGING DIRECTOR  ·  DEVELOPMENT'), '+41 71 855 88 55', 'alain.roth@iro.swiss', 'p14_portrait.jpg'], [d('Vorname Name', 'Firstname Lastname'), d('PROJEKTLEITUNG  ·  KONSTRUKTION', 'PROJECT LEAD  ·  DESIGN'), '+41 71 855 88 55', d('vorname.name@iro.swiss', 'firstname.lastname@iro.swiss'), 'p10.jpg']].forEach(([name, r, t, m, f], i) => {
     const k = 'mint', tw = 2.9, x = M + i * (2.75 + tw + 0.43), tx = x + 2.75;
     h.photo(s, f, x, 2.85, 2.4, 2.9, k, 'Porträt ' + name);
     s.addText(name, { x: tx, y: 2.85, w: tw, h: 0.45, fontSize: 22, color: BLACK, charSpacing: -0.4, margin: 0, isTextBox: true, objectName: 'Name ' + name });

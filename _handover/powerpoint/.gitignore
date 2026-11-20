@@ -5,3 +5,6 @@ _*.pdf
 review/
 xmlcheck/
 *.png
+
+# Logo- und Badge-Masken fuer den Bau gehoeren ins Repository (vor dem 20.11.2026 durch *.png ausgeschlossen)
+!assets/*.png
