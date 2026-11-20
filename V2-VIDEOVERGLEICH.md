@@ -346,7 +346,9 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Status: erledigt in r1
 79. [Kunde 20.11.] Prozess "In fuenf Schritten zur Serie": Bildwechsel wie Vorschau Uebergaenge 04 Clear, Tempo 1, Takt
     3 s nur ohne Mausbedienung; das Schwenken und Kippen der Buehne entfaellt. Status: erledigt in r1 (Cache 20261120).
-    Offen: Foto fuer 05 Prototyp (Kundenwunsch 21) und dann fuer 04 Entwicklung.
+    Kundenentscheid 20.11.: 04 Entwicklung bleibt 21, 05 Prototyp bekommt 22 (3D-Drucker mit Mustern), sobald das alte
+    Logo auf den Mustern ersetzt ist (Kunde liefert das Bild). Foto 06 bleibt in der Rotation (alte Kaffeemaschine nur
+    klein im Hintergrund). Status: 05 offen bis Bild 22 mit neuem Logo vorliegt.
 80. [Kunde 20.11.] Texte: Ideation-Karte (Pruefung vor der Detailkonstruktion mit Skizzen, 3D-Entwuerfen und
     Kostenschaetzung), Simulation-Karte (NAFEMS-Satz: Mitgliedschaft haelt uns auf dem aktuellen Stand), Schritte 01 Idee
     (Kundentext), 02 Konstruktion (Basis fuer Simulation und erste Prototypen), 04 Entwicklung (senkt das Risiko teurer
