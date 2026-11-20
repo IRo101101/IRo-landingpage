@@ -196,6 +196,7 @@ a:hover > .badge, a:focus-visible > .badge { color: var(--link-hover-dark); }
 .pre__finale { position: relative; }
 .pre__finale.is-free { position: fixed; inset: auto; z-index: 3; }
 .pre__card img { width: 100%; height: 100%; object-fit: cover; }
+.pre--logo .pre__deck, .pre--logo .pre__finale { display: none; }   /* r1 Variante nur Logo (?lade=logo) */
 .layer { position: absolute; inset-inline: 0; bottom: 0; height: 130%; }
 .layer img { width: 100%; height: 100%; object-fit: cover; }
 /* Gleicher Schleier auf Finale-Karte und Hero-Foto, damit die Uebergabe nahtlos bleibt */

@@ -711,6 +711,10 @@
     var deck = panel.querySelector('.pre__deck'), cards = panel.querySelectorAll('.pre__card'), finale = panel.querySelector('.pre__finale');
     var markWrap = panel.querySelector('.pre__mark'), ghost = panel.querySelector('.pre__ghost .logo-mark');
     var stage = doc.querySelector('[data-hero-stage]');
+    // r1 Variante "nur Logo" (Kundenwunsch 20.11.2026, zum Vergleich): ohne Fotokarten, nur das IRo-Zeichen fuellt sich von
+    // unten nach oben, fliegt in den Header, dann blendet das Panel aus. Aufruf mit ?lade=logo oder data-preloader="logo".
+    var logoOnly = panel.getAttribute('data-preloader') === 'logo' || /[?&]lade=logo(&|$)/.test(win.location.search);
+    if (logoOnly) panel.classList.add('pre--logo');
     if (lenis) lenis.stop();
     try { win.scrollTo(0, 0); } catch (e) {}
     doc.body.classList.add('loading');
@@ -728,16 +732,16 @@
     setTimeout(ready, MAX_WAIT);
 
     // Karten austeilen
-    var tilts = [-12, 9, -5, 14, -8], dealt = 0, dealDone = false;
-    cards.forEach(function (c, i) {
+    var tilts = [-12, 9, -5, 14, -8], dealt = 0, dealDone = logoOnly;
+    if (!logoOnly) cards.forEach(function (c, i) {
       var g = new Group(c, { from: { opacity: 0, scale: 0.82, y: 48, rotate: tilts[i] * 1.8 }, config: CARD });
       setTimeout(function () { g.to({ opacity: 1, scale: 1, y: 0, rotate: tilts[i] }); }, CARD_LEAD + i * CARD_INTERVAL);
     });
     var fg = new Group(finale, { from: { opacity: 0, scale: 0.82, y: 48 }, config: CARD });
-    setTimeout(function () { fg.to({ opacity: 1, scale: 1, y: 0 }, CARD, function () { setTimeout(function () { dealDone = true; check(); }, FINALE_HOLD); }); }, CARD_LEAD + cards.length * CARD_INTERVAL);
+    if (!logoOnly) setTimeout(function () { fg.to({ opacity: 1, scale: 1, y: 0 }, CARD, function () { setTimeout(function () { dealDone = true; check(); }, FINALE_HOLD); }); }, CARD_LEAD + cards.length * CARD_INTERVAL);
 
     var fired = false;
-    function check() { if (fired || !dealDone || !loaded) return; if (prog.value < 0.999) { setTimeout(check, 40); return; } fired = true; try { expand(); } catch (err) { console.warn('Ladepanel-Finale fehlgeschlagen', err); finish(); } }
+    function check() { if (fired || !dealDone || !loaded) return; if (prog.value < 0.999) { setTimeout(check, 40); return; } fired = true; try { if (logoOnly) expandLogo(); else expand(); } catch (err) { console.warn('Ladepanel-Finale fehlgeschlagen', err); finish(); } }
 
     function rectOf(el) { var r = el.getBoundingClientRect(); return { left: r.left, top: r.top, width: r.width, height: r.height }; }
     function expand() {
@@ -762,6 +766,26 @@
       mg.to({ x: (b.left + b.width / 2) - (a.left + a.width / 2), y: (b.top + b.height / 2) - (a.top + a.height / 2), scale: b.width / a.width });
       new Group(veil, { from: { opacity: 1 }, config: HANDOFF }).to({ opacity: 0 });
       new Group(deck, { from: { opacity: 1 }, config: HANDOFF }).to({ opacity: 0 });
+    }
+    function expandLogo() {
+      // Zeichen fliegt in den Header; sobald es dort liegt, blendet das Panel aus und gibt die Seite frei
+      var a = markWrap.getBoundingClientRect(), b = ghost.getBoundingClientRect();
+      new Group(veil, { from: { opacity: 1 }, config: HANDOFF }).to({ opacity: 0 });
+      var tx = (b.left + b.width / 2) - (a.left + a.width / 2), ty = (b.top + b.height / 2) - (a.top + a.height / 2), left = false;
+      var mg = new Group(markWrap, { from: { x: 0, y: 0, scale: 1 }, config: HANDOFF });
+      mg.to({ x: tx, y: ty, scale: b.width / a.width }, HANDOFF, leave);
+      // nicht auf die Ruhe der Feder warten: ausblenden, wenn das Zeichen drei Viertel des Wegs hinter sich hat; das echte
+      // Header-Zeichen liegt an derselben Stelle unter dem Panel und uebernimmt nahtlos
+      var dist = Math.max(1, Math.hypot(tx, ty));
+      ticker.add(function () { if (left) return false; if (Math.hypot(mg.get('x') - tx, mg.get('y') - ty) < dist * 0.25) { leave(); return false; } });
+      function leave() {
+        if (left) return; left = true;
+        if (lenis) lenis.start();
+        doc.body.classList.remove('loading');
+        var lg = new Group(panel, { from: { opacity: 1 }, config: LEAVE }), released = false;
+        ticker.add(function () { if (!released && lg.get('opacity') <= RELEASE_AT) { released = true; fireHandoff(); return false; } if (!lg.active) return false; });
+        lg.to({ opacity: 0 }, LEAVE, function () { released = true; fireHandoff(); panel.remove(); done = true; });
+      }
     }
     function finish() {                                   // reduzierte Bewegung / Notausstieg: sofort
       if (lenis) lenis.start(); doc.body.classList.remove('loading'); if (panel.parentNode) panel.remove(); fireHandoff();

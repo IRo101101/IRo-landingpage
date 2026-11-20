@@ -362,6 +362,9 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     links"), Datenschutz (Rechte, Aenderungen, Karte). Neu zweisprachig: Alt-Texte aller Fotos (data-en-alt, main.js
     applyLang), aria-Labels Hauptnavigation, Kennzahlen, Kompetenzen, Leistungen, "Google opt-out add-on". Cache
     20261120b. Status: erledigt in r1
+82. [Kunde 20.11.] Ladepanel zum Vergleich ohne Fotos, nur das IRo-Zeichen fuellt sich von unten nach oben ("vielleicht
+    ist weniger mehr"). Umgesetzt als Variante: r1/?lade=logo; ohne Parameter bleibt das Panel mit Fotokarten. Dauer
+    3,3 bis 3,5 s statt 4,4 s. Cache 20261120c. Status: Entscheid offen (welche Fassung wird Standard)
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

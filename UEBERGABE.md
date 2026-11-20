@@ -23,7 +23,7 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
   - **Ordner `r1/` = Arbeitskopie**, hier wird gearbeitet: https://iro101101.github.io/IRo-landingpage/r1/
     Fuenf Seiten: index, karriere, kontakt, impressum, datenschutz. Dazu fuenf Vorschauseiten `vorschau-*.html`
     (Entscheidungshilfen, bleiben als Nachschlagewerk, kommen nicht live).
-  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120b`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
+  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120c`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
     `r1/assets/js/main.js` hochzaehlen (`YYYYMMDD`, am selben Tag Buchstabe anhaengen).
   - Alle Kundenentscheide bis 15.10.2026 sind eingebaut (Liste: `V2-VIDEOVERGLEICH.md`, Punkte 1 bis 58).
     Letzte Entscheide 15.10.: duenne durchgezogene Linie statt gestrichelter Haarlinien (Vorbild `.hero__rule`),
@@ -227,3 +227,5 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
   Texte zu Ideation, Simulation, Schritten 01/02/04/05 und Team ueberarbeitet (V2-VIDEOVERGLEICH 78 bis 80).
 - 20.11.: Foto 22 mit neuem IRo-Logo auf den Mustern (Lieferung Kunde) im Fundus, Prozessschritt 05 Prototyp zeigt 22.
 - 20.11.: Englisch auf allen fuenf r1-Seiten geprueft und verbessert, Alt-Texte und Bereichs-Labels jetzt zweisprachig.
+- 20.11.: Ladepanel-Variante nur mit dem IRo-Zeichen zum Vergleich: `r1/?lade=logo` (Entscheid offen; als Standard
+  `data-preloader="logo"` am Panel in `r1/index.html` setzen).
