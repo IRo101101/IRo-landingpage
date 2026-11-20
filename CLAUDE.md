@@ -27,12 +27,17 @@ Vorgaben von Alain Roth (IdeeRoth AG) und sind verbindlich.
 - Hero-Titel (Text-Pressure): Beim Zerlegen in Buchstaben-Spans haengt das Leerzeichen am letzten
   Buchstaben jedes Wortes (`tp-char--sp`, white-space:pre). NIE reine Leerzeichen-Textknoten
   zwischen Wort-Spans setzen - Text-Extraktoren/Crawler verwerfen sie und lesen "Developmorefromless".
+  Die Woerter jeder Ruhe-Zeile stehen in einem `.tp-line` (nowrap, `lockLines()` in main.js), sonst bricht der Titel
+  unter dem Effekt neu um und die Seite springt. Kein `<br>` verwenden (Markdown-Extraktoren zerreissen sonst die Ueberschrift).
 - Effekte muessen `prefers-reduced-motion` respektieren (Titel statisch, keine Pixel-Buttons).
 - Safari: `backdrop-filter` immer mit `-webkit-`-Praefix.
 - Sehr schmale Geraete (<= 350px): Kontaktzeilen stapeln (siehe Media-Query 420px).
 - Einzeilige Texte (Kennzahlen `.stat__value`, Titel `.legal h1`): die Faktoren in styles.css haengen an der Textbreite von
   "Swiss engineered" bzw. "Datenschutzerklaerung". Bei Text- oder Schriftaenderung nachrechnen und im Sweep zusaetzlich pruefen,
   dass kein Text aus seiner Karte ragt (scrollWidth > clientWidth), auch wenn die Seite nicht scrollt.
+- Hero bis 720px: Liste `.hero__meta` steht unter dem Text und braucht `position: relative`. Mit `static` liegt sie unter
+  Bild und Schleier und wirkt blass (so bis Version 20261119 live).
+- Pixel-Buttons: Canvas wird per ResizeObserver neu aufgebaut, auch nach dem Sprachwechsel (anderes Label = andere Breite).
 - Nach Aenderungen: Playwright-Sweep ueber 4 Seiten x Viewports (320-1440) x DE/EN,
   Kriterien: kein horizontaler Overflow, keine Konsolenfehler.
 

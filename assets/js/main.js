@@ -216,6 +216,26 @@
         el.appendChild(w);
       });
     }
+    // Zeilen fixieren: Der Effekt macht Buchstaben breiter. Bei knappen Breiten brach der Titel dadurch neu um
+    // und die Seite sprang (auch beim Intro-Sweep). Die Woerter jeder Zeile in Ruhe kommen in ein .tp-line
+    // (display:block, nowrap). Kein <br>, keine Leerzeichen-Knoten: Extraktoren lesen den Titel weiterhin ganz.
+    function lockLines() {
+      var words = [].slice.call(el.querySelectorAll('.tp-word'));
+      if (!words.length) return;
+      var old = [].slice.call(el.querySelectorAll('.tp-line'));
+      words.forEach(function (w) { el.appendChild(w); });
+      old.forEach(function (l) { l.parentNode.removeChild(l); });
+      var saved = chars.map(function (c) { return c.style.fontVariationSettings; });
+      chars.forEach(function (c) { c.style.fontVariationSettings = "'wght' " + REST_W; });
+      var tops = words.map(function (w) { return w.offsetTop; });
+      chars.forEach(function (c, i) { c.style.fontVariationSettings = saved[i]; });
+      var line = null, top = null;
+      words.forEach(function (w, i) {
+        if (line === null || tops[i] !== top) { line = document.createElement('span'); line.className = 'tp-line'; el.appendChild(line); top = tops[i]; }
+        line.appendChild(w);
+      });
+    }
+    function relock() { if (!reduce && chars.length) { lockLines(); recalc(); } }
     function recalc() { var r = el.getBoundingClientRect(); maxDist = Math.max(r.width, r.height) * 0.5; }
     function smooth(t) { t = t < 0 ? 0 : (t > 1 ? 1 : t); return t * t * (3 - 2 * t); }
     function paint() {
@@ -246,7 +266,8 @@
     stage.addEventListener('touchstart', function (e) { over = true; pressTarget = 1; if (e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
     window.addEventListener('touchmove', function (e) { if (e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
     window.addEventListener('touchend', function () { over = false; pressTarget = 0; });
-    window.addEventListener('resize', recalc);
+    var lt = null;
+    window.addEventListener('resize', function () { recalc(); clearTimeout(lt); lt = setTimeout(relock, 120); });
     window.addEventListener('scroll', recalc, { passive: true });
 
     function staticRender() {
@@ -269,7 +290,7 @@
       }
       requestAnimationFrame(step);
     }
-    function refresh() { split(); recalc(); if (reduce) staticRender(); }
+    function refresh() { split(); recalc(); if (reduce) staticRender(); else relock(); }
 
     var startedTP = false;
     function go() {
@@ -277,11 +298,13 @@
       split(); recalc();
       mouse.x = -9999; mouse.y = -9999; cur.x = mouse.x; cur.y = mouse.y;
       if (reduce) { staticRender(); return; }
+      relock();
       raf = requestAnimationFrame(loop); introSweep();
     }
-    // Start erst, wenn die variable Inter-Achse verfügbar ist (verhindert Flackern)
+    // Start erst, wenn die variable Inter-Achse verfügbar ist (verhindert Flackern).
+    // Kam Inter erst nach dem 700-ms-Notstart, die Zeilen mit der echten Schrift neu fixieren.
     if (document.fonts && document.fonts.load) {
-      document.fonts.load("400 20px 'Inter'").then(go, go); setTimeout(go, 700);
+      document.fonts.load("400 20px 'Inter'").then(function () { if (startedTP) relock(); else go(); }, go); setTimeout(go, 700);
     } else { go(); }
     return { refresh: refresh };
   }
@@ -305,8 +328,10 @@
     Pixel.prototype.appear = function () { this.isIdle = false; if (this.counter <= this.delay) { this.counter += this.counterStep; return; } if (this.size >= this.maxSize) { this.isShimmer = true; } if (this.isShimmer) { this.shimmer(); } else { this.size += this.sizeStep; } this.draw(); };
     Pixel.prototype.disappear = function () { this.isShimmer = false; this.counter = 0; if (this.size <= 0) { this.isIdle = true; return; } this.size -= 0.1; this.draw(); };
     Pixel.prototype.shimmer = function () { if (this.size >= this.maxSize) { this.isReverse = true; } else if (this.size <= this.minSize) { this.isReverse = false; } this.size += this.isReverse ? -this.speed : this.speed; };
+    var lastW = 0, lastH = 0;
     function build() {
       var r = btn.getBoundingClientRect(); cssW = Math.max(1, Math.floor(r.width)); cssH = Math.max(1, Math.floor(r.height));
+      lastW = cssW; lastH = cssH;
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = cssW * dpr; canvas.height = cssH * dpr; canvas.style.width = cssW + 'px'; canvas.style.height = cssH + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); pixels = [];
@@ -328,7 +353,17 @@
     btn.addEventListener('pointerleave', function () { run('disappear'); });
     btn.addEventListener('focus', function () { run('appear'); });
     btn.addEventListener('blur', function () { run('disappear'); });
-    var rt = null; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 150); });
+    // Neu aufbauen, wenn sich die Button-Groesse aendert: Fenstergroesse UND Sprachwechsel (anderes Label = andere Breite)
+    var rt = null;
+    function rebuild() { clearTimeout(rt); rt = setTimeout(build, 150); }
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(function () {
+        var r = btn.getBoundingClientRect();
+        if (Math.floor(r.width) !== lastW || Math.floor(r.height) !== lastH) rebuild();
+      }).observe(btn);
+    } else {
+      window.addEventListener('resize', rebuild);
+    }
     build();
   }
   // Button-Beschriftungen in ein Label-Span kapseln (früh, damit Sprach-Logik + Canvas sauber sind)

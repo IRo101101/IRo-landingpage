@@ -104,6 +104,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;   /* nur Woerter, die allein breiter als ihre Zeile sind, werden umbrochen (z. B. URLs bei 280px) */
 }
 img { max-width: 100%; display: block; }
 a { color: var(--text-link); text-decoration: none; transition: color var(--mo) var(--ease); }
@@ -231,14 +232,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero__meta ul { display: flex; flex-wrap: wrap; gap: var(--sp-7); padding-block: var(--sp-4); }
 .hero__meta li { color: #AEB6BC; font: 500 13px/1.3 var(--font-sans); letter-spacing: .02em; }
 .hero__meta strong { display: block; color: #fff; font-weight: 600; font-size: 15px; }
+/* Bis 720px: Liste unter dem Text mit Trennlinie, wie auf dem Desktop (Titel und Text nutzen die volle Breite).
+   position: relative, NIE static: statische Elemente malt der Browser unter Bild und Schleier (Liste wirkt blass).
+   width: 100%, weil margin:auto aus .wrap das Strecken im Flex-Container verhindert. */
 @media (max-width: 720px) {
-  .hero__meta { position: static; border-top: none; }
+  .hero { flex-direction: column; }
+  .hero__inner { margin-block: auto; padding-bottom: var(--sp-7); }
+  .hero__meta { position: relative; width: 100%; }
   .hero__meta ul { gap: var(--sp-5); }
-}
-/* Sehr schmale Geraete (< 338px): Abstand zwischen Titelspalte und Liste verkleinern, sonst schneidet der Hero die Liste rechts ab */
-@media (max-width: 337px) {
-  .hero__inner { padding-right: var(--sp-2); }
-  .hero__meta { padding-inline: var(--sp-2) var(--sp-3); }
 }
 
 /* ---------- Leistungen: Hairline-Raster gap:1px ---------- */
@@ -265,7 +266,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .panel { background: #fff; padding: var(--sp-7); }
 .panel h3 { font: 600 20px/1.2 var(--font-sans); margin-bottom: var(--sp-3); }
 .panel p { color: var(--iro-body-strong); }
-@media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } .panel { padding: var(--sp-6); } }
+@media (max-width: 720px) { .grid-2 { grid-template-columns: minmax(0, 1fr); } .panel { padding: var(--sp-6); } }
 
 .values { margin-top: var(--sp-5); display: grid; gap: var(--sp-3); }
 .values li { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-3); align-items: start; color: var(--iro-body-strong); font-size: 15px; }
@@ -402,6 +403,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 /* ---------- Hero-Titel: Text-Pressure (Inter Variable, wght 100-900) ---------- */
 .hero h1 { font-family: var(--font-sans); font-weight: 480; }   /* animierter Titel nutzt die variable Achse von Inter */
 html:not(.js) .hero h1 { font-weight: 480; }                    /* ohne JS gute Stärke */
+.hero h1 .tp-line { display: block; white-space: nowrap; }   /* Zeilen in Ruhe fixiert (main.js lockLines): kein Neu-Umbruch unter dem Effekt */
 .hero h1 .tp-word { display: inline-block; white-space: nowrap; }
 .hero h1 .tp-char { display: inline-block; font-variation-settings: 'wght' 480;
   transform-origin: center bottom; will-change: font-variation-settings, transform; }
@@ -429,7 +431,7 @@ html[lang="en"] [data-only="en"] { display: revert; }
 .legal h3 { font: 600 16px/1.3 var(--font-sans); margin-top: var(--sp-5); }
 .legal p, .legal li { color: var(--iro-body-strong); margin-top: var(--sp-3); max-width: 72ch; }
 .legal ul { margin-top: var(--sp-3); display: grid; gap: var(--sp-2); }
-.legal li { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-3); }
+.legal li { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-3); }   /* 1fr bewusst: lange Woerter (Konstruktionszeichnungen) nicht mitten trennen */
 .legal li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--iro-green); margin-top: 10px; }
 .legal address { font-style: normal; margin-top: var(--sp-3); color: var(--iro-ink); }
 .back-link { display: inline-flex; align-items: center; gap: var(--sp-2); margin-top: var(--sp-7); font-weight: 600; }
