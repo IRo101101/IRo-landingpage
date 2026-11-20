@@ -662,3 +662,44 @@ section { position: relative; }
   .card__btn { opacity: 1; }
   .hero .words .w__i { visibility: visible; }
 }
+
+/* =========================================================================
+   r1 Mobile nach der Vorlage (Kundenauftrag 20.11.2026, Spec "below 768" und Mobile-Video der Vorlage).
+   Nur unter 768 px; Tablet und Desktop bleiben unberuehrt.
+   ========================================================================= */
+@media (max-width: 767px) {
+  /* Hero: Titel und Schlusszeile als ein zentrierter Block oben, dann das Foto als Karte mit den Kennzahlen,
+     darunter Intro, Linie und die zwei Buttons (Reihenfolge wie in der Vorlage) */
+  .hero__top { order: 1; }
+  .hero__close { order: 2; }
+  .hero__stage { order: 3; margin-top: 1.5rem; aspect-ratio: 358 / 448; }
+  .hero__mid { order: 4; display: flex; flex-direction: column-reverse; margin-top: 1.25rem; }
+  .hero__row { padding-top: 0; padding-bottom: 1.25rem; }
+  .hero__ctas { order: 5; margin-top: 1.25rem; }
+
+  /* Unternehmen: Mission zentriert unter dem Foto */
+  .about__mission { text-align: center; }
+  .about__mission.words, .about__mission .words { justify-content: center; }
+  .about__mission .words__indent { width: 0; }
+
+  /* Prozess: wie die Vorlage - Schritte zentriert hinter dem Foto, der aktive liegt darueber, die Beschreibung
+     mit Ergebnis darunter; die Leiste 01-05 bleibt als Tap-Ziel (die Schrittnamen sind schmaler als das Foto) */
+  .process { height: 46.5rem; }
+  .process__stagepos { top: 8.5rem; transform: translateX(-50%); }
+  .process__stage { width: 13.25rem; height: 16.25rem; }
+  .process__steps { inset: 8.5rem 0 auto; height: 16.25rem; gap: .5rem; }
+  .pstep { font-size: 1.375rem; }
+  .process__bar { top: 25.25rem; bottom: auto; }
+  .process__caption { top: calc(26.25rem + 44px); bottom: auto; max-width: 21rem; font-size: 1.0625rem; }   /* 1rem unter der Leiste (44 px Tap-Ziel); laengste Caption DE 320 px endet bei rund 43rem */
+
+  /* Kontakt: zuerst das Foto mit dem Aufruf, dann die schwarze Spalte mit Logo, Links, Badges und Adresse,
+     zuletzt Rechtszeile und Copyright (Reihenfolge wie die Vorlage: Foto mit Karte, dann Links und Details) */
+  .contact { display: grid; grid-template-columns: 100%; }
+  .contact__photo { grid-row: 1; grid-column: 1; order: 0; height: auto; min-height: 24rem; }
+  .contact__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(17,20,24,.78) 0%, rgba(17,20,24,.35) 45%, rgba(17,20,24,0) 75%); pointer-events: none; }
+  .contact__close { grid-row: 1; grid-column: 1; order: 0; align-self: end; z-index: 2; padding: 6rem 1rem 1.5rem; text-align: right; }
+  .contact__ctas { justify-content: flex-end; }
+  .rail { grid-row: 2; order: 0; }
+  .contact__legal { grid-row: 3; order: 0; }
+  .contact__copy { grid-row: 4; order: 0; }
+}

@@ -366,6 +366,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     ist weniger mehr"). Umgesetzt als Variante: r1/?lade=logo; ohne Parameter bleibt das Panel mit Fotokarten. Dauer
     3,3 bis 3,5 s statt 4,4 s. Kundenentscheid 20.11.: "nur Logo" wirkt cleaner, ist Standard (data-preloader="logo");
     das alte Panel bleibt unter r1/?lade=fotos erreichbar. Cache 20261120d. Status: erledigt in r1
+83. [Kunde 20.11.] Mobile Version "passt noch gar nicht", Vorbild die Mobilansicht der Vorlage. Unter 768 px jetzt wie
+    dort: Hero mit Titel oben, Foto 358/448 mit Kennzahlen, Intro, Linie, Buttons; Mission zentriert; Prozess mit dem
+    aktiven Schritt ueber dem Foto, Leiste 01-05 direkt darunter, Text und Ergebnis darunter; Kontakt zuerst Foto mit
+    Aufruf, dann schwarze Spalte mit Links und Adresse. Tablet und Desktop unveraendert. Geprueft 320 bis 767 px in DE
+    und EN, Sweep ohne Befund. Cache 20261120e. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

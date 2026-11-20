@@ -73,7 +73,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261120d; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261120e; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -159,9 +159,15 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Unter 768 px folgt der Boden dem Scrollweg (initGround: Mischfarbe anteilig zur sichtbaren Flaeche beider Sektionen,
   Zone Viewport-Unterkante bis 10 %, Feder GROUND_MOBILE 170/26 glaettet nur); ab 768 px zeitbasiert an der Mitte.
   main.js schreibt die Bodenfarbe pro Frame in `--ground-rgb`; der Header ist unter 1024 px damit deckend.
-- Unter 768 px: Prozess gestapelt (Foto oben, Liste, Caption, Leiste 01-05 `.process__bar`, Parallaxe +-20 px),
-  `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen 12 px fuer Versal-Labels, Tap-Ziele 40 px (auch bei
-  `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand, Hero-Foto 358/400 mit staerkerem Schleier.
+- Unter 768 px (Kundenauftrag 20.11.2026 "Mobile wie die Vorlage", eigener Block am Ende von styles.css "r1 Mobile nach
+  der Vorlage"): Hero = Titel und Schlusszeile zentriert oben, darunter Foto 358/448 mit den Kennzahlen, dann Intro, Linie,
+  zwei Buttons. Mission zentriert. Prozess wie die Vorlage: Buehne 13.25 x 16.25rem ab top 8.5rem, Schrittzeilen 1.375rem
+  zentriert hinter dem Foto (der aktive liegt darueber), Leiste 01-05 `.process__bar` direkt unter dem Foto (top 25.25rem),
+  Caption mit Ergebnis darunter (top 26.25rem + 44 px), Sektion 46.5rem (laengste Caption DE bei 320 px endet bei rund
+  43rem). Kontakt als Grid: Foto mit Aufruf und Buttons rechtsbuendig darueber (Verlauf von unten), dann schwarze Spalte
+  (Logo, Links, Badges, Adresse), Rechtszeile, Copyright. Dazu `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen
+  12 px fuer Labels, Tap-Ziele 40 px (auch bei `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand,
+  staerkerer Schleier auf dem Hero-Foto.
 - Ladepanel "nur Logo" ist Standard (Kundenentscheid 20.11.2026, `data-preloader="logo"` am Panel): ohne Fotokarten und
   Finale-Karte (`.pre--logo`), das Zeichen fuellt sich, fliegt in den Header, das Panel blendet ab drei Vierteln des Flugs
   aus (initPreloader `expandLogo`). Das alte Panel mit Fotos zum Vergleich: `r1/?lade=fotos`. Die Kartenbilder tragen
