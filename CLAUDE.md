@@ -73,7 +73,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261018b; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261120; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -121,9 +121,10 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Chrome rechnet `clip-path` des Ziels in IntersectionObserver ein: maskierte Elemente (`.card__mask`,
   `.team__mask`) nie direkt beobachten, sondern den unmaskierten Elternknoten (`Inview(..., {watch: el})`).
 - Fotos: `assets/img/v2/NN.webp` (Desktop, 1800 px breit, Hero 2400) und `NN-m.webp` (mobil, 1100 px); Nummern = Kontaktblatt
-  01-23 (24-26 = Fassungen von 16, 21, 11, siehe unten). Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 08/05/10/04/12/18/06/15/20/02;
+  01-23 (24-26 = Fassungen von 16, 21, 11, siehe unten). Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 08/05/10/04/27/18/06/15/20/02;
   01 (Espressomaschine) veraltet, das Geraet gibt es nicht mehr: nirgends verwenden (Kundenentscheid 20.11.2026, in der
-  Rotation durch 08 Glasfront mit Terrasse ersetzt; der eingefrorene Root zeigt 01 weiter). 22 (3D-Drucker druckt Shore-Haertemuster) und 23 (offene Glastuer zum Buero, gruene
+  Rotation durch 08 Glasfront mit Terrasse ersetzt; der eingefrorene Root zeigt 01 weiter). 12 ebenfalls nirgends verwenden
+  (Kunde 20.11., in der Rotation durch 27 ersetzt). 27 = Team am langen Tisch mit der Mitarbeiterin (Master x6, seit 20.11.). 22 (3D-Drucker druckt Shore-Haertemuster) und 23 (offene Glastuer zum Buero, gruene
   Saeulen, Kaffeebar) am 10.10.2026 nachgeliefert, noch frei; sie kamen als Chat-Upload nur mit 2000 px Breite (Originale
   01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (`_handover/tools/add_photos.py`).
   Uebersicht aller Fotos mit Verwendung: `_handover/tools/bilduebersicht.py` erzeugt `_handover/bilduebersicht.png`.
@@ -238,7 +239,9 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Foto-Uebergaenge: Bibliothek TRANSITIONS in main.js (dissolve, dissolve-settle, wipe, clear, deal, turn, push; alle
   aus dem Prompt), `PhotoSwap(frame, photos, name)` blendet gestapelte Fotos um. Am Rahmen waehlbar per
   `data-transition`, `data-interval` (ms) und `data-speed` (Tempo-Faktor, Federn tension*k^2, friction*k).
-  Kundenentscheid 09.10.2026: Unternehmen = clear, 2 s, Faktor 1.4; andere Bloecke unveraendert (Prozess SWAP_IMG).
+  Kundenentscheid 09.10.2026: Unternehmen = clear, 2 s, Faktor 1.4. Prozess seit 20.11.2026 ebenfalls clear (Faktor 1,
+  Auto-Takt 3 s nur ohne Maus unter 1440 px; `data-transition`/`data-speed`/`data-interval` an `.process__stage`), ohne
+  Schwenken je Schritt und ohne Kippen mit der Maus (initProcess `calm`); mit data-transition="turn" kaeme das alte Verhalten.
   Ebenen im Rahmen sind fest: Fotos nur z-index 0 bis 2 (eintretend 2, aktuell 1, uebrige 0; NIE hochzaehlen),
   Schleier `.about__frame::after` 3, `.about__btnpos` und `.about__topics` 4; sonst verdecken die Fotos nach wenigen
   Wechseln den "Ueber uns"-Hover-Button (ab 1440 px mit Maus pro Hineinfahren sichtbar, darunter und auf Touch immer).

@@ -23,7 +23,7 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
   - **Ordner `r1/` = Arbeitskopie**, hier wird gearbeitet: https://iro101101.github.io/IRo-landingpage/r1/
     Fuenf Seiten: index, karriere, kontakt, impressum, datenschutz. Dazu fuenf Vorschauseiten `vorschau-*.html`
     (Entscheidungshilfen, bleiben als Nachschlagewerk, kommen nicht live).
-  - Cache-Version in allen r1-HTML-Dateien: `?v=20261018b`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
+  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
     `r1/assets/js/main.js` hochzaehlen (`YYYYMMDD`, am selben Tag Buchstabe anhaengen).
   - Alle Kundenentscheide bis 15.10.2026 sind eingebaut (Liste: `V2-VIDEOVERGLEICH.md`, Punkte 1 bis 58).
     Letzte Entscheide 15.10.: duenne durchgezogene Linie statt gestrichelter Haarlinien (Vorbild `.hero__rule`),
@@ -224,3 +224,5 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
   Beispieldecks: Fotos aus den Mastern, Ihre-Ansprechpersonen-Folie mit Foto 14 (Inhaber) statt einer erfundenen
   Person, alle Fotos zugeschnitten statt gestaucht (Fehler seit 15.10.), Logo-Dateien fuer den Bau ins Repository.
 - 20.11.: Foto 01 (Espressomaschine, Geraet gibt es nicht mehr) aus r1 entfernt, in der Rotation durch 08 ersetzt.
+- 20.11.: Foto 12 aus der Rotation (durch 27 Team am langen Tisch ersetzt), Prozess mit ruhigem Bildwechsel clear,
+  Texte zu Ideation, Simulation, Schritten 01/02/04/05 und Team ueberarbeitet (V2-VIDEOVERGLEICH 78 bis 80).

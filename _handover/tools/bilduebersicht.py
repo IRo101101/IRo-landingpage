@@ -14,12 +14,14 @@ PAGE = REPO + 'r1/index.html'
 
 # Fotos, die in keiner Seite eingebaut sind: Beschreibung, Zustand (unused = rot, new = schwarz), Beschriftung
 FREE = {
+  '12': ('Mitarbeiter im Gespräch am Arbeitsplatz. Nirgends verwenden (Kunde 20.11.2026)', 'unused', 'NICHT VERWENDEN'),
   '01': ('Espressobezug an der Kaffeemaschine. Das Gerät gibt es nicht mehr: nirgends verwenden (Kunde 20.11.2026)', 'unused', 'VERALTET, NICHT VERWENDEN'),
   '22': ('3D-Drucker druckt Härtemuster 27 bis 95 Shore (Vero White) mit IdeeRoth-Beschriftung', 'new', 'NEU 10.10., NOCH FREI'),
   '23': ('Offene Glastür zum Büro mit grünen Säulen und Kaffeebar', 'new', 'NEU 10.10., NOCH FREI'),
   '24': ('Fassung von 16 (Team am Tisch) mit neu erzeugtem Kopf rechts', 'new', 'NEU 20.11., NOCH FREI'),
   '25': ('Fassung von 21 (3D-Drucker) mit neu erzeugtem Kopf', 'new', 'NEU 20.11., NOCH FREI'),
   '26': ('Fassung von 11 (Besprechung mit Flasche) mit neu erzeugtem Kopf', 'new', 'NEU 20.11., NOCH FREI'),
+  '27': ('Team am langen Tisch mit Mitarbeiterin (Master x6, Lehrling neu, Frau Original)', 'new', 'NEU 20.11., NOCH FREI'),
 }
 # Alle uebrigen Bilddateien unter r1/assets/img: (Datei, Name, Verwendung, Kachelgrund, Zustand). Von Hand gepflegt und am
 # 19.11.2026 gegen Markup und CSS geprueft (Klassen .logo-mark, .logo-tile, .badge--* auf den fuenf Seiten; .logo-lock und

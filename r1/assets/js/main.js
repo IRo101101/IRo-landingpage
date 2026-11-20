@@ -970,8 +970,13 @@
     var steps = sec.querySelectorAll('.pstep'), stage = sec.querySelector('.process__stage'), inner = sec.querySelector('.process__inner'), photos = stage.querySelectorAll('.process__photo');
     var caption = sec.querySelector('.process__caption');
     var sg = Array.prototype.map.call(steps, function (s, i) { return new Group(s, { from: { opacity: i === 0 ? 1 : DIM_OPACITY, blur: i === 0 ? 0 : DIM_BLUR }, config: STEPC }); });
-    var pg = Array.prototype.map.call(photos, function (p, i) { return new Group(p, { from: { opacity: i === 0 ? 1 : 0 }, config: SWAP_IMG }); });
-    var turn = new Group(stage.querySelector('.process__turn'), { from: { rotate: LAST_TILT - (steps.length - 1) * TILT_STEP }, config: TURN });
+    // r1 (Kundenentscheid 20.11.2026): Bildwechsel waehlbar wie bei Unternehmen (data-transition, data-speed, data-interval
+    // an .process__stage). Mit "clear" bleibt die Buehne ruhig: kein Schwenken je Schritt, kein Kippen mit der Maus.
+    var tname = stage.getAttribute('data-transition') || 'turn', calm = tname !== 'turn';
+    var autoMs = parseInt(stage.getAttribute('data-interval'), 10) || AUTO_STEP_MS;
+    var swap = calm ? PhotoSwap(stage, photos, tname, parseFloat(stage.getAttribute('data-speed')) || 1) : null;
+    var pg = calm ? [] : Array.prototype.map.call(photos, function (p, i) { return new Group(p, { from: { opacity: i === 0 ? 1 : 0 }, config: SWAP_IMG }); });
+    var turn = new Group(stage.querySelector('.process__turn'), { from: { rotate: calm ? 0 : LAST_TILT - (steps.length - 1) * TILT_STEP }, config: TURN });
     var tilt = new Group(stage, { from: { rotateX: 0, rotateY: 0 }, config: TILT });
     var depth = new Group(inner, { from: { x: 0, y: 0, scale: 1.12 }, config: TILT });
     var drift = VW() < MD ? STAGE_DRIFT_MOBILE : STAGE_DRIFT;
@@ -1009,8 +1014,8 @@
       steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); s.setAttribute('aria-current', k === i ? 'true' : 'false'); });
       dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
       sg.forEach(function (g, k) { g.to({ opacity: k === i ? 1 : DIM_OPACITY, blur: k === i ? 0 : DIM_BLUR }); });
-      pg.forEach(function (g, k) { g.to({ opacity: k === i ? 1 : 0 }); });
-      turn.to({ rotate: LAST_TILT - (steps.length - 1 - i) * TILT_STEP });
+      if (swap) swap.go(i); else pg.forEach(function (g, k) { g.to({ opacity: k === i ? 1 : 0 }); });
+      if (!calm) turn.to({ rotate: LAST_TILT - (steps.length - 1 - i) * TILT_STEP });
       setCaption(i);
     }
     setCaption(0); steps[0].classList.add('is-active');
@@ -1030,16 +1035,16 @@
     // Auto-Weiterschalten unter 1440 (solange >= 40% sichtbar), echte Maus oder erster Tipp (Schritt/Leiste) schaltet ab
     var auto = null, mouseSeen = false, visible = false;
     function tickAuto() { if (visible && !mouseSeen && !tapped && !RM) setActive((active + 1) % steps.length); }
-    function arm() { if (auto || VW() >= XL) return; auto = setInterval(tickAuto, AUTO_STEP_MS); }
+    function arm() { if (auto || VW() >= XL) return; auto = setInterval(tickAuto, autoMs); }
     new IntersectionObserver(function (es) { es.forEach(function (e) { visible = e.isIntersecting; if (visible) arm(); }); }, { threshold: 0.4 }).observe(sec);
     sec.addEventListener('pointermove', function (e) {
       if (e.pointerType === 'mouse') { mouseSeen = true; }
-      if (e.pointerType !== 'mouse') return;
+      if (e.pointerType !== 'mouse' || calm) return;
       var r = sec.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
       tilt.to({ rotateX: -py * MAX_TILT * 2, rotateY: px * MAX_TILT * 2 });
       depth.to({ x: px * MAX_DEPTH, y: py * MAX_DEPTH, scale: 1.12 });
     });
-    sec.addEventListener('pointerleave', function () { tilt.to({ rotateX: 0, rotateY: 0 }); depth.to({ x: 0, y: 0, scale: 1.12 }); });
+    sec.addEventListener('pointerleave', function () { if (calm) return; tilt.to({ rotateX: 0, rotateY: 0 }); depth.to({ x: 0, y: 0, scale: 1.12 }); });
   }
 
   /* =====================================================================

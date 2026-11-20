@@ -341,6 +341,18 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     01, ebenso auf den Vorschauseiten Layouts und Uebergaenge. Der eingefrorene Root (Stand 30.09.) zeigt 01 weiter
     (Vergleichsbasis, nicht anfassen). Hinweis: Die Kaffeebar an der gruenen Wand ist klein im Hintergrund von 06
     (Rotation) und 23 (frei) zu sehen. Status: erledigt in r1
+78. [Kunde 20.11.] Foto 12 aus der Rotation nehmen und nirgends verwenden. Umgesetzt: Position 5 der Rotation zeigt 27
+    (Team am langen Tisch mit der Mitarbeiterin, neu im Fundus aus Master x6; das Foto fehlte in der Bilduebersicht).
+    Status: erledigt in r1
+79. [Kunde 20.11.] Prozess "In fuenf Schritten zur Serie": Bildwechsel wie Vorschau Uebergaenge 04 Clear, Tempo 1, Takt
+    3 s nur ohne Mausbedienung; das Schwenken und Kippen der Buehne entfaellt. Status: erledigt in r1 (Cache 20261120).
+    Offen: Foto fuer 05 Prototyp (Kundenwunsch 21) und dann fuer 04 Entwicklung.
+80. [Kunde 20.11.] Texte: Ideation-Karte (Pruefung vor der Detailkonstruktion mit Skizzen, 3D-Entwuerfen und
+    Kostenschaetzung), Simulation-Karte (NAFEMS-Satz: Mitgliedschaft haelt uns auf dem aktuellen Stand), Schritte 01 Idee
+    (Kundentext), 02 Konstruktion (Basis fuer Simulation und erste Prototypen), 04 Entwicklung (senkt das Risiko teurer
+    Aenderungen beim Serienanlauf), 05 Prototyp (Zulieferer, die in ihrer Disziplin zu den besten gehoeren: CNC-Fraesen und
+    -Drehen, additive Fertigung, Schweissen, Giessen), Team-Einleitung (Fachleute fuer Konstruktion, Simulation und
+    Prototypenbau). Je DE und EN, Karten und Captions in allen Breiten ohne Ueberlauf. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
