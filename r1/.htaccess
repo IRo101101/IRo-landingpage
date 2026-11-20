@@ -54,6 +54,7 @@ RedirectMatch 404 ^/assets(/.*)?/$
   ExpiresByType image/png "access plus 6 months"
   ExpiresByType image/svg+xml "access plus 6 months"
   ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
   ExpiresByType application/manifest+json "access plus 1 week"
   ExpiresByType text/plain "access plus 1 day"
   ExpiresByType application/xml "access plus 1 day"

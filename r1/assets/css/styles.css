@@ -176,7 +176,7 @@ a:hover > .badge, a:focus-visible > .badge { color: var(--link-hover-dark); }
 .lang__panel a:hover { background: rgba(255,255,255,.06); }
 
 /* Mobiles Menue */
-.menu { position: fixed; inset: 0; top: var(--header-height); z-index: 40; background: var(--black); color: #fff; padding: 2rem 1rem 2.5rem; display: flex; flex-direction: column; --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); }
+.menu { overscroll-behavior: contain; position: fixed; inset: 0; top: var(--header-height); z-index: 40; background: var(--black); color: #fff; padding: 2rem 1rem 2.5rem; display: flex; flex-direction: column; --mk-bg: #fff; --mk-bd: rgba(255,255,255,.4); }
 .menu[hidden] { display: none; }
 .menu__links .al { padding-block: 1rem; border-bottom: 1px solid var(--border-on-inverse-subtle); }
 .menu__lang { display: flex; align-items: center; justify-content: space-between; padding-block: 1rem; color: var(--on-inverse-muted); font-size: .875rem; letter-spacing: var(--tracking-nav); }
@@ -353,7 +353,7 @@ section { position: relative; }
 .card__short { max-width: 17rem; font-size: .9375rem; line-height: 1.25; color: rgba(255,255,255,.85); }
 .card__hit { position: absolute; inset: 0; z-index: 3; display: block; width: 100%; padding: 0; text-align: inherit; }
 .card__hit:focus-visible { outline: 2px solid #fff; outline-offset: -.5rem; }
-.card__more { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem; overflow-y: auto; background: rgba(17,20,24,.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); clip-path: inset(100% 0 0 0); }
+.card__more { overscroll-behavior: contain; position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem; overflow-y: auto; background: rgba(17,20,24,.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); clip-path: inset(100% 0 0 0); }
 .card__top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .card__kicker { font-size: .875rem; letter-spacing: var(--tracking-nav); color: var(--on-inverse-meta); }
 .card__close { position: relative; flex: none; width: 2.5rem; height: 2.5rem; margin: -.75rem -.75rem -.75rem 0; }
@@ -588,7 +588,8 @@ section { position: relative; }
 .sub .routes a { font-weight: 500; }
 .sub .todo { background: rgba(37,199,122,.22); padding: 0 .2em; }
 .sub .srow__body h3:first-child { margin-top: 0; }
-.srow[id] { scroll-margin-top: calc(var(--header-height) + 1.5rem); }   /* Spruenge wie karriere.html#lehrstelle landen unter dem festen Header */
+.srow[id] { scroll-margin-top: calc(var(--header-height) + 1.5rem); }
+[tabindex="-1"]:focus { outline: none; }   /* Sprungziele (Skip-Link, Anker) bekommen den Fokus programmatisch, ohne Ring */   /* Spruenge wie karriere.html#lehrstelle landen unter dem festen Header */
 @media (min-width: 768px) { .sub { padding-inline: 1.5rem; } .sub h1 { font-size: 3rem; } }
 @media (min-width: 1440px) { .sub { padding-inline: 2rem; } .sub h1 { font-size: var(--section-title); } }
 

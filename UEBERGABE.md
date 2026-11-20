@@ -23,7 +23,7 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
   - **Ordner `r1/` = Arbeitskopie**, hier wird gearbeitet: https://iro101101.github.io/IRo-landingpage/r1/
     Fuenf Seiten: index, karriere, kontakt, impressum, datenschutz. Dazu fuenf Vorschauseiten `vorschau-*.html`
     (Entscheidungshilfen, bleiben als Nachschlagewerk, kommen nicht live).
-  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120h`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
+  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120i`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
     `r1/assets/js/main.js` hochzaehlen (`YYYYMMDD`, am selben Tag Buchstabe anhaengen).
   - Alle Kundenentscheide bis 15.10.2026 sind eingebaut (Liste: `V2-VIDEOVERGLEICH.md`, Punkte 1 bis 58).
     Letzte Entscheide 15.10.: duenne durchgezogene Linie statt gestrichelter Haarlinien (Vorbild `.hero__rule`),
@@ -65,12 +65,17 @@ Beim Kunden:
 - Kartenlinks der Kontaktseite auf dem iPhone testen (Apple Karten in der Legacy-Form `maps.apple.com/?daddr=`).
 - Bestaetigen, dass die Schranke an der Westzufahrt (Hafenstrasse 62) die eigene ist (Text "Eingang" auf kontakt.html).
 - Originale der Fotos 22 und 23 als ZIP (6720 px) nachliefern; dann mit `_handover/tools/add_photos.py` neu rechnen.
-- Kennzahlen im Hero (20+ Jahre, 100+ Projekte, 5 Leistungen) sind Platzhalter, vom Kunden zu korrigieren.
-- Go-live-Entscheid: Wann wird `r1/` zum Root?
+- Kennzahlen im Hero: «20+ Jahre» am 20.11.2026 bestaetigt (dazu «1 Adresse», «130 dB»).
+- Go-live: Paket am 20.11.2026 geliefert (Abschnitt 4), Upload durch den Kunden.
+- Karriere: Die Zeile «Initiativbewerbung» duzt wie das Inserat (Hausstil verlangt «Sie»); Kunde entscheidet, ob das
+  so bleibt oder auf «Sie» umgestellt wird.
+- Rechtlich pruefen lassen (Hinweise aus der Endkontrolle 20.11., keine Rechtsberatung): Impressum ohne UID und
+  Handelsregister-Eintrag; Datenschutz ohne Stand-Datum, ohne Aufbewahrungsfristen (Logs, GA, E-Mails), Rechte ohne
+  Datenherausgabe (Art. 28 DSG) und Beschwerde beim EDOEB, Grundlage der USA-Uebermittlung bei Google (Swiss-US DPF
+  oder Standardvertragsklauseln) nicht genannt; Satz «gekuerzte IP» in den Server-Logfiles mit Hostpoint klaeren;
+  Alt-Texte nennen die erfundenen Personen «Mitarbeiter».
 - Google-Unternehmensprofil pruefen (vorhanden, verifiziert, Adresse aktuell?) und bei Bedarf beanspruchen. Mit der
   Place-ID liesse sich der Google-Maps-Link auf kontakt.html genau auf den Eintrag richten (`destination_place_id`).
-- Datenschutz Abschnitt 11 "Karte und Routenplanung" bei Bedarf rechtlich pruefen lassen (Recherche ist keine
-  Rechtsberatung).
 
 Fotos mit erfundenen Personen (Stand 20.11.2026, Einzelheiten in `_handover/tools/fotomaster/README.md`):
 - Kundenentscheid 20.11. nach dem Vergleich (`r1/vorschau-fotos.html`): Alle Fotos bleiben, wie sie sind. Die
@@ -91,7 +96,6 @@ Spaeter zu pruefen:
 - Umbau untere Bahnhofstrasse Romanshorn bis April 2027 (Hinweis auf kontakt.html), danach Einbahnregelung pruefen.
 - Tiefgarage Hafenpromenade (Abstimmung 14.06.2026) ersetzt die oberirdischen Parkplaetze am See; Text anpassen.
 - Faehrfahrplan (Takt, Winterfahrplan) bei Fahrplanwechsel pruefen; Quelle bsb.de und bodensee-schiffe.ch.
-- Nutzungsbedingungen geo.admin.ch (iFrame, BGDI-Fair-Use) vor dem Go-live in der aktuellen Fassung pruefen.
 - Idee aus der Recherche 09.10.: QR-Code zur Anfahrt (SBB- oder Kartenlink) auf Drucksachen.
 
 ## 4. Go-live (vorbereitet 20.11.2026, Kunde laedt hoch)

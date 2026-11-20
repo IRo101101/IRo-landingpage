@@ -510,8 +510,9 @@
       doms.forEach(function (d) { doc.cookie = n + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : ''); });
     });
   }
-  function buildBanner() {
+  function buildBanner(opener) {
     if (doc.querySelector('.consent')) return;
+    var dl = doc.querySelector('a[href$="datenschutz.html"]'), dhref = dl ? dl.getAttribute('href') : 'datenschutz.html';
     var wrap = doc.createElement('div');
     wrap.className = 'consent'; wrap.setAttribute('role', 'dialog'); wrap.setAttribute('aria-label', 'Cookie-Hinweis'); wrap.setAttribute('data-en-label', 'Cookie notice');
     wrap.innerHTML =
@@ -519,19 +520,27 @@
         '<p class="consent__text" data-en="We use Google Analytics to understand how our website is used - only with your consent. You can withdraw your choice at any time via “Cookie settings” in the footer.">' +
         'Wir verwenden Google Analytics, um die Nutzung unserer Website zu verstehen - nur mit Ihrer Einwilligung. Sie können Ihre Wahl jederzeit über «Cookie-Einstellungen» im Footer widerrufen.</p>' +
         '<div class="consent__actions">' +
-          '<a class="consent__more" href="datenschutz.html" data-en="Privacy policy">Datenschutzerklärung</a>' +
+          '<a class="consent__more" href="' + dhref + '" data-en="Privacy policy">Datenschutzerklärung</a>' +
           '<button class="cbtn cbtn--ghost" type="button" data-consent="deny" data-en="Decline">Ablehnen</button>' +
           '<button class="cbtn cbtn--solid" type="button" data-consent="allow" data-en="Accept">Akzeptieren</button>' +
         '</div></div>';
-    doc.body.appendChild(wrap);
-    wrap.querySelector('[data-consent="allow"]').addEventListener('click', function () { consentSet('granted'); loadGA(); wrap.remove(); });
-    wrap.querySelector('[data-consent="deny"]').addEventListener('click', function () { consentSet('denied'); revokeGA(); wrap.remove(); });
+    // gleich nach dem Skip-Link einfuegen: per Tab frueh erreichbar
+    var skip = doc.querySelector('body > .skip');
+    doc.body.insertBefore(wrap, skip ? skip.nextSibling : doc.body.firstChild);
+    function done() { wrap.remove(); if (opener && opener.focus) opener.focus(); }
+    wrap.querySelector('[data-consent="allow"]').addEventListener('click', function () {
+      consentSet('granted');
+      if (win.__iroGA) { win['ga-disable-' + GA_ID] = false; if (win.gtag) win.gtag('consent', 'update', { analytics_storage: 'granted' }); } else loadGA();
+      done();
+    });
+    wrap.querySelector('[data-consent="deny"]').addEventListener('click', function () { consentSet('denied'); revokeGA(); done(); });
     applyLang(currentLang());
+    if (opener) { var first = wrap.querySelector('button'); if (first) first.focus(); }
   }
   function initConsent() {
     var links = doc.querySelectorAll('[data-cookie-settings]');
     for (var i = 0; i < links.length; i++) links[i].addEventListener('click', function (e) {
-      e.preventDefault(); var b = doc.querySelector('.consent'); if (b) b.remove(); consentSet(''); buildBanner();
+      e.preventDefault(); var b = doc.querySelector('.consent'); if (b) b.remove(); consentSet(''); buildBanner(e.currentTarget);
     });
     var c = consentGet();
     if (c === 'granted') loadGA(); else if (c !== 'denied') buildBanner();
@@ -575,7 +584,11 @@
       target = clampY(target + dy);
       run();
     }, { passive: false });
-    win.addEventListener('scroll', function () { if (!running) current = target = win.pageYOffset; }, { passive: true });
+    win.addEventListener('scroll', function () {
+      var y = win.pageYOffset;
+      if (!running) current = target = y;
+      else if (Math.abs(y - current) > 2) halt();   // Scrollbalken, Suche im Text, Fokus: fremdes Scrollen hat Vorrang
+    }, { passive: true });
     ['keydown', 'pointerdown', 'touchstart'].forEach(function (n) { win.addEventListener(n, function () { if (running) halt(); }, { passive: true }); });
     this.scrollTo = function (y) { if (stopped) return; if (!running) current = win.pageYOffset; target = clampY(y); run(); };
     this.stop = function () { stopped = true; running = false; };
@@ -594,6 +607,9 @@
     if (!target) return false;
     var y = Math.max(0, Math.round(layoutTop(target) - (parseFloat(win.getComputedStyle(target).scrollMarginTop) || 0)));   // scroll-margin-top beachten (z. B. .srow[id] unter dem Header)
     if (smooth) smooth.scrollTo(y); else win.scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' });
+    // Tastaturfokus mitnehmen (Skip-Link, Navigation): Ziel fokussierbar machen, ohne zusaetzlich zu scrollen
+    if (!target.matches('a[href], button, input, select, textarea, [tabindex]')) target.setAttribute('tabindex', '-1');
+    try { target.focus({ preventScroll: true }); } catch (e) {}
     return true;
   }
   function initAnchors() {
@@ -708,8 +724,18 @@
      Header: Sprache, Burger, Aktion
      ===================================================================== */
   var menuOpen = false, burgerA, burgerB, menuGroup;
+  // Hintergrund unbedienbar machen, solange Ladepanel oder Menue offen sind (Tab landet sonst unsichtbar dahinter)
+  var inerted = [];
+  function setInert(on, keep) {
+    inerted.forEach(function (el) { el.inert = false; }); inerted = [];
+    if (!on) return;
+    Array.prototype.forEach.call(doc.body.children, function (el) {
+      if (el.tagName === 'SCRIPT' || el.inert || (keep || []).indexOf(el) !== -1) return;
+      el.inert = true; inerted.push(el);
+    });
+  }
   function closeMenu() {
-    if (!menuOpen) return; menuOpen = false;
+    if (!menuOpen) return; menuOpen = false; setInert(false);
     doc.body.classList.remove('menu-open');
     var btn = doc.querySelector('.hdr__burger'); if (btn) btn.setAttribute('aria-expanded', 'false');
     if (burgerA) { burgerA.to({ y: 5, rotate: 0 }); burgerB.to({ y: 11, rotate: 0 }); }
@@ -724,6 +750,7 @@
     burgerA.to({ y: 8, rotate: 45 }); burgerB.to({ y: 8, rotate: -45 });
     menuGroup.set({ opacity: 0, y: -8 }).to({ opacity: 1, y: 0 });
     if (smooth) smooth.stop();
+    setInert(true, [doc.querySelector('.hdr'), m, doc.querySelector('.consent')]);
   }
   function initHeader() {
     var h = doc.querySelector('.hdr'); if (!h) return;
@@ -748,6 +775,7 @@
       }
       btn.addEventListener('click', function () { if (!open) { viaHover = false; show(); } else if (viaHover) { viaHover = false; } else hide(); });
       lg.addEventListener('keydown', function (e) { if (e.key === 'Escape') { hide(); btn.focus(); } });
+      lg.addEventListener('focusout', function (e) { if (e.relatedTarget && !lg.contains(e.relatedTarget)) hide(); });
       doc.addEventListener('click', function (e) { if (!lg.contains(e.target)) hide(); });
       panel.querySelectorAll('[data-lang]').forEach(function (o) {
         o.addEventListener('click', function (e) { e.preventDefault(); setLang(o.getAttribute('data-lang'), true); hide(); });
@@ -796,7 +824,7 @@
     if (logoOnly) panel.classList.add('pre--logo');
     if (smooth) smooth.stop();
     try { win.scrollTo(0, 0); } catch (e) {}
-    doc.body.classList.add('loading');
+    doc.body.classList.add('loading'); setInert(true, [panel]);
 
     if (RM) { finish(); return; }
 
@@ -831,7 +859,7 @@
       var eg = new Group(finale, { from: from, config: EXPAND });
       eg.to(to, EXPAND, function () {
         if (smooth) smooth.start();
-        doc.body.classList.remove('loading');
+        doc.body.classList.remove('loading'); setInert(false);
         requestAnimationFrame(function () {
           var t2 = stage ? rectOf(stage) : to; eg.set(t2);
           var lg = new Group(panel, { from: { opacity: 1 }, config: LEAVE }), released = false;
@@ -860,14 +888,14 @@
       function leave() {
         if (left) return; left = true;
         if (smooth) smooth.start();
-        doc.body.classList.remove('loading');
+        doc.body.classList.remove('loading'); setInert(false);
         var lg = new Group(panel, { from: { opacity: 1 }, config: LEAVE }), released = false;
         ticker.add(function () { if (!released && lg.get('opacity') <= RELEASE_AT) { released = true; fireHandoff(); return false; } if (!lg.active) return false; });
         lg.to({ opacity: 0 }, LEAVE, function () { released = true; fireHandoff(); panel.remove(); done = true; });
       }
     }
     function finish() {                                   // reduzierte Bewegung / Notausstieg: sofort
-      if (smooth) smooth.start(); doc.body.classList.remove('loading'); if (panel.parentNode) panel.remove(); fireHandoff();
+      if (smooth) smooth.start(); doc.body.classList.remove('loading'); setInert(false); if (panel.parentNode) panel.remove(); fireHandoff();
     }
     // Notausstieg: Das Panel darf die Seite nie dauerhaft verdecken.
     setTimeout(function () { if (panel.parentNode && !done) { console.warn('Ladepanel: Notausstieg'); finish(); } }, MAX_WAIT + 7000);
@@ -1119,8 +1147,9 @@
         requestAnimationFrame(function () { requestAnimationFrame(function () { o.classList.add('is-in'); }); });
       }
     }
-    function setActive(i) {
+    function setActive(i, byAuto) {
       active = i;
+      caption.setAttribute('aria-live', byAuto ? 'off' : 'polite');   // Auto-Takt nicht alle 3 s vorlesen
       steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); s.setAttribute('aria-current', k === i ? 'true' : 'false'); });
       dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
       sg.forEach(function (g, k) { g.to({ opacity: k === i ? 1 : DIM_OPACITY, blur: k === i ? 0 : DIM_BLUR }); });
@@ -1144,7 +1173,7 @@
     });
     // Auto-Weiterschalten unter 1440 (solange >= 40% sichtbar), echte Maus oder erster Tipp (Schritt/Leiste) schaltet ab
     var auto = null, mouseSeen = false, visible = false;
-    function tickAuto() { if (visible && !mouseSeen && !tapped && !RM) setActive((active + 1) % steps.length); }
+    function tickAuto() { if (visible && !mouseSeen && !tapped && !RM) setActive((active + 1) % steps.length, true); }
     function arm() { if (auto || VW() >= XL) return; auto = setInterval(tickAuto, autoMs); }
     new IntersectionObserver(function (es) { es.forEach(function (e) { visible = e.isIntersecting; if (visible) arm(); }); }, { threshold: 0.4 }).observe(sec);
     sec.addEventListener('pointermove', function (e) {
@@ -1261,7 +1290,10 @@
   initConsent();
   applyLang(currentLang());
   if (location.hash && !doc.querySelector('[data-preloader]')) setTimeout(function () { scrollToHash(location.hash); }, 50);
-  // r1: Engine fuer die Vorschauseiten (vorschau*.html) zugaenglich machen
+  // r1: Engine fuer die Vorschauseiten (vorschau*.html) zugaenglich machen; der Build fuer die Live-Site entfernt den
+  // Block zwischen den Markierungen
+  /* @vorschau-begin */
   win.IRO = { Group: Group, ticker: ticker, advance: advance, Words: Words, Inview: Inview, Scrub: Scrub, Hover: Hover, onHandoff: onHandoff, PhotoSwap: PhotoSwap, TRANSITIONS: TRANSITIONS,
     springs: { FADE: FADE, SWAP_IMG: SWAP_IMG, MASK: MASK, SETTLE: SETTLE, CARD: CARD, TURN: TURN, ROW_REVEAL: ROW_REVEAL, PARALLAX: PARALLAX } };
+  /* @vorschau-end */
 })();

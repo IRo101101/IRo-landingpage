@@ -14,7 +14,7 @@ Was der Build macht:
 - minifiziert HTML, CSS und JS ohne Kommentare (minify.js, Node-Pakete aus package.json)
 - prueft danach: keine Entwicklungsspuren im Paket, alle internen Verweise vorhanden
 """
-import datetime, json, os, re, shutil, subprocess, sys, zipfile
+import datetime, hashlib, json, os, re, shutil, subprocess, sys, zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
@@ -30,7 +30,7 @@ ROOT_FILES = ['.htaccess', 'site.webmanifest', 'favicon.ico', 'favicon-16x16.png
 # Woerter, die im Paket nicht vorkommen duerfen (Entwicklungsspuren, fremde Dienste ausser Google)
 FORBIDDEN = ['Northwall', 'getlayers', 'Prompt', 'Kundenentscheid', 'Kunde ', 'Lenis', 'lenis', 'swisstopo',
              'geo.admin', 'leaflet', 'Leaflet', 'vorschau', 'Vorschau', 'Higgsfield', 'Claude', 'Anthropic',
-             'noindex, nofollow', 'TODO', '[[', 'r1:', 'r1 ', 'Bodensee']
+             'noindex, nofollow', 'TODO', '[[', 'r1:', 'r1 ', 'Bodensee', '.IRO=', '@vorschau']
 REF = re.compile(r'''(?:href|src|content)="([^"#?]+)(?:[?#][^"]*)?"|url\(\s*['"]?([^'")?#]+)''')
 
 
@@ -65,6 +65,11 @@ def main():
     for f in ['assets/css/styles.css', 'assets/js/main.js', 'assets/fonts/inter.woff2']:
         os.makedirs(os.path.dirname(os.path.join(OUT, f)), exist_ok=True)
         shutil.copy2(os.path.join(SRC, f), os.path.join(OUT, f))
+    # Schnittstelle fuer die Vorschauseiten (window.IRO) gehoert nicht auf die Live-Site
+    js = os.path.join(OUT, 'assets/js/main.js'); t = open(js, encoding='utf-8').read()
+    t, n = re.subn(r'/\* @vorschau-begin \*/.*?/\* @vorschau-end \*/', '', t, flags=re.S)
+    if n != 1: sys.exit('main.js: Vorschau-Block nicht gefunden')
+    open(js, 'w', encoding='utf-8').write(t)
 
     # 3) alle Dateien, auf die Seiten, CSS, JS und Manifest verweisen (rekursiv)
     texts = [open(os.path.join(OUT, p), encoding='utf-8').read() for p in PAGES]
@@ -90,11 +95,28 @@ def main():
     for u in sorted(refs):
         s = os.path.join(SRC, u)
         if os.path.isfile(s):
+            if os.path.exists(os.path.join(OUT, u)): continue   # schon bearbeitet (main.js ohne Vorschau-Block)
             os.makedirs(os.path.dirname(os.path.join(OUT, u)) or OUT, exist_ok=True)
             shutil.copy2(s, os.path.join(OUT, u))
         elif not os.path.isdir(s):
             missing.append(u)
     if missing: sys.exit('FEHLT: ' + ', '.join(missing))
+
+    # 3b) Bilder mit Inhalts-Kennung versionieren (?v=...): Bilder sind 6 Monate gecacht, ein ersetztes Foto mit
+    #     gleichem Namen kaeme sonst bei wiederkehrenden Besuchern nicht an
+    vers = {}
+    for u in refs:
+        if u.startswith('assets/img/') and os.path.isfile(os.path.join(OUT, u)):
+            vers[u] = hashlib.md5(open(os.path.join(OUT, u), 'rb').read()).hexdigest()[:8]
+    def stamp(path, rel_prefix=''):
+        t = open(path, encoding='utf-8').read()
+        for u, h in vers.items():
+            for pre in ('', '/', SITE, rel_prefix):
+                if pre == '' and rel_prefix: continue
+                t = re.sub(re.escape(pre + (u[len('assets/'):] if pre == rel_prefix and rel_prefix else u)) + r'(?=["\')\s])', lambda m: m.group(0) + '?v=' + h, t)
+        open(path, 'w', encoding='utf-8').write(t)
+    for p in PAGES: stamp(os.path.join(OUT, p))
+    stamp(os.path.join(OUT, 'assets/css/styles.css'), rel_prefix='../')
 
     # 4) robots.txt und sitemap.xml
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %ssitemap.xml\n' % SITE)
