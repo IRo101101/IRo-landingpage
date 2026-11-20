@@ -456,6 +456,13 @@
       if (!a.hasAttribute('data-de-href')) a.setAttribute('data-de-href', a.getAttribute('href') || '');
       a.setAttribute('href', lang === 'en' ? a.getAttribute('data-en-href') : a.getAttribute('data-de-href'));
     }
+    // r1 (20.11.2026): Alt-Texte der Fotos zweisprachig (data-en-alt)
+    var alts = doc.querySelectorAll('img[data-en-alt]');
+    for (var g = 0; g < alts.length; g++) {
+      var im = alts[g];
+      if (!im.hasAttribute('data-de-alt')) im.setAttribute('data-de-alt', im.getAttribute('alt') || '');
+      im.setAttribute('alt', lang === 'en' ? im.getAttribute('data-en-alt') : im.getAttribute('data-de-alt'));
+    }
     var titled = doc.querySelectorAll('[data-en-title]');
     for (var t = 0; t < titled.length; t++) {
       var ti = titled[t];

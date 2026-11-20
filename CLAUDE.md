@@ -73,7 +73,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261120; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261120b; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -211,8 +211,8 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Hinweis (.kmap__hint): Ziel ist eingetragen, Start nimmt die App vom Standort oder fragt danach. "Mit dem Schiff" nennt
   den Takt (Ankunft Romanshorn stuendlich zur Minute 06, Abfahrt Friedrichshafen Minute 20, rund 45 Minuten, im Winter
   teils Zweistundentakt; Quelle bsb.de und bodensee-schiffe.ch, Stand 10.10.2026, bei Fahrplanwechsel pruefen). Das Wort
-  "Bodensee" bleibt im sichtbaren Text tabu (Faehrbetreiberin statt Firmenname). applyLang kennt zusaetzlich data-en-href
-  und data-en-title. Anreise-Texte (10.10.2026) nach
+  "Bodensee" bleibt im sichtbaren Text tabu (Faehrbetreiberin statt Firmenname). applyLang kennt zusaetzlich data-en-href,
+  data-en-title und (seit 20.11.2026) data-en-alt fuer die Alt-Texte der Fotos. Anreise-Texte (10.10.2026) nach
   Kundenangaben: drei Anfahrten ueber den Hubkreisel (Amriswil/Weinfelden; Zuerich via Ausfahrt Kreuzlingen Sued und
   Hauptstrasse 13; Osten via Verzweigung Meggenhus und A23), Parkplaetze (oeffentlich oder Anruf fuer die Schranke),
   Fussweg vom Bahnhof, der Faehre und den Kursschiffen unten am Hafenbecken entlang, Eingang Westseite/Hochparterre,

@@ -356,6 +356,12 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Aenderungen beim Serienanlauf), 05 Prototyp (Zulieferer, die in ihrer Disziplin zu den besten gehoeren: CNC-Fraesen und
     -Drehen, additive Fertigung, Schweissen, Giessen), Team-Einleitung (Fachleute fuer Konstruktion, Simulation und
     Prototypenbau). Je DE und EN, Karten und Captions in allen Breiten ohne Ueberlauf. Status: erledigt in r1
+81. [Kunde 20.11.] Branchen: "Maschinen- und Anlagenbau, etwa fuer die Abfuellung von Fluessigkeiten und Feststoffen".
+    Danach Pruefung der englischen Fassung aller fuenf Seiten (393 Textpaare): Korrekturen u. a. Team-Titel, Leitbild,
+    Branchen, Karriere (Titel, Initiativbewerbung, Konstrukteur/-in EFZ einheitlich), Kontakt, Impressum ("Liability for
+    links"), Datenschutz (Rechte, Aenderungen, Karte). Neu zweisprachig: Alt-Texte aller Fotos (data-en-alt, main.js
+    applyLang), aria-Labels Hauptnavigation, Kennzahlen, Kompetenzen, Leistungen, "Google opt-out add-on". Cache
+    20261120b. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
