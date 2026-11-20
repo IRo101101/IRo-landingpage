@@ -132,7 +132,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Erfundene Personen (Stand 20.11.2026): Auf den Fotos 09, 10, 11, 12, 15, 16, 18, 19, 20, 21 sind die Koepfe der
   Mitarbeitenden durch erfundene Personen ersetzt (Inhaber unveraendert; 04 Mitarbeiterin bleibt Original; 05 und 14
   zeigen den Inhaber). 24, 25, 26 sind zusaetzliche Fassungen von 16, 21, 11 mit neu erzeugtem Kopf (20.11., der
-  bisherige glich der echten Person noch); nirgends eingebunden, Wahl der Fassung offen beim Kunden (Vergleich:
+  bisherige glich der echten Person noch); nirgends eingebunden; Kundenentscheid 20.11.: die Seite behaelt 16, 21, 11, 24 bis 26 bleiben als Reserve (Vergleich:
   `r1/vorschau-fotos.html`, eigenes CSS `assets/css/vorschau-fotos.css`, nicht fuer die Live-Site). Figuren bleiben
   uneinheitlich, Taetowierung auf dem Foto mit drei Sitzenden darf sichtbar bleiben (Kundenentscheide 20.11.).
   Basis sind Master in Originalgroesse aus den unveraenderten Originalfotos, im Higgsfield-Konto

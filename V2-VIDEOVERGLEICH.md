@@ -334,7 +334,8 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     alle Fotos zugeschnitten statt gestaucht (Fehler seit 15.10.) und auf der Folie "Ihre Ansprechpersonen" Foto 14
     (Inhaber) statt einer erfundenen Person (Kundenwunsch). (4) Die Taetowierung am Knoechel darf sichtbar bleiben.
     Master-Paket `IRo_Fotomaster_2026-11-20.zip` (21 Master) im Higgsfield-Konto.
-    Status: erledigt. Offen (Entscheid Kunde): welche Fassung auf die Seite kommt (16/21/11 oder 24/25/26).
+    Status: erledigt. Kundenentscheid 20.11. nach Vergleich (`r1/vorschau-fotos.html`): alle Fotos bleiben, wie sie
+    sind; die Seite zeigt weiter 16, 21, 11, die Fassungen 24, 25, 26 bleiben als Reserve im Fundus.
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

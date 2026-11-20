@@ -64,7 +64,8 @@ aendern muessen. Farbstich und Unschaerfe des alten Stands verschwinden damit vo
 
 - Fuenf uebernommene Koepfe waren der echten Person laut Gesichtsvergleich noch aehnlich (siehe Abschnitt 3). Die
   drei auf der Website (16, 21, 11) gibt es seit 20.11.2026 zusaetzlich mit neuem Kopf als 24, 25, 26. Die Seiten
-  zeigen weiterhin 16, 21 und 11; welche Fassung gilt, entscheidet der Kunde. Die zwei uebrigen (Profil am
+  zeigen weiterhin 16, 21 und 11 (Kundenentscheid 20.11.2026 nach dem Vergleich auf `r1/vorschau-fotos.html`:
+  alle Fotos bleiben, wie sie sind; 24 bis 26 bleiben als Reserve). Die zwei uebrigen (Profil am
   Bildschirm, zweite Drehmaschine) sind nicht auf der Website und bleiben so.
 - Die uebernommenen Koepfe stammen aus Bildern mit 5056 Pixeln Breite. In der 100-Prozent-Ansicht sind sie etwas
   weicher als das Original daneben. Fuer Web und uebliche Druckgroessen spielt das keine Rolle.
