@@ -155,7 +155,7 @@ def main():
 
     F_T, F_H, F_L, F_N, F_D = font(22, True), font(19, True), font(17, True), font(14), font(14)
     COLS, TW, TH, GX, M = 4, 300, 200, 18, 18
-    TEXT_H, GY = 34 + 5 * 18, 26                      # Beschriftung + bis 2 Hinweiszeilen + bis 3 Beschreibungszeilen
+    TEXT_H, GY = 34 + 5 * 18 + 24, 26                 # Beschriftung + bis 2 Hinweiszeilen + bis 3 Beschreibungszeilen + Dateiname
     W = M * 2 + COLS * TW + (COLS - 1) * GX
     rows = -(-len(rows_data) // COLS)
     HEAD = M + 78
@@ -181,7 +181,7 @@ def main():
         return im.resize((max(1, round(w * s)), max(1, round(h * s))), Image.LANCZOS)
 
     n_used = sum(1 for r in rows_data if r[4] == 'used')
-    d.text((M, M), 'Fotos %s bis %s und ihre Verwendung in v2 r1 · Code-Stand %s' % (nums[0], nums[-1], code_date()), fill=INK, font=F_T)
+    d.text((M, M), 'Fotos %s bis %s und ihre Verwendung in v2 r1 · Code-Stand %s · Dateien in r1/assets/img/v2' % (nums[0], nums[-1], code_date()), fill=INK, font=F_T)
     x = M
     for state, text in (('used', '%d verwendet' % n_used), ('unused', '%d nicht verwendet' % sum(1 for r in rows_data if r[4] == 'unused')),
                         ('new', '%d neu, noch frei' % sum(1 for r in rows_data if r[4] == 'new'))):
@@ -200,6 +200,7 @@ def main():
             d.text((x, yy), line, fill=INK, font=F_N); yy += 18
         for line in wrap(desc, F_D, TW)[:3]:
             d.text((x, yy), line, fill=GRAY, font=F_D); yy += 18
+        d.text((x, yy + 4), f'Datei: {num}.webp', fill=INK, font=F_L)   # Name zum Nennen beim Austauschen, direkt unter dem Text
 
     y = H_PHOTOS
     d.text((M, y), 'Fotos der alten Site (v1), nicht in v2 übernommen', fill=INK, font=F_H); y += 36
