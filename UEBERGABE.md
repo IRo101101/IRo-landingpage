@@ -223,3 +223,4 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
 - 20.11.: Drei Koepfe, die der echten Person noch glichen, neu erzeugt (zusaetzliche Fotos 24, 25, 26). PowerPoint-
   Beispieldecks: Fotos aus den Mastern, Ihre-Ansprechpersonen-Folie mit Foto 14 (Inhaber) statt einer erfundenen
   Person, alle Fotos zugeschnitten statt gestaucht (Fehler seit 15.10.), Logo-Dateien fuer den Bau ins Repository.
+- 20.11.: Foto 01 (Espressomaschine, Geraet gibt es nicht mehr) aus r1 entfernt, in der Rotation durch 08 ersetzt.

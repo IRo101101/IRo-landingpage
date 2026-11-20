@@ -121,8 +121,9 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Chrome rechnet `clip-path` des Ziels in IntersectionObserver ein: maskierte Elemente (`.card__mask`,
   `.team__mask`) nie direkt beobachten, sondern den unmaskierten Elternknoten (`Inview(..., {watch: el})`).
 - Fotos: `assets/img/v2/NN.webp` (Desktop, 1800 px breit, Hero 2400) und `NN-m.webp` (mobil, 1100 px); Nummern = Kontaktblatt
-  01-23 (24-26 = Fassungen von 16, 21, 11, siehe unten). Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 01/05/10/04/12/18/06/15/20/02;
-  08 (Glasfront mit Terrasse) unbenutzt. 22 (3D-Drucker druckt Shore-Haertemuster) und 23 (offene Glastuer zum Buero, gruene
+  01-23 (24-26 = Fassungen von 16, 21, 11, siehe unten). Hero 07, Team 16, Kontakt 17, Karten 09/11/13/14, Prozess 19/15/10/21/03, Rotation 08/05/10/04/12/18/06/15/20/02;
+  01 (Espressomaschine) veraltet, das Geraet gibt es nicht mehr: nirgends verwenden (Kundenentscheid 20.11.2026, in der
+  Rotation durch 08 Glasfront mit Terrasse ersetzt; der eingefrorene Root zeigt 01 weiter). 22 (3D-Drucker druckt Shore-Haertemuster) und 23 (offene Glastuer zum Buero, gruene
   Saeulen, Kaffeebar) am 10.10.2026 nachgeliefert, noch frei; sie kamen als Chat-Upload nur mit 2000 px Breite (Originale
   01-21 lagen als ZIP mit 6720 px vor), bei Lieferung der Originale als ZIP neu rechnen (`_handover/tools/add_photos.py`).
   Uebersicht aller Fotos mit Verwendung: `_handover/tools/bilduebersicht.py` erzeugt `_handover/bilduebersicht.png`.

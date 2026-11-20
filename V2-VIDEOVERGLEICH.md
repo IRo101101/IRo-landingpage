@@ -336,6 +336,11 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Master-Paket `IRo_Fotomaster_2026-11-20.zip` (21 Master) im Higgsfield-Konto.
     Status: erledigt. Kundenentscheid 20.11. nach Vergleich (`r1/vorschau-fotos.html`): alle Fotos bleiben, wie sie
     sind; die Seite zeigt weiter 16, 21, 11, die Fassungen 24, 25, 26 bleiben als Reserve im Fundus.
+77. [Kunde 20.11.] Foto 01 (Espressobezug an der Kaffeemaschine) ist veraltet, das Geraet gibt es nicht mehr: nirgends
+    mehr verwenden. Umgesetzt: In der Rotation Unternehmen (Position 1 von 10) steht 08 (Glasfront und Terrasse) statt
+    01, ebenso auf den Vorschauseiten Layouts und Uebergaenge. Der eingefrorene Root (Stand 30.09.) zeigt 01 weiter
+    (Vergleichsbasis, nicht anfassen). Hinweis: Die Kaffeebar an der gruenen Wand ist klein im Hintergrund von 06
+    (Rotation) und 23 (frei) zu sehen. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

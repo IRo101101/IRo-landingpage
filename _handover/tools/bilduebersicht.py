@@ -14,7 +14,7 @@ PAGE = REPO + 'r1/index.html'
 
 # Fotos, die in keiner Seite eingebaut sind: Beschreibung, Zustand (unused = rot, new = schwarz), Beschriftung
 FREE = {
-  '08': ('Glasfront und Terrasse des Firmengebäudes', 'unused', 'NICHT VERWENDET'),
+  '01': ('Espressobezug an der Kaffeemaschine. Das Gerät gibt es nicht mehr: nirgends verwenden (Kunde 20.11.2026)', 'unused', 'VERALTET, NICHT VERWENDEN'),
   '22': ('3D-Drucker druckt Härtemuster 27 bis 95 Shore (Vero White) mit IdeeRoth-Beschriftung', 'new', 'NEU 10.10., NOCH FREI'),
   '23': ('Offene Glastür zum Büro mit grünen Säulen und Kaffeebar', 'new', 'NEU 10.10., NOCH FREI'),
   '24': ('Fassung von 16 (Team am Tisch) mit neu erzeugtem Kopf rechts', 'new', 'NEU 20.11., NOCH FREI'),
