@@ -713,7 +713,8 @@
     var stage = doc.querySelector('[data-hero-stage]');
     // r1 Variante "nur Logo" (Kundenwunsch 20.11.2026, zum Vergleich): ohne Fotokarten, nur das IRo-Zeichen fuellt sich von
     // unten nach oben, fliegt in den Header, dann blendet das Panel aus. Aufruf mit ?lade=logo oder data-preloader="logo".
-    var logoOnly = panel.getAttribute('data-preloader') === 'logo' || /[?&]lade=logo(&|$)/.test(win.location.search);
+    // Kundenentscheid 20.11.2026: "nur Logo" ist Standard (data-preloader="logo"); ?lade=fotos zeigt zum Vergleich das alte Panel
+    var logoOnly = (panel.getAttribute('data-preloader') === 'logo' && !/[?&]lade=fotos(&|$)/.test(win.location.search)) || /[?&]lade=logo(&|$)/.test(win.location.search);
     if (logoOnly) panel.classList.add('pre--logo');
     if (lenis) lenis.stop();
     try { win.scrollTo(0, 0); } catch (e) {}

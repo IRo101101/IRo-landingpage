@@ -73,7 +73,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261120c; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261120d; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -162,9 +162,10 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Unter 768 px: Prozess gestapelt (Foto oben, Liste, Caption, Leiste 01-05 `.process__bar`, Parallaxe +-20 px),
   `html { font-size: max(14px, 4.102564vw) }`, Mindestgroessen 12 px fuer Versal-Labels, Tap-Ziele 40 px (auch bei
   `pointer: coarse` ab 1024), `.about__band` als Flex-Spalte mit 1.5rem Abstand, Hero-Foto 358/400 mit staerkerem Schleier.
-- Ladepanel-Variante "nur Logo" (Kundenwunsch 20.11.2026, Entscheid offen): `r1/?lade=logo` oder `data-preloader="logo"`
-  am Panel. Ohne Fotokarten und Finale-Karte (`.pre--logo`), das Zeichen fuellt sich, fliegt in den Header, das Panel
-  blendet ab drei Vierteln des Flugs aus (initPreloader `expandLogo`); ohne Parameter bleibt das Panel mit Fotos.
+- Ladepanel "nur Logo" ist Standard (Kundenentscheid 20.11.2026, `data-preloader="logo"` am Panel): ohne Fotokarten und
+  Finale-Karte (`.pre--logo`), das Zeichen fuellt sich, fliegt in den Header, das Panel blendet ab drei Vierteln des Flugs
+  aus (initPreloader `expandLogo`). Das alte Panel mit Fotos zum Vergleich: `r1/?lade=fotos`. Die Kartenbilder tragen
+  loading="lazy" und laden darum im Logo-Modus nicht.
 - Kontakt-Parallaxe laeuft auf `.contact__layer` (innerer Layer 120 %), nicht mehr auf `.contact__photo`.
 - Kompetenzkarten (Kundenentscheid K-B/KL-A 16.10.2026): `div.card` mit `.card__foot` (Titel und Kurzzeile),
   `button.card__hit` ueber der ganzen Karte (aria-expanded) und `.card__more` (inert, Feder PANEL auf clip-path,

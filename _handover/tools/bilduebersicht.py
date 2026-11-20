@@ -14,6 +14,7 @@ PAGE = REPO + 'r1/index.html'
 
 # Fotos, die in keiner Seite eingebaut sind: Beschreibung, Zustand (unused = rot, new = schwarz), Beschriftung
 FREE = {
+  '03': ('Werkstatt mit Fräs- und Bohrmaschinen (bis 20.11.2026 Prozess 05 und Ladepanel)', 'unused', 'NICHT VERWENDET'),
   '12': ('Mitarbeiter im Gespräch am Arbeitsplatz. Nirgends verwenden (Kunde 20.11.2026)', 'unused', 'NICHT VERWENDEN'),
   '01': ('Espressobezug an der Kaffeemaschine. Das Gerät gibt es nicht mehr: nirgends verwenden (Kunde 20.11.2026)', 'unused', 'VERALTET, NICHT VERWENDEN'),
   '23': ('Offene Glastür zum Büro mit grünen Säulen und Kaffeebar', 'new', 'NEU 10.10., NOCH FREI'),
@@ -57,8 +58,10 @@ class Page(HTMLParser):
         self.n_step = 0; self.step_titles = {}
         self.grab = None           # (art, index, stapeltiefe) solange ein Titel gesammelt wird
         self.buf = ''
+        self.logo_only = False     # data-preloader="logo": Karten und Schlussbild des Ladepanels werden nicht gezeigt
     def handle_starttag(self, tag, attrs):
         a = dict(attrs); cl = (a.get('class') or '').split()
+        if 'data-preloader' in a and a['data-preloader'] == 'logo': self.logo_only = True   # Ladepanel ohne Fotos (seit 20.11.2026)
         if tag == 'img':
             m = re.search(r'img/v2/(\d\d)(-m)?\.webp', a.get('src') or '')
             if m:
@@ -92,6 +95,7 @@ class Page(HTMLParser):
 
 def read_usage():
     p = Page(); p.feed(open(PAGE, encoding='utf-8').read())
+    if p.logo_only: p.uses = [u for u in p.uses if u['role'] not in ('deck', 'finale')]
     rot = [u for u in p.uses if u['role'] == 'rot']; proc = [u for u in p.uses if u['role'] == 'proc']
     deck = [u for u in p.uses if u['role'] == 'deck']
     use = {}

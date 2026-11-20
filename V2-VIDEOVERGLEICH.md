@@ -364,7 +364,8 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     20261120b. Status: erledigt in r1
 82. [Kunde 20.11.] Ladepanel zum Vergleich ohne Fotos, nur das IRo-Zeichen fuellt sich von unten nach oben ("vielleicht
     ist weniger mehr"). Umgesetzt als Variante: r1/?lade=logo; ohne Parameter bleibt das Panel mit Fotokarten. Dauer
-    3,3 bis 3,5 s statt 4,4 s. Cache 20261120c. Status: Entscheid offen (welche Fassung wird Standard)
+    3,3 bis 3,5 s statt 4,4 s. Kundenentscheid 20.11.: "nur Logo" wirkt cleaner, ist Standard (data-preloader="logo");
+    das alte Panel bleibt unter r1/?lade=fotos erreichbar. Cache 20261120d. Status: erledigt in r1
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
