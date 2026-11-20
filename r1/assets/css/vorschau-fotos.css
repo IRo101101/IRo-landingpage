@@ -1,0 +1,36 @@
+/* =========================================================================
+   IdeeRoth AG - iro.swiss - Vorschau r1: Fotos bisher gegen neu
+   Nur fuer vorschau-fotos.html. Laedt NACH styles.css und vorschau-layouts.css,
+   ohne main.js. Zeigt 16, 21, 11 (heute auf der Seite) neben 24, 25, 26
+   (gleiche Fotos mit neu erzeugtem Kopf, Kundenentscheid offen).
+   ========================================================================= */
+
+.vfo__pair { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; padding-inline: 1rem; margin-top: 1.5rem; }   /* auch mobil nebeneinander, sonst ist der Vergleich muehsam */
+.vfo__fig { margin: 0; min-width: 0; }
+.vfo__fig .eyebrow { display: block; margin-bottom: .5rem; font-size: .8125rem; line-height: 1.3; color: var(--fg); }
+.vfo__fig--neu .eyebrow { color: var(--black); }
+.vfo__full { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; background: var(--muted, #eef0f1); }
+
+/* Ausschnitt um den Kopf: --x, --y, --w, --h in Pixeln des 1800 x 1200 Fundusbilds */
+.vfo__crop { position: relative; overflow: hidden; margin-top: .75rem; width: 100%; aspect-ratio: var(--w) / var(--h); background: var(--muted, #eef0f1); }
+.vfo__crop img { position: absolute; max-width: none; height: auto;
+  width: calc(100% * 1800 / var(--w));
+  left: calc(-100% * var(--x) / var(--w));
+  top: calc(-100% * var(--y) / var(--h)); }
+
+.vfo__score { margin-top: .5rem; font-size: .9375rem; line-height: 1.4; color: var(--on-muted-meta); }
+.vfo__score b { font-weight: 500; color: var(--fg); }
+
+@media (min-width: 768px) {
+  .vfo__pair { padding-inline: 1.5rem; gap: 1.5rem; }
+  .vfo__fig .eyebrow { font-size: .875rem; }
+  .vfo__crop { width: min(100%, 22rem); }
+}
+@media (min-width: 1440px) {
+  .vfo__pair { padding-inline: 2rem; gap: 2rem; }
+}
+/* Sechs Vorschauseiten: Navigation darf zwischen 640 und 1023 px umbrechen */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .vl__hdr { flex-wrap: wrap; height: auto; padding-block: .875rem; row-gap: .75rem; }
+  .vl__hdr nav { flex: 1 1 100%; order: 2; flex-wrap: wrap; gap: .5rem; }
+}

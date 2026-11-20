@@ -74,7 +74,7 @@ Beim Kunden:
 
 Fotos mit erfundenen Personen (Stand 20.11.2026, Einzelheiten in `_handover/tools/fotomaster/README.md`):
 - Entscheid des Kunden offen: Fassung 16, 21 und 11 (bisheriger Kopf, der echten Person noch aehnlich) oder die
-  zusaetzlichen Fassungen 24, 25, 26 (neuer Kopf). Tausch auf der Seite: `src` und Ladepanel-Verweise in
+  zusaetzlichen Fassungen 24, 25, 26 (neuer Kopf), Vergleich auf `r1/vorschau-fotos.html`. Tausch auf der Seite: `src` und Ladepanel-Verweise in
   `r1/index.html` von 16/21/11 auf 24/25/26 aendern, Sweep.
 - Kundenentscheide 20.11.: Die Figuren bleiben so, wie sie sind (von Foto zu Foto nicht streng dieselbe Person);
   die Taetowierung am Knoechel auf dem Foto mit den drei Sitzenden darf sichtbar bleiben.
