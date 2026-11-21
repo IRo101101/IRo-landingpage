@@ -23,7 +23,24 @@ Das ist keine Rechtsberatung. Die Punkte unter «Offen» gehoeren vor eine Fachp
 | Impressum 03 Haftungsausschluss | Voller Ausschluss ist fuer Absicht und grobe Fahrlaessigkeit nichtig (OR Art. 100 Abs. 1) | «soweit das Gesetz dies zulaesst» |
 | Impressum 01 | Identitaet und Kontaktadresse mit E-Mail vorhanden (UWG Art. 3 Abs. 1 lit. s Ziff. 1, falls anwendbar) | nichts noetig |
 
-## Offen (braucht Angaben oder einen Entscheid des Kunden)
+## Nachtrag 21.11.2026 (Angaben und Entscheide des Kunden, Paket 20261121c)
+
+- Impressum: UID CHE-407.745.534 in der Kontaktadresse (vom Kunden, eingetragen im UID-Register). Handelsregister und
+  vertretungsberechtigte Person nicht ergaenzt (keine Angabe).
+- Google Analytics bewahrt die Daten 14 Monate auf (Kunde). Abschnitt 06 nennt jetzt «nach 14 Monaten».
+- KI-Fotos: Hinweis nur im Impressum, Abschnitt Urheberrechte: «Ein Teil der Fotos auf dieser Website wurde mit KI
+  bearbeitet.» (Kundenentscheid).
+- Server-Logfiles: Abschnitt 04 nennt die Hostpoint AG, die Logfiles liegen dort, fuer die Aufbewahrung gelten die
+  Bestimmungen von Hostpoint (Kunde: «Den Rest regeln die»). Der Satz zur Aufbewahrung in Abschnitt 03 verweist darauf.
+
+## Noch offen (zur Bestaetigung durch eine Fachperson, keine Aenderung an der Seite noetig)
+
+1. Swiss-U.S. Data Privacy Framework: Zertifizierung der Google LLC bestaetigen (Satz steht «nach Angaben von Google»).
+2. EU-Vertretung nach DSGVO Art. 27: voraussichtlich nicht noetig (Ausnahme Art. 27 Abs. 2 lit. a).
+3. Mitarbeiterfotos beim externen KI-Dienst: Einwilligung der abgebildeten Mitarbeitenden und Vertrag mit dem Dienst.
+
+## Erste Fassung der offenen Punkte (vor dem Nachtrag)
+
 
 1. **Impressum, UID und Handelsregister:** UID-Nummer (CHE-...) und «Handelsregister des Kantons Thurgau» ergaenzen,
    dazu die vertretungsberechtigte Person mit Funktion. Nach UWG nicht zwingend, fuer Besucher aus Deutschland und

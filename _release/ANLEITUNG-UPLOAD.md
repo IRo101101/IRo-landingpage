@@ -3,7 +3,7 @@
 Paket: `iro-swiss-www-20261120.zip` (52 Dateien, 4,1 MB entpackt). Die Dateien liegen im ZIP direkt auf oberster
 Ebene; ihr Inhalt gehoert 1:1 in das Verzeichnis `www` bei Hostpoint.
 
-## Update vom 21.11.2026 (Paket `iro-swiss-www-20261121b.zip`, ersetzt `iro-swiss-www-20261121.zip`)
+## Update vom 21.11.2026 (Paket `iro-swiss-www-20261121c.zip`, finaler Stand, ersetzt 20261121 und 20261121b)
 
 Die Seite ist seit 20.11.2026 live. Fuer das Update genuegt:
 
@@ -15,8 +15,8 @@ Die Seite ist seit 20.11.2026 live. Fuer das Update genuegt:
 3. Kontrolle im privaten Fenster: Startseite mit Knopf «Offene Lehrstelle», Kontaktseite (ohne Apple Karten, Anreise in
    Punkten), Handy quer und Tablet mit Text im Foto. Wer die Seite schon offen hatte: einmal neu laden.
 
-Wer `iro-swiss-www-20261121.zip` schon hochgeladen hat, ersetzt aus 20261121b nur `index.html`, `impressum.html` und
-`datenschutz.html`.
+Wer `iro-swiss-www-20261121.zip` oder `20261121b` schon hochgeladen hat, ersetzt aus 20261121c nur `index.html`,
+`impressum.html` und `datenschutz.html`.
 
 Zurueck auf den Stand vom 20.11.: `iro-swiss-www-20261120.zip` gleich hochladen.
 

@@ -70,6 +70,10 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - LIVE seit 20.11.2026 (v2 aus r1). Go-Live-Stand eingefroren als Branch `golive-2026-11-20` (Commit 72a3797 =
   `_release/iro-swiss-www-20261120.zip`; Tags lassen sich aus der Cloud-Umgebung nicht pushen, Proxy 403). Jedes neue
   Paket bekommt das Datum im Namen, alte Pakete bleiben im Repository. Nachtrag 21.11.: `iro-swiss-www-20261121.zip`.
+- FREIGEGEBEN 21.11.2026 (Kunde): `_release/iro-swiss-www-20261121c.zip`, eingefroren als Branch `freigabe-2026-11-21`
+  (zeigt auf den Commit mit diesem Paket und dem Archiv `iro-website-archiv-20261121c.zip`). Das ist der gueltige
+  Live-Stand, sobald der Kunde ihn hochgeladen hat. Eingefrorene Branches nie aendern, neue Staende bekommen einen
+  neuen Branch `freigabe-YYYY-MM-DD`.
 - Endkontrolle vor jedem Upload: Skripte und Aufrufe in `_handover/tools/golive/endkontrolle/README.md`.
 - Archiv fuer Marketing (Finish-File): `python3 _handover/tools/archiv/build_archiv.py` nach dem Release-Build ergibt
   `_release/iro-website-archiv-YYYYMMDD.zip` (Texte je Seite DE/EN als Markdown, texte.json/csv als Paare, Stil,
@@ -332,6 +336,9 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Datenschutz hat seither Stand-Datum (Abschnitt 11), Rechte mit Herausgabe/Uebertragung, Widerruf und EDOEB,
   Auslandsbekanntgabe bei Google, Aufbewahrung nach Kriterium, «IP-Adresse» ohne Zusage zur Kuerzung. Impressum:
   Haftungsausschluss «soweit das Gesetz dies zulaesst». Bei jeder Aenderung an datenschutz.html das Stand-Datum nachfuehren.
+  Kundenangaben 21.11.: UID CHE-407.745.534 im Impressum, Google Analytics 14 Monate Aufbewahrung, Hinweis zu KI-Fotos
+  NUR im Impressum (Abschnitt Urheberrechte, «Ein Teil der Fotos auf dieser Website wurde mit KI bearbeitet.»),
+  Datenschutz nennt Hostpoint AG als Ort der Server-Logfiles, Aufbewahrung regelt Hostpoint (keine eigenen Fristen nennen).
 - Google Search Console: Anleitung fuer den Kunden `_release/ANLEITUNG-SEARCH-CONSOLE.md` (Domain-Property iro.swiss,
   TXT-Eintrag bei Hostpoint, Sitemap). Der TXT-Eintrag muss bleiben.
 - Zweites Paket am selben Tag: `build_release.py b` ergibt `iro-swiss-www-YYYYMMDDb.zip`; das Archiv nimmt das juengste

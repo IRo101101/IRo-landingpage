@@ -421,6 +421,10 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Status: erledigt in r1, offene Punkte beim Kunden
 95. [Kunde 21.11.] Schritt-fuer-Schritt-Anleitung fuer die Google Search Console: _release/ANLEITUNG-SEARCH-CONSOLE.md.
     Paket _release/iro-swiss-www-20261121b.zip, Archiv _release/iro-website-archiv-20261121b.zip. Status: erledigt
+96. [Kunde 21.11.] Angaben zur Rechtspruefung: UID CHE-407.745.534 ins Impressum, Google Analytics bewahrt 14 Monate
+    auf, Hinweis zu KI-Fotos nur im Impressum («Ein Teil der Fotos auf dieser Website wurde mit KI bearbeitet.»),
+    Server-Logfiles liegen bei Hostpoint, den Rest regelt Hostpoint. DE und EN. Paket _release/iro-swiss-www-20261121c.zip,
+    Archiv _release/iro-website-archiv-20261121c.zip. Status: erledigt
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

@@ -69,13 +69,13 @@ Beim Kunden:
 - Kennzahlen im Hero: «20+ Jahre» am 20.11.2026 bestaetigt (dazu «1 Adresse», «130 dB»).
 - Paket `_release/iro-swiss-www-20261121.zip` hochladen (Aenderungen vom 21.11., Abschnitt 4). Danach im Browser
   pruefen: Knopf «Offene Lehrstelle» im Startbild, Kontaktseite, Handy quer, Tablet.
-- Paket `_release/iro-swiss-www-20261121b.zip` hochladen (Knopf Variante C, Datenschutz und Impressum nach der
-  Rechtspruefung). Es ersetzt 20261121.
+- Paket `_release/iro-swiss-www-20261121c.zip` hochladen (Knopf Variante C, Datenschutz und Impressum nach der
+  Rechtspruefung mit UID, 14 Monaten Google Analytics, KI-Hinweis im Impressum, Hostpoint). Es ersetzt 20261121 und
+  20261121b.
 - Aktuell-Knopf: Variante C Glanz ist eingestellt (Kundenentscheid 21.11.). Wenn die Lehrstelle 2027 besetzt ist, meldet
   sich der Kunde, dann Knopf aendern oder entfernen.
-- Rechtspruefung 21.11.: offene Punkte 1 bis 7 in `_handover/recherche/rechtspruefung-impressum-datenschutz-2026-11-21.md`
-  (UID und Handelsregister, Aufbewahrung in Google Analytics, Data Privacy Framework, Kennzeichnung KI-bearbeiteter
-  Fotos, Logfiles beim Hosting-Anbieter, EU-Vertretung, Mitarbeiterfotos beim KI-Dienst).
+- Rechtspruefung 21.11.: noch drei Punkte zur Bestaetigung durch eine Fachperson (Data Privacy Framework bei Google,
+  EU-Vertretung, Mitarbeiterfotos beim KI-Dienst), siehe `_handover/recherche/rechtspruefung-impressum-datenschutz-2026-11-21.md`.
 - Google Search Console nach `_release/ANLEITUNG-SEARCH-CONSOLE.md` einrichten (Kunde).
 - Rechtliche Hinweise aus der Endkontrolle 20.11. sind seit 21.11. geprueft und, soweit ohne neue Angaben moeglich,
   umgesetzt (siehe Rechtspruefung oben).
@@ -133,8 +133,8 @@ Repository bleibt wie es ist (Root = Stand 30.09. als Vergleich, `r1/` = Quelle)
    `_release/ANLEITUNG-UPLOAD.md` (ohne Loeschschritt, die Ordner sind gleich). Endkontrolle am Paket 21.11.: vnu ohne
    Fehler, 318 interne Verweise ok, keine externe Anfrage vor Zustimmung, danach nur googletagmanager.com, axe nur die
    bekannte Fehlmessung im Prozessblock, Tastatur 45 Stopps ohne Befund, Sweep 72/72 auf r1.
-8. Archiv fuer Marketing (Finish-File, Kundenwunsch 21.11.): `_release/iro-website-archiv-20261121b.zip` (ersetzt die
-   erste Fassung vom selben Tag), gebaut mit
+8. Archiv fuer Marketing (Finish-File, Kundenwunsch 21.11.): `_release/iro-website-archiv-20261121c.zip` (ersetzt die
+   frueheren Fassungen vom selben Tag), gebaut mit
    `python3 _handover/tools/archiv/build_archiv.py` nach dem Release-Build. Inhalt: alle Texte je Seite DE und EN als
    Markdown, alle Texteinheiten als JSON und CSV (Paare DE/EN), Textstil, Wording, Glossar, Design, Firmendaten, alle
    Fotos als JPG mit Alt-Texten und Hinweis zu erfundenen Personen, Logos, Badges, PowerPoint-Vorlage, Upload-Paket.
@@ -271,3 +271,5 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
   Lehrstelle»), neues Paket 20261121, Archiv fuer Marketing, Endkontrolle-Skripte im Repository.
 - 21.11.: Knopf Variante C, Rechtspruefung Impressum und Datenschutz mit Ergaenzungen, Anleitung Search Console,
   Paket 20261121b und Archiv 20261121b.
+- 21.11.: UID, 14 Monate Google Analytics, KI-Hinweis im Impressum, Hostpoint als Ort der Logfiles. Paket 20261121c
+  ist der finale Stand des Tages, Archiv 20261121c.

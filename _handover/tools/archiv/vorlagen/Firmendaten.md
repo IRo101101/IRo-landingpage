@@ -8,6 +8,7 @@ und wird nicht erfunden.
 | Feld | Wert |
 |---|---|
 | Firma | IdeeRoth AG |
+| UID | CHE-407.745.534 |
 | Marke, Kurzform | IRo |
 | Website | https://www.iro.swiss (ideeroth.ch leitet dorthin um) |
 | Adresse | Hafenstrasse 62, CH-8590 Romanshorn, Schweiz |
@@ -44,4 +45,5 @@ und wird nicht erfunden.
 
 - Google Analytics nur nach Zustimmung im Cookie-Hinweis.
 - Links zu Google Maps (Route), SBB-Fahrplan und Fährfahrplan. Keine eingebettete Karte, keine fremden Schriften.
-- Hosting bei Hostpoint (Schweiz).
+- Hosting bei der Hostpoint AG (Schweiz), die Server-Logfiles liegen dort.
+- Ein Teil der Fotos wurde mit KI bearbeitet (Hinweis im Impressum).
