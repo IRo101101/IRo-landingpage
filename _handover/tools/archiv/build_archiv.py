@@ -327,10 +327,13 @@ def banner_html():
 
 def main():
     today = datetime.date.today()
-    pkg = os.path.join(REL, 'iro-swiss-www-%s.zip' % today.strftime('%Y%m%d'))
-    if not os.path.isfile(pkg): sys.exit('Zuerst das Upload-Paket bauen: python3 _handover/tools/golive/build_release.py')
+    import glob
+    pkgs = sorted(glob.glob(os.path.join(REL, 'iro-swiss-www-%s*.zip' % today.strftime('%Y%m%d'))))
+    if not pkgs: sys.exit('Zuerst das Upload-Paket bauen: python3 _handover/tools/golive/build_release.py')
+    pkg = pkgs[-1]  # juengstes Paket des Tages (mit Buchstaben b, c ...)
+    tag = os.path.basename(pkg)[len('iro-swiss-www-'):-len('.zip')]
     if os.path.isdir(OUT): shutil.rmtree(OUT)
-    base = os.path.join(OUT, 'iro-website-archiv-%s' % today.strftime('%Y%m%d'))
+    base = os.path.join(OUT, 'iro-website-archiv-%s' % tag)
     for d in ('texte/de', 'texte/en', 'stil', 'firma', 'bilder/fotos', 'bilder/logo', 'bilder/badges', 'bilder/weitere', 'website'):
         os.makedirs(os.path.join(base, d), exist_ok=True)
 
@@ -449,7 +452,7 @@ def main():
     if bad: print('\n'.join(bad)); sys.exit('Kontrolle fehlgeschlagen')
 
     # 7) ZIP
-    zpath = os.path.join(REL, 'iro-website-archiv-%s.zip' % today.strftime('%Y%m%d'))
+    zpath = os.path.join(REL, 'iro-website-archiv-%s.zip' % tag)
     if os.path.exists(zpath): os.remove(zpath)
     n = 0
     with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:

@@ -69,15 +69,16 @@ Beim Kunden:
 - Kennzahlen im Hero: «20+ Jahre» am 20.11.2026 bestaetigt (dazu «1 Adresse», «130 dB»).
 - Paket `_release/iro-swiss-www-20261121.zip` hochladen (Aenderungen vom 21.11., Abschnitt 4). Danach im Browser
   pruefen: Knopf «Offene Lehrstelle» im Startbild, Kontaktseite, Handy quer, Tablet.
-- Aktuell-Knopf: Bewegung waehlen (A Puls ist eingestellt, B Atem, C Glanz; Vorschau `r1/vorschau-aktuell.html`).
-  Sobald die Lehrstelle 2027 besetzt ist, Knopf aendern oder entfernen (CLAUDE.md, Abschnitt Aktuell-Knopf).
-- Karriere: Die Zeile «Initiativbewerbung» duzt wie das Inserat (Hausstil verlangt «Sie»); Kunde entscheidet, ob das
-  so bleibt oder auf «Sie» umgestellt wird.
-- Rechtlich pruefen lassen (Hinweise aus der Endkontrolle 20.11., keine Rechtsberatung): Impressum ohne UID und
-  Handelsregister-Eintrag; Datenschutz ohne Stand-Datum, ohne Aufbewahrungsfristen (Logs, GA, E-Mails), Rechte ohne
-  Datenherausgabe (Art. 28 DSG) und Beschwerde beim EDOEB, Grundlage der USA-Uebermittlung bei Google (Swiss-US DPF
-  oder Standardvertragsklauseln) nicht genannt; Satz «gekuerzte IP» in den Server-Logfiles mit Hostpoint klaeren;
-  Alt-Texte nennen die erfundenen Personen «Mitarbeiter».
+- Paket `_release/iro-swiss-www-20261121b.zip` hochladen (Knopf Variante C, Datenschutz und Impressum nach der
+  Rechtspruefung). Es ersetzt 20261121.
+- Aktuell-Knopf: Variante C Glanz ist eingestellt (Kundenentscheid 21.11.). Wenn die Lehrstelle 2027 besetzt ist, meldet
+  sich der Kunde, dann Knopf aendern oder entfernen.
+- Rechtspruefung 21.11.: offene Punkte 1 bis 7 in `_handover/recherche/rechtspruefung-impressum-datenschutz-2026-11-21.md`
+  (UID und Handelsregister, Aufbewahrung in Google Analytics, Data Privacy Framework, Kennzeichnung KI-bearbeiteter
+  Fotos, Logfiles beim Hosting-Anbieter, EU-Vertretung, Mitarbeiterfotos beim KI-Dienst).
+- Google Search Console nach `_release/ANLEITUNG-SEARCH-CONSOLE.md` einrichten (Kunde).
+- Rechtliche Hinweise aus der Endkontrolle 20.11. sind seit 21.11. geprueft und, soweit ohne neue Angaben moeglich,
+  umgesetzt (siehe Rechtspruefung oben).
 - Google-Unternehmensprofil pruefen (vorhanden, verifiziert, Adresse aktuell?) und bei Bedarf beanspruchen. Mit der
   Place-ID liesse sich der Google-Maps-Link auf kontakt.html genau auf den Eintrag richten (`destination_place_id`).
 
@@ -121,7 +122,7 @@ Repository bleibt wie es ist (Root = Stand 30.09. als Vergleich, `r1/` = Quelle)
 4. Kundenentscheide zum Go-Live: nur Google als externer Dienst; swisstopo-Karte durch «Route in Google Maps» ersetzt;
    Routenlinks Apple/SBB/Faehre und Badge-Links (NAFEMS, Berufsberatung) bleiben; «20+ Jahre» bestaetigt; Lenis durch
    eigenen Code ersetzt.
-5. Nach dem Livegang: Google Search Console, Sitemap einreichen. GitHub-Pages-Vorschau kann danach abgeschaltet werden.
+5. Nach dem Livegang: Google Search Console, Sitemap einreichen (Anleitung `_release/ANLEITUNG-SEARCH-CONSOLE.md`). GitHub-Pages-Vorschau kann danach abgeschaltet werden.
 6. Eingefroren: Branch `golive-2026-11-20` = Commit 72a3797 = Inhalt von `iro-swiss-www-20261120.zip`. Zurueck auf
    diesen Stand: ZIP erneut hochladen (alte Dateien vorher loeschen) oder aus dem Branch neu bauen.
 7. Nachtrag 21.11.2026 (Kundenwuensche nach dem Livegang, V2-VIDEOVERGLEICH 87 bis 91): Sonne im Startbild auf dem
@@ -132,7 +133,8 @@ Repository bleibt wie es ist (Root = Stand 30.09. als Vergleich, `r1/` = Quelle)
    `_release/ANLEITUNG-UPLOAD.md` (ohne Loeschschritt, die Ordner sind gleich). Endkontrolle am Paket 21.11.: vnu ohne
    Fehler, 318 interne Verweise ok, keine externe Anfrage vor Zustimmung, danach nur googletagmanager.com, axe nur die
    bekannte Fehlmessung im Prozessblock, Tastatur 45 Stopps ohne Befund, Sweep 72/72 auf r1.
-8. Archiv fuer Marketing (Finish-File, Kundenwunsch 21.11.): `_release/iro-website-archiv-20261121.zip`, gebaut mit
+8. Archiv fuer Marketing (Finish-File, Kundenwunsch 21.11.): `_release/iro-website-archiv-20261121b.zip` (ersetzt die
+   erste Fassung vom selben Tag), gebaut mit
    `python3 _handover/tools/archiv/build_archiv.py` nach dem Release-Build. Inhalt: alle Texte je Seite DE und EN als
    Markdown, alle Texteinheiten als JSON und CSV (Paare DE/EN), Textstil, Wording, Glossar, Design, Firmendaten, alle
    Fotos als JPG mit Alt-Texten und Hinweis zu erfundenen Personen, Logos, Badges, PowerPoint-Vorlage, Upload-Paket.
@@ -267,3 +269,5 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
   Branch `golive-2026-11-20`.
 - 21.11.: Nachtrag nach dem Livegang (Sonne, Tablet und Handy quer, Kontaktseite, Strichpunkte, Knopf «Offene
   Lehrstelle»), neues Paket 20261121, Archiv fuer Marketing, Endkontrolle-Skripte im Repository.
+- 21.11.: Knopf Variante C, Rechtspruefung Impressum und Datenschutz mit Ergaenzungen, Anleitung Search Console,
+  Paket 20261121b und Archiv 20261121b.

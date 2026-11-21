@@ -413,6 +413,14 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
 92. [Kunde 21.11.] Archiv fuer Marketing mit allen Texten DE/EN (getrennt), Bildern, Stil- und Wording-Regeln, fuer
     Menschen und KI lesbar: _release/iro-website-archiv-20261121.zip (_handover/tools/archiv/build_archiv.py). Neues
     Upload-Paket _release/iro-swiss-www-20261121.zip. Status: erledigt
+93. [Kunde 21.11.] Aktuell-Knopf: Variante C Glanz (data-attn="glanz"). Knopf bleibt, bis der Kunde meldet, dass die
+    Lehrstelle besetzt ist. «Initiativbewerbung» duzt weiter (kein Wechsel auf «Sie»). Status: erledigt in r1
+94. [Kunde 21.11.] Impressum und Datenschutz mit Better Call Claude pruefen: Datenschutz ergaenzt (Stand-Datum, Rechte,
+    EDOEB, Auslandsbekanntgabe Google, Aufbewahrung, IP-Adresse ohne Zusage zur Kuerzung), Impressum Haftung «soweit das
+    Gesetz dies zulaesst». Offene Punkte in _handover/recherche/rechtspruefung-impressum-datenschutz-2026-11-21.md.
+    Status: erledigt in r1, offene Punkte beim Kunden
+95. [Kunde 21.11.] Schritt-fuer-Schritt-Anleitung fuer die Google Search Console: _release/ANLEITUNG-SEARCH-CONSOLE.md.
+    Paket _release/iro-swiss-www-20261121b.zip, Archiv _release/iro-website-archiv-20261121b.zip. Status: erledigt
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Baut das Upload-Paket fuer Hostpoint aus r1/.
 
-Aufruf (im Repo-Root):  python3 _handover/tools/golive/build_release.py
+Aufruf (im Repo-Root):  python3 _handover/tools/golive/build_release.py [b]
+                        (optional ein Buchstabe fuer ein zweites Paket am selben Tag: iro-swiss-www-YYYYMMDDb.zip)
 Ergebnis:               _release/www/                     (Inhalt fuer das www-Verzeichnis)
                         _release/iro-swiss-www-YYYYMMDD.zip  (dasselbe als ZIP, Dateien direkt auf oberster Ebene)
 
@@ -145,7 +146,8 @@ def main():
         print('\n'.join(problems)); sys.exit('Kontrolle fehlgeschlagen')
 
     # 7) ZIP (Dateien auf oberster Ebene, .htaccess eingeschlossen)
-    zpath = os.path.join(REL, 'iro-swiss-www-%s.zip' % today.strftime('%Y%m%d'))
+    suffix = sys.argv[1] if len(sys.argv) > 1 and re.fullmatch(r'[a-z]', sys.argv[1]) else ''
+    zpath = os.path.join(REL, 'iro-swiss-www-%s%s.zip' % (today.strftime('%Y%m%d'), suffix))
     if os.path.exists(zpath): os.remove(zpath)
     n = 0
     with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:

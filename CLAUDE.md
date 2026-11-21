@@ -321,7 +321,18 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Ab 1024 px gilt unveraendert der Desktop (Master bleibt die Laptop-Version, Kunde 21.11.).
 - Aktuell-Knopf (Kundenwunsch 21.11.): erstes Element in `.hero__ctas` auf index.html, `a.dbtn.dbtn--news` mit
   `.news__dot`; Text im `span.rl` (DE) und dessen `data-en`, Ziel im `href` (heute `karriere.html#lehrstelle`), Bewegung
-  per `data-attn` am Knopf: `puls` (Ring um den Punkt, 2,4 s, eingestellt), `atem` (Flaeche atmet gruen, 3,6 s),
-  `glanz` (Lichtstreif, 5 s). Ohne aktuelles Thema die Zeile loeschen. Bei reduzierter Bewegung steht alles still.
+  per `data-attn` am Knopf: `puls` (Ring um den Punkt, 2,4 s), `atem` (Flaeche atmet gruen, 3,6 s),
+  `glanz` (Lichtstreif, 5 s, eingestellt seit Kundenentscheid 21.11.2026: Variante C).
+  Wenn die Lehrstelle besetzt ist, sagt der Kunde Bescheid; erst dann Knopf aendern oder entfernen. Ohne aktuelles Thema die Zeile loeschen. Bei reduzierter Bewegung steht alles still.
   Unter 768 px hochkant steht der Knopf allein in der ersten Zeile. Vergleich: `r1/vorschau-aktuell.html` (nicht live).
 - `#lehrstelle` liegt auf der Zeile «Lehrstelle 2027» in karriere.html (Ziel von Knopf, Team-Zeile 04 und Badge).
+- Karriere: «Initiativbewerbung» duzt wie das Inserat, bleibt so (Kundenentscheid 21.11.2026).
+- Rechtspruefung 21.11.2026 (Better Call Claude, Gesetzestext ueber Fedlex; das Analyse-Werkzeug `legal_analyze`
+  antwortete leer): Befund, Umsetzung und offene Punkte in `_handover/recherche/rechtspruefung-impressum-datenschutz-2026-11-21.md`.
+  Datenschutz hat seither Stand-Datum (Abschnitt 11), Rechte mit Herausgabe/Uebertragung, Widerruf und EDOEB,
+  Auslandsbekanntgabe bei Google, Aufbewahrung nach Kriterium, «IP-Adresse» ohne Zusage zur Kuerzung. Impressum:
+  Haftungsausschluss «soweit das Gesetz dies zulaesst». Bei jeder Aenderung an datenschutz.html das Stand-Datum nachfuehren.
+- Google Search Console: Anleitung fuer den Kunden `_release/ANLEITUNG-SEARCH-CONSOLE.md` (Domain-Property iro.swiss,
+  TXT-Eintrag bei Hostpoint, Sitemap). Der TXT-Eintrag muss bleiben.
+- Zweites Paket am selben Tag: `build_release.py b` ergibt `iro-swiss-www-YYYYMMDDb.zip`; das Archiv nimmt das juengste
+  Paket des Tages und traegt dessen Kennung im Namen.
