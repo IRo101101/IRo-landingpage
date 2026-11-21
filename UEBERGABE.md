@@ -20,6 +20,8 @@ Prototyping. Zwei Arbeitsgebiete in diesem Repository:
   auf Hostpoint hochgeladen. Eingefroren als Branch **`golive-2026-11-20`** (Commit 72a3797, Paket
   `_release/iro-swiss-www-20261120.zip`). Ein Git-Tag liess sich aus der Umgebung nicht pushen (Proxy 403), darum ein
   Branch. Nachtrag 21.11.2026: Paket `_release/iro-swiss-www-20261121.zip` (Abschnitt 4).
+- **Freigegeben 21.11.2026:** Paket `_release/iro-swiss-www-20261121c.zip`, eingefroren als Branch
+  **`freigabe-2026-11-21`** (Kundenauftrag). Dieser Stand ersetzt nach dem Upload den Go-Live-Stand vom 20.11.
 - **v1 (bis 20.11.2026 live):** Branch `claude/iro-skill-designsystem-access-0i426w`, unveraendert, nur noch Geschichte.
 - **v2 Redesign:** Branch `v2-redesign`, Vorschau ueber GitHub Pages.
   - Root des Branches = Stand 30.09.2026 (Vergleichsbasis, nicht anfassen): https://iro101101.github.io/IRo-landingpage/
@@ -273,3 +275,4 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
   Paket 20261121b und Archiv 20261121b.
 - 21.11.: UID, 14 Monate Google Analytics, KI-Hinweis im Impressum, Hostpoint als Ort der Logfiles. Paket 20261121c
   ist der finale Stand des Tages, Archiv 20261121c.
+- 21.11.: Paket 20261121c vom Kunden freigegeben, eingefroren als Branch `freigabe-2026-11-21`.

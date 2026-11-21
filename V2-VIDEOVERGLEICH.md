@@ -425,6 +425,8 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     auf, Hinweis zu KI-Fotos nur im Impressum («Ein Teil der Fotos auf dieser Website wurde mit KI bearbeitet.»),
     Server-Logfiles liegen bei Hostpoint, den Rest regelt Hostpoint. DE und EN. Paket _release/iro-swiss-www-20261121c.zip,
     Archiv _release/iro-website-archiv-20261121c.zip. Status: erledigt
+97. [Kunde 21.11.] Paket 20261121c ist die freigegebene Version: auf GitHub eingefroren als Branch freigabe-2026-11-21.
+    Status: erledigt
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.
