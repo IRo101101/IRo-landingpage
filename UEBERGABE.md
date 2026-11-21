@@ -1,4 +1,4 @@
-# Uebergabe an das Claude-Projekt (Stand 16.10.2026)
+# Uebergabe an das Claude-Projekt (Stand 21.11.2026)
 
 Dieses Dokument ist der Einstieg fuer jede neue Claude-Sitzung zu diesem Repository. Es fasst zusammen, was bis
 heute entstanden ist, was offen ist und wie gearbeitet wird. Die verbindlichen Regeln stehen in `CLAUDE.md`, die
@@ -10,20 +10,23 @@ steht in diesem Repository.
 IdeeRoth AG, Romanshorn (Alain Roth, alain.roth@ideeroth.ch): Produktentwicklung, Konstruktion, Simulation,
 Prototyping. Zwei Arbeitsgebiete in diesem Repository:
 
-1. **Website iro.swiss** (statisch, HTML/CSS/Vanilla-JS, DE/EN). v1 ist live, v2 ist das Redesign in Arbeit.
+1. **Website iro.swiss** (statisch, HTML/CSS/Vanilla-JS, DE/EN). Seit 20.11.2026 ist v2 live (Quelle `r1/`).
 2. **PowerPoint-Vorlage** im Design der Website v2 (Ordner `_handover/powerpoint/`).
 
 ## 2. Stand
 
 ### Website
-- **v1 (live auf Hostpoint, www.iro.swiss):** Branch `claude/iro-skill-designsystem-access-0i426w`, unveraendert.
-  Deployment per FTP ins `www`-Verzeichnis (siehe `README.md`).
+- **Live seit 20.11.2026: v2** aus `r1/`, gebaut mit `_handover/tools/golive/build_release.py`, vom Kunden per FileZilla
+  auf Hostpoint hochgeladen. Eingefroren als Branch **`golive-2026-11-20`** (Commit 72a3797, Paket
+  `_release/iro-swiss-www-20261120.zip`). Ein Git-Tag liess sich aus der Umgebung nicht pushen (Proxy 403), darum ein
+  Branch. Nachtrag 21.11.2026: Paket `_release/iro-swiss-www-20261121.zip` (Abschnitt 4).
+- **v1 (bis 20.11.2026 live):** Branch `claude/iro-skill-designsystem-access-0i426w`, unveraendert, nur noch Geschichte.
 - **v2 Redesign:** Branch `v2-redesign`, Vorschau ueber GitHub Pages.
   - Root des Branches = Stand 30.09.2026 (Vergleichsbasis, nicht anfassen): https://iro101101.github.io/IRo-landingpage/
   - **Ordner `r1/` = Arbeitskopie**, hier wird gearbeitet: https://iro101101.github.io/IRo-landingpage/r1/
-    Fuenf Seiten: index, karriere, kontakt, impressum, datenschutz. Dazu fuenf Vorschauseiten `vorschau-*.html`
-    (Entscheidungshilfen, bleiben als Nachschlagewerk, kommen nicht live).
-  - Cache-Version in allen r1-HTML-Dateien: `?v=20261120i`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
+    Sechs Seiten: index, karriere, kontakt, impressum, datenschutz, 404. Dazu sieben Vorschauseiten `vorschau-*.html`
+    (Entscheidungshilfen, bleiben als Nachschlagewerk, kommen nicht live; neu 21.11.: `vorschau-aktuell.html`).
+  - Cache-Version in allen r1-HTML-Dateien: `?v=20261121a`. Bei jeder Aenderung an `r1/assets/css/styles.css` oder
     `r1/assets/js/main.js` hochzaehlen (`YYYYMMDD`, am selben Tag Buchstabe anhaengen).
   - Alle Kundenentscheide bis 15.10.2026 sind eingebaut (Liste: `V2-VIDEOVERGLEICH.md`, Punkte 1 bis 58).
     Letzte Entscheide 15.10.: duenne durchgezogene Linie statt gestrichelter Haarlinien (Vorbild `.hero__rule`),
@@ -62,11 +65,12 @@ Beim Kunden:
 - Vorlage in PowerPoint (Windows und Mac) oeffnen und pruefen: senkrechte Fusszeile, Seitenzahl, Aufzaehlungspunkte,
   Designfarben. Hier wurde nur mit LibreOffice gerendert.
 - CMYK-Druckwerte der Farben einmal mit der Druckerei festlegen (Signal Green liegt ausserhalb des Druckfarbraums).
-- Kartenlinks der Kontaktseite auf dem iPhone testen (Apple Karten in der Legacy-Form `maps.apple.com/?daddr=`).
-- Bestaetigen, dass die Schranke an der Westzufahrt (Hafenstrasse 62) die eigene ist (Text "Eingang" auf kontakt.html).
 - Originale der Fotos 22 und 23 als ZIP (6720 px) nachliefern; dann mit `_handover/tools/add_photos.py` neu rechnen.
 - Kennzahlen im Hero: «20+ Jahre» am 20.11.2026 bestaetigt (dazu «1 Adresse», «130 dB»).
-- Go-live: Paket am 20.11.2026 geliefert (Abschnitt 4), Upload durch den Kunden.
+- Paket `_release/iro-swiss-www-20261121.zip` hochladen (Aenderungen vom 21.11., Abschnitt 4). Danach im Browser
+  pruefen: Knopf «Offene Lehrstelle» im Startbild, Kontaktseite, Handy quer, Tablet.
+- Aktuell-Knopf: Bewegung waehlen (A Puls ist eingestellt, B Atem, C Glanz; Vorschau `r1/vorschau-aktuell.html`).
+  Sobald die Lehrstelle 2027 besetzt ist, Knopf aendern oder entfernen (CLAUDE.md, Abschnitt Aktuell-Knopf).
 - Karriere: Die Zeile «Initiativbewerbung» duzt wie das Inserat (Hausstil verlangt «Sie»); Kunde entscheidet, ob das
   so bleibt oder auf «Sie» umgestellt wird.
 - Rechtlich pruefen lassen (Hinweise aus der Endkontrolle 20.11., keine Rechtsberatung): Impressum ohne UID und
@@ -92,13 +96,13 @@ Vorgemerkt fuer das naechste Ueberarbeiten der Seite (Kundenauftrag 19.11.2026):
   `<picture>` und kein `srcset`. Beim Umbau `srcset` mit `sizes` oder `<picture>` setzen und auf Handybreite pruefen.
   Vorlage: Die verworfene Variante B hatte das einmal gebaut (Commit 93cb8cb, `b/index.html`).
 
-Spaeter zu pruefen:
-- Umbau untere Bahnhofstrasse Romanshorn bis April 2027 (Hinweis auf kontakt.html), danach Einbahnregelung pruefen.
-- Tiefgarage Hafenpromenade (Abstimmung 14.06.2026) ersetzt die oberirdischen Parkplaetze am See; Text anpassen.
-- Faehrfahrplan (Takt, Winterfahrplan) bei Fahrplanwechsel pruefen; Quelle bsb.de und bodensee-schiffe.ch.
+Spaeter zu pruefen (die Kontaktseite nennt seit 21.11. bewusst keine Baustellen, Schranken und Fahrplanminuten):
+- Wenn die Tiefgarage Hafenpromenade (Abstimmung 14.06.2026) gebaut ist: Satz «Oeffentliche Parkplaetze gibt es
+  direkt am Hafen.» pruefen. Umbau untere Bahnhofstrasse bis April 2027: Wegbeschreibung danach kurz gegenlesen.
+- Faehre: «rund 45 Minuten» und «im Sommerhalbjahr Kursschiffe» bei Fahrplanwechseln gegenlesen.
 - Idee aus der Recherche 09.10.: QR-Code zur Anfahrt (SBB- oder Kartenlink) auf Drucksachen.
 
-## 4. Go-live (vorbereitet 20.11.2026, Kunde laedt hoch)
+## 4. Go-live (live seit 20.11.2026)
 
 Der Kunde hat am 20.11.2026 den Stand von `r1/` freigegeben. Das Upload-Paket entsteht nur noch per Build, das
 Repository bleibt wie es ist (Root = Stand 30.09. als Vergleich, `r1/` = Quelle):
@@ -118,6 +122,21 @@ Repository bleibt wie es ist (Root = Stand 30.09. als Vergleich, `r1/` = Quelle)
    Routenlinks Apple/SBB/Faehre und Badge-Links (NAFEMS, Berufsberatung) bleiben; «20+ Jahre» bestaetigt; Lenis durch
    eigenen Code ersetzt.
 5. Nach dem Livegang: Google Search Console, Sitemap einreichen. GitHub-Pages-Vorschau kann danach abgeschaltet werden.
+6. Eingefroren: Branch `golive-2026-11-20` = Commit 72a3797 = Inhalt von `iro-swiss-www-20261120.zip`. Zurueck auf
+   diesen Stand: ZIP erneut hochladen (alte Dateien vorher loeschen) oder aus dem Branch neu bauen.
+7. Nachtrag 21.11.2026 (Kundenwuensche nach dem Livegang, V2-VIDEOVERGLEICH 87 bis 91): Sonne im Startbild auf dem
+   Handy beim Titel, Tablet und Handy quer wie Desktop (Text im Foto), Kontaktseite ohne Apple Karten, ohne Schranke
+   und Baustelle, Anreise in Aufzaehlungen und rund 40 % kuerzer, keine Strichpunkte mehr auf der ganzen Seite,
+   neuer Knopf «Offene Lehrstelle» im Startbild. Paket `_release/iro-swiss-www-20261121.zip` (52 Dateien). Zum Hochladen
+   reicht es, alle sechs HTML-Dateien, `sitemap.xml` und `assets/css/styles.css` zu ersetzen; einfacher ist das ganze Paket wie in
+   `_release/ANLEITUNG-UPLOAD.md` (ohne Loeschschritt, die Ordner sind gleich). Endkontrolle am Paket 21.11.: vnu ohne
+   Fehler, 318 interne Verweise ok, keine externe Anfrage vor Zustimmung, danach nur googletagmanager.com, axe nur die
+   bekannte Fehlmessung im Prozessblock, Tastatur 45 Stopps ohne Befund, Sweep 72/72 auf r1.
+8. Archiv fuer Marketing (Finish-File, Kundenwunsch 21.11.): `_release/iro-website-archiv-20261121.zip`, gebaut mit
+   `python3 _handover/tools/archiv/build_archiv.py` nach dem Release-Build. Inhalt: alle Texte je Seite DE und EN als
+   Markdown, alle Texteinheiten als JSON und CSV (Paare DE/EN), Textstil, Wording, Glossar, Design, Firmendaten, alle
+   Fotos als JPG mit Alt-Texten und Hinweis zu erfundenen Personen, Logos, Badges, PowerPoint-Vorlage, Upload-Paket.
+   Die Stilblaetter sind Vorlagen in `_handover/tools/archiv/vorlagen/` (dort pflegen, nicht im ZIP).
 
 ## 5. Arbeitsweise
 
@@ -139,7 +158,7 @@ Alle Skripte liegen in `_handover/tools/` (frueher in einem Sitzungs-Scratchpad,
 Notizen `scratchpad/...`). Alle Pfade sind relativ zum Skript; die Skripte laufen aus jedem Verzeichnis.
 
 - **Sweep nach Aenderungen** (Pflicht): lokalen Server im Repo-Root starten (`python3 -m http.server 8771`), dann
-  `python3 _handover/tools/test_v2b.py 8771 r1/` (5 Seiten x 6 Viewports 320 bis 1920 x DE/EN; prueft horizontalen
+  `python3 _handover/tools/test_v2b.py 8771 r1/` (6 Seiten x 6 Viewports 320 bis 1920 x DE/EN; prueft horizontalen
   Overflow, Konsolenfehler, Ladepanel). Fuer den Root-Stand `test_v2.py <port>`. Kriterium: jede Zeile `OK`.
   Screenshots landen in `_handover/tools/shots_b/` (per .gitignore ausgeschlossen).
   Playwright im Cloud-Container: `p.chromium.launch(executable_path='/opt/pw-browsers/chromium')`; nur Chromium,
@@ -159,6 +178,8 @@ Notizen `scratchpad/...`). Alle Pfade sind relativ zum Skript; die Skripte laufe
   von Higgsfield, die Skripte dazu liegen im Lieferpaket des Kunden.
 - **PowerPoint:** siehe `_handover/powerpoint/README.md` (Node mit pptxgenjs und jszip, Python mit python-pptx,
   pymupdf, defusedxml, LibreOffice Impress fuer PDFs, Inter als Systemschrift, Chromium fuer die Anleitung).
+- **Go-Live und Endkontrolle:** `golive/build_release.py` (Upload-Paket), `golive/endkontrolle/` (Validator, Links,
+  Netzwerk ohne Zustimmung, axe, Tastatur, Scrollmessung; Aufrufe im README dort), `archiv/build_archiv.py` (Archiv).
 - **Textregeln pruefen:** `grep -nE "–|—"` auf die HTML- oder Textdumps (keine Gedankenstriche), `grep -i` auf die
   verbotenen Woerter, kein `ß`.
 - **Recherche-Notizen:** `_handover/recherche/` (Anreise-Fakten mit Quellen, Faktenbasis Karte und Anfahrt
@@ -180,7 +201,8 @@ _handover/
   palette.png, logo/, screens/, bilduebersicht.png
   powerpoint/           Vorlage, Beispieldecks, Anleitung, Quellen, Referenz (alte Vorlage)
   tools/                Sweep (test_v2b.py), Fotos (add_photos.py, bilduebersicht.py, v1img/, fotomaster/),
-                        Karten (osm/), Generatoren (generatoren/)
+                        Karten (osm/), Generatoren (generatoren/), golive/ (Build, endkontrolle/), archiv/
+_release/               Upload-Pakete iro-swiss-www-YYYYMMDD.zip, Anleitung FileZilla, Archiv iro-website-archiv-*.zip
   recherche/            Anreise-Fakten, Northwall-Bauanleitung, Analysen
   PROJEKT-ANWEISUNGEN.md Text fuer die Projektanweisungen des Claude-Projekts
 CLAUDE.md               verbindliche Regeln und Technik-Notizen (Pflichtlektuere)
@@ -241,3 +263,7 @@ und jede Regel in `V2-VIDEOVERGLEICH.md`, `CLAUDE.md` und diesem Dokument festge
 - 20.11.: Foto 22 mit neuem IRo-Logo auf den Mustern (Lieferung Kunde) im Fundus, Prozessschritt 05 Prototyp zeigt 22.
 - 20.11.: Englisch auf allen fuenf r1-Seiten geprueft und verbessert, Alt-Texte und Bereichs-Labels jetzt zweisprachig.
 - 20.11.: Ladepanel nur mit dem IRo-Zeichen ist Standard (Kundenentscheid); das alte Panel mit Fotos: `r1/?lade=fotos`.
+- 20.11.: Go-Live-Endkontrolle, Paket gebaut, vom Kunden auf Hostpoint hochgeladen: v2 ist live. Stand eingefroren als
+  Branch `golive-2026-11-20`.
+- 21.11.: Nachtrag nach dem Livegang (Sonne, Tablet und Handy quer, Kontaktseite, Strichpunkte, Knopf «Offene
+  Lehrstelle»), neues Paket 20261121, Archiv fuer Marketing, Endkontrolle-Skripte im Repository.

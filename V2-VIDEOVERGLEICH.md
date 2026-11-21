@@ -389,6 +389,30 @@ vom 30.09. bleibt die Basis; die Punkte werden einzeln mit dem Kunden entschiede
     Social-Media-Bild og.jpg, Datenschutz an das tatsaechliche Verhalten angepasst (keine Karte, Sprachwahl im
     localStorage, GA4 ohne IP-Speicherung, Widerruf loescht _ga-Cookies), Kontraste der Labels, Esc schliesst das Menue,
     Build-Skript mit ZIP. Cache 20261120i. Status: erledigt, Paket _release/iro-swiss-www-20261120.zip
+    Nachtrag: Der Kunde hat das Paket am 20.11.2026 hochgeladen, v2 ist live. Eingefroren als Branch golive-2026-11-20
+    (Commit 72a3797).
+87. [Kunde 21.11.] Handy hochkant: Die durchscheinende Sonne im Startbild soll beim Titel «Aus weniger mehr entwickeln.»
+    stehen. Foto so verschoben, dass die Sonne knapp unter der Kopfzeile neben dem Titel liegt (Rechnung in CLAUDE.md),
+    Schleier oben leichter. Geprueft 320 bis 430 px. Cache 20261121a. Status: erledigt in r1
+88. [Kunde 21.11.] Handy quer und Tablet sollen wie Desktop aussehen (Text im Foto), universell fuer alle Geraete; Master
+    bleibt die Laptop-Version. Eigener Block 768 bis 1023 px und Handy quer: Startbild vollflaechig mit Titel, Linie,
+    Intro, Kennzahlen, Schlusszeile und Knoepfen im Foto, Sonne beim Titel, Unternehmen mit Themenliste und Mission
+    neben dem Foto; bei geringer Hoehe kompakter (Knoepfe neben der Schlusszeile). Desktop ab 1024 px unveraendert.
+    Geprueft 667 x 375 bis 1023 x 768 und 768 bis 1180 hochkant. Status: erledigt in r1
+89. [Kunde 21.11.] Kontaktseite: Apple Karten gestrichen (Routenplanung nur Google Maps, dazu SBB- und Faehrfahrplan),
+    alles zu Schranke und Baustelle entfernt (keine aktuellen Verkehrsinformationen, Texte sollen zwei Jahre gelten),
+    Anreise in Aufzaehlungen mit Zwischentiteln und rund 40 % kuerzer, Satz zu Treppenhaus, Hochparterre und
+    Anlieferung bleibt. Datenschutz ohne Apple, Abschnitte neu nummeriert. DE und EN. Status: erledigt in r1
+90. [Kunde 21.11.] Keine Strichpunkte, nirgends (Komma oder kurze Saetze). Auf allen Seiten in DE und EN ersetzt, neue
+    Regel in CLAUDE.md. Status: erledigt in r1
+91. [Kunde 21.11.] Neuer Knopf im Startbild vor «Kompetenzen entdecken» und «Fuenf Schritte»: «Offene Lehrstelle»
+    (EN «Open apprenticeship»), fuehrt zu karriere.html#lehrstelle, leicht zu aendern (eine Zeile in index.html).
+    Bewegung waehlbar: A Puls (gruener Punkt sendet Ringe, eingestellt), B Atem (Flaeche atmet gruen), C Glanz
+    (Lichtstreif); Vorschau r1/vorschau-aktuell.html. Bei reduzierter Bewegung steht alles still. Status: erledigt in r1,
+    Wahl der Bewegung offen
+92. [Kunde 21.11.] Archiv fuer Marketing mit allen Texten DE/EN (getrennt), Bildern, Stil- und Wording-Regeln, fuer
+    Menschen und KI lesbar: _release/iro-website-archiv-20261121.zip (_handover/tools/archiv/build_archiv.py). Neues
+    Upload-Paket _release/iro-swiss-www-20261121.zip. Status: erledigt
 
 ### Bewusst anders (kein Handlungsbedarf, nur bestaetigen)
 - Prozentzahl in Signal Green statt gedaempftem Weiss. Fuellfarbe der Buttons Signal Green statt Weiss.

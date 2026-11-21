@@ -3,6 +3,22 @@
 Paket: `iro-swiss-www-20261120.zip` (52 Dateien, 4,1 MB entpackt). Die Dateien liegen im ZIP direkt auf oberster
 Ebene; ihr Inhalt gehoert 1:1 in das Verzeichnis `www` bei Hostpoint.
 
+## Update vom 21.11.2026 (Paket `iro-swiss-www-20261121.zip`)
+
+Die Seite ist seit 20.11.2026 live. Fuer das Update genuegt:
+
+1. ZIP entpacken. In FileZilla rechts `www` oeffnen, links den entpackten Ordner.
+2. Diese acht Dateien nach rechts ziehen und «Ueberschreiben» waehlen: `index.html`, `kontakt.html`,
+   `karriere.html`, `impressum.html`, `datenschutz.html`, `404.html`, `sitemap.xml` und `assets/css/styles.css` (in den Ordner
+   `assets/css`). Wer es einfacher will: alles markieren (auch `.htaccess`) und ueberschreiben, geloescht werden muss
+   nichts.
+3. Kontrolle im privaten Fenster: Startseite mit Knopf «Offene Lehrstelle», Kontaktseite (ohne Apple Karten, Anreise in
+   Punkten), Handy quer und Tablet mit Text im Foto. Wer die Seite schon offen hatte: einmal neu laden.
+
+Zurueck auf den Stand vom 20.11.: `iro-swiss-www-20261120.zip` gleich hochladen.
+
+## Erstinstallation vom 20.11.2026
+
 ## 1. Sicherung der alten Seite (5 Minuten)
 
 1. FileZilla oeffnen und mit Hostpoint verbinden (wie bisher).

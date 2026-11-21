@@ -9,6 +9,8 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 ## Inhalt / Wording
 - NIE erwaehnen: Siemens, NX, Ansys, Flow-3D, Simcenter, Teamcenter, Nastran, "Bodensee".
 - Keine Gedankenstriche (– oder —). Nur Bindestriche (-). Mittelpunkte (·) sind erlaubt.
+- Keine Strichpunkte (Semikolon) im sichtbaren Text, DE und EN (Kundenregel 21.11.2026): Komma oder kurze, einfache
+  Saetze. Keine aktuellen Verkehrsinformationen (Baustellen, Umleitungen, Schranken); Texte sollen zwei Jahre gelten.
 - Keine Unterstreichungen, nirgends (auch nicht bei Links oder im Consent-Banner).
 - Das Lehrstellen-Inserat auf karriere.html bleibt verbatim und nur auf Deutsch.
 - Alle Kontaktadressen auf iro.swiss (info@iro.swiss, datenschutz@iro.swiss).
@@ -65,6 +67,14 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   absolut (/assets/...), Links auf index.html zu "./" und bricht ab bei Entwicklungsspuren (Liste FORBIDDEN) oder
   fehlenden Dateien. Vor dem Upload alte v1-Dateien in www loeschen (alte Fotos, Leaflet, alte Schriften).
 - www.iro.swiss ist kanonisch; ideeroth.ch leitet per 301 um.
+- LIVE seit 20.11.2026 (v2 aus r1). Go-Live-Stand eingefroren als Branch `golive-2026-11-20` (Commit 72a3797 =
+  `_release/iro-swiss-www-20261120.zip`; Tags lassen sich aus der Cloud-Umgebung nicht pushen, Proxy 403). Jedes neue
+  Paket bekommt das Datum im Namen, alte Pakete bleiben im Repository. Nachtrag 21.11.: `iro-swiss-www-20261121.zip`.
+- Endkontrolle vor jedem Upload: Skripte und Aufrufe in `_handover/tools/golive/endkontrolle/README.md`.
+- Archiv fuer Marketing (Finish-File): `python3 _handover/tools/archiv/build_archiv.py` nach dem Release-Build ergibt
+  `_release/iro-website-archiv-YYYYMMDD.zip` (Texte je Seite DE/EN als Markdown, texte.json/csv als Paare, Stil,
+  Glossar, Design, Firmendaten, Fotos als JPG mit Alt-Texten, Logos, PowerPoint-Vorlage, Upload-Paket). Stilblaetter
+  liegen als Vorlagen in `_handover/tools/archiv/vorlagen/`; bei neuen Regeln dort nachfuehren und neu bauen.
 
 ## Geparkte Inhalte
 - `_parkiert/offene-stellen.html`: Abschnitt "Offene Stellen" (2 Junior-Positionen), ausgebaut Juli 2026.
@@ -72,13 +82,14 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 
 ## v2-Redesign (Branch `v2-redesign`) - Vorschau ueber GitHub Pages
 - Vorschau-URL: https://iro101101.github.io/IRo-landingpage/ (Pages-Quelle: Branch `v2-redesign`, Ordner `/`).
-- Der Live-Stand (v1) liegt unveraendert auf `claude/iro-skill-designsystem-access-0i426w`; Live-Site = Hostpoint-Upload.
+- Live seit 20.11.2026 ist v2 (aus `r1/`, Branch `golive-2026-11-20`); der alte v1-Stand liegt unveraendert auf
+  `claude/iro-skill-designsystem-access-0i426w` (nur noch Geschichte). Live-Site = Hostpoint-Upload.
 - Eine Variante B (Ordner `b/`, 08.10.2026) wurde dem Kunden gezeigt und verworfen: Der Stand vom 30.09. ist
   die Basis, Aenderungen daran nur Punkt fuer Punkt mit dem Kunden (Liste: `V2-VIDEOVERGLEICH.md`).
   Der Ordner `b/` wurde am 08.10.2026 wieder entfernt und liegt nur noch in der Git-Historie (angelegt mit Commit
   93cb8cb, entfernt mit Commit 2e70474).
 - Runde 1 seit 08.10.2026: Root bleibt der Stand vom 30.09. (Vergleichsbasis, nicht anfassen), Ordner `r1/` ist die
-  Arbeitskopie (eigene assets/, Cache-Version 20261120i; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
+  Arbeitskopie (eigene assets/, Cache-Version 20261121a; bei mehreren Aenderungen am selben Tag Buchstabe anhaengen), Vorschau https://iro101101.github.io/IRo-landingpage/r1/ .
   Entscheidungsseiten dort: `r1/vorschau-uebergaenge.html` (sieben Fotouebergaenge aus dem Prompt, gemeinsame Uhr,
   Takt- und Tempo-Regler), `r1/vorschau-layouts.html` (Varianten Unternehmen U-A/B/C, Karten K-A/B/C, Team T-A/B/C)
   und `r1/vorschau-footer.html` (Footer der Unterseiten; Kundenentscheid 09.10.: Richtung F-B, Vorbild Footer
@@ -228,8 +239,13 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Badges `.badge--nafems` / `.badge--lehrbetrieb`: PNG als Maske in currentColor (#c4c8cc), Hover Fresh Mint ueber den
   umschliessenden Link; nie mehr als <img>.
 - Kontaktseite seit Go-Live (Kundenentscheid 20.11.2026, nur Google als externer Dienst): KEINE eingebettete Karte mehr;
-  Zeile 02 hat den Button «Route in Google Maps» und darunter «Weitere Routen und Fahrplaene» (Apple Karten, SBB, Faehre,
-  bleiben laut Kunde). initMapEmbed, `.kmap` und frame-src sind entfernt, Datenschutz Abschnitt 09 heisst «Routenplanung».
+  Zeile 02 hat den Button «Route in Google Maps» und darunter `p.routes` «Fahrplaene» mit SBB-Fahrplan und Faehrfahrplan
+  (Apple Karten seit 21.11.2026 gestrichen, Kunde) und den Hinweis `.routes__hint`. initMapEmbed, `.kmap` und frame-src
+  sind entfernt, Datenschutz Abschnitt 09 heisst «Routenplanung» (nennt Google Maps, SBB, Faehrbetreiberin).
+  Zeile 03 Anreise seit 21.11.2026: h3 je Verkehrsmittel (Auto, Bahn und Bus, Schiff, Eingang und Anlieferung), beim
+  Auto zwei h4 (Zum Hubkreisel, Vom Hubkreisel zu uns), alles als `ul`-Punkte, rund 250 Woerter; keine Schranke, keine
+  Baustelle, keine Fahrplanminuten (nur «rund 45 Minuten», «im Sommerhalbjahr Kursschiffe»). Satz «im Treppenhaus
+  hinauf ins Hochparterre, dann links den Flur entlang. Anlieferungen bitte ebenfalls ueber diesen Eingang.» bleibt.
   Der folgende Absatz beschreibt den frueheren Stand mit swisstopo-Karte (nur noch Geschichte):
 - Kontaktseite `kontakt.html` (Kundenentscheid 09.10., statt Standort-Kachel S-1 bis S-3): Aufbau wie Karriere mit drei
   Zeilen (Kontaktadresse mit Ansprechperson und Buttons, Karte, Anreise). Karte = iFrame von map.geo.admin.ch (swisstopo,
@@ -255,7 +271,7 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
   Routenplanung" (Bundes-Link admin.ch/de/rechtliches, EN per data-en-href admin.ch/en/terms-and-conditions).
   `r1/.htaccess` (seit Go-Live neu: 404-Seite, /index.html -> /, HSTS, CSP nur 'self' plus Google-Analytics-Hosts,
   frame-src 'none', Sperre fuer _parkiert/_handover/_release/r1) kommt ueber den Build ins Paket. Header-Navigation, Burger-Menue, Footer und Schiene verlinken "Kontakt" auf kontakt.html; "Projekt
-  starten" fuehrt weiter zum Abspann (#kontakt). v2 hat damit 5 Seiten; Sweep-Skript test_v2b.py prueft alle fuenf.
+  starten" fuehrt weiter zum Abspann (#kontakt). v2 hat damit 5 Seiten plus 404.html (seit Go-Live); Sweep-Skript test_v2b.py prueft alle sechs.
 - Rechtszeile: Trenner-Spans sind ausgeblendet, der gerade Strich "|" (Kundenwunsch 09.10., vorher Schraegstrich) haengt
   per `a ~ a::before` am Link (nie am Zeilenende) und bleibt gedaempft; die Links der Startseite haben kein RollLabel mehr,
   nur den Farbwechsel der Textlink-Regel.
@@ -288,3 +304,24 @@ Zuerst `UEBERGABE.md` lesen (Stand, offene Punkte, Werkzeuge, Ordnerkarte). Kund
 - Layouts ab 1024 px (Kundenentscheid 09.10.2026): Unternehmen U-A (Themenliste links, Mission rechts neben dem Foto,
   beide an der Rahmenunterkante, kein Einzug), Karten K-A (alle 30rem, xl 34rem), Team T-A (`.team__rows` max-width
   64rem zentriert, Spalten wie Vorlage). Die Vorschauseiten bleiben als Nachschlagewerk in r1.
+
+### Nachtrag 21.11.2026 (nach dem Livegang, nur `r1/`)
+- Sonne im Startbild (Hochformat unter 768 px und Block 768-1023 / Handy quer): Foto 07 ist 2400 x 1600, die Sonne liegt
+  bei 32,1 % / 27,2 %. `.hero__photo` ist 130 % der Hero-Hoehe hoch, mit `object-position: X% 0` liegt die Sonne im Kasten
+  bei y = 0,272 x max(Breite/1,5, 1,3 x Hoehe). Darum `top: calc(var(--header-height) + var(--sun-y) - max(18.13vw,
+  35.36%))` und `bottom: auto`: die Sonne steht `--sun-y` unter der Kopfzeile (Hochformat 2.75rem, quer niedrig .75rem).
+  Waagrecht per object-position (Hochformat 20 %, Tablet und quer 17 %). Schleier oben leichter, Titel mit weichem
+  Textschatten. Pruefen mit einer Markierung an der berechneten Stelle, nicht nach Gefuehl.
+- Tablet hochkant und Handy quer wie Desktop: Block am Ende von styles.css «r1 Tablet hochkant und Handy quer
+  (768-1023 px) wie Desktop», Media `(min-width: 768px) and (max-width: 1023px), (max-width: 767px) and (orientation:
+  landscape) and (max-height: 500px)`. Hero als Raster mit Subgrid (Buehne ueber alle Zeilen, Titel Zeile 2, Linie mit
+  Intro und Kennzahlen Zeile 4, Schlusszeile Zeile 6 rechts, Knoepfe Zeile 7), Unternehmen U-A (Rahmen 15 x 18.5rem
+  mittig, Themenliste links, Mission rechts). Bei geringer Hoehe (Tablet unter 600 px, Handy quer) kompakter: Schlusszeile
+  Spalte 3 und Knoepfe Spalte 2 in derselben Zeile, Knoepfe duerfen umbrechen (`.roll__a/.roll__b` white-space normal).
+  Ab 1024 px gilt unveraendert der Desktop (Master bleibt die Laptop-Version, Kunde 21.11.).
+- Aktuell-Knopf (Kundenwunsch 21.11.): erstes Element in `.hero__ctas` auf index.html, `a.dbtn.dbtn--news` mit
+  `.news__dot`; Text im `span.rl` (DE) und dessen `data-en`, Ziel im `href` (heute `karriere.html#lehrstelle`), Bewegung
+  per `data-attn` am Knopf: `puls` (Ring um den Punkt, 2,4 s, eingestellt), `atem` (Flaeche atmet gruen, 3,6 s),
+  `glanz` (Lichtstreif, 5 s). Ohne aktuelles Thema die Zeile loeschen. Bei reduzierter Bewegung steht alles still.
+  Unter 768 px hochkant steht der Knopf allein in der ersten Zeile. Vergleich: `r1/vorschau-aktuell.html` (nicht live).
+- `#lehrstelle` liegt auf der Zeile «Lehrstelle 2027» in karriere.html (Ziel von Knopf, Team-Zeile 04 und Badge).

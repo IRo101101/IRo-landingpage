@@ -684,7 +684,12 @@ section { position: relative; }
     .hero__close { grid-row: 5; grid-column: 2 / 4; margin-top: 2rem; text-align: right; font-size: 2.125rem; }   /* laengste Zeile "to series production." 9.43em passt bei 320 px einzeilig */
     .hero__close .words { justify-content: flex-end; }
     .hero__ctas { grid-row: 6; grid-column: 2 / 4; margin-top: 1.25rem; }
-    .layer::after, .hero__photo::after { background: linear-gradient(to bottom, rgba(17,20,24,.62) 0%, rgba(17,20,24,.45) 22%, rgba(17,20,24,.26) 38%, rgba(17,20,24,.36) 54%, rgba(17,20,24,.7) 100%); }   /* Titel oben liegt auf hellem Laub: oben dichter als am Desktop */
+    .layer::after, .hero__photo::after { background: linear-gradient(to bottom, rgba(17,20,24,.42) 0%, rgba(17,20,24,.24) 24%, rgba(17,20,24,.26) 40%, rgba(17,20,24,.38) 56%, rgba(17,20,24,.7) 100%); }
+    /* Sonne (im Foto bei 32 % / 27 %) gleich ueber der ersten Titelzeile: Foto oben buendig skaliert (object-position y 0),
+       Sonnenhoehe im Rahmen = 27,2 % der Bildhoehe = max(18,13vw, 35,36 % der Hero-Hoehe); Rahmen so weit hochschieben */
+    .hero__photo { --sun-y: 2.75rem; top: calc(var(--header-height) + var(--sun-y, 1.75rem) - max(18.13vw, 35.36%)); bottom: auto; }
+    .hero__photo img { object-position: 20% 0; }
+    .hero h1 { text-shadow: 0 0 1.75rem rgba(17,20,24,.35), 0 1px 2px rgba(17,20,24,.2); }
   }
 
   /* Unternehmen wie Desktop: Themenliste links neben dem Foto (rechtsbuendig, an der Unterkante), Mission darunter
@@ -730,3 +735,80 @@ section { position: relative; }
   html { font-size: max(14px, 2.083333vw); }
 }
 @media (prefers-reduced-motion: reduce) { .hdr { transition: none; } }
+
+/* =========================================================================
+   r1 Tablet hochkant und Handy quer (768-1023 px) wie Desktop (Kundenauftrag 21.11.2026: "muss universal
+   funktionieren", Master bleibt die Desktop-Version). Nach Fenstergroesse, nicht nach Geraet.
+   Startbild: Foto ueber die ganze Flaeche, Titel links oben, Linie mit Intro links und Kennzahlen rechts, unten
+   Buttons links und Schlusszeile rechts (Anordnung wie ab 1024 px), als Raster im Fluss statt absolut, damit auch
+   niedrige Fenster (Handy quer, rund 390 px hoch) nichts ueberlappen.
+   ========================================================================= */
+@media (min-width: 768px) and (max-width: 1023px), (max-width: 767px) and (orientation: landscape) and (max-height: 500px) {
+  @supports (grid-template-rows: subgrid) {
+    .hero { position: relative; display: grid; padding: 0; min-height: 100vh; min-height: 100svh;
+      grid-template-columns: 1.5rem minmax(0, 1fr) minmax(0, 1fr) 1.5rem;
+      grid-template-rows: calc(var(--header-height) + 1.75rem) auto minmax(1.5rem, 1fr) auto minmax(1.5rem, 1fr) auto auto 1.75rem; }
+    .hero__stage { grid-row: 1 / -1; grid-column: 1 / -1; display: grid; grid-template-rows: subgrid; grid-template-columns: subgrid; position: relative; z-index: 0; margin: 0; aspect-ratio: auto; }
+    .hero__top, .hero__mid, .hero__close, .hero__ctas { position: relative; z-index: 1; padding: 0; margin: 0; }
+    .hero__top { grid-row: 2; grid-column: 2 / 4; }
+    .hero h1 { font-size: 3rem; width: auto; max-width: 8.4em; text-shadow: 0 0 1.75rem rgba(17,20,24,.35), 0 1px 2px rgba(17,20,24,.2); }
+    .hero__mid { grid-row: 4; grid-column: 2 / 4; }
+    .hero__intro { width: auto; max-width: 17.0625rem; font-size: 1.125rem; }
+    .figs { position: relative; grid-row: 4; grid-column: 3; justify-self: end; align-self: start; left: auto; right: auto; top: auto; bottom: auto; transform: none; padding-top: calc(1rem + 1px); width: auto; text-align: right; font-size: 1.0625rem; gap: .5rem; }
+    /* drei Buttons brauchen die ganze Breite: Schlusszeile rechts, darunter die Buttons (niedrige Fenster: nebeneinander, unten) */
+    .hero__close { grid-row: 6; grid-column: 2 / 4; justify-self: end; align-self: end; order: 0; text-align: right; font-size: 2.25rem; }
+    .hero__ctas { grid-row: 7; grid-column: 2 / 4; align-self: end; flex-wrap: wrap; margin-top: 1.25rem; }
+    .layer::after, .hero__photo::after { background: linear-gradient(to bottom, rgba(17,20,24,.4) 0%, rgba(17,20,24,.18) 30%, rgba(17,20,24,.3) 55%, rgba(17,20,24,.62) 100%); }
+    /* Sonne gleich ueber der ersten Titelzeile (Rechnung wie im Hochformat) */
+    .hero__photo { top: calc(var(--header-height) + var(--sun-y, 1.75rem) - max(18.13vw, 35.36%)); bottom: auto; }
+    .hero__photo img { object-position: 17% 0; }
+  }
+
+  /* Unternehmen wie Desktop (U-A): Foto in der Mitte, Themenliste links, Mission rechts, beide an der Unterkante */
+  .about__wrap { position: relative; height: 18.5rem; }
+  .about__stage { position: static; }
+  .about__frame { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 15rem; height: 18.5rem; aspect-ratio: auto; }
+  .about__topics { position: absolute; right: calc(50% + 9rem); bottom: 0; margin: 0; align-items: flex-end; text-align: right; }
+  .about__mission { position: absolute; left: calc(50% + 9rem); right: 0; bottom: 0; width: auto; margin: 0; font-size: 1rem; }
+  .about__mission .words__indent { width: 0; }
+}
+/* Handy quer und andere niedrige Fenster: kleinere Schrift im Startbild, damit es eine Bildschirmhoehe bleibt (Handys
+   quer unter 768 px Breite bekommen dieselbe Anordnung, siehe Medienabfrage oben) */
+@media (min-width: 768px) and (max-width: 1023px) and (max-height: 600px), (max-width: 767px) and (orientation: landscape) and (max-height: 500px) {
+  @supports (grid-template-rows: subgrid) {
+    .hero { grid-template-rows: calc(var(--header-height) + .75rem) auto minmax(.75rem, 1fr) auto minmax(.75rem, 1fr) auto 1rem; }
+    .hero__close { grid-row: 6; grid-column: 3; }
+    .hero__ctas { grid-row: 6; grid-column: 2; margin-top: 0; flex-wrap: nowrap; gap: .5rem; }
+    .hero__ctas .dbtn { flex: 1 1 auto; min-width: 0; white-space: normal; padding: .5rem .625rem; }
+    .hero__ctas .roll__a, .hero__ctas .roll__b { white-space: normal; }
+    .hero h1 { font-size: 2.25rem; }
+    .hero__intro { font-size: .9375rem; }
+    .hero__row { padding-top: .75rem; }
+    .figs { font-size: .875rem; gap: .25rem; padding-top: calc(.75rem + 1px); }
+    .hero__close { font-size: 1.75rem; }
+    .hero__photo { --sun-y: .75rem; }
+  }
+}
+
+/* =========================================================================
+   Aktuell-Knopf im Startbild (Kundenwunsch 21.11.2026, z. B. «Offene Lehrstelle»): gleicher Rahmen wie die anderen
+   Buttons, dazu ein Signal-Green-Punkt; Bewegung per data-attn: puls (Standard, Punkt sendet Ringe), atem (Flaeche
+   atmet langsam gruen), glanz (Lichtstreif alle paar Sekunden). Bei reduzierter Bewegung steht alles still.
+   ========================================================================= */
+.dbtn--news { overflow: hidden; }
+.news__dot { position: relative; z-index: 1; flex: none; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); }
+.dbtn--news[data-attn="puls"] .news__dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent); animation: news-ping 2.4s cubic-bezier(.2, 0, 0, 1) infinite; }
+@keyframes news-ping { 0% { transform: scale(1); opacity: .75; } 70%, 100% { transform: scale(3.4); opacity: 0; } }
+.dbtn--news[data-attn="atem"] { animation: news-breathe 3.6s ease-in-out infinite; }
+@keyframes news-breathe { 0%, 100% { background-color: rgba(37,199,122,0); border-color: var(--border-on-inverse); } 50% { background-color: rgba(37,199,122,.3); border-color: rgba(37,199,122,.9); } }
+.dbtn--news[data-attn="glanz"]::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 30%, rgba(183,243,208,.5) 50%, transparent 70%); transform: translateX(-130%); animation: news-sheen 5s ease-in-out infinite; }
+@keyframes news-sheen { 0%, 55% { transform: translateX(-130%); } 100% { transform: translateX(130%); } }
+@media (prefers-reduced-motion: reduce) {
+  .dbtn--news, .dbtn--news .news__dot::after { animation: none !important; }
+  .dbtn--news::after { display: none; }
+}
+/* Hochformat: Aktuell-Knopf eigene Zeile ueber den beiden anderen */
+@media (max-width: 767px) and (orientation: portrait), (max-width: 767px) and (min-height: 501px) {
+  .hero__ctas { flex-wrap: wrap; }
+  .hero__ctas .dbtn--news { flex: 1 1 100%; }
+}

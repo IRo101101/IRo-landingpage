@@ -15,3 +15,4 @@ _handover/tools/osm/render.html
 
 # Upload-Paket: nur ZIP und Anleitung einchecken, der entpackte Ordner entsteht beim Build
 _release/www/
+_release/archiv/

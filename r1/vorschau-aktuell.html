@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Vorschau Aktuell-Knopf - IdeeRoth AG</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261121a">
+<style>
+  body { background: #111418; color: #fff; }
+  .va { max-width: 64rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .va h1 { font-size: 2rem; }
+  .va > p { color: rgba(255,255,255,.7); max-width: 40rem; margin-top: .75rem; }
+  .va__grid { display: grid; gap: 1rem; margin-top: 2rem; }
+  @media (min-width: 768px) { .va__grid { grid-template-columns: repeat(3, 1fr); } }
+  .va__card { position: relative; overflow: hidden; min-height: 15rem; display: flex; flex-direction: column; justify-content: space-between; padding: 1.25rem; }
+  .va__card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .va__card::after { content: ""; position: absolute; inset: 0; background: rgba(17,20,24,.45); z-index: 0; }
+  .va__card > * { position: relative; z-index: 1; }
+  .va__label { font-size: .875rem; color: rgba(255,255,255,.85); }
+  .va__label b { display: block; font-size: 1.125rem; color: #fff; font-weight: 500; margin-bottom: .25rem; }
+  .va__card .dbtn { align-self: flex-start; padding: .875rem 1.25rem; }
+</style>
+</head>
+<body>
+<main class="va">
+  <h1>Aktuell-Knopf: drei Bewegungen.</h1>
+  <p>Der Knopf «Offene Lehrstelle» steht im Startbild vor «Kompetenzen entdecken» und «Fünf Schritte». Voreingestellt ist A. Wechsel per Attribut data-attn am Knopf (puls, atem, glanz). Bei «Bewegung reduzieren» im Betriebssystem steht alles still.</p>
+  <div class="va__grid">
+    <div class="va__card"><img src="assets/img/v2/07-m.webp" alt="">
+      <span class="va__label"><b>A · Puls (Standard)</b>Ein grüner Punkt sendet ruhig Ringe aus, alle 2,4 s. Dezent, wirkt wie «live».</span>
+      <a class="dbtn dbtn--news" href="karriere.html#lehrstelle" data-attn="puls"><span class="dbtn__fill" aria-hidden="true"></span><span class="news__dot" aria-hidden="true"></span><span class="rl">Offene Lehrstelle</span></a>
+    </div>
+    <div class="va__card"><img src="assets/img/v2/07-m.webp" alt="">
+      <span class="va__label"><b>B · Atem</b>Die Fläche füllt sich langsam grün und wird wieder leer, alle 3,6 s. Fällt am stärksten auf.</span>
+      <a class="dbtn dbtn--news" href="karriere.html#lehrstelle" data-attn="atem"><span class="dbtn__fill" aria-hidden="true"></span><span class="news__dot" aria-hidden="true"></span><span class="rl">Offene Lehrstelle</span></a>
+    </div>
+    <div class="va__card"><img src="assets/img/v2/07-m.webp" alt="">
+      <span class="va__label"><b>C · Glanz</b>Ein heller Lichtstreif läuft alle 5 s über den Knopf. Edel, zieht den Blick kurz an.</span>
+      <a class="dbtn dbtn--news" href="karriere.html#lehrstelle" data-attn="glanz"><span class="dbtn__fill" aria-hidden="true"></span><span class="news__dot" aria-hidden="true"></span><span class="rl">Offene Lehrstelle</span></a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
